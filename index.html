@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOMAD MAPS - Mapeamos a Geografia do Trance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 1. VARIÁVEIS DE COR & ESTILO BASE */
+        :root {
+            --color-dark: #121212; /* Fundo principal */
+            --color-medium: #1f1f1f; /* Fundo de seções */
+            --color-light: #ffffff; /* Texto principal */
+            --color-accent-1: #00ffc8; /* Ciano/Verde Neon */
+            --color-accent-2: #ff00ff; /* Magenta Neon */
+            --color-accent-grad: linear-gradient(90deg, var(--color-accent-1), var(--color-accent-2));
+            --font-main: 'Montserrat', sans-serif;
+        }
+
+        /* RESET BÁSICO */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--color-light);
+            background-color: var(--color-dark);
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--color-accent-1);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--color-accent-2);
+        }
+
+        /* 2. LAYOUT GERAL E UTILITÁRIOS */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 0.5em;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--color-medium);
+        }
+        
+        /* Aplica o gradiente de Neon aos títulos */
+        .neon-text {
+            background: var(--color-accent-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 3. HEADER & NAVEGAÇÃO */
+        header {
+            background-color: var(--color-dark);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--color-medium);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .nav-links a {
+            margin-left: 30px;
+            font-size: 1em;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            border-bottom: 2px solid var(--color-accent-1);
+        }
+
+        /* 4. HERO SECTION (IMERSÃO) */
+        .hero {
+            background: url('caminho/para/logo_banner_site.jpg') no-repeat center center/cover; /* Usar o seu banner aqui */
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Efeito de Overlay Escuro para o texto se destacar */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--color-accent-grad);
+            color: var(--color-dark);
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: opacity 0.3s;
+        }
+
+        .cta-button:hover {
+            opacity: 0.8;
+            color: var(--color-dark); /* Impede a mudança de cor do texto */
+        }
+
+        /* 5. SEÇÃO DE FESTIVAIS EM DESTAQUE */
+        .featured-festivals {
+            padding: 60px 0;
+            background-color: var(--color-medium);
+        }
+
+        .festival-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .festival-card {
+            background-color: var(--color-dark);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--color-medium);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .festival-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 200, 0.2); /* Sombra Neon sutil */
+        }
+
+        .festival-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            filter: brightness(0.8); /* Escurece um pouco para dar o ar "dark" */
+        }
+
+        .festival-info {
+            padding: 20px;
+        }
+
+        .festival-info h3 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+        }
+
+        .festival-info p {
+            font-size: 0.9em;
+            color: #ccc;
+        }
+
+        .festival-info .price {
+            margin-top: 15px;
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--color-accent-2);
+        }
+
+        /* 6. FOOTER (A BASE) */
+        footer {
+            background-color: var(--color-dark);
+            border-top: 1px solid var(--color-medium);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            text-align: left;
+        }
+
+        .footer-section {
+            width: 30%;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2em;
+            border-bottom: 2px solid var(--color-accent-1);
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            color: var(--color-light);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .social-links a {
+            font-size: 1.5em;
+            margin: 0 10px;
+            /* Ícones reais (ex: Font Awesome) precisariam ser integrados aqui */
+        }
+
+        .legal-info {
+            width: 100%;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--color-medium);
+            font-size: 0.8em;
+            text-align: center;
+            color: #777;
+        }
+
+        /* MEDIA QUERIES para responsividade */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            .hero p {
+                font-size: 1.2em;
+            }
+            .nav-links {
+                display: none; /* Em mobile, você usaria um ícone de menu (hamburguer) e JS */
+            }
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            .footer-section {
+                width: 90%;
+                text-align: center;
+            }
+            .footer-section h4 {
+                 display: block;
+                 text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo"><span class="neon-text">NOMAD MAPS</span></div>
+                <div class="nav-links">
+                    <a href="#destinos">Destinos</a>
+                    <a href="#filosofia">Filosofia</a>
+                    <a href="#testemunhos">A Tribo</a>
+                    <a href="#contato">Contato</a>
+                </div>
+                </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="neon-text">NOMAD MAPS</h1>
+            <p>Especialistas em Curadoria de Experiências. Mapeamos a Geografia do Trance.</p>
+            <a href="#destinos" class="cta-button">EXPLORE AS JORNADAS</a>
+        </div>
+    </section>
+
+    <section class="featured-festivals" id="destinos">
+        <div class="container">
+            <h2 class="section-title"><span class="neon-text">Próximas</span> Jornadas</h2>
+            <div class="festival-grid">
+
+                <div class="festival-card">
+                    <img src="https://via.placeholder.com/400x200/ff00ff/121212?text=BOOM+FESTIVAL" alt="Boom Festival">
+                    <div class="festival-info">
+                        <h3 class="neon-text">Boom Festival</h3>
+                        <p>Portugal | Julho 2026</p>
+                        <p class="price">A partir de R$ 7.990</p>
+                        <a href="#" class="cta-button" style="width: 100%; margin-top: 15px;">VER DETALHES</a>
+                    </div>
+                </div>
+
+                <div class="festival-card">
+                    <img src="https://via.placeholder.com/400x200/00ffc8/121212?text=OZORA+FESTIVAL" alt="Ozora Festival">
+                    <div class="festival-info">
+                        <h3 class="neon-text">Ozora Festival</h3>
+                        <p>Hungria | Agosto 2026</p>
+                        <p class="price">A partir de R$ 6.800</p>
+                        <a href="#" class="cta-button" style="width: 100%; margin-top: 15px;">VER DETALHES</a>
+                    </div>
+                </div>
+
+                <div class="festival-card">
+                    <img src="https://via.placeholder.com/400x200/ff00ff/121212?text=UNIVERSO+PARALELLO" alt="Universo Paralello">
+                    <div class="festival-info">
+                        <h3 class="neon-text">Universo Paralello</h3>
+                        <p>Brasil | Dezembro 2025</p>
+                        <p class="price">A partir de R$ 4.500</p>
+                        <a href="#" class="cta-button" style="width: 100%; margin-top: 15px;">VER DETALHES</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="filosofia" style="padding: 60px 0; text-align: center;">
+        <div class="container">
+            <h2 class="section-title">Nossa Filosofia</h2>
+            <blockquote style="font-style: italic; font-size: 1.4em; color: #aaa;">
+                "Não somos turistas, somos nômades da alma. Especializados em viagens para festivais de arte e cultura visionária."
+            </blockquote>
+            <p style="margin-top: 20px;">Curadoria de experiências que transformam. Da logística à imersão cultural, sua única preocupação é dançar.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+
+                <div class="footer-section">
+                    <h4>Mapa do Site</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#destinos">Destinos</a></li>
+                        <li><a href="#">Como Funciona</a></li>
+                        <li><a href="#contato">Fale Conosco</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Conecte-se</h4>
+                    <div class="social-links">
+                        <a href="#" title="Instagram">👽</a>
+                        <a href="#" title="Facebook">👁️</a>
+                        <a href="#" title="WhatsApp">💬</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <p>contato@nomadmaps.com</p>
+                    <p>+55 (XX) 9XXXX-XXXX</p>
+                    <p>CNPJ: XX.XXX.XXX/0001-XX</p>
+                </div>
+
+            </div>
+            <div class="legal-info">
+                &copy; 2025 NOMAD MAPS - Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+    
+</body>
+</html>
