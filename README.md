@@ -1,1 +1,1 @@
-# nomad_maps
+# Nomad Maps - Psytrance Travel Agency
