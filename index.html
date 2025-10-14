@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOMAD MAPS - Mapeamos a Geografia do Trance</title>
+    <title>NOMAD MAPS - Psytrance Travel Agency</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* 1. VARIÁVEIS DE COR & ESTILO BASE */
@@ -16,7 +16,21 @@
             --color-accent-grad: linear-gradient(90deg, var(--color-accent-1), var(--color-accent-2));
             --font-main: 'Montserrat', sans-serif;
         }
+  /* Garantir que a seção do mapa ocupe toda a largura */
+        .map-section {
+            padding-top: 60px; /* Espaçamento superior */
+            background-color: var(--color-dark); /* Cor de fundo */
+        }
 
+        /* Estilizar o iframe para ser mais 'dark' */
+        .map-section iframe {
+            display: block;
+            width: 100%; 
+            border: none !important; 
+            /* filter: brightness(0.9) grayscale(0.1); */ 
+        }
+        
+        /* ---------------------------------------------------- */
         /* RESET BÁSICO */
         * {
             margin: 0;
@@ -208,7 +222,23 @@
             font-weight: 700;
             color: var(--color-accent-2);
         }
+<section class="map-section" id="mapa">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="neon-text">Mapeamos</span> a Geografia do Trance
+        </h2>
+    </div>
 
+    <iframe 
+        src="<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1adej1ZKSiAOyUe4Uu9jPBV6P6DalfQk&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>" 
+        width="100%" 
+        height="500" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy">
+    </iframe>
+
+</section>
         /* 6. FOOTER (A BASE) */
         footer {
             background-color: var(--color-dark);
@@ -297,8 +327,8 @@
                 <div class="logo"><span class="neon-text">NOMAD MAPS</span></div>
                 <div class="nav-links">
                     <a href="#destinos">Destinos</a>
-                    <a href="#filosofia">Filosofia</a>
-                    <a href="#testemunhos">A Tribo</a>
+                    <a href="#galeria de mapas">galeriademapas</a>
+                    <a href="#Web Mapa Global">Web Mapa Global</a>
                     <a href="#contato">Contato</a>
                 </div>
                 </nav>
@@ -354,7 +384,7 @@
 
     <section id="filosofia" style="padding: 60px 0; text-align: center;">
         <div class="container">
-            <h2 class="section-title">Nossa Filosofia</h2>
+            <h2 class="section-title">Nossa Missão</h2>
             <blockquote style="font-style: italic; font-size: 1.4em; color: #aaa;">
                 "Não somos turistas, somos nômades da alma. Especializados em viagens para festivais de arte e cultura visionária."
             </blockquote>
@@ -402,3 +432,4 @@
 </body>
 
 </html>
+
