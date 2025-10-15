@@ -94,24 +94,46 @@
             z-index: 1000;
         }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+      nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .logo {
-            font-size: 1.8em;
-            font-weight: 700;
-        }
+.logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    
+    /* ADICIONADO: Para alinhar a imagem e o texto e dar um pequeno espaço */
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
 
-        .nav-links a {
+/* NOVO: Estilo para a imagem da mini logo */
+.mini-logo {
+    height: 50px; 
+    width: 50px; 
+    border-radius: 50%; /* Transforma em círculo */
+    object-fit: cover; 
+    border: 2px solid var(--color-accent-1); /* Borda neon (ciano) */
+    padding: 2px;
+}
+
+.nav-links a {
+    margin-left: 30px;
+    font-size: 1em;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
             margin-left: 30px;
             font-size: 1em;
             padding: 5px 0;
             border-bottom: 2px solid transparent;
         }
-
+<div class="logo">
+    <img src="Assets/Imagens/assets/logo_circular.png" alt="Nomad Maps Logo" class="mini-logo">
+    <span class="neon-text">NOMAD MAPS</span> 
+</div>
         .nav-links a:hover {
             border-bottom: 2px solid var(--color-accent-1);
         }
@@ -336,7 +358,7 @@
     <section class="hero" id="home">
         <div class="hero-content">
             <h1 class="neon-text">NOMAD MAPS</h1>
-            <p>Agencia Especializada em Festivaais de Arte e Cultura Visionária pelo mundo.</p>
+            <p>Agencia Especializada em Festivais de Arte e Cultura Visionária pelo mundo.</p>
             <a href="#destinos" class="cta-button">EXPLORE AS JORNADAS</a>
         </div>
     </section>
@@ -430,6 +452,7 @@
 </body>
 
 </html>
+
 
 
 
