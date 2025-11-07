@@ -8,29 +8,15 @@
     <style>
         /* 1. VARIÁVEIS DE COR & ESTILO BASE */
         :root {
-            --color-dark: #121212; /* Fundo principal */
-            --color-medium: #1f1f1f; /* Fundo de seções */
-            --color-light: #ffffff; /* Texto principal */
-            --color-accent-1: #00ffc8; /* Ciano/Verde Neon */
-            --color-accent-2: #ff00ff; /* Magenta Neon */
+            --color-dark: #121212;
+            --color-medium: #1f1f1f;
+            --color-light: #ffffff;
+            --color-accent-1: #00ffc8;
+            --color-accent-2: #ff00ff;
             --color-accent-grad: linear-gradient(90deg, var(--color-accent-1), var(--color-accent-2));
             --font-main: 'Montserrat', sans-serif;
         }
-  /* Garantir que a seção do mapa ocupe toda a largura */
-        .map-section {
-            padding-top: 60px; /* Espaçamento superior */
-            background-color: var(--color-dark); /* Cor de fundo */
-        }
 
-        /* Estilizar o iframe para ser mais 'dark' */
-        .map-section iframe {
-            display: block;
-            width: 100%; 
-            border: none !important; 
-            /* filter: brightness(0.9) grayscale(0.1); */ 
-        }
-        
-        /* ---------------------------------------------------- */
         /* RESET BÁSICO */
         * {
             margin: 0;
@@ -76,7 +62,6 @@
             border-bottom: 2px solid var(--color-medium);
         }
         
-        /* Aplica o gradiente de Neon aos títulos */
         .neon-text {
             background: var(--color-accent-grad);
             -webkit-background-clip: text;
@@ -94,69 +79,44 @@
             z-index: 1000;
         }
 
-      nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.logo {
-    font-size: 1.8em;
-    font-weight: 700;
-    
-    /* ADICIONADO: Para alinhar a imagem e o texto e dar um pequeno espaço */
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
-}
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-/* NOVO: Estilo para a imagem da mini logo */
-.mini-logo {
-    height: 50px; 
-    width: 50px; 
-    border-radius: 50%; /* Transforma em círculo */
-    object-fit: cover; 
-    border: 2px solid var(--color-accent-1); /* Borda neon (ciano) */
-    padding: 2px;
-}
+        .mini-logo {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--color-accent-1);
+            padding: 2px;
+        }
 
-.nav-links a {
-    margin-left: 30px;
-    font-size: 1em;
-    padding: 5px 0;
-    border-bottom: 2px solid transparent;
+        .nav-links a {
             margin-left: 30px;
             font-size: 1em;
             padding: 5px 0;
             border-bottom: 2px solid transparent;
         }
-<div class="logo">
-    <img src="Assets/Imagens/assets/logo_circular.png" alt="Nomad Maps Logo" class="mini-logo">
-    <span class="neon-text">NOMAD MAPS</span> 
-</div>
+
         .nav-links a:hover {
             border-bottom: 2px solid var(--color-accent-1);
         }
-<section class="map-section" id="mapa">
-    <div class="container">
-        <h2 class="section-title">
-            <span class="neon-text">Mapeamos</span> a Geografia do Trance
-        </h2>
-    </div>
 
-       src="https://www.google.com/maps/d/u/0/edit?mid=1adej1ZKSiAOyUe4Uu9jPBV6P6DalfQk&usp=sharing" 
-        width="100%" 
-        height="500" 
-        style="border:0;" 
-        allowfullscreen="" 
-        loading="lazy">
-    </iframe>
-</section>
-        
-        /* 4. HERO SECTION (IMERSÃO) */
+        /* 4. HERO SECTION COM BANNER */
         .hero {
-            background: url('Assets/Imagens/assets/images/banner-nomad-maps.jpg') no-repeat center center/cover; /* Usar o seu banner aqui */
-            min-height: 60vh;
+            background: url('Assets/Imagens/assets/images/banner-nomad-maps.jpg') no-repeat center center/cover;
+            min-height: 70vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -164,7 +124,6 @@
             position: relative;
         }
 
-        /* Efeito de Overlay Escuro para o texto se destacar */
         .hero::before {
             content: '';
             position: absolute;
@@ -172,7 +131,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.5);
         }
 
         .hero-content {
@@ -182,34 +141,39 @@
         }
 
         .hero h1 {
-            font-size: 3.5em;
-            margin-bottom: 10px;
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 255, 200, 0.5);
         }
 
         .hero p {
             font-size: 1.5em;
             margin-bottom: 30px;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
         }
 
         .cta-button {
             display: inline-block;
             background: var(--color-accent-grad);
             color: var(--color-dark);
-            padding: 12px 30px;
+            padding: 15px 40px;
             border-radius: 5px;
-            font-size: 1.1em;
+            font-size: 1.2em;
             font-weight: 700;
-            transition: opacity 0.3s;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
         .cta-button:hover {
             opacity: 0.8;
-            color: var(--color-dark); /* Impede a mudança de cor do texto */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 200, 0.4);
         }
 
-        /* 5. SEÇÃO DE FESTIVAIS EM DESTAQUE */
+        /* 5. SEÇÃO DE FESTIVAIS */
         .featured-festivals {
-            padding: 60px 0;
+            padding: 80px 0;
             background-color: var(--color-medium);
         }
 
@@ -229,14 +193,14 @@
 
         .festival-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 255, 200, 0.2); /* Sombra Neon sutil */
+            box-shadow: 0 10px 20px rgba(0, 255, 200, 0.2);
         }
 
         .festival-card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            filter: brightness(0.8); /* Escurece um pouco para dar o ar "dark" */
+            filter: brightness(0.8);
         }
 
         .festival-info {
@@ -259,7 +223,46 @@
             font-weight: 700;
             color: var(--color-accent-2);
         }
-        /* 6. FOOTER (A BASE) */
+
+        /* 6. SEÇÃO DO MAPA COM MY MAPS INTEGRADO */
+        .map-section {
+            padding: 80px 0;
+            background-color: var(--color-dark);
+        }
+
+        .map-container {
+            width: 100%;
+            height: 650px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 3px solid var(--color-accent-1);
+            box-shadow: 0 0 30px rgba(0, 255, 200, 0.4);
+            background: var(--color-medium);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: brightness(0.9) contrast(1.1) saturate(1.1);
+        }
+
+        /* 7. SEÇÃO FILOSOFIA */
+        .philosophy-section {
+            padding: 80px 0;
+            background-color: var(--color-medium);
+            text-align: center;
+        }
+
+        .philosophy-section blockquote {
+            font-style: italic;
+            font-size: 1.8em;
+            color: #aaa;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        /* 8. FOOTER */
         footer {
             background-color: var(--color-dark);
             border-top: 1px solid var(--color-medium);
@@ -300,7 +303,6 @@
         .social-links a {
             font-size: 1.5em;
             margin: 0 10px;
-            /* Ícones reais (ex: Font Awesome) precisariam ser integrados aqui */
         }
 
         .legal-info {
@@ -313,7 +315,7 @@
             color: #777;
         }
 
-        /* MEDIA QUERIES para responsividade */
+        /* MEDIA QUERIES */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5em;
@@ -322,7 +324,7 @@
                 font-size: 1.2em;
             }
             .nav-links {
-                display: none; /* Em mobile, você usaria um ícone de menu (hamburguer) e JS */
+                display: none;
             }
             .footer-content {
                 flex-direction: column;
@@ -336,6 +338,12 @@
                  display: block;
                  text-align: center;
             }
+            .map-container {
+                height: 400px;
+            }
+            .philosophy-section blockquote {
+                font-size: 1.4em;
+            }
         }
     </style>
 </head>
@@ -344,21 +352,24 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo"><span class="neon-text">NOMAD MAPS</span></div>
+                <div class="logo">
+                    <img src="Assets/Imagens/assets/logo_circular.png" alt="Nomad Maps Logo" class="mini-logo">
+                    <span class="neon-text">NOMAD MAPS</span>
+                </div>
                 <div class="nav-links">
                     <a href="#destinos">Destinos</a>
-                    <a href="#Galeria de Mapas">Galeria de Mapas</a>
-                    <a href="#Web Mapa Global">Web Mapa Global</a>
+                    <a href="#mapa">Mapa Global</a>
+                    <a href="#filosofia">Filosofia</a>
                     <a href="#contato">Contato</a>
                 </div>
-                </nav>
+            </nav>
         </div>
     </header>
 
     <section class="hero" id="home">
         <div class="hero-content">
             <h1 class="neon-text">NOMAD MAPS</h1>
-            <p>Agencia Especializada em Festivais de Arte e Cultura Visionária pelo mundo.</p>
+            <p>Agência Especializada em Festivais de Arte e Cultura Visionária pelo mundo.</p>
             <a href="#destinos" class="cta-button">EXPLORE AS JORNADAS</a>
         </div>
     </section>
@@ -379,7 +390,7 @@
                 </div>
 
                 <div class="festival-card">
-                    <img src="Assets/Imagens/assets/images/Gemini_Generated_Image_ssau6ussau6ussau%20(1).png">
+                    <img src="Assets/Imagens/assets/images/Gemini_Generated_Image_ssau6ussau6ussau (1).png" alt="Modem Festival">
                     <div class="festival-info">
                         <h3 class="neon-text">Modem Festival</h3>
                         <p>Hungria | Agosto 2026</p>
@@ -389,7 +400,7 @@
                 </div>
 
                 <div class="festival-card">
-                    <img src="https://via.placeholder.com/400x200/ff00ff/121212?text=UNIVERSO+PARALELLO" alt="Universo Paralello">
+                    <img src="Assets/Imagens/assets/images/universo-paralello-festival.jpg" alt="Universo Paralello">
                     <div class="festival-info">
                         <h3 class="neon-text">Universo Paralello</h3>
                         <p>Brasil | Dezembro 2025</p>
@@ -402,17 +413,42 @@
         </div>
     </section>
 
-    <section id="filosofia" style="padding: 60px 0; text-align: center;">
+    <!-- SEÇÃO DO MAPA COM MY MAPS INTEGRADO -->
+    <section class="map-section" id="mapa">
         <div class="container">
-            <h2 class="section-title">Nossa Missão</h2>
-            <blockquote style="font-style: italic; font-size: 1.4em; color: #aaa;">
-                "Não somos turistas, somos nômades da alma. Especializados em viagens para festivais de arte e cultura visionária."
-            </blockquote>
-            <p style="margin-top: 20px;">Curadoria de experiências que transformam. Da logística à imersão cultural, sua única preocupação é dançar.</p>
+            <h2 class="section-title">
+                <span class="neon-text">Mapa Global</span> dos Festivais
+            </h2>
+            <p style="text-align: center; margin-bottom: 40px; color: #ccc; font-size: 1.1em;">
+                Explore nossa curadoria exclusiva de festivais de psytrance ao redor do planeta
+            </p>
+            <div class="map-container">
+                <!-- MY MAPS INTEGRADO COM O LINK CORRETO -->
+                <iframe 
+                    src="https://www.google.com/maps/d/embed?mid=1adej1ZKSiAOyUe4Uu9jPBV6P6DalfQk&ehbc=2E312F"
+                    width="100%" 
+                    height="100%"
+                    allowfullscreen="" 
+                    loading="lazy"
+                    title="Mapa Global de Festivais de Psytrance - Nomad Maps">
+                </iframe>
+            </div>
         </div>
     </section>
 
-    <footer>
+    <section class="philosophy-section" id="filosofia">
+        <div class="container">
+            <h2 class="section-title">Nossa Missão</h2>
+            <blockquote>
+                "Não somos turistas, somos nômades da alma. Especializados em viagens para festivais de arte e cultura visionária."
+            </blockquote>
+            <p style="margin-top: 20px; font-size: 1.1em; color: #ccc;">
+                Curadoria de experiências que transformam. Da logística à imersão cultural, sua única preocupação é dançar.
+            </p>
+        </div>
+    </section>
+
+    <footer id="contato">
         <div class="container">
             <div class="footer-content">
 
@@ -421,8 +457,8 @@
                     <ul>
                         <li><a href="#home">Home</a></li>
                         <li><a href="#destinos">Destinos</a></li>
-                        <li><a href="#">Como Funciona</a></li>
-                        <li><a href="#contato">Fale Conosco</a></li>
+                        <li><a href="#mapa">Mapa Global</a></li>
+                        <li><a href="#filosofia">Filosofia</a></li>
                     </ul>
                 </div>
 
@@ -444,18 +480,13 @@
 
             </div>
             <div class="legal-info">
-                &copy; 2025 NOMAD MAPS - Todos os direitos reservados.
+                &copy; 2025 NOMAD MAPS - Todos os direitos reservados. | 
+                <a href="https://github.com/ramadageografia/nomad_maps" target="_blank" style="color: var(--color-accent-1);">
+                    GitHub do Projeto
+                </a>
             </div>
         </div>
     </footer>
     
 </body>
-
 </html>
-
-
-
-
-
-
-
