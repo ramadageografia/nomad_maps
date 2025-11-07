@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOMAD MAPS - Psytrance Travel Agency</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Bibliotecas para mapas interativos -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Plotly para gráficos interativos -->
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 1. VARIÁVEIS DE COR & ESTILO BASE */
         :root {
             --color-dark: #121212;
             --color-medium: #1f1f1f;
@@ -17,7 +23,6 @@
             --font-main: 'Montserrat', sans-serif;
         }
 
-        /* RESET BÁSICO */
         * {
             margin: 0;
             padding: 0;
@@ -31,27 +36,10 @@
             line-height: 1.6;
         }
 
-        a {
-            color: var(--color-accent-1);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        a:hover {
-            color: var(--color-accent-2);
-        }
-
-        /* 2. LAYOUT GERAL E UTILITÁRIOS */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-        }
-
-        h1, h2, h3 {
-            font-weight: 700;
-            margin-bottom: 0.5em;
-            text-transform: uppercase;
         }
 
         .section-title {
@@ -69,7 +57,7 @@
             background-clip: text;
         }
 
-        /* 3. HEADER & NAVEGAÇÃO */
+        /* HEADER & NAVEGAÇÃO */
         header {
             background-color: var(--color-dark);
             padding: 15px 0;
@@ -113,7 +101,7 @@
             border-bottom: 2px solid var(--color-accent-1);
         }
 
-        /* 4. HERO SECTION COM BANNER */
+        /* HERO SECTION */
         .hero {
             background: url('Assets/Imagens/assets/images/banner-nomad-maps.jpg') no-repeat center center/cover;
             min-height: 70vh;
@@ -171,10 +159,93 @@
             box-shadow: 0 5px 15px rgba(0, 255, 200, 0.4);
         }
 
-        /* 5. SEÇÃO DE FESTIVAIS */
-        .featured-festivals {
+        /* SEÇÃO DE MAPAS INTERATIVOS */
+        .interactive-maps-section {
             padding: 80px 0;
             background-color: var(--color-medium);
+        }
+
+        .maps-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .map-card {
+            background: var(--color-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--color-accent-1);
+            box-shadow: 0 0 20px rgba(0, 255, 200, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .map-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 200, 0.4);
+        }
+
+        .map-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--color-medium);
+        }
+
+        .map-header h3 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .map-header p {
+            color: #ccc;
+            font-size: 0.9em;
+        }
+
+        .map-container-interactive {
+            width: 100%;
+            height: 400px;
+            position: relative;
+        }
+
+        /* Estilos para os mapas Leaflet */
+        .leaflet-container {
+            background: var(--color-dark) !important;
+            font-family: var(--font-main) !important;
+        }
+
+        .leaflet-popup-content-wrapper {
+            background: var(--color-dark) !important;
+            color: var(--color-light) !important;
+            border: 1px solid var(--color-accent-1) !important;
+            border-radius: 8px;
+        }
+
+        .leaflet-popup-tip {
+            background: var(--color-dark) !important;
+        }
+
+        .leaflet-popup-content {
+            font-family: var(--font-main) !important;
+        }
+
+        /* Estilos para gráficos Plotly */
+        .plotly-graph {
+            width: 100%;
+            height: 100%;
+        }
+
+        .js-plotly-plot .plotly .modebar {
+            background: rgba(18, 18, 18, 0.8) !important;
+        }
+
+        .js-plotly-plot .plotly .modebar-btn path {
+            fill: var(--color-accent-1) !important;
+        }
+
+        /* OUTRAS SEÇÕES */
+        .featured-festivals {
+            padding: 80px 0;
+            background-color: var(--color-dark);
         }
 
         .festival-grid {
@@ -184,7 +255,7 @@
         }
 
         .festival-card {
-            background-color: var(--color-dark);
+            background-color: var(--color-medium);
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid var(--color-medium);
@@ -207,27 +278,10 @@
             padding: 20px;
         }
 
-        .festival-info h3 {
-            font-size: 1.4em;
-            margin-bottom: 5px;
-        }
-
-        .festival-info p {
-            font-size: 0.9em;
-            color: #ccc;
-        }
-
-        .festival-info .price {
-            margin-top: 15px;
-            font-size: 1.2em;
-            font-weight: 700;
-            color: var(--color-accent-2);
-        }
-
-        /* 6. SEÇÃO DO MAPA COM MY MAPS INTEGRADO */
+        /* SEÇÃO DO MAPA GLOBAL */
         .map-section {
             padding: 80px 0;
-            background-color: var(--color-dark);
+            background-color: var(--color-medium);
         }
 
         .map-container {
@@ -237,7 +291,7 @@
             overflow: hidden;
             border: 3px solid var(--color-accent-1);
             box-shadow: 0 0 30px rgba(0, 255, 200, 0.4);
-            background: var(--color-medium);
+            background: var(--color-dark);
         }
 
         .map-container iframe {
@@ -247,22 +301,7 @@
             filter: brightness(0.9) contrast(1.1) saturate(1.1);
         }
 
-        /* 7. SEÇÃO FILOSOFIA */
-        .philosophy-section {
-            padding: 80px 0;
-            background-color: var(--color-medium);
-            text-align: center;
-        }
-
-        .philosophy-section blockquote {
-            font-style: italic;
-            font-size: 1.8em;
-            color: #aaa;
-            margin-bottom: 30px;
-            line-height: 1.4;
-        }
-
-        /* 8. FOOTER */
+        /* FOOTER */
         footer {
             background-color: var(--color-dark);
             border-top: 1px solid var(--color-medium);
@@ -283,28 +322,6 @@
             margin-bottom: 20px;
         }
 
-        .footer-section h4 {
-            font-size: 1.2em;
-            border-bottom: 2px solid var(--color-accent-1);
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-            color: var(--color-light);
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 8px;
-        }
-
-        .social-links a {
-            font-size: 1.5em;
-            margin: 0 10px;
-        }
-
         .legal-info {
             width: 100%;
             margin-top: 20px;
@@ -315,34 +332,19 @@
             color: #777;
         }
 
-        /* MEDIA QUERIES */
+        /* RESPONSIVIDADE */
         @media (max-width: 768px) {
+            .maps-gallery {
+                grid-template-columns: 1fr;
+            }
+            .map-container-interactive {
+                height: 300px;
+            }
             .hero h1 {
                 font-size: 2.5em;
             }
-            .hero p {
-                font-size: 1.2em;
-            }
             .nav-links {
                 display: none;
-            }
-            .footer-content {
-                flex-direction: column;
-                align-items: center;
-            }
-            .footer-section {
-                width: 90%;
-                text-align: center;
-            }
-            .footer-section h4 {
-                 display: block;
-                 text-align: center;
-            }
-            .map-container {
-                height: 400px;
-            }
-            .philosophy-section blockquote {
-                font-size: 1.4em;
             }
         }
     </style>
@@ -358,7 +360,8 @@
                 </div>
                 <div class="nav-links">
                     <a href="#destinos">Destinos</a>
-                    <a href="#mapa">Mapa Global</a>
+                    <a href="#mapas-interativos">Mapas Interativos</a>
+                    <a href="#mapa-global">Mapa Global</a>
                     <a href="#filosofia">Filosofia</a>
                     <a href="#contato">Contato</a>
                 </div>
@@ -370,42 +373,41 @@
         <div class="hero-content">
             <h1 class="neon-text">NOMAD MAPS</h1>
             <p>Agência Especializada em Festivais de Arte e Cultura Visionária pelo mundo.</p>
-            <a href="#destinos" class="cta-button">EXPLORE AS JORNADAS</a>
+            <a href="#mapas-interativos" class="cta-button">EXPLORE OS MAPAS</a>
         </div>
     </section>
 
-    <section class="featured-festivals" id="destinos">
+    <!-- SEÇÃO DE MAPAS INTERATIVOS DO COLAB -->
+    <section class="interactive-maps-section" id="mapas-interativos">
         <div class="container">
-            <h2 class="section-title"><span class="neon-text">Próximas</span> Jornadas</h2>
-            <div class="festival-grid">
-
-                <div class="festival-card">
-                    <img src="Assets/Imagens/assets/images/Gemini_Generated_Image_ssau6ussau6ussau.png" alt="Boom Festival">
-                    <div class="festival-info">
-                        <h3 class="neon-text">Boom Festival</h3>
-                        <p>Portugal | Julho 2026</p>
-                        <p class="price">A partir de R$ 7.990</p>
-                        <a href="#" class="cta-button" style="width: 100%; margin-top: 15px;">VER DETALHES</a>
+            <h2 class="section-title">
+                <span class="neon-text">Análises</span> Geoespaciais
+            </h2>
+            <p style="text-align: center; margin-bottom: 40px; color: #ccc; font-size: 1.1em;">
+                Explore a evolução histórica e distribuição global da cultura psytrance
+            </p>
+            
+            <div class="maps-gallery">
+                
+                <!-- MAPA 1: Folium - Pontos Históricos -->
+                <div class="map-card">
+                    <div class="map-header">
+                        <h3 class="neon-text">🎵 Pontos Históricos do Psytrance</h3>
+                        <p>Origens, festivais icônicos e selos importantes na história do gênero</p>
+                    </div>
+                    <div class="map-container-interactive" id="historicalMap">
+                        <!-- Mapa Folium será renderizado aqui -->
                     </div>
                 </div>
 
-                <div class="festival-card">
-                    <img src="Assets/Imagens/assets/images/Gemini_Generated_Image_ssau6ussau6ussau (1).png" alt="Modem Festival">
-                    <div class="festival-info">
-                        <h3 class="neon-text">Modem Festival</h3>
-                        <p>Hungria | Agosto 2026</p>
-                        <p class="price">A partir de R$ 6.800</p>
-                        <a href="#" class="cta-button" style="width: 100%; margin-top: 15px;">VER DETALHES</a>
+                <!-- MAPA 2: Plotly - Evolução Animada -->
+                <div class="map-card">
+                    <div class="map-header">
+                        <h3 class="neon-text">🌍 Evolução Histórica (1986-2008)</h3>
+                        <p>Animção temporal mostrando a expansão global do movimento trance</p>
                     </div>
-                </div>
-
-                <div class="festival-card">
-                    <img src="Assets/Imagens/assets/images/universo-paralello-festival.jpg" alt="Universo Paralello">
-                    <div class="festival-info">
-                        <h3 class="neon-text">Universo Paralello</h3>
-                        <p>Brasil | Dezembro 2025</p>
-                        <p class="price">A partir de R$ 4.500</p>
-                        <a href="#" class="cta-button" style="width: 100%; margin-top: 15px;">VER DETALHES</a>
+                    <div class="map-container-interactive" id="animatedMap">
+                        <!-- Mapa Plotly animado será renderizado aqui -->
                     </div>
                 </div>
 
@@ -413,21 +415,25 @@
         </div>
     </section>
 
-    <!-- SEÇÃO DO MAPA COM MY MAPS INTEGRADO -->
-    <section class="map-section" id="mapa">
+    <!-- SEÇÃO DE FESTIVAIS EM DESTAQUE -->
+    <section class="featured-festivals" id="destinos">
+        <div class="container">
+            <h2 class="section-title"><span class="neon-text">Próximas</span> Jornadas</h2>
+            <div class="festival-grid">
+                <!-- Seus cards de festivais aqui -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO DO MAPA GLOBAL -->
+    <section class="map-section" id="mapa-global">
         <div class="container">
             <h2 class="section-title">
                 <span class="neon-text">Mapa Global</span> dos Festivais
             </h2>
-            <p style="text-align: center; margin-bottom: 40px; color: #ccc; font-size: 1.1em;">
-                Explore nossa curadoria exclusiva de festivais de psytrance ao redor do planeta
-            </p>
             <div class="map-container">
-                <!-- MY MAPS INTEGRADO COM O LINK CORRETO -->
                 <iframe 
                     src="https://www.google.com/maps/d/embed?mid=1adej1ZKSiAOyUe4Uu9jPBV6P6DalfQk&ehbc=2E312F"
-                    width="100%" 
-                    height="100%"
                     allowfullscreen="" 
                     loading="lazy"
                     title="Mapa Global de Festivais de Psytrance - Nomad Maps">
@@ -436,57 +442,150 @@
         </div>
     </section>
 
-    <section class="philosophy-section" id="filosofia">
-        <div class="container">
-            <h2 class="section-title">Nossa Missão</h2>
-            <blockquote>
-                "Não somos turistas, somos nômades da alma. Especializados em viagens para festivais de arte e cultura visionária."
-            </blockquote>
-            <p style="margin-top: 20px; font-size: 1.1em; color: #ccc;">
-                Curadoria de experiências que transformam. Da logística à imersão cultural, sua única preocupação é dançar.
-            </p>
-        </div>
-    </section>
-
     <footer id="contato">
         <div class="container">
-            <div class="footer-content">
-
-                <div class="footer-section">
-                    <h4>Mapa do Site</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#destinos">Destinos</a></li>
-                        <li><a href="#mapa">Mapa Global</a></li>
-                        <li><a href="#filosofia">Filosofia</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h4>Conecte-se</h4>
-                    <div class="social-links">
-                        <a href="#" title="Instagram">👽</a>
-                        <a href="#" title="Facebook">👁️</a>
-                        <a href="#" title="WhatsApp">💬</a>
-                    </div>
-                </div>
-
-                <div class="footer-section">
-                    <h4>Contato</h4>
-                    <p>contato@nomadmaps.com</p>
-                    <p>+55 (XX) 9XXXX-XXXX</p>
-                    <p>CNPJ: XX.XXX.XXX/0001-XX</p>
-                </div>
-
-            </div>
             <div class="legal-info">
-                &copy; 2025 NOMAD MAPS - Todos os direitos reservados. | 
-                <a href="https://github.com/ramadageografia/nomad_maps" target="_blank" style="color: var(--color-accent-1);">
-                    GitHub do Projeto
-                </a>
+                &copy; 2025 NOMAD MAPS - Todos os direitos reservados.
             </div>
         </div>
     </footer>
-    
+
+    <script>
+        // INICIALIZAÇÃO DOS MAPAS INTERATIVOS
+
+        // MAPA 1: Folium (convertido para Leaflet)
+        function initHistoricalMap() {
+            const map = L.map('historicalMap').setView([20, 0], 2);
+            
+            // Tile layer escuro para combinar com o tema
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '©OpenStreetMap, ©CartoDB',
+                maxZoom: 18
+            }).addTo(map);
+
+            // Dados dos pontos históricos (do seu código Python)
+            const locations = [
+                {name: 'Goa Trance', lat: 15.2993, lon: 74.1240, year: 1986, type: 'origin', icon: 'star', color: 'orange'},
+                {name: 'Frankfurt Acid', lat: 50.1109, lon: 8.6821, year: 1988, type: 'origin', icon: 'star', color: 'orange'},
+                {name: 'Dragonfly Records', lat: 51.5074, lon: -0.1278, year: 1993, type: 'label', icon: 'record-vinyl', color: 'purple'},
+                {name: 'Boom Festival', lat: 39.5932, lon: -8.4467, year: 1997, type: 'festival', icon: 'music', color: 'green'},
+                {name: 'Armada Music', lat: 52.3676, lon: 4.9041, year: 2003, type: 'label', icon: 'record-vinyl', color: 'purple'},
+            ];
+
+            // Adicionar marcadores
+            locations.forEach(loc => {
+                const icon = L.divIcon({
+                    html: `<i class="fas fa-${loc.icon}" style="color: ${loc.color}; font-size: 20px;"></i>`,
+                    className: 'custom-div-icon',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 15]
+                });
+
+                L.marker([loc.lat, loc.lon], {icon: icon})
+                    .addTo(map)
+                    .bindPopup(`
+                        <div style="color: var(--color-light);">
+                            <h3 style="color: var(--color-accent-1); margin: 0 0 10px 0;">${loc.name}</h3>
+                            <p><strong>Ano:</strong> ${loc.year}</p>
+                            <p><strong>Tipo:</strong> ${loc.type}</p>
+                            <p><strong>Coordenadas:</strong> ${loc.lat.toFixed(4)}, ${loc.lon.toFixed(4)}</p>
+                        </div>
+                    `);
+            });
+        }
+
+        // MAPA 2: Plotly - Evolução Animada
+        function initAnimatedMap() {
+            const data = [{
+                type: 'scattergeo',
+                mode: 'markers+text',
+                lat: [15.2993, 50.1109, 51.5074, 32.0853, 52.3676, -23.5505],
+                lon: [74.1240, 8.6821, -0.1278, 34.7818, 4.9041, -46.6333],
+                text: ['Goa Trance', 'Acid House', 'Dragonfly Records', 'Psytrance Israel', 'Armada Music', 'Universo Paralello'],
+                marker: {
+                    size: [20, 18, 16, 14, 12, 10],
+                    color: ['#FF6B35', '#FF6B35', '#6A0DAD', '#0044CC', '#6A0DAD', '#00FF41'],
+                    line: {
+                        width: 2,
+                        color: '#FFFFFF'
+                    }
+                },
+                textposition: 'top center',
+                textfont: {
+                    family: 'Montserrat',
+                    size: 12,
+                    color: '#FFFFFF'
+                }
+            }];
+
+            const frames = [
+                {name: '1986', data: [{lat: [15.2993], lon: [74.1240]}]},
+                {name: '1988', data: [{lat: [15.2993, 50.1109], lon: [74.1240, 8.6821]}]},
+                {name: '1993', data: [{lat: [15.2993, 50.1109, 51.5074], lon: [74.1240, 8.6821, -0.1278]}]},
+                {name: '1997', data: [{lat: [15.2993, 50.1109, 51.5074, 32.0853], lon: [74.1240, 8.6821, -0.1278, 34.7818]}]},
+                {name: '2003', data: [{lat: [15.2993, 50.1109, 51.5074, 32.0853, 52.3676], lon: [74.1240, 8.6821, -0.1278, 34.7818, 4.9041]}]},
+                {name: '2008', data: [{lat: [15.2993, 50.1109, 51.5074, 32.0853, 52.3676, -23.5505], lon: [74.1240, 8.6821, -0.1278, 34.7818, 4.9041, -46.6333]}]}
+            ];
+
+            const layout = {
+                title: {
+                    text: 'Evolução Histórica do Trance (1986-2008)',
+                    font: {family: 'Montserrat', size: 16, color: '#FFFFFF'}
+                },
+                geo: {
+                    showland: true,
+                    landcolor: '#2F2F2F',
+                    showocean: true,
+                    oceancolor: '#1A1A2E',
+                    showcountries: true,
+                    countrycolor: '#555555',
+                    showframe: false,
+                    projection: {'type': 'natural earth'},
+                    bgcolor: 'rgba(0,0,0,0)'
+                },
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)',
+                font: {family: 'Montserrat', color: '#FFFFFF'},
+                hoverlabel: {font: {family: 'Montserrat'}},
+                sliders: [{
+                    steps: frames.map((frame, idx) => ({
+                        args: [idx],
+                        label: frame.name,
+                        method: 'animate'
+                    })),
+                    active: 0,
+                    x: 0.1,
+                    len: 0.9,
+                    xanchor: 'left',
+                    y: 0,
+                    yanchor: 'top',
+                    pad: {t: 50, r: 10},
+                    currentvalue: {
+                        visible: true,
+                        prefix: 'Ano: ',
+                        xanchor: 'right',
+                        font: {size: 16, color: '#FFFFFF'}
+                    },
+                    transition: {duration: 300},
+                }]
+            };
+
+            Plotly.newPlot('animatedMap', data, layout, {
+                displayModeBar: true,
+                displaylogo: false,
+                responsive: true,
+                modeBarButtonsToRemove: ['pan2d', 'select2d', 'lasso2d', 'autoScale2d']
+            }).then(function() {
+                Plotly.addFrames('animatedMap', frames);
+            });
+        }
+
+        // Inicializar mapas quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            initHistoricalMap();
+            initAnimatedMap();
+        });
+    </script>
+
 </body>
 </html>
