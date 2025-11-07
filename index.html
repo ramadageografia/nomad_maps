@@ -57,14 +57,18 @@
             background-clip: text;
         }
 
-        /* HEADER & NAVEGAÇÃO */
+        /* HEADER CORRIGIDO - SEM BORRAMENTO */
         header {
             background-color: var(--color-dark);
-            padding: 15px 0;
+            padding: 12px 0;
             border-bottom: 1px solid var(--color-medium);
             position: sticky;
             top: 0;
             z-index: 1000;
+            /* PROPRIEDADES ANTI-BORRAMENTO */
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            transform: translateZ(0);
         }
 
         nav {
@@ -78,16 +82,35 @@
             font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            /* GARANTIR CLAREZA */
+            text-shadow: none;
+            filter: none;
         }
 
         .mini-logo {
-            height: 50px;
-            width: 50px;
+            height: 45px;
+            width: 45px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--color-accent-1);
             padding: 2px;
+            /* REMOVER QUALQUER FILTRO QUE CAUSE BORRAMENTO */
+            filter: none;
+            -webkit-filter: none;
+            /* GARANTIR RENDERIZAÇÃO NÍTIDA */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        /* GARANTIR QUE O TEXTO DA LOGO FIQUE NÍTIDO */
+        .logo .neon-text {
+            text-shadow: none;
+            background: var(--color-accent-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
         }
 
         .nav-links a {
@@ -95,6 +118,9 @@
             font-size: 1em;
             padding: 5px 0;
             border-bottom: 2px solid transparent;
+            /* REMOVER EFEITOS DE BLUR */
+            text-shadow: none;
+            filter: none;
         }
 
         .nav-links a:hover {
@@ -103,7 +129,7 @@
 
         /* HERO SECTION */
         .hero {
-            background: url('Assets/Imagens/assets/images/banner-nomad-maps.jpg') no-repeat center center/cover;
+            background: url('https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/banner-nomad-maps.jpg') no-repeat center center/cover;
             min-height: 70vh;
             display: flex;
             align-items: center;
@@ -346,6 +372,13 @@
             .nav-links {
                 display: none;
             }
+            .logo {
+                font-size: 1.5em;
+            }
+            .mini-logo {
+                height: 35px;
+                width: 35px;
+            }
         }
     </style>
 </head>
@@ -355,7 +388,8 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    <img src="Assets/Imagens/assets/logo_circular.png" alt="Nomad Maps Logo" class="mini-logo">
+                    <!-- LOGO CIRCULAR COM CAMINHO ABSOLUTO DO GITHUB -->
+                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/logo_circular.png" alt="Nomad Maps Logo" class="mini-logo">
                     <span class="neon-text">NOMAD MAPS</span>
                 </div>
                 <div class="nav-links">
@@ -404,7 +438,7 @@
                 <div class="map-card">
                     <div class="map-header">
                         <h3 class="neon-text">🌍 Evolução Histórica (1986-2008)</h3>
-                        <p>Animção temporal mostrando a expansão global do movimento trance</p>
+                        <p>Animação temporal mostrando a expansão global do movimento trance</p>
                     </div>
                     <div class="map-container-interactive" id="animatedMap">
                         <!-- Mapa Plotly animado será renderizado aqui -->
@@ -420,7 +454,35 @@
         <div class="container">
             <h2 class="section-title"><span class="neon-text">Próximas</span> Jornadas</h2>
             <div class="festival-grid">
-                <!-- Seus cards de festivais aqui -->
+                <div class="festival-card">
+                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/Gemini_Generated_Image_ssau6ussau6ussau.png" alt="Boom Festival">
+                    <div class="festival-info">
+                        <h3 class="neon-text">Boom Festival</h3>
+                        <p>Portugal | Julho 2026</p>
+                        <p class="price">A partir de R$ 7.990</p>
+                        <a href="#" class="cta-button" style="width: 100%; margin-top: 15px;">VER DETALHES</a>
+                    </div>
+                </div>
+
+                <div class="festival-card">
+                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/Gemini_Generated_Image_ssau6ussau6ussau%20(1).png" alt="Modem Festival">
+                    <div class="festival-info">
+                        <h3 class="neon-text">Modem Festival</h3>
+                        <p>Hungria | Agosto 2026</p>
+                        <p class="price">A partir de R$ 6.800</p>
+                        <a href="#" class="cta-button" style="width: 100%; margin-top: 15px;">VER DETALHES</a>
+                    </div>
+                </div>
+
+                <div class="festival-card">
+                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/universo-paralello-festival.jpg" alt="Universo Paralello">
+                    <div class="festival-info">
+                        <h3 class="neon-text">Universo Paralello</h3>
+                        <p>Brasil | Dezembro 2025</p>
+                        <p class="price">A partir de R$ 4.500</p>
+                        <a href="#" class="cta-button" style="width: 100%; margin-top: 15px;">VER DETALHES</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
