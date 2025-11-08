@@ -313,14 +313,14 @@
             filter: brightness(0.9) contrast(1.1) saturate(1.1);
         }
 
-        /* SEÇÃO FILOSOFIA */
-        .philosophy-section {
+        /* SEÇÃO SOBRE NÓS */
+        .about-section {
             padding: 80px 0;
             background-color: var(--color-medium);
             text-align: center;
         }
 
-        .philosophy-section blockquote {
+        .about-section blockquote {
             font-style: italic;
             font-size: 1.8em;
             color: #aaa;
@@ -328,7 +328,7 @@
             line-height: 1.4;
         }
 
-        /* SEÇÃO DE MAPAS INTERATIVOS - AGORA NO FINAL */
+        /* SEÇÃO DE MAPAS INTERATIVOS */
         .interactive-maps-section {
             padding: 80px 0;
             background-color: var(--color-dark);
@@ -374,6 +374,43 @@
             width: 100%;
             height: 400px;
             position: relative;
+        }
+
+        /* SEÇÃO DE PRODUTOS */
+        .products-section {
+            padding: 80px 0;
+            background-color: var(--color-medium);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background: var(--color-dark);
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid var(--color-accent-1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 200, 0.3);
+        }
+
+        .product-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .product-card p {
+            color: #ccc;
+            margin-bottom: 20px;
         }
 
         /* Estilos para os mapas Leaflet */
@@ -496,7 +533,7 @@
                 height: 35px;
                 width: 35px;
             }
-            .philosophy-section blockquote {
+            .about-section blockquote {
                 font-size: 1.4em;
             }
             
@@ -516,34 +553,30 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    <!-- LOGO CIRCULAR COM CAMINHO ABSOLUTO DO GITHUB -->
                     <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/logo_circular.png" alt="Nomad Maps Logo" class="mini-logo">
                     <span class="neon-text">NOMAD MAPS</span>
                 </div>
                 <div class="nav-links">
-                    <a href="#destinos">Destinos</a>
-                    <a href="#mapa-global">Mapa Global</a>
-                    <a href="#filosofia">Filosofia</a>
-                    <a href="#analises-geoespaciais">
-                        Análises Geoespaciais 
-                        <i class="fas fa-external-link-alt subpage-icon"></i>
-                    </a>
+                    <a href="#inicio">Página Inicial</a>
+                    <a href="#sobre">Sobre Nós</a>
+                    <a href="#mapas">Mapas</a>
+                    <a href="#produtos">Produtos</a>
                     <a href="#contato">Contato</a>
                 </div>
             </nav>
         </div>
     </header>
 
-    <section class="hero" id="home">
+    <section class="hero" id="inicio">
         <div class="hero-content">
             <h1 class="neon-text">NOMAD MAPS</h1>
             <p>Agência Especializada em Festivais de Arte e Cultura Visionária pelo mundo.</p>
-            <a href="#destinos" class="cta-button">EXPLORE AS JORNADAS</a>
+            <a href="#produtos" class="cta-button">EXPLORAR PRODUTOS</a>
         </div>
     </section>
 
-    <!-- NOVA SEÇÃO: FESTIVAIS E MAPA LADO A LADO -->
-    <section class="main-content-grid" id="destinos">
+    <!-- SEÇÃO: FESTIVAIS E MAPA LADO A LADO -->
+    <section class="main-content-grid" id="produtos">
         <div class="container">
             <div class="content-grid">
                 
@@ -587,7 +620,7 @@
                 </div>
 
                 <!-- COLUNA DIREITA: MAPA GLOBAL -->
-                <div class="map-section" id="mapa-global">
+                <div class="map-section">
                     <div class="map-header">
                         <h2 class="neon-text">Mapa Global</h2>
                         <p style="color: #ccc;">Explore festivais ao redor do mundo</p>
@@ -606,27 +639,27 @@
         </div>
     </section>
 
-    <!-- SEÇÃO FILOSOFIA -->
-    <section class="philosophy-section" id="filosofia">
+    <!-- SEÇÃO SOBRE NÓS -->
+    <section class="about-section" id="sobre">
         <div class="container">
-            <h2 class="section-title">Nossa Missão</h2>
+            <h2 class="section-title">Sobre Nós</h2>
             <blockquote>
-                "Não somos turistas, somos nômades da alma. Especializados em viagens para festivais de arte e cultura visionária."
+                "Curadoria de experiências que transformam. Da logística à imersão cultural, sua única preocupação é dançar."
             </blockquote>
             <p style="margin-top: 20px; font-size: 1.1em; color: #ccc;">
-                Curadoria de experiências que transformam. Da logística à imersão cultural, sua única preocupação é dançar.
+                Somos nômades da alma, especializados em criar jornadas únicas para festivais de arte e cultura visionária ao redor do mundo.
             </p>
         </div>
     </section>
 
-    <!-- SEÇÃO DE ANÁLISES GEOESPACIAIS - AGORA NO FINAL -->
-    <section class="interactive-maps-section" id="analises-geoespaciais">
+    <!-- SEÇÃO DE MAPAS INTERATIVOS -->
+    <section class="interactive-maps-section" id="mapas">
         <div class="container">
             <h2 class="section-title">
-                <span class="neon-text">Análises</span> Geoespaciais
+                <span class="neon-text">Mapas</span> Interativos
             </h2>
             <p style="text-align: center; margin-bottom: 40px; color: #ccc; font-size: 1.1em;">
-                Explore a evolução histórica e distribuição global da cultura psytrance através de mapas interativos
+                Explore a evolução histórica e distribuição global da cultura psytrance
             </p>
             
             <div class="maps-gallery">
@@ -657,16 +690,48 @@
         </div>
     </section>
 
+    <!-- SEÇÃO DE PRODUTOS -->
+    <section class="products-section" id="produtos">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="neon-text">Nossos</span> Produtos
+            </h2>
+            <p style="text-align: center; margin-bottom: 40px; color: #ccc; font-size: 1.1em;">
+                Conheça nossos serviços e experiências exclusivas
+            </p>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <h3 class="neon-text">🎫 Pacotes Completos</h3>
+                    <p>Passagem, hospedagem, ingressos e transfer - tudo incluído para sua jornada perfeita</p>
+                    <a href="#contato" class="cta-button">SOLICITAR ORÇAMENTO</a>
+                </div>
+
+                <div class="product-card">
+                    <h3 class="neon-text">🗺️ Consultoria de Roteiros</h3>
+                    <p>Planejamento personalizado de rotas para festivais múltiplos e experiências únicas</p>
+                    <a href="#contato" class="cta-button">SAIBA MAIS</a>
+                </div>
+
+                <div class="product-card">
+                    <h3 class="neon-text">👥 Grupos & Tribos</h3>
+                    <p>Experiências coletivas com pessoas que compartilham a mesma vibração e intenção</p>
+                    <a href="#contato" class="cta-button">JUNTAR-SE</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer id="contato">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>Mapa do Site</h4>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#destinos">Destinos</a></li>
-                        <li><a href="#mapa-global">Mapa Global</a></li>
-                        <li><a href="#analises-geoespaciais">Análises Geoespaciais</a></li>
+                        <li><a href="#inicio">Página Inicial</a></li>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#mapas">Mapas</a></li>
+                        <li><a href="#produtos">Produtos</a></li>
                     </ul>
                 </div>
 
