@@ -199,20 +199,46 @@
             box-shadow: 0 5px 15px rgba(0, 255, 200, 0.4);
         }
 
-        /* SEÇÃO DE FESTIVAIS EM DESTAQUE */
-        .featured-festivals {
+        /* NOVA SEÇÃO: FESTIVAIS E MAPA LADO A LADO */
+        .main-content-grid {
             padding: 80px 0;
             background-color: var(--color-dark);
         }
 
-        .festival-grid {
+        .content-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* SEÇÃO DE FESTIVAIS EM DESTAQUE - LADO ESQUERDO */
+        .featured-festivals {
+            background: var(--color-medium);
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid var(--color-accent-1);
+            box-shadow: 0 0 20px rgba(0, 255, 200, 0.2);
+        }
+
+        .festivals-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .festivals-header h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .festival-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .festival-card {
-            background-color: var(--color-medium);
+            background-color: var(--color-dark);
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid var(--color-medium);
@@ -220,23 +246,23 @@
         }
 
         .festival-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 255, 200, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 200, 0.3);
         }
 
         .festival-card img {
             width: 100%;
-            height: 200px;
+            height: 150px;
             object-fit: cover;
             filter: brightness(0.8);
         }
 
         .festival-info {
-            padding: 20px;
+            padding: 15px;
         }
 
         .festival-info h3 {
-            font-size: 1.4em;
+            font-size: 1.2em;
             margin-bottom: 5px;
         }
 
@@ -246,26 +272,38 @@
         }
 
         .festival-info .price {
-            margin-top: 15px;
-            font-size: 1.2em;
+            margin-top: 10px;
+            font-size: 1.1em;
             font-weight: 700;
             color: var(--color-accent-2);
         }
 
-        /* SEÇÃO DO MAPA GLOBAL */
+        /* SEÇÃO DO MAPA GLOBAL - LADO DIREITO */
         .map-section {
-            padding: 80px 0;
-            background-color: var(--color-medium);
+            background: var(--color-medium);
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid var(--color-accent-1);
+            box-shadow: 0 0 20px rgba(0, 255, 200, 0.2);
+            height: fit-content;
+        }
+
+        .map-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .map-header h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
         }
 
         .map-container {
             width: 100%;
-            height: 650px;
-            border-radius: 12px;
+            height: 500px;
+            border-radius: 8px;
             overflow: hidden;
-            border: 3px solid var(--color-accent-1);
-            box-shadow: 0 0 30px rgba(0, 255, 200, 0.4);
-            background: var(--color-dark);
+            border: 2px solid var(--color-accent-1);
         }
 
         .map-container iframe {
@@ -278,7 +316,7 @@
         /* SEÇÃO FILOSOFIA */
         .philosophy-section {
             padding: 80px 0;
-            background-color: var(--color-dark);
+            background-color: var(--color-medium);
             text-align: center;
         }
 
@@ -293,7 +331,7 @@
         /* SEÇÃO DE MAPAS INTERATIVOS - AGORA NO FINAL */
         .interactive-maps-section {
             padding: 80px 0;
-            background-color: var(--color-medium);
+            background-color: var(--color-dark);
         }
 
         .maps-gallery {
@@ -317,17 +355,17 @@
             box-shadow: 0 0 30px rgba(0, 255, 200, 0.4);
         }
 
-        .map-header {
+        .map-header-analytics {
             padding: 20px;
             border-bottom: 1px solid var(--color-medium);
         }
 
-        .map-header h3 {
+        .map-header-analytics h3 {
             font-size: 1.4em;
             margin-bottom: 10px;
         }
 
-        .map-header p {
+        .map-header-analytics p {
             color: #ccc;
             font-size: 0.9em;
         }
@@ -427,6 +465,17 @@
         }
 
         /* RESPONSIVIDADE */
+        @media (max-width: 968px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .map-container {
+                height: 400px;
+            }
+        }
+
         @media (max-width: 768px) {
             .maps-gallery {
                 grid-template-columns: 1fr;
@@ -449,6 +498,14 @@
             }
             .philosophy-section blockquote {
                 font-size: 1.4em;
+            }
+            
+            .festival-grid {
+                gap: 15px;
+            }
+            
+            .festival-card img {
+                height: 120px;
             }
         }
     </style>
@@ -485,57 +542,66 @@
         </div>
     </section>
 
-    <!-- SEÇÃO DE FESTIVAIS EM DESTAQUE -->
-    <section class="featured-festivals" id="destinos">
+    <!-- NOVA SEÇÃO: FESTIVAIS E MAPA LADO A LADO -->
+    <section class="main-content-grid" id="destinos">
         <div class="container">
-            <h2 class="section-title"><span class="neon-text">Próximas</span> Jornadas</h2>
-            <div class="festival-grid">
-                <div class="festival-card">
-                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/Gemini_Generated_Image_ssau6ussau6ussau.png" alt="Boom Festival">
-                    <div class="festival-info">
-                        <h3 class="neon-text">Boom Festival</h3>
-                        <p>Portugal | Julho 2026</p>
-                        <p class="price">A partir de R$ 7.990</p>
-                        <a href="#" class="cta-button" style="width: 100%; margin-top: 15px;">VER DETALHES</a>
+            <div class="content-grid">
+                
+                <!-- COLUNA ESQUERDA: PRÓXIMAS JORNADAS -->
+                <div class="featured-festivals">
+                    <div class="festivals-header">
+                        <h2 class="neon-text">Próximas Jornadas</h2>
+                        <p style="color: #ccc;">Nossos destinos em destaque</p>
+                    </div>
+                    <div class="festival-grid">
+                        <div class="festival-card">
+                            <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/Gemini_Generated_Image_ssau6ussau6ussau.png" alt="Boom Festival">
+                            <div class="festival-info">
+                                <h3 class="neon-text">Boom Festival</h3>
+                                <p>Portugal | Julho 2026</p>
+                                <p class="price">A partir de R$ 7.990</p>
+                                <a href="#" class="cta-button" style="width: 100%; margin-top: 10px; padding: 10px 20px; font-size: 0.9em;">VER DETALHES</a>
+                            </div>
+                        </div>
+
+                        <div class="festival-card">
+                            <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/Gemini_Generated_Image_ssau6ussau6ussau%20(1).png" alt="Modem Festival">
+                            <div class="festival-info">
+                                <h3 class="neon-text">Modem Festival</h3>
+                                <p>Hungria | Agosto 2026</p>
+                                <p class="price">A partir de R$ 6.800</p>
+                                <a href="#" class="cta-button" style="width: 100%; margin-top: 10px; padding: 10px 20px; font-size: 0.9em;">VER DETALHES</a>
+                            </div>
+                        </div>
+
+                        <div class="festival-card">
+                            <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/universo-paralello-festival.jpg" alt="Universo Paralello">
+                            <div class="festival-info">
+                                <h3 class="neon-text">Universo Paralello</h3>
+                                <p>Brasil | Dezembro 2025</p>
+                                <p class="price">A partir de R$ 4.500</p>
+                                <a href="#" class="cta-button" style="width: 100%; margin-top: 10px; padding: 10px 20px; font-size: 0.9em;">VER DETALHES</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="festival-card">
-                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/Gemini_Generated_Image_ssau6ussau6ussau%20(1).png" alt="Modem Festival">
-                    <div class="festival-info">
-                        <h3 class="neon-text">Modem Festival</h3>
-                        <p>Hungria | Agosto 2026</p>
-                        <p class="price">A partir de R$ 6.800</p>
-                        <a href="#" class="cta-button" style="width: 100%; margin-top: 15px;">VER DETALHES</a>
+                <!-- COLUNA DIREITA: MAPA GLOBAL -->
+                <div class="map-section" id="mapa-global">
+                    <div class="map-header">
+                        <h2 class="neon-text">Mapa Global</h2>
+                        <p style="color: #ccc;">Explore festivais ao redor do mundo</p>
+                    </div>
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/d/embed?mid=1adej1ZKSiAOyUe4Uu9jPBV6P6DalfQk&ehbc=2E312F"
+                            allowfullscreen="" 
+                            loading="lazy"
+                            title="Mapa Global de Festivais de Psytrance - Nomad Maps">
+                        </iframe>
                     </div>
                 </div>
 
-                <div class="festival-card">
-                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/universo-paralello-festival.jpg" alt="Universo Paralello">
-                    <div class="festival-info">
-                        <h3 class="neon-text">Universo Paralello</h3>
-                        <p>Brasil | Dezembro 2025</p>
-                        <p class="price">A partir de R$ 4.500</p>
-                        <a href="#" class="cta-button" style="width: 100%; margin-top: 15px;">VER DETALHES</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SEÇÃO DO MAPA GLOBAL -->
-    <section class="map-section" id="mapa-global">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="neon-text">Mapa Global</span> dos Festivais
-            </h2>
-            <div class="map-container">
-                <iframe 
-                    src="https://www.google.com/maps/d/embed?mid=1adej1ZKSiAOyUe4Uu9jPBV6P6DalfQk&ehbc=2E312F"
-                    allowfullscreen="" 
-                    loading="lazy"
-                    title="Mapa Global de Festivais de Psytrance - Nomad Maps">
-                </iframe>
             </div>
         </div>
     </section>
@@ -567,7 +633,7 @@
                 
                 <!-- MAPA 1: Folium - Pontos Históricos -->
                 <div class="map-card">
-                    <div class="map-header">
+                    <div class="map-header-analytics">
                         <h3 class="neon-text">🎵 Pontos Históricos do Psytrance</h3>
                         <p>Origens, festivais icônicos e selos importantes na história do gênero</p>
                     </div>
@@ -578,7 +644,7 @@
 
                 <!-- MAPA 2: Plotly - Evolução Animada -->
                 <div class="map-card">
-                    <div class="map-header">
+                    <div class="map-header-analytics">
                         <h3 class="neon-text">🌍 Evolução Histórica (1986-2008)</h3>
                         <p>Animação temporal mostrando a expansão global do movimento trance</p>
                     </div>
