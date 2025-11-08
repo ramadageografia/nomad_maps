@@ -88,13 +88,9 @@
             filter: none;
         }
 
-        .mini-logo {
-            height: 45px;
-            width: 45px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--color-accent-1);
-            padding: 2px;
+        .banner-logo {
+            height: 60px;
+            object-fit: contain;
             /* REMOVER QUALQUER FILTRO QUE CAUSE BORRAMENTO */
             filter: none;
             -webkit-filter: none;
@@ -139,6 +135,13 @@
             color: var(--color-accent-1);
             font-weight: 400;
             z-index: 1001;
+        }
+
+        /* BANNER LOGO */
+        .banner-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         /* SEÇÃO 1: MAPA ONLINE (PRIMEIRA SEÇÃO) */
@@ -470,6 +473,10 @@
                 text-align: center;
                 margin-bottom: 10px;
             }
+            
+            .banner-logo {
+                height: 50px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -488,9 +495,8 @@
             .logo {
                 font-size: 1.5em;
             }
-            .mini-logo {
-                height: 35px;
-                width: 35px;
+            .banner-logo {
+                height: 40px;
             }
             .about-section blockquote {
                 font-size: 1.4em;
@@ -508,6 +514,10 @@
                 font-size: 0.8em;
                 padding: 0 10px;
             }
+            
+            .banner-container {
+                gap: 10px;
+            }
         }
     </style>
 </head>
@@ -520,9 +530,9 @@
                 Agência Especializada em Festivais de Arte e Cultura Visionária pelo mundo
             </div>
             <nav>
-                <div class="logo">
-                    <!-- LOGO CIRCULAR COM CAMINHO CORRETO -->
-                    <img src="https://github.com/ramadageografia/nomad_maps/blob/main/Assets/Imagens/assets/images/Screenshot_1-removebg-preview.png" alt="Nomad Maps Logo" class="mini-logo">
+                <div class="banner-container">
+                    <!-- BANNER NOMAD MAPS -->
+                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/banner-nomad-maps.jpg" alt="Nomad Maps" class="banner-logo">
                     <span class="neon-text">NOMAD MAPS</span>
                 </div>
                 <div class="nav-links">
@@ -588,7 +598,7 @@
                 </div>
 
                 <div class="festival-card">
-                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/universo-paralello-festival.jpg" alt="Universo Paralello">
+                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/flyer_up.jpg" alt="Universo Paralello">
                     <div class="festival-info">
                         <h3 class="neon-text">Universo Paralello</h3>
                         <p>📍 Brasil | 📅 Dezembro 2025</p>
