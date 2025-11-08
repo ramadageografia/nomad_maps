@@ -130,90 +130,82 @@
             border-bottom: 2px solid var(--color-accent-1);
         }
 
-        /* ÍCONE DE SUBPÁGINA */
-        .subpage-icon {
-            font-size: 0.8em;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-
-        .nav-links a:hover .subpage-icon {
-            opacity: 1;
-        }
-
-        /* HERO SECTION */
-        .hero {
-            background: url('https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/banner-nomad-maps.jpg') no-repeat center center/cover;
-            min-height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero::before {
-            content: '';
+        /* FRASE SUPERIOR ESQUERDA */
+        .header-tagline {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
+            top: 15px;
+            left: 20px;
+            font-size: 0.9em;
+            color: var(--color-accent-1);
+            font-weight: 400;
+            z-index: 1001;
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            padding: 40px;
-        }
-
-        .hero h1 {
-            font-size: 4em;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(0, 255, 200, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.5em;
-            margin-bottom: 30px;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: var(--color-accent-grad);
-            color: var(--color-dark);
-            padding: 15px 40px;
-            border-radius: 5px;
-            font-size: 1.2em;
-            font-weight: 700;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            opacity: 0.8;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 255, 200, 0.4);
-        }
-
-        /* SEÇÃO DE FESTIVAIS EM DESTAQUE */
-        .featured-festivals {
-            padding: 80px 0;
+        /* SEÇÃO 1: MAPA ONLINE (PRIMEIRA SEÇÃO) */
+        .online-map-section {
+            padding: 40px 0;
             background-color: var(--color-dark);
+        }
+
+        .map-section {
+            background: var(--color-medium);
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid var(--color-accent-1);
+            box-shadow: 0 0 20px rgba(0, 255, 200, 0.2);
+        }
+
+        .map-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .map-header h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 600px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid var(--color-accent-1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: brightness(0.9) contrast(1.1) saturate(1.1);
+        }
+
+        /* SEÇÃO 2: FESTIVAIS EM DESTAQUE */
+        .featured-festivals-section {
+            padding: 80px 0;
+            background-color: var(--color-medium);
+        }
+
+        .festivals-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .festivals-header h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
         }
 
         .festival-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
+            margin-top: 30px;
         }
 
         .festival-card {
-            background-color: var(--color-medium);
-            border-radius: 8px;
+            background-color: var(--color-dark);
+            border-radius: 12px;
             overflow: hidden;
             border: 1px solid var(--color-medium);
             transition: transform 0.3s, box-shadow 0.3s;
@@ -221,7 +213,7 @@
 
         .festival-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 255, 200, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 255, 200, 0.3);
         }
 
         .festival-card img {
@@ -237,60 +229,60 @@
 
         .festival-info h3 {
             font-size: 1.4em;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
         .festival-info p {
-            font-size: 0.9em;
+            font-size: 1em;
             color: #ccc;
+            margin-bottom: 10px;
         }
 
         .festival-info .price {
             margin-top: 15px;
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: 700;
             color: var(--color-accent-2);
         }
 
-        /* SEÇÃO DO MAPA GLOBAL */
-        .map-section {
-            padding: 80px 0;
-            background-color: var(--color-medium);
-        }
-
-        .map-container {
-            width: 100%;
-            height: 650px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 3px solid var(--color-accent-1);
-            box-shadow: 0 0 30px rgba(0, 255, 200, 0.4);
-            background: var(--color-dark);
-        }
-
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            filter: brightness(0.9) contrast(1.1) saturate(1.1);
-        }
-
-        /* SEÇÃO FILOSOFIA */
-        .philosophy-section {
+        /* SEÇÃO 3: NOSSOS PRODUTOS */
+        .products-section {
             padding: 80px 0;
             background-color: var(--color-dark);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background: var(--color-medium);
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid var(--color-accent-1);
             text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .philosophy-section blockquote {
-            font-style: italic;
-            font-size: 1.8em;
-            color: #aaa;
-            margin-bottom: 30px;
-            line-height: 1.4;
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 200, 0.3);
         }
 
-        /* SEÇÃO DE MAPAS INTERATIVOS - AGORA NO FINAL */
+        .product-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .product-card p {
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        /* SEÇÃO 4: MAPAS INTERATIVOS */
         .interactive-maps-section {
             padding: 80px 0;
             background-color: var(--color-medium);
@@ -317,17 +309,17 @@
             box-shadow: 0 0 30px rgba(0, 255, 200, 0.4);
         }
 
-        .map-header {
+        .map-header-analytics {
             padding: 20px;
             border-bottom: 1px solid var(--color-medium);
         }
 
-        .map-header h3 {
+        .map-header-analytics h3 {
             font-size: 1.4em;
             margin-bottom: 10px;
         }
 
-        .map-header p {
+        .map-header-analytics p {
             color: #ccc;
             font-size: 0.9em;
         }
@@ -336,6 +328,41 @@
             width: 100%;
             height: 400px;
             position: relative;
+        }
+
+        /* SEÇÃO 5: SOBRE NÓS */
+        .about-section {
+            padding: 80px 0;
+            background-color: var(--color-dark);
+            text-align: center;
+        }
+
+        .about-section blockquote {
+            font-style: italic;
+            font-size: 1.8em;
+            color: #aaa;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--color-accent-grad);
+            color: var(--color-dark);
+            padding: 15px 40px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 200, 0.4);
         }
 
         /* Estilos para os mapas Leaflet */
@@ -427,6 +454,24 @@
         }
 
         /* RESPONSIVIDADE */
+        @media (max-width: 968px) {
+            .maps-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-container {
+                height: 500px;
+            }
+            
+            .header-tagline {
+                position: relative;
+                top: auto;
+                left: auto;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+        }
+
         @media (max-width: 768px) {
             .maps-gallery {
                 grid-template-columns: 1fr;
@@ -434,8 +479,8 @@
             .map-container-interactive {
                 height: 300px;
             }
-            .hero h1 {
-                font-size: 2.5em;
+            .festival-grid {
+                grid-template-columns: 1fr;
             }
             .nav-links {
                 display: none;
@@ -447,8 +492,21 @@
                 height: 35px;
                 width: 35px;
             }
-            .philosophy-section blockquote {
+            .about-section blockquote {
                 font-size: 1.4em;
+            }
+            
+            .festival-card img {
+                height: 180px;
+            }
+
+            .map-container {
+                height: 400px;
+            }
+            
+            .header-tagline {
+                font-size: 0.8em;
+                padding: 0 10px;
             }
         }
     </style>
@@ -457,46 +515,64 @@
 
     <header>
         <div class="container">
+            <!-- FRASE SUPERIOR ESQUERDA -->
+            <div class="header-tagline">
+                Agência Especializada em Festivais de Arte e Cultura Visionária pelo mundo
+            </div>
             <nav>
                 <div class="logo">
-                    <!-- LOGO CIRCULAR COM CAMINHO ABSOLUTO DO GITHUB -->
+                    <!-- LOGO CIRCULAR COM CAMINHO CORRETO -->
                     <img src="https://github.com/ramadageografia/nomad_maps/blob/main/Assets/Imagens/assets/images/Screenshot_1-removebg-preview.png" alt="Nomad Maps Logo" class="mini-logo">
                     <span class="neon-text">NOMAD MAPS</span>
                 </div>
                 <div class="nav-links">
-                    <a href="#destinos">Destinos</a>
-                    <a href="#mapa-global">Mapa Global</a>
-                    <a href="#filosofia">Filosofia</a>
-                    <a href="#analises-geoespaciais">
-                        Análises Geoespaciais 
-                        <i class="fas fa-external-link-alt subpage-icon"></i>
-                    </a>
-                    <a href="#contato">Contato</a>
+                    <a href="#mapa-online">Mapa Online</a>
+                    <a href="#festivais">Festivais</a>
+                    <a href="#produtos">Produtos</a>
+                    <a href="#mapas-interativos">Mapas Interativos</a>
+                    <a href="#sobre">Sobre Nós</a>
                 </div>
             </nav>
         </div>
     </header>
 
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1 class="neon-text">NOMAD MAPS</h1>
-            <p>Agência Especializada em Festivais de Arte e Cultura Visionária pelo mundo.</p>
-            <a href="#destinos" class="cta-button">EXPLORE AS JORNADAS</a>
+    <!-- SEÇÃO 1: MAPA ONLINE (PRIMEIRA SEÇÃO) -->
+    <section class="online-map-section" id="mapa-online">
+        <div class="container">
+            <div class="map-section">
+                <div class="map-header">
+                    <h2 class="neon-text">Mapa Global de Festivais</h2>
+                    <p style="color: #ccc; font-size: 1.2em;">Explore festivais de psytrance ao redor do mundo em tempo real</p>
+                </div>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/d/embed?mid=1adej1ZKSiAOyUe4Uu9jPBV6P6DalfQk&ehbc=2E312F"
+                        allowfullscreen="" 
+                        loading="lazy"
+                        title="Mapa Global de Festivais de Psytrance - Nomad Maps">
+                    </iframe>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- SEÇÃO DE FESTIVAIS EM DESTAQUE -->
-    <section class="featured-festivals" id="destinos">
+    <!-- SEÇÃO 2: FESTIVAIS EM DESTAQUE -->
+    <section class="featured-festivals-section" id="festivais">
         <div class="container">
-            <h2 class="section-title"><span class="neon-text">Próximas</span> Jornadas</h2>
+            <div class="festivals-header">
+                <h2 class="neon-text">Festivais em Destaque</h2>
+                <p style="color: #ccc; font-size: 1.2em;">Nossos destinos mais procurados e experiências exclusivas</p>
+            </div>
+            
             <div class="festival-grid">
                 <div class="festival-card">
                     <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/Gemini_Generated_Image_ssau6ussau6ussau.png" alt="Boom Festival">
                     <div class="festival-info">
                         <h3 class="neon-text">Boom Festival</h3>
-                        <p>Portugal | Julho 2026</p>
+                        <p>📍 Portugal | 📅 Julho 2026</p>
+                        <p>O festival de transformação consciente mais icônico do mundo</p>
                         <p class="price">A partir de R$ 7.990</p>
-                        <a href="#" class="cta-button" style="width: 100%; margin-top: 15px;">VER DETALHES</a>
+                        <a href="#" class="cta-button" style="width: 100%; margin-top: 10px; padding: 12px 20px; font-size: 1em;">VER DETALHES</a>
                     </div>
                 </div>
 
@@ -504,69 +580,74 @@
                     <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/Gemini_Generated_Image_ssau6ussau6ussau%20(1).png" alt="Modem Festival">
                     <div class="festival-info">
                         <h3 class="neon-text">Modem Festival</h3>
-                        <p>Hungria | Agosto 2026</p>
+                        <p>📍 Hungria | 📅 Agosto 2026</p>
+                        <p>Tecnologia, natureza e psytrance de alta qualidade</p>
                         <p class="price">A partir de R$ 6.800</p>
-                        <a href="#" class="cta-button" style="width: 100%; margin-top: 15px;">VER DETALHES</a>
+                        <a href="#" class="cta-button" style="width: 100%; margin-top: 10px; padding: 12px 20px; font-size: 1em;">VER DETALHES</a>
                     </div>
                 </div>
 
                 <div class="festival-card">
-                    <img src="https://github.com/ramadageografia/nomad_maps/blob/main/Assets/Imagens/assets/images/flyer_up.jpg">
+                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/universo-paralello-festival.jpg" alt="Universo Paralello">
+                    <div class="festival-info">
                         <h3 class="neon-text">Universo Paralello</h3>
-                        <p>Brasil | Dezembro 2025</p>
+                        <p>📍 Brasil | 📅 Dezembro 2025</p>
+                        <p>A maior celebração de cultura alternativa da América Latina</p>
                         <p class="price">A partir de R$ 4.500</p>
-                        <a href="#" class="cta-button" style="width: 100%; margin-top: 15px;">VER DETALHES</a>
+                        <a href="#" class="cta-button" style="width: 100%; margin-top: 10px; padding: 12px 20px; font-size: 1em;">VER DETALHES</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SEÇÃO DO MAPA GLOBAL -->
-    <section class="map-section" id="mapa-global">
+    <!-- SEÇÃO 3: NOSSOS PRODUTOS -->
+    <section class="products-section" id="produtos">
         <div class="container">
             <h2 class="section-title">
-                <span class="neon-text">Mapa Global</span> dos Festivais
+                <span class="neon-text">Nossos</span> Produtos
             </h2>
-            <div class="map-container">
-                <iframe 
-                    src="https://www.google.com/maps/d/embed?mid=1adej1ZKSiAOyUe4Uu9jPBV6P6DalfQk&ehbc=2E312F"
-                    allowfullscreen="" 
-                    loading="lazy"
-                    title="Mapa Global de Festivais de Psytrance - Nomad Maps">
-                </iframe>
+            <p style="text-align: center; margin-bottom: 40px; color: #ccc; font-size: 1.2em;">
+                Conheça nossos serviços e experiências exclusivas
+            </p>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <h3 class="neon-text">🎫 Pacotes Completos</h3>
+                    <p>Passagem, hospedagem, ingressos e transfer - tudo incluído para sua jornada perfeita</p>
+                    <a href="#contato" class="cta-button">SOLICITAR ORÇAMENTO</a>
+                </div>
+
+                <div class="product-card">
+                    <h3 class="neon-text">🗺️ Consultoria de Roteiros</h3>
+                    <p>Planejamento personalizado de rotas para festivais múltiplos e experiências únicas</p>
+                    <a href="#contato" class="cta-button">SAIBA MAIS</a>
+                </div>
+
+                <div class="product-card">
+                    <h3 class="neon-text">👥 Grupos & Tribos</h3>
+                    <p>Experiências coletivas com pessoas que compartilham a mesma vibração e intenção</p>
+                    <a href="#contato" class="cta-button">JUNTAR-SE</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- SEÇÃO FILOSOFIA -->
-    <section class="philosophy-section" id="filosofia">
-        <div class="container">
-            <h2 class="section-title">Nossa Missão</h2>
-            <blockquote>
-                "Não somos turistas, somos nômades da alma. Especializados em viagens para festivais de arte e cultura visionária."
-            </blockquote>
-            <p style="margin-top: 20px; font-size: 1.1em; color: #ccc;">
-                Curadoria de experiências que transformam. Da logística à imersão cultural, sua única preocupação é dançar.
-            </p>
-        </div>
-    </section>
-
-    <!-- SEÇÃO DE ANÁLISES GEOESPACIAIS - AGORA NO FINAL -->
-    <section class="interactive-maps-section" id="analises-geoespaciais">
+    <!-- SEÇÃO 4: MAPAS INTERATIVOS -->
+    <section class="interactive-maps-section" id="mapas-interativos">
         <div class="container">
             <h2 class="section-title">
-                <span class="neon-text">Análises</span> Geoespaciais
+                <span class="neon-text">Mapas</span> Interativos
             </h2>
-            <p style="text-align: center; margin-bottom: 40px; color: #ccc; font-size: 1.1em;">
-                Explore a evolução histórica e distribuição global da cultura psytrance através de mapas interativos
+            <p style="text-align: center; margin-bottom: 40px; color: #ccc; font-size: 1.2em;">
+                Explore a evolução histórica e distribuição global da cultura psytrance
             </p>
             
             <div class="maps-gallery">
                 
                 <!-- MAPA 1: Folium - Pontos Históricos -->
                 <div class="map-card">
-                    <div class="map-header">
+                    <div class="map-header-analytics">
                         <h3 class="neon-text">🎵 Pontos Históricos do Psytrance</h3>
                         <p>Origens, festivais icônicos e selos importantes na história do gênero</p>
                     </div>
@@ -577,7 +658,7 @@
 
                 <!-- MAPA 2: Plotly - Evolução Animada -->
                 <div class="map-card">
-                    <div class="map-header">
+                    <div class="map-header-analytics">
                         <h3 class="neon-text">🌍 Evolução Histórica (1986-2008)</h3>
                         <p>Animação temporal mostrando a expansão global do movimento trance</p>
                     </div>
@@ -590,16 +671,31 @@
         </div>
     </section>
 
+    <!-- SEÇÃO 5: SOBRE NÓS -->
+    <section class="about-section" id="sobre">
+        <div class="container">
+            <h2 class="section-title">Sobre Nós</h2>
+            <blockquote>
+                "Curadoria de experiências que transformam. Da logística à imersão cultural, sua única preocupação é dançar."
+            </blockquote>
+            <p style="color: #ccc; font-size: 1.1em; max-width: 800px; margin: 0 auto;">
+                A Nomad Maps nasceu da paixão pela cultura psytrance e pela vontade de conectar pessoas a experiências transformadoras. 
+                Somos mais que uma agência de viagens - somos facilitadores de jornadas que expandem consciências e criam memórias eternas.
+            </p>
+        </div>
+    </section>
+
     <footer id="contato">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>Mapa do Site</h4>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#destinos">Destinos</a></li>
-                        <li><a href="#mapa-global">Mapa Global</a></li>
-                        <li><a href="#analises-geoespaciais">Análises Geoespaciais</a></li>
+                        <li><a href="#mapa-online">Mapa Online</a></li>
+                        <li><a href="#festivais">Festivais em Destaque</a></li>
+                        <li><a href="#produtos">Nossos Produtos</a></li>
+                        <li><a href="#mapas-interativos">Mapas Interativos</a></li>
+                        <li><a href="#sobre">Sobre Nós</a></li>
                     </ul>
                 </div>
 
@@ -764,5 +860,3 @@
 
 </body>
 </html>
-
-
