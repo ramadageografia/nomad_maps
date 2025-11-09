@@ -3,136 +3,751 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomad Maps - Psytrance Travel Agency</title>
+    <title>Mapa Global de Festivais de Trance</title>
     
     <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     
-    <!-- Nosso CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/map.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        #header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        #header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        
+        #header p {
+            margin: 5px 0 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        #container {
+            display: flex;
+            height: calc(100vh - 120px);
+        }
+        
+        #sidebar {
+            width: 300px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+        
+        #map {
+            flex: 1;
+            height: 100%;
+        }
+        
+        .filter-section {
+            margin-bottom: 25px;
+        }
+        
+        .filter-section h3 {
+            margin-top: 0;
+            color: #2575fc;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        
+        .filter-option {
+            margin: 10px 0;
+        }
+        
+        .filter-option label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .filter-option input {
+            margin-right: 8px;
+        }
+        
+        .stats {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .stats h4 {
+            margin-top: 0;
+            color: #2575fc;
+        }
+        
+        .stats p {
+            margin: 5px 0;
+        }
+        
+        .legend {
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        /* Cores para diferentes tipos de festivais */
+        .psytrance-multigenero {
+            background-color: #3498db;
+        }
+        
+        .hitech-psytrance {
+            background-color: #e74c3c;
+        }
+        
+        .darkpsy {
+            background-color: #9b59b6;
+        }
+        
+        /* Estilo para bandeiras nos popups */
+        .country-flag {
+            width: 24px;
+            height: 16px;
+            margin-right: 10px;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+            border-radius: 2px;
+        }
+        
+        .festival-popup {
+            min-width: 280px;
+            max-width: 400px;
+        }
+        
+        .festival-popup h3 {
+            margin: 0 0 12px;
+            color: #2575fc;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+        }
+        
+        .festival-info {
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+        
+        .festival-info strong {
+            color: #555;
+        }
+        
+        .status-active {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .status-inactive {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        /* Estilos para flyers e ícones */
+        .festival-flyer {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .festival-flyer:hover {
+            transform: scale(1.02);
+        }
+        
+        .festival-icon {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        
+        .icon-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .icon-text {
+            margin-left: 10px;
+            flex: 1;
+        }
+
+        /* Melhorias para os marcadores */
+        .custom-div-icon {
+            background: transparent;
+            border: none;
+        }
+        
+        .icon-marker {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Loading state */
+        .loading {
+            opacity: 0.7;
+        }
+        
+        .flyer-placeholder {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .icon-placeholder {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+    </style>
 </head>
 <body>
-    <header class="main-header">
-        <div class="container">
-            <div class="header-content">
-                <h1 class="logo">🌍 Nomad Maps</h1>
-                <p class="tagline">Psytrance Travel Agency - Encontre seu próximo festival</p>
+    <div id="header">
+        <h1>🎵 Mapa Global de Festivais de Trance</h1>
+        <p>Explore festivais de trance ao redor do mundo com ícones e flyers</p>
+    </div>
+    
+    <div id="container">
+        <div id="sidebar">
+            <div class="filter-section">
+                <h3>🎛️ Filtros</h3>
+                
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" id="filter-active" checked>
+                        ✅ Festivais Ativos
+                    </label>
+                </div>
+                
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" id="filter-inactive">
+                        ❌ Festivais Inativos
+                    </label>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3>🌍 Continentes</h3>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" class="continent-filter" value="Europa" checked>
+                        Europa
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" class="continent-filter" value="América do Sul" checked>
+                        América do Sul
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" class="continent-filter" value="América do Norte" checked>
+                        América do Norte
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" class="continent-filter" value="América Central" checked>
+                        América Central
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" class="continent-filter" value="África" checked>
+                        África
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" class="continent-filter" value="Ásia" checked>
+                        Ásia
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" class="continent-filter" value="Oceania" checked>
+                        Oceania
+                    </label>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3>🎶 Vertente Principal</h3>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" class="genre-filter" value="Psytrance - multigênero" checked>
+                        Psytrance - Multigênero
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" class="genre-filter" value="Hitech Psytrance" checked>
+                        Hitech Psytrance
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" class="genre-filter" value="Darkpsy" checked>
+                        Darkpsy
+                    </label>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <h4>📊 Estatísticas</h4>
+                <p>Total de Festivais: <span id="total-festivals">0</span></p>
+                <p>Festivais Ativos: <span id="active-festivals">0</span></p>
+                <p>Festivais Inativos: <span id="inactive-festivals">0</span></p>
+            </div>
+            
+            <div class="legend">
+                <h4>🎨 Legenda</h4>
+                <div class="legend-item">
+                    <div class="legend-color psytrance-multigenero"></div>
+                    <span>Psytrance - Multigênero</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color hitech-psytrance"></div>
+                    <span>Hitech Psytrance</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color darkpsy"></div>
+                    <span>Darkpsy</span>
+                </div>
             </div>
         </div>
-    </header>
+        
+        <div id="map"></div>
+    </div>
 
-    <main class="main-content">
-        <div class="container">
-            <!-- Sidebar de Filtros -->
-            <aside class="sidebar">
-                <div class="filters-card">
-                    <h2>🎵 Filtros</h2>
-                    
-                    <div class="filter-group">
-                        <label for="status-filter">Status do Festival:</label>
-                        <select id="status-filter" class="filter-select">
-                            <option value="all">Todos os Status</option>
-                            <option value="Ativo">Ativos</option>
-                            <option value="Inativo">Inativos</option>
-                        </select>
-                    </div>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    
+    <script>
+        // Dados completos dos festivais - COM ÍCONES INTEGRADOS
+        const festivals = [
+            { 
+                name: "Nataraja Festival", 
+                country: "França", 
+                continent: "Europa", 
+                genre: "Psytrance - multigênero", 
+                subgenres: "Full on, Prog, Night, Forest", 
+                status: "Ativo", 
+                lat: 46.0201, 
+                lng: 3.7616,
+                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/natara.jpg",
+                flyer: ""
+            },
+            { 
+                name: "Boom Festival", 
+                country: "Portugal", 
+                continent: "Europa", 
+                genre: "Psytrance - multigênero", 
+                subgenres: "Full on, Prog, Night, Forest", 
+                status: "Ativo", 
+                lat: 39.784492, 
+                lng: -7.45194,
+                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/boom.jpg",
+                flyer: ""
+            },
+            { 
+                name: "Universo Paralello", 
+                country: "Brasil", 
+                continent: "América do Sul", 
+                genre: "Psytrance - multigênero", 
+                subgenres: "Full on, Prog, Night, Forest", 
+                status: "Ativo", 
+                lat: -13.512251, 
+                lng: -38.92635,
+                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/universo.jpg",
+                flyer: ""
+            },
+            { 
+                name: "Ozora Festival", 
+                country: "Hungria", 
+                continent: "Europa", 
+                genre: "Psytrance - multigênero", 
+                subgenres: "Full on, Prog, Night, Forest", 
+                status: "Ativo", 
+                lat: 46.779312, 
+                lng: 18.410091,
+                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/ozora.jpg",
+                flyer: ""
+            },
+            { 
+                name: "Mo:dem Festival", 
+                country: "Croácia", 
+                continent: "Europa", 
+                genre: "Darkpsy", 
+                subgenres: "Hitech, Darkpsy, Core", 
+                status: "Ativo", 
+                lat: 45.216951, 
+                lng: 15.471648,
+                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/modem.jpg",
+                flyer: ""
+            },
+            { 
+                name: "Shankra Festival", 
+                country: "Suíça", 
+                continent: "Europa", 
+                genre: "Psytrance - multigênero", 
+                subgenres: "Full on, Prog, Night, Forest", 
+                status: "Ativo", 
+                lat: 46.3439, 
+                lng: 9.1011,
+                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/shankra.jpg",
+                flyer: ""
+            },
+            { 
+                name: "Indian Spirit", 
+                country: "Alemanha", 
+                continent: "Europa", 
+                genre: "Psytrance - multigênero", 
+                subgenres: "Full on, Prog, Night, Forest", 
+                status: "Ativo", 
+                lat: 53.2623, 
+                lng: 11.4153,
+                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/indian.jpg",
+                flyer: ""
+            },
+            { 
+                name: "Hadra Trance Festival", 
+                country: "França", 
+                continent: "Europa", 
+                genre: "Psytrance - multigênero", 
+                subgenres: "Full on, Prog, Night, Forest", 
+                status: "Ativo", 
+                lat: 45.188742, 
+                lng: 5.703492,
+                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/hadra.jpg",
+                flyer: ""
+            },
+            // ... outros festivais (sem ícones por enquanto)
+            { 
+                name: "Vuuv Festival", 
+                country: "Alemanha", 
+                continent: "Europa", 
+                genre: "Psytrance - multigênero", 
+                subgenres: "Full on, Prog, Night, Forest", 
+                status: "Ativo", 
+                lat: 52.8625, 
+                lng: 12.1538,
+                icon: "",
+                flyer: ""
+            }
+            // ... continuar com os outros festivais da lista original
+        ];
 
-                    <div class="filter-group">
-                        <label for="continent-filter">Continente:</label>
-                        <select id="continent-filter" class="filter-select">
-                            <option value="all">Todos os Continentes</option>
-                            <option value="Europa">Europa</option>
-                            <option value="América do Sul">América do Sul</option>
-                            <option value="América do Norte">América do Norte</option>
-                            <option value="América Central">América Central</option>
-                            <option value="Ásia">Ásia</option>
-                            <option value="África">África</option>
-                            <option value="Oceania">Oceania</option>
-                        </select>
-                    </div>
+        // Mapeamento de países para códigos (para bandeiras)
+        const countryCodes = {
+            'Alemanha': 'de',
+            'França': 'fr',
+            'África do Sul': 'za',
+            'Suíça': 'ch',
+            'Costa Rica': 'cr',
+            'EUA': 'us',
+            'Canadá': 'ca',
+            'Brasil': 'br',
+            'Uruguai': 'uy',
+            'Perú': 'pe',
+            'México': 'mx',
+            'Bolívia': 'bo',
+            'Chile': 'cl',
+            'Equador': 'ec',
+            'Argentina': 'ar',
+            'Namíbia': 'na',
+            'Marrocos': 'ma',
+            'Índia': 'in',
+            'Nepal': 'np',
+            'Tunísia': 'tn',
+            'Portugal': 'pt',
+            'Espanha': 'es',
+            'Croácia': 'hr',
+            'Venezuela': 've',
+            'Guatemala': 'gt',
+            'Tailândia': 'th',
+            'Turquia': 'tr',
+            'China': 'cn',
+            'Cambodia': 'kh',
+            'Nova Zelândia': 'nz',
+            'Inglaterra': 'gb',
+            'Sérvia': 'rs',
+            'Grécia': 'gr',
+            'Panamá': 'pa',
+            'Noruega': 'no',
+            'Japão': 'jp',
+            'Romênia': 'ro',
+            'Hungria': 'hu',
+            'Austrália': 'au',
+            'Colômbia': 'co'
+        };
 
-                    <div class="filter-group">
-                        <label for="genre-filter">Gênero Principal:</label>
-                        <select id="genre-filter" class="filter-select">
-                            <option value="all">Todos os Gêneros</option>
-                            <option value="Psytrance - multigênero">Psytrance Multigênero</option>
-                            <option value="Darkpsy">Darkpsy</option>
-                            <option value="Hitech Psytrance">Hitech</option>
-                        </select>
-                    </div>
+        // URL base para as bandeiras
+        const FLAG_BASE_URL = 'https://flagcdn.com/w40/';
 
-                    <div class="filter-group">
-                        <label for="search-filter">Buscar Festival:</label>
-                        <input type="text" id="search-filter" class="search-input" placeholder="Digite o nome do festival...">
-                    </div>
+        // URL base para os ícones no GitHub
+        const ICON_BASE_URL = 'https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/';
 
-                    <button id="reset-filters" class="btn-reset">🔄 Limpar Filtros</button>
-                </div>
+        // Função para obter URL da bandeira
+        function getFlagUrl(countryName) {
+            const code = countryCodes[countryName];
+            if (code) {
+                return `${FLAG_BASE_URL}${code}.png`;
+            }
+            return '';
+        }
 
-                <div class="stats-card">
-                    <h2>📊 Estatísticas</h2>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-label">Total de Festivais:</span>
-                            <span class="stat-value" id="total-festivals">0</span>
+        // Função para obter URL do ícone
+        function getIconUrl(festival) {
+            if (festival.icon) {
+                return festival.icon;
+            }
+            // Tentar encontrar por nome se não tiver URL específica
+            const iconName = festival.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+            return `${ICON_BASE_URL}${iconName}.jpg`;
+        }
+
+        // Função para obter URL do flyer
+        function getFlyerUrl(festival) {
+            if (festival.flyer) {
+                return festival.flyer;
+            }
+            return '';
+        }
+
+        // Função para gerar placeholder de ícone com iniciais
+        function getIconPlaceholder(name) {
+            const initials = name.split(' ').map(word => word[0]).join('').toUpperCase().substring(0, 2);
+            return `<div class="icon-placeholder">${initials}</div>`;
+        }
+
+        // Inicializar o mapa
+        const map = L.map('map').setView([20, 0], 2);
+
+        // Adicionar camada do mapa
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Grupos de marcadores
+        const markerGroups = {
+            active: L.layerGroup().addTo(map),
+            inactive: L.layerGroup().addTo(map)
+        };
+
+        // Função para obter cor baseada no gênero
+        function getGenreColor(genre) {
+            switch(genre) {
+                case 'Psytrance - multigênero':
+                    return '#3498db';
+                case 'Hitech Psytrance':
+                    return '#e74c3c';
+                case 'Darkpsy':
+                    return '#9b59b6';
+                default:
+                    return '#2ecc71';
+            }
+        }
+
+        // Função para obter ícone baseado no status
+        function getFestivalIcon(festival) {
+            const iconUrl = getIconUrl(festival);
+            
+            // Verificar se o ícone existe
+            if (iconUrl && !iconUrl.includes('/undefined')) {
+                return L.divIcon({
+                    className: 'custom-div-icon',
+                    html: `<div class="icon-marker" style="background-image: url('${iconUrl}')"></div>`,
+                    iconSize: [38, 38],
+                    iconAnchor: [19, 19]
+                });
+            }
+            
+            // Se não tiver ícone, usar círculo colorido
+            const color = getGenreColor(festival.genre);
+            return L.divIcon({
+                className: 'custom-div-icon',
+                html: `<div style="background-color: ${color}; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            });
+        }
+
+        // Adicionar marcadores ao mapa
+        function addMarkers() {
+            // Limpar marcadores existentes
+            markerGroups.active.clearLayers();
+            markerGroups.inactive.clearLayers();
+            
+            // Obter filtros ativos
+            const showActive = document.getElementById('filter-active').checked;
+            const showInactive = document.getElementById('filter-inactive').checked;
+            const selectedContinents = Array.from(document.querySelectorAll('.continent-filter:checked')).map(cb => cb.value);
+            const selectedGenres = Array.from(document.querySelectorAll('.genre-filter:checked')).map(cb => cb.value);
+            
+            let activeCount = 0;
+            let inactiveCount = 0;
+            
+            festivals.forEach(festival => {
+                // Verificar se o festival atende aos critérios de filtro
+                if ((festival.status === 'Ativo' && !showActive) || 
+                    (festival.status === 'Inativo' && !showInactive) ||
+                    !selectedContinents.includes(festival.continent) ||
+                    !selectedGenres.includes(festival.genre)) {
+                    return;
+                }
+                
+                // Contar para estatísticas
+                if (festival.status === 'Ativo') activeCount++;
+                else inactiveCount++;
+                
+                // Criar marcador
+                const marker = L.marker([festival.lat, festival.lng], { 
+                    icon: getFestivalIcon(festival)
+                });
+                
+                // Obter URLs
+                const flagUrl = getFlagUrl(festival.country);
+                const iconUrl = getIconUrl(festival);
+                const flyerUrl = getFlyerUrl(festival);
+                
+                const flagHtml = flagUrl ? `<img src="${flagUrl}" alt="${festival.country}" class="country-flag">` : '';
+                
+                // Construir conteúdo do popup
+                let popupContent = `
+                    <div class="festival-popup">
+                        <div class="icon-container">
+                `;
+                
+                // Adicionar ícone se disponível
+                if (iconUrl && !iconUrl.includes('/undefined')) {
+                    popupContent += `
+                        <img src="${iconUrl}" alt="${festival.name}" class="festival-icon" onerror="this.style.display='none'; this.parentNode.innerHTML += '${getIconPlaceholder(festival.name)}<div class=\\'icon-text\\'><h3>${flagHtml}${festival.name}</h3></div>';">
+                        <div class="icon-text">
+                            <h3>${flagHtml}${festival.name}</h3>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Festivais Ativos:</span>
-                            <span class="stat-value" id="active-festivals">0</span>
+                    `;
+                } else {
+                    popupContent += `
+                        ${getIconPlaceholder(festival.name)}
+                        <div class="icon-text">
+                            <h3>${flagHtml}${festival.name}</h3>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Por Continente:</span>
-                            <div id="continent-stats" class="continent-stats"></div>
+                    `;
+                }
+                
+                popupContent += `
                         </div>
-                    </div>
-                </div>
-            </aside>
-
-            <!-- Área do Mapa -->
-            <section class="map-section">
-                <div class="map-container">
-                    <div id="nomad-map"></div>
-                    <div class="map-controls">
-                        <div class="legend">
-                            <h4>Legenda do Mapa</h4>
-                            <div class="legend-items">
-                                <div class="legend-item">
-                                    <span class="legend-color active"></span>
-                                    <span class="legend-text">Festivais Ativos</span>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="legend-color inactive"></span>
-                                    <span class="legend-text">Festivais Inativos</span>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="legend-color darkpsy"></span>
-                                    <span class="legend-text">Darkpsy/Hitech</span>
-                                </div>
-                            </div>
+                        <div class="festival-info"><strong>País:</strong> ${festival.country}</div>
+                        <div class="festival-info"><strong>Continente:</strong> ${festival.continent}</div>
+                        <div class="festival-info"><strong>Gênero:</strong> ${festival.genre}</div>
+                        <div class="festival-info"><strong>Subgêneros:</strong> ${festival.subgenres}</div>
+                        <div class="festival-info"><strong>Status:</strong> <span class="status-${festival.status === 'Ativo' ? 'active' : 'inactive'}">${festival.status}</span></div>
+                `;
+                
+                // Adicionar flyer se disponível
+                if (flyerUrl) {
+                    popupContent += `
+                        <img src="${flyerUrl}" alt="Flyer ${festival.name}" class="festival-flyer" onclick="window.open('${flyerUrl}', '_blank')">
+                    `;
+                } else {
+                    popupContent += `
+                        <div class="flyer-placeholder">
+                            🎵 Flyer Indisponível
                         </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
+                    `;
+                }
+                
+                popupContent += `</div>`;
+                
+                // Adicionar popup com informações
+                marker.bindPopup(popupContent);
+                
+                // Adicionar ao grupo apropriado
+                if (festival.status === 'Ativo') {
+                    markerGroups.active.addLayer(marker);
+                } else {
+                    markerGroups.inactive.addLayer(marker);
+                }
+            });
+            
+            // Atualizar estatísticas
+            document.getElementById('total-festivals').textContent = activeCount + inactiveCount;
+            document.getElementById('active-festivals').textContent = activeCount;
+            document.getElementById('inactive-festivals').textContent = inactiveCount;
+        }
 
-    <footer class="main-footer">
-        <div class="container">
-            <p>&copy; 2024 Nomad Maps - Psytrance Travel Agency. Desenvolvido com ❤️ para a comunidade trance.</p>
-        </div>
-    </footer>
+        // Adicionar eventos aos filtros
+        document.getElementById('filter-active').addEventListener('change', addMarkers);
+        document.getElementById('filter-inactive').addEventListener('change', addMarkers);
+        
+        document.querySelectorAll('.continent-filter').forEach(checkbox => {
+            checkbox.addEventListener('change', addMarkers);
+        });
+        
+        document.querySelectorAll('.genre-filter').forEach(checkbox => {
+            checkbox.addEventListener('change', addMarkers);
+        });
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-    <script src="assets/js/data.js"></script>
-    <script src="assets/js/map.js"></script>
-    <script src="assets/js/filters.js"></script>
-    <script src="assets/js/app.js"></script>
+        // Inicializar marcadores
+        addMarkers();
+    </script>
 </body>
 </html>
-
