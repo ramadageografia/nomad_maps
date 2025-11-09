@@ -196,3 +196,25 @@ body {
 .marker-cluster-large div {
     background-color: rgba(241, 128, 23, 0.6);
 }
+/* Mobile styles */
+@media (max-width: 480px) {
+    .container {
+        padding: 0.5rem;
+    }
+    
+    .header {
+        padding: 1rem 0;
+    }
+    
+    .logo {
+        font-size: 2rem;
+    }
+    
+    .sidebar {
+        padding: 1rem;
+    }
+    
+    .map-container {
+        height: 350px;
+    }
+}
