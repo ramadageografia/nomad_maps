@@ -19,6 +19,7 @@
             --color-light: #ffffff;
             --color-accent-1: #00ffc8;
             --color-accent-2: #ff00ff;
+            --color-accent-3: #b967ff; /* Roxo do tema */
             --color-accent-grad: linear-gradient(90deg, var(--color-accent-1), var(--color-accent-2));
             --font-main: 'Montserrat', sans-serif;
         }
@@ -111,21 +112,43 @@
             font-weight: 700;
         }
 
-        .nav-links a {
-            margin-left: 30px;
-            font-size: 1em;
-            padding: 5px 0;
-            border-bottom: 2px solid transparent;
-            /* REMOVER EFEITOS DE BLUR */
-            text-shadow: none;
-            filter: none;
+        /* MENU DE NAVEGAÇÃO ATUALIZADO */
+        .nav-links {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            font-size: 1.2em;
+            font-weight: 600;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            color: var(--color-accent-3); /* Roxo do tema */
+            position: relative;
         }
 
         .nav-links a:hover {
+            color: var(--color-light); /* Branco no hover */
             border-bottom: 2px solid var(--color-accent-1);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent-grad);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         /* FRASE SUPERIOR ESQUERDA */
@@ -496,6 +519,14 @@
             
             .banner-container {
                 max-width: 380px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+            
+            .nav-links a {
+                font-size: 1.1em;
             }
         }
 
