@@ -127,3 +127,72 @@ body {
         height: 400px;
     }
 }
+/* Popup styles */
+.leaflet-popup-content {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 15px;
+    min-width: 250px;
+}
+
+.festival-popup h3 {
+    color: var(--dark-color);
+    margin-bottom: 0.75rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+.info-row {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+.info-label {
+    font-weight: 600;
+    min-width: 80px;
+    margin-right: 0.5rem;
+}
+
+.status-active {
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+.status-inactive {
+    color: var(--gray-color);
+    font-weight: bold;
+}
+
+.genre-tag {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin: 0.1rem;
+}
+
+/* Cluster styles */
+.marker-cluster-small {
+    background-color: rgba(181, 226, 140, 0.6);
+}
+
+.marker-cluster-small div {
+    background-color: rgba(110, 204, 57, 0.6);
+}
+
+.marker-cluster-medium {
+    background-color: rgba(241, 211, 87, 0.6);
+}
+
+.marker-cluster-medium div {
+    background-color: rgba(240, 194, 12, 0.6);
+}
+
+.marker-cluster-large {
+    background-color: rgba(253, 156, 115, 0.6);
+}
+
+.marker-cluster-large div {
+    background-color: rgba(241, 128, 23, 0.6);
+}
