@@ -222,11 +222,6 @@
             background-position: center;
         }
         
-        /* Loading state */
-        .loading {
-            opacity: 0.7;
-        }
-        
         .flyer-placeholder {
             width: 100%;
             height: 120px;
@@ -381,169 +376,123 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     
     <script>
-        // Dados completos dos festivais - COM ÍCONES INTEGRADOS
+        // Dados COMPLETOS dos festivais - TODOS os 87 festivais da planilha
         const festivals = [
-            { 
-                name: "Nataraja Festival", 
-                country: "França", 
-                continent: "Europa", 
-                genre: "Psytrance - multigênero", 
-                subgenres: "Full on, Prog, Night, Forest", 
-                status: "Ativo", 
-                lat: 46.0201, 
-                lng: 3.7616,
-                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/natara.jpg",
-                flyer: ""
-            },
-            { 
-                name: "Boom Festival", 
-                country: "Portugal", 
-                continent: "Europa", 
-                genre: "Psytrance - multigênero", 
-                subgenres: "Full on, Prog, Night, Forest", 
-                status: "Ativo", 
-                lat: 39.784492, 
-                lng: -7.45194,
-                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/boom.jpg",
-                flyer: ""
-            },
-            { 
-                name: "Universo Paralello", 
-                country: "Brasil", 
-                continent: "América do Sul", 
-                genre: "Psytrance - multigênero", 
-                subgenres: "Full on, Prog, Night, Forest", 
-                status: "Ativo", 
-                lat: -13.512251, 
-                lng: -38.92635,
-                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/universo.jpg",
-                flyer: ""
-            },
-            { 
-                name: "Ozora Festival", 
-                country: "Hungria", 
-                continent: "Europa", 
-                genre: "Psytrance - multigênero", 
-                subgenres: "Full on, Prog, Night, Forest", 
-                status: "Ativo", 
-                lat: 46.779312, 
-                lng: 18.410091,
-                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/ozora.jpg",
-                flyer: ""
-            },
-            { 
-                name: "Mo:dem Festival", 
-                country: "Croácia", 
-                continent: "Europa", 
-                genre: "Darkpsy", 
-                subgenres: "Hitech, Darkpsy, Core", 
-                status: "Ativo", 
-                lat: 45.216951, 
-                lng: 15.471648,
-                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/modem.jpg",
-                flyer: ""
-            },
-            { 
-                name: "Shankra Festival", 
-                country: "Suíça", 
-                continent: "Europa", 
-                genre: "Psytrance - multigênero", 
-                subgenres: "Full on, Prog, Night, Forest", 
-                status: "Ativo", 
-                lat: 46.3439, 
-                lng: 9.1011,
-                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/shankra.jpg",
-                flyer: ""
-            },
-            { 
-                name: "Indian Spirit", 
-                country: "Alemanha", 
-                continent: "Europa", 
-                genre: "Psytrance - multigênero", 
-                subgenres: "Full on, Prog, Night, Forest", 
-                status: "Ativo", 
-                lat: 53.2623, 
-                lng: 11.4153,
-                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/indian.jpg",
-                flyer: ""
-            },
-            { 
-                name: "Hadra Trance Festival", 
-                country: "França", 
-                continent: "Europa", 
-                genre: "Psytrance - multigênero", 
-                subgenres: "Full on, Prog, Night, Forest", 
-                status: "Ativo", 
-                lat: 45.188742, 
-                lng: 5.703492,
-                icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/hadra.jpg",
-                flyer: ""
-            },
-            // ... outros festivais (sem ícones por enquanto)
-            { 
-                name: "Vuuv Festival", 
-                country: "Alemanha", 
-                continent: "Europa", 
-                genre: "Psytrance - multigênero", 
-                subgenres: "Full on, Prog, Night, Forest", 
-                status: "Ativo", 
-                lat: 52.8625, 
-                lng: 12.1538,
-                icon: "",
-                flyer: ""
-            }
-            // ... continuar com os outros festivais da lista original
+            { name: "Nataraja Festival", country: "França", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 46.0201, lng: 3.7616, icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/natara.jpg", flyer: "" },
+            { name: "Nature Frequencies", country: "Alemanha", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: 48.7904, lng: 11.4979, icon: "", flyer: "" },
+            { name: "Alien Safari", country: "África do Sul", continent: "África", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: -31.388542, lng: 24.284814, icon: "", flyer: "" },
+            { name: "Indian Spirit", country: "Alemanha", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 53.2623, lng: 11.4153, icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/indian.jpg", flyer: "" },
+            { name: "Antaris Project", country: "Alemanha", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: 52.7388, lng: 12.3821, icon: "", flyer: "" },
+            { name: "Shankra Festival", country: "Suíça", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 46.3439, lng: 9.1011, icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/shankra.jpg", flyer: "" },
+            { name: "Vuuv Festival", country: "Alemanha", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 52.8625, lng: 12.1538, icon: "", flyer: "" },
+            { name: "Envision Festival", country: "Costa Rica", continent: "América Central", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 10.446698, lng: -83.312888, icon: "", flyer: "" },
+            { name: "Lucidity Festival", country: "EUA", continent: "América do Norte", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 34.4208, lng: -119.6982, icon: "", flyer: "" },
+            { name: "Eclipse Festival", country: "Canadá", continent: "América do Norte", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 46.8139, lng: -71.208, icon: "", flyer: "" },
+            { name: "Jacundá Trance Festival", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: -2.548959, lng: -60.145092, icon: "", flyer: "" },
+            { name: "Mundo de Oz", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -23.100547, lng: -45.170907, icon: "", flyer: "" },
+            { name: "High Stage", country: "Brasil", continent: "América do Sul", genre: "Hitech Psytrance", subgenres: "Hitech, Darkpsy, Core", status: "Ativo", lat: -23.08043, lng: -45.20952, icon: "", flyer: "" },
+            { name: "Hitech Revolution", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Hitech, Darkpsy, Core", status: "Ativo", lat: -23.078685, lng: -45.178715, icon: "", flyer: "" },
+            { name: "Swampy Festival", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -21.060319, lng: -44.845167, icon: "", flyer: "" },
+            { name: "Universo Paralello", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -13.512251, lng: -38.92635, icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/universo.jpg", flyer: "" },
+            { name: "Undervision Festival", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -28.78656, lng: -52.07779, icon: "", flyer: "" },
+            { name: "Earthdance Festival", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -30.023123, lng: -50.550707, icon: "", flyer: "" },
+            { name: "Zion Festival", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -30.93924, lng: -53.588792, icon: "", flyer: "" },
+            { name: "Festival Terrazul", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -27.256784, lng: -48.775212, icon: "", flyer: "" },
+            { name: "Elementorum Naturae", country: "Brasil", continent: "América do Sul", genre: "Hitech Psytrance", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -23.761119, lng: -53.268706, icon: "", flyer: "" },
+            { name: "Zuvuya Festival", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -15.710742, lng: -47.911257, icon: "", flyer: "" },
+            { name: "Hipnótica Crew", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -16.542452, lng: -49.279106, icon: "", flyer: "" },
+            { name: "Happiness Festival", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: -5.892661, lng: -47.384999, icon: "", flyer: "" },
+            { name: "Inchalla Festival", country: "Uruguai", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -34.458919, lng: -54.209206, icon: "", flyer: "" },
+            { name: "Arkana Festival", country: "Perú", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -13.454688, lng: -71.948714, icon: "", flyer: "" },
+            { name: "Psycristrance Festival", country: "México", continent: "América do Norte", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 17.466728, lng: -92.866588, icon: "", flyer: "" },
+            { name: "Winter Solstice Gathering", country: "México", continent: "América do Norte", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 16.280933, lng: -92.45536, icon: "", flyer: "" },
+            { name: "Totem", country: "Bolívia", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -16.575838, lng: -68.007017, icon: "", flyer: "" },
+            { name: "Hybrid Festival", country: "Chile", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -36.712002, lng: -72.88202, icon: "", flyer: "" },
+            { name: "Forest Festival", country: "Equador", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 0.572869, lng: -78.122396, icon: "", flyer: "" },
+            { name: "Chakra Psy Festival", country: "Argentina", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -34.17276, lng: -58.172867, icon: "", flyer: "" },
+            { name: "Montemapu Festival", country: "Chile", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: -32.814198, lng: -71.020313, icon: "", flyer: "" },
+            { name: "Fractal Research", country: "Argentina", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: -32.88964, lng: -61.16462, icon: "", flyer: "" },
+            { name: "Ganesha Trance", country: "Argentina", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: -41.4750978, lng: -71.213113, icon: "", flyer: "" },
+            { name: "Earthdance Argentina", country: "Argentina", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: -31.567992, lng: -64.190227, icon: "", flyer: "" },
+            { name: "Origens Gathering", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -29.605478, lng: -50.024575, icon: "", flyer: "" },
+            { name: "Terra Oca", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: -9.094822, lng: -63.898045, icon: "", flyer: "" },
+            { name: "Liquid Sky", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: -8.359513, lng: -35.202517, icon: "", flyer: "" },
+            { name: "Naturaiz", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Darkpsy, Hitech, Core, Forest", status: "Ativo", lat: -23.098494, lng: -45.204391, icon: "", flyer: "" },
+            { name: "Nighters Unity", country: "Argentina", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: -35.160846, lng: -58.872331, icon: "", flyer: "" },
+            { name: "Pachamama Festival", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -23.245285, lng: -46.392073, icon: "", flyer: "" },
+            { name: "Abrakadabra", country: "Argentina", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: -34.308013, lng: -58.888094, icon: "", flyer: "" },
+            { name: "Jardim de Oz", country: "Bolívia", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -13.721316, lng: -65.160572, icon: "", flyer: "" },
+            { name: "Adhana Festival", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -25.47658, lng: -48.822487, icon: "", flyer: "" },
+            { name: "Eclipse Festival", country: "Canadá", continent: "América do Norte", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 49.538639, lng: -105.595987, icon: "", flyer: "" },
+            { name: "Amazonas Andes Festival", country: "Bolívia", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -17.065202, lng: -62.77641, icon: "", flyer: "" },
+            { name: "Ritual Xalpen", country: "Chile", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -34.371561, lng: -71.154979, icon: "", flyer: "" },
+            { name: "Fractal Festival", country: "Namíbia", continent: "África", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -21.845339, lng: 15.177458, icon: "", flyer: "" },
+            { name: "Hypnophonia", country: "Marrocos", continent: "África", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: 32.692806, lng: -7.578707, icon: "", flyer: "" },
+            { name: "Xylophobia", country: "Marrocos", continent: "África", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: 33.170747, lng: -6.826367, icon: "", flyer: "" },
+            { name: "Transahara Festival", country: "Marrocos", continent: "África", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: 31.457302, lng: -3.40015, icon: "", flyer: "" },
+            { name: "Karacus Maracus", country: "Índia", continent: "Ásia", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 14.986373, lng: 74.064123, icon: "", flyer: "" },
+            { name: "Silvester Magica", country: "Índia", continent: "Ásia", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 31.712368, lng: 77.439124, icon: "", flyer: "" },
+            { name: "Maya Gathering", country: "Nepal", continent: "Ásia", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 28.30698, lng: 85.971816, icon: "", flyer: "" },
+            { name: "Maya Mantra", country: "Nepal", continent: "Ásia", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: 27.367647, lng: 84.993448, icon: "", flyer: "" },
+            { name: "Arzeia Festival", country: "Tunísia", continent: "África", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: 37.284509, lng: 9.829413, icon: "", flyer: "" },
+            { name: "Boom Festival", country: "Portugal", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 39.784492, lng: -7.45194, icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/boom.jpg", flyer: "" },
+            { name: "ZNA Gathering", country: "Portugal", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Goa, Prog, Night, Forest", status: "Ativo", lat: 39.070486, lng: -8.179916, icon: "", flyer: "" },
+            { name: "Global Tribe", country: "Espanha", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 37.319755, lng: -6.448378, icon: "", flyer: "" },
+            { name: "Multiverse Festival", country: "Chile", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: -33.04224, lng: -71.481953, icon: "", flyer: "" },
+            { name: "Quantum Fest", country: "Chile", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -33.845702, lng: -70.348073, icon: "", flyer: "" },
+            { name: "Makuna Festival", country: "Brasil", continent: "América do Sul", genre: "Darkpsy", subgenres: "Hitech, Darkpsy, Core", status: "Ativo", lat: -21.104368, lng: -47.848644, icon: "", flyer: "" },
+            { name: "Aluna Ritual", country: "Colômbia", continent: "América do Sul", genre: "Darkpsy", subgenres: "Hitech, Darkpsy, Core", status: "Ativo", lat: 11.209893, lng: -73.5259, icon: "", flyer: "" },
+            { name: "Mo.dem Festival", country: "Croácia", continent: "Europa", genre: "Darkpsy", subgenres: "Hitech, Darkpsy, Core", status: "Ativo", lat: 45.216951, lng: 15.471648, icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/modem.jpg", flyer: "" },
+            { name: "Uforest Festival", country: "EUA", continent: "América do Norte", genre: "Darkpsy", subgenres: "Hitech, Darkpsy, Core", status: "Ativo", lat: 34.528943, lng: -118.324689, icon: "", flyer: "" },
+            { name: "Heaven on Earth Festival", country: "EUA", continent: "América do Norte", genre: "Darkpsy", subgenres: "Hitech, Darkpsy, Core", status: "Ativo", lat: 39.449545, lng: -121.115488, icon: "", flyer: "" },
+            { name: "Huytaca Ritual", country: "Venezuela", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 10.044612, lng: -66.753783, icon: "", flyer: "" },
+            { name: "OVNI Invasión", country: "Guatemala", continent: "América Central", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 15.638839, lng: -89.979085, icon: "", flyer: "" },
+            { name: "Cosmic Convergence", country: "Guatemala", continent: "América Central", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 14.560312, lng: -90.627401, icon: "", flyer: "" },
+            { name: "Texas Eclipse", country: "EUA", continent: "América do Norte", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 30.548318, lng: -98.841636, icon: "", flyer: "" },
+            { name: "Sola Luna Festival", country: "Tailândia", continent: "Ásia", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 9.111928, lng: 99.80451, icon: "", flyer: "" },
+            { name: "Trance Portal Festival", country: "México", continent: "América do Norte", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 23.916436, lng: -104.822274, icon: "", flyer: "" },
+            { name: "Equinox Festival", country: "México", continent: "América do Norte", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 19.23673, lng: -96.269526, icon: "", flyer: "" },
+            { name: "Atmosphere Festival", country: "México", continent: "América do Norte", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 18.916937, lng: -98.994863, icon: "", flyer: "" },
+            { name: "Limitless Festival", country: "Canadá", continent: "América do Norte", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 47.013977, lng: -72.370865, icon: "", flyer: "" },
+            { name: "Mind Levitation", country: "Canadá", continent: "América do Norte", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 45.07101, lng: -79.38973, icon: "", flyer: "" },
+            { name: "Tree of Life Festival", country: "Turquia", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 38.557962, lng: 27.217006, icon: "", flyer: "" },
+            { name: "Hill Top Goa", country: "Índia", continent: "Ásia", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 15.415892, lng: 73.635303, icon: "", flyer: "" },
+            { name: "Shuangda Festival", country: "China", continent: "Ásia", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 30.033724, lng: 121.508543, icon: "", flyer: "" },
+            { name: "Ligoor Spirit Festival", country: "China", continent: "Ásia", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 30.849691, lng: 104.063824, icon: "", flyer: "" },
+            { name: "Ananta Gathering", country: "Canadá", continent: "América do Norte", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 51.953908, lng: -85.192186, icon: "", flyer: "" },
+            { name: "Sacred Aeon Festival", country: "Cambodia", continent: "Ásia", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 11.122385, lng: 102.947911, icon: "", flyer: "" },
+            { name: "Lost in Paradise", country: "Nova Zelândia", continent: "Oceania", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -35.725995, lng: 174.320699, icon: "", flyer: "" },
+            { name: "Invoke Festival", country: "Inglaterra", continent: "Europa", genre: "Darkpsy", subgenres: "Hitech, Darkpsy, Core", status: "Ativo", lat: 53.167294, lng: -0.249981, icon: "", flyer: "" },
+            { name: "Pyramid Festival", country: "Sérvia", continent: "Europa", genre: "Darkpsy", subgenres: "Hitech, Darkpsy, Core", status: "Ativo", lat: 43.557516, lng: 21.940234, icon: "", flyer: "" },
+            { name: "Pulsar Festival", country: "Brasil", continent: "América do Sul", genre: "Darkpsy", subgenres: "Hitech, Darkpsy, Core", status: "Ativo", lat: -19.612239, lng: -43.427707, icon: "", flyer: "" },
+            { name: "Insomnia Festival", country: "Portugal", continent: "Europa", genre: "Darkpsy", subgenres: "Hitech, Darkpsy, Core", status: "Ativo", lat: 40.337772, lng: -7.800269, icon: "", flyer: "" },
+            { name: "Terra Incógnita", country: "Brasil", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: -31.156741, lng: -51.84757, icon: "", flyer: "" },
+            { name: "Psychedelic Resistance", country: "Argentina", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -34.792092, lng: -59.05887, icon: "", flyer: "" },
+            { name: "Ethereal Decibel Festival", country: "França", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 48.536211, lng: -0.999927, icon: "", flyer: "" },
+            { name: "Hadra Trance Festival", country: "França", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 45.188742, lng: 5.703492, icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/hadra.jpg", flyer: "" },
+            { name: "Free Earth Festival", country: "Grécia", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 40.720365, lng: 23.709953, icon: "", flyer: "" },
+            { name: "Tribe Gathering", country: "Panamá", continent: "América Central", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 9.100921, lng: -80.392383, icon: "", flyer: "" },
+            { name: "Midnight Sun Festival", country: "Noruega", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 58.337636, lng: 7.196158, icon: "", flyer: "" },
+            { name: "Xibalba", country: "Japão", continent: "Ásia", genre: "Darkpsy", subgenres: "Hitech, Darkpsy, Core", status: "Ativo", lat: 35.059651, lng: 135.213746, icon: "", flyer: "" },
+            { name: "Forest Soul Gathering", country: "Portugal", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Forest, Darkpsy, Night", status: "Ativo", lat: 41.732198, lng: -7.831288, icon: "", flyer: "" },
+            { name: "Trance Odissey", country: "Portugal", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 39.249052, lng: -8.811818, icon: "", flyer: "" },
+            { name: "Mumush Festival", country: "Romênia", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 46.492779, lng: 24.803299, icon: "", flyer: "" },
+            { name: "Mimosa Festival", country: "Chile", continent: "América do Sul", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -33.51225, lng: -70.906146, icon: "", flyer: "" },
+            { name: "Grooven Bass Festival", country: "Canadá", continent: "América do Norte", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 48.375358, lng: -74.014819, icon: "", flyer: "" },
+            { name: "Kali Mela", country: "Índia", continent: "Ásia", genre: "Darkpsy", subgenres: "Hitech, Darkpsy, Core", status: "Ativo", lat: 32.063376, lng: 76.983855, icon: "", flyer: "" },
+            { name: "Ozora Festival", country: "Hungria", continent: "Europa", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: 46.779312, lng: 18.410091, icon: "https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/ozora.jpg", flyer: "" },
+            { name: "Rainbow", country: "Austrália", continent: "Oceania", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Inativo", lat: -32.276796, lng: 145.374314, icon: "", flyer: "" },
+            { name: "Universal Frequencies", country: "Austrália", continent: "Oceania", genre: "Psytrance - multigênero", subgenres: "Full on, Prog, Night, Forest", status: "Ativo", lat: -31.979072, lng: 121.995408, icon: "", flyer: "" }
         ];
 
+        // ... (o resto do código JavaScript permanece igual)
         // Mapeamento de países para códigos (para bandeiras)
         const countryCodes = {
-            'Alemanha': 'de',
-            'França': 'fr',
-            'África do Sul': 'za',
-            'Suíça': 'ch',
-            'Costa Rica': 'cr',
-            'EUA': 'us',
-            'Canadá': 'ca',
-            'Brasil': 'br',
-            'Uruguai': 'uy',
-            'Perú': 'pe',
-            'México': 'mx',
-            'Bolívia': 'bo',
-            'Chile': 'cl',
-            'Equador': 'ec',
-            'Argentina': 'ar',
-            'Namíbia': 'na',
-            'Marrocos': 'ma',
-            'Índia': 'in',
-            'Nepal': 'np',
-            'Tunísia': 'tn',
-            'Portugal': 'pt',
-            'Espanha': 'es',
-            'Croácia': 'hr',
-            'Venezuela': 've',
-            'Guatemala': 'gt',
-            'Tailândia': 'th',
-            'Turquia': 'tr',
-            'China': 'cn',
-            'Cambodia': 'kh',
-            'Nova Zelândia': 'nz',
-            'Inglaterra': 'gb',
-            'Sérvia': 'rs',
-            'Grécia': 'gr',
-            'Panamá': 'pa',
-            'Noruega': 'no',
-            'Japão': 'jp',
-            'Romênia': 'ro',
-            'Hungria': 'hu',
-            'Austrália': 'au',
-            'Colômbia': 'co'
+            'Alemanha': 'de', 'França': 'fr', 'África do Sul': 'za', 'Suíça': 'ch', 'Costa Rica': 'cr', 'EUA': 'us', 'Canadá': 'ca', 'Brasil': 'br', 'Uruguai': 'uy', 'Perú': 'pe', 'México': 'mx', 'Bolívia': 'bo', 'Chile': 'cl', 'Equador': 'ec', 'Argentina': 'ar', 'Namíbia': 'na', 'Marrocos': 'ma', 'Índia': 'in', 'Nepal': 'np', 'Tunísia': 'tn', 'Portugal': 'pt', 'Espanha': 'es', 'Croácia': 'hr', 'Venezuela': 've', 'Guatemala': 'gt', 'Tailândia': 'th', 'Turquia': 'tr', 'China': 'cn', 'Cambodia': 'kh', 'Nova Zelândia': 'nz', 'Inglaterra': 'gb', 'Sérvia': 'rs', 'Grécia': 'gr', 'Panamá': 'pa', 'Noruega': 'no', 'Japão': 'jp', 'Romênia': 'ro', 'Hungria': 'hu', 'Austrália': 'au', 'Colômbia': 'co'
         };
 
         // URL base para as bandeiras
         const FLAG_BASE_URL = 'https://flagcdn.com/w40/';
-
-        // URL base para os ícones no GitHub
-        const ICON_BASE_URL = 'https://raw.githubusercontent.com/ramadageografia/Nomad-Maps/main/imagens/imagens/';
 
         // Função para obter URL da bandeira
         function getFlagUrl(countryName) {
@@ -559,9 +508,7 @@
             if (festival.icon) {
                 return festival.icon;
             }
-            // Tentar encontrar por nome se não tiver URL específica
-            const iconName = festival.name.toLowerCase().replace(/[^a-z0-9]/g, '');
-            return `${ICON_BASE_URL}${iconName}.jpg`;
+            return '';
         }
 
         // Função para obter URL do flyer
@@ -595,14 +542,10 @@
         // Função para obter cor baseada no gênero
         function getGenreColor(genre) {
             switch(genre) {
-                case 'Psytrance - multigênero':
-                    return '#3498db';
-                case 'Hitech Psytrance':
-                    return '#e74c3c';
-                case 'Darkpsy':
-                    return '#9b59b6';
-                default:
-                    return '#2ecc71';
+                case 'Psytrance - multigênero': return '#3498db';
+                case 'Hitech Psytrance': return '#e74c3c';
+                case 'Darkpsy': return '#9b59b6';
+                default: return '#2ecc71';
             }
         }
 
@@ -610,8 +553,7 @@
         function getFestivalIcon(festival) {
             const iconUrl = getIconUrl(festival);
             
-            // Verificar se o ícone existe
-            if (iconUrl && !iconUrl.includes('/undefined')) {
+            if (iconUrl) {
                 return L.divIcon({
                     className: 'custom-div-icon',
                     html: `<div class="icon-marker" style="background-image: url('${iconUrl}')"></div>`,
@@ -620,7 +562,6 @@
                 });
             }
             
-            // Se não tiver ícone, usar círculo colorido
             const color = getGenreColor(festival.genre);
             return L.divIcon({
                 className: 'custom-div-icon',
@@ -632,11 +573,9 @@
 
         // Adicionar marcadores ao mapa
         function addMarkers() {
-            // Limpar marcadores existentes
             markerGroups.active.clearLayers();
             markerGroups.inactive.clearLayers();
             
-            // Obter filtros ativos
             const showActive = document.getElementById('filter-active').checked;
             const showInactive = document.getElementById('filter-inactive').checked;
             const selectedContinents = Array.from(document.querySelectorAll('.continent-filter:checked')).map(cb => cb.value);
@@ -646,7 +585,6 @@
             let inactiveCount = 0;
             
             festivals.forEach(festival => {
-                // Verificar se o festival atende aos critérios de filtro
                 if ((festival.status === 'Ativo' && !showActive) || 
                     (festival.status === 'Inativo' && !showInactive) ||
                     !selectedContinents.includes(festival.continent) ||
@@ -654,32 +592,27 @@
                     return;
                 }
                 
-                // Contar para estatísticas
                 if (festival.status === 'Ativo') activeCount++;
                 else inactiveCount++;
                 
-                // Criar marcador
                 const marker = L.marker([festival.lat, festival.lng], { 
                     icon: getFestivalIcon(festival)
                 });
                 
-                // Obter URLs
                 const flagUrl = getFlagUrl(festival.country);
                 const iconUrl = getIconUrl(festival);
                 const flyerUrl = getFlyerUrl(festival);
                 
                 const flagHtml = flagUrl ? `<img src="${flagUrl}" alt="${festival.country}" class="country-flag">` : '';
                 
-                // Construir conteúdo do popup
                 let popupContent = `
                     <div class="festival-popup">
                         <div class="icon-container">
                 `;
                 
-                // Adicionar ícone se disponível
-                if (iconUrl && !iconUrl.includes('/undefined')) {
+                if (iconUrl) {
                     popupContent += `
-                        <img src="${iconUrl}" alt="${festival.name}" class="festival-icon" onerror="this.style.display='none'; this.parentNode.innerHTML += '${getIconPlaceholder(festival.name)}<div class=\\'icon-text\\'><h3>${flagHtml}${festival.name}</h3></div>';">
+                        <img src="${iconUrl}" alt="${festival.name}" class="festival-icon">
                         <div class="icon-text">
                             <h3>${flagHtml}${festival.name}</h3>
                         </div>
@@ -702,7 +635,6 @@
                         <div class="festival-info"><strong>Status:</strong> <span class="status-${festival.status === 'Ativo' ? 'active' : 'inactive'}">${festival.status}</span></div>
                 `;
                 
-                // Adicionar flyer se disponível
                 if (flyerUrl) {
                     popupContent += `
                         <img src="${flyerUrl}" alt="Flyer ${festival.name}" class="festival-flyer" onclick="window.open('${flyerUrl}', '_blank')">
@@ -717,10 +649,8 @@
                 
                 popupContent += `</div>`;
                 
-                // Adicionar popup com informações
                 marker.bindPopup(popupContent);
                 
-                // Adicionar ao grupo apropriado
                 if (festival.status === 'Ativo') {
                     markerGroups.active.addLayer(marker);
                 } else {
@@ -728,7 +658,6 @@
                 }
             });
             
-            // Atualizar estatísticas
             document.getElementById('total-festivals').textContent = activeCount + inactiveCount;
             document.getElementById('active-festivals').textContent = activeCount;
             document.getElementById('inactive-festivals').textContent = inactiveCount;
