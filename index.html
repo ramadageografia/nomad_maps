@@ -90,6 +90,7 @@
 
         .banner-logo {
             height: 80px;
+            width: auto;
             object-fit: contain;
             /* REMOVER QUALQUER FILTRO QUE CAUSE BORRAMENTO */
             filter: none;
@@ -137,11 +138,16 @@
             z-index: 1001;
         }
 
-        /* BANNER LOGO */
+        /* BANNER LOGO - TAMANHO DO RETÂNGULO VERMELHO */
         .banner-container {
             display: flex;
             align-items: center;
             gap: 15px;
+        }
+
+        .banner-wrapper {
+            display: flex;
+            align-items: center;
         }
 
         /* SEÇÃO 1: MAPA ONLINE (PRIMEIRA SEÇÃO) */
@@ -353,7 +359,7 @@
             background: var(--color-accent-grad);
             color: var(--color-dark);
             padding: 15px 40px;
-            border-radius: 5px;
+            borderRadius: 5px;
             font-size: 1.2em;
             font-weight: 700;
             transition: all 0.3s;
@@ -525,8 +531,8 @@
                 height: 50px;
             }
             
-            .banner-container .neon-text {
-                display: none;
+            .header-tagline {
+                font-size: 0.7em;
             }
         }
     </style>
@@ -540,10 +546,9 @@
                 Agência Especializada em Festivais de Arte e Cultura Visionária pelo mundo
             </div>
             <nav>
-                <div class="banner-container">
-                    <!-- BANNER NOMAD MAPS MAIOR -->
-                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/banner_superior.jpg" alt="Nomad Maps" class="banner-logo">
-                    <span class="neon-text">NOMAD MAPS</span>
+                <div class="banner-wrapper">
+                    <!-- BANNER NOMAD MAPS - TAMANHO DO RETÂNGULO VERMELHO -->
+                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/banner-nomad-maps.jpg" alt="Nomad Maps" class="banner-logo">
                 </div>
                 <div class="nav-links">
                     <a href="#mapa-online">Mapa Online</a>
