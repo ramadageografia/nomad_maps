@@ -89,8 +89,9 @@
         }
 
         .banner-logo {
-            height: 80px;
-            width: auto;
+            width: 100%;
+            max-width: 400px;
+            height: auto;
             object-fit: contain;
             /* REMOVER QUALQUER FILTRO QUE CAUSE BORRAMENTO */
             filter: none;
@@ -138,16 +139,18 @@
             z-index: 1001;
         }
 
-        /* BANNER LOGO - TAMANHO DO RETÂNGULO VERMELHO */
+        /* BANNER LOGO - LARGURA COMPLETA DA FRASE */
         .banner-container {
             display: flex;
             align-items: center;
-            gap: 15px;
+            width: 100%;
+            max-width: 450px;
         }
 
         .banner-wrapper {
             display: flex;
             align-items: center;
+            width: 100%;
         }
 
         /* SEÇÃO 1: MAPA ONLINE (PRIMEIRA SEÇÃO) */
@@ -359,7 +362,7 @@
             background: var(--color-accent-grad);
             color: var(--color-dark);
             padding: 15px 40px;
-            borderRadius: 5px;
+            border-radius: 5px;
             font-size: 1.2em;
             font-weight: 700;
             transition: all 0.3s;
@@ -481,7 +484,11 @@
             }
             
             .banner-logo {
-                height: 70px;
+                max-width: 350px;
+            }
+            
+            .banner-container {
+                max-width: 380px;
             }
         }
 
@@ -502,7 +509,10 @@
                 font-size: 1.5em;
             }
             .banner-logo {
-                height: 60px;
+                max-width: 300px;
+            }
+            .banner-container {
+                max-width: 320px;
             }
             .about-section blockquote {
                 font-size: 1.4em;
@@ -528,7 +538,11 @@
 
         @media (max-width: 480px) {
             .banner-logo {
-                height: 50px;
+                max-width: 250px;
+            }
+            
+            .banner-container {
+                max-width: 280px;
             }
             
             .header-tagline {
@@ -546,9 +560,11 @@
                 Agência Especializada em Festivais de Arte e Cultura Visionária pelo mundo
             </div>
             <nav>
-                <div class="banner-wrapper">
-                    <!-- BANNER NOMAD MAPS - TAMANHO DO RETÂNGULO VERMELHO -->
-                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/banner-nomad-maps.jpg" alt="Nomad Maps" class="banner-logo">
+                <div class="banner-container">
+                    <!-- BANNER NOMAD MAPS - LARGURA COMPLETA DA FRASE -->
+                    <div class="banner-wrapper">
+                        <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/banner-nomad-maps.jpg" alt="Nomad Maps" class="banner-logo">
+                    </div>
                 </div>
                 <div class="nav-links">
                     <a href="#mapa-online">Mapa Online</a>
@@ -566,15 +582,15 @@
         <div class="container">
             <div class="map-section">
                 <div class="map-header">
-                    <h2 class="neon-text">Mapa Global de Festivais</h2>
-                    <p style="color: #ccc; font-size: 1.2em;">Explore festivais de psytrance ao redor do mundo em tempo real</p>
+                    <h2 class="neon-text">Mapa Global dos Festivais</h2>
+                    <p style="color: #ccc; font-size: 1.2em;">Plataforma interativa com informações georreferenciadas dos principais festivais de cultura alternativa catalogados mundialmente</p>
                 </div>
                 <div class="map-container">
                     <iframe 
                         src="https://www.google.com/maps/d/embed?mid=1adej1ZKSiAOyUe4Uu9jPBV6P6DalfQk&ehbc=2E312F"
                         allowfullscreen="" 
                         loading="lazy"
-                        title="Mapa Global de Festivais de Psytrance - Nomad Maps">
+                        title="Mapa Global dos Festivais de Cultura Alternativa - Nomad Maps">
                     </iframe>
                 </div>
             </div>
