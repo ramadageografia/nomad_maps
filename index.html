@@ -89,7 +89,7 @@
         }
 
         .banner-logo {
-            height: 60px;
+            height: 80px;
             object-fit: contain;
             /* REMOVER QUALQUER FILTRO QUE CAUSE BORRAMENTO */
             filter: none;
@@ -475,7 +475,7 @@
             }
             
             .banner-logo {
-                height: 50px;
+                height: 70px;
             }
         }
 
@@ -496,7 +496,7 @@
                 font-size: 1.5em;
             }
             .banner-logo {
-                height: 40px;
+                height: 60px;
             }
             .about-section blockquote {
                 font-size: 1.4em;
@@ -519,6 +519,16 @@
                 gap: 10px;
             }
         }
+
+        @media (max-width: 480px) {
+            .banner-logo {
+                height: 50px;
+            }
+            
+            .banner-container .neon-text {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -531,8 +541,8 @@
             </div>
             <nav>
                 <div class="banner-container">
-                    <!-- BANNER NOMAD MAPS -->
-                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/banner-nomad-maps.jpg" alt="Nomad Maps" class="banner-logo">
+                    <!-- BANNER NOMAD MAPS MAIOR -->
+                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/Assets/Imagens/assets/images/banner_superior.jpg" alt="Nomad Maps" class="banner-logo">
                     <span class="neon-text">NOMAD MAPS</span>
                 </div>
                 <div class="nav-links">
