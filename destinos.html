@@ -1,48 +1,112 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Destinos - Nomad Maps</title>
-  <link rel="stylesheet" href="Assets/CSS/style.css">
-  <link rel="icon" href="Assets/Imagens/logo_circle.png">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-</head><body>
-  <header class="site-header">
-    <div class="container nav">
-      <div class="brand">
-        <img src="Assets/Imagens/logo_circle.png" alt="logo">
-        <div><div style="font-weight:800">Nomad Maps</div><div style="font-size:0.8rem;color:#9fb0a7">Psytrance Travel Agency</div></div>
-      </div>
-      <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="destinos.html">Destinos</a>
-        <a href="sobre.html">Sobre</a>
-        <a href="contato.html">Contato</a>
-      </nav>
-    </div>
-  </header>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Festivais de Trance - Nomad Maps</title>
+    <link rel="stylesheet" href="assets/CSS/style.css">
+    <link rel="stylesheet" href="assets/CSS/destinos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Nomad Maps</h1>
+                <span>Descubra novos horizontes</span>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="destinos.html" class="active">Festivais</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
 
-  <main class="container">
-    <section class="section">
-      <h2 id="boom">Boom Festival</h2>
-      <p>Festival de arte e transformação em Portugal. Pacotes, logística e experiências.</p>
+    <!-- Banner Principal -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Mapa Global de Festivais de Trance</h1>
+            <p>Explore os principais festivais de psytrance ao redor do mundo</p>
+        </div>
     </section>
 
-    <section class="section">
-      <h2 id="ozora">Ozora Festival</h2>
-      <p>Festival na Hungria com foco em arte, música e cultura alternativa.</p>
+    <!-- Mapa Principal -->
+    <section class="main-map-section">
+        <div class="container">
+            <div class="map-container">
+                <div id="trance-map"></div>
+                <div class="map-legend">
+                    <h4><i class="fas fa-map-marker-alt"></i> Legenda</h4>
+                    <div class="legend-item">
+                        <span class="legend-color active-marker"></span>
+                        <span>Festival Ativo</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color inactive-marker"></span>
+                        <span>Festival Inativo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="section">
-      <h2 id="universo">Universo Paralello</h2>
-      <p>Festival icônico no Brasil — experiência imersiva entre cultura e natureza.</p>
+    <!-- Informações -->
+    <section class="info-section">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-database"></i>
+                    <h3>Dados Atualizados</h3>
+                    <p>Mapa com informações em tempo real dos principais festivais de trance mundial</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-sync-alt"></i>
+                    <h3>Atualização Constante</h3>
+                    <p>Base de dados em constante expansão e atualização</p>
+                </div>
+            </div>
+        </div>
     </section>
-  </main>
 
-  <footer class="footer">
-    <div class="container">
-      <p>Contato: <a href="mailto:contato@nomadmaps.com">contato@nomadmaps.com</a> • WhatsApp: <a href="https://wa.me/5548988135980">+55 48 98813-5980</a></p>
-    </div>
-  </footer>
-</body></html>
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Nomad Maps</h3>
+                    <p>Plataforma dedicada ao mapeamento global da cena trance mundial.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="destinos.html">Festivais</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nomad Maps. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="assets/JS/script.js"></script>
+    <script src="assets/JS/trance-map.js"></script>
+</body>
+</html>
