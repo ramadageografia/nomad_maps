@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Festivais de Trance - Nomad Maps</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/destinos.css">
+    <title>Nomad Maps - Descubra Novos Destinos</title>
+    <link rel="stylesheet" href="assets/CSS/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
     <!-- Cabeçalho -->
@@ -20,8 +18,8 @@
             </div>
             <nav class="nav">
                 <ul>
-                    <li><a href="index.html">Início</a></li>
-                    <li><a href="destinos.html" class="active">Festivais</a></li>
+                    <li><a href="index.html" class="active">Início</a></li>
+                    <li><a href="destinos.html">Festivais</a></li>
                     <li><a href="sobre.html">Sobre</a></li>
                     <li><a href="contato.html">Contato</a></li>
                 </ul>
@@ -35,103 +33,92 @@
     </header>
 
     <!-- Banner Principal -->
-    <section class="page-hero">
+    <section class="hero">
         <div class="container">
-            <h1>Mapa Global de Festivais de Trance</h1>
-            <p>Descubra os principais festivais de psytrance ao redor do mundo</p>
-        </div>
-    </section>
-
-    <!-- Filtros -->
-    <section class="filters">
-        <div class="container">
-            <div class="filter-group">
-                <label for="continente">Continente:</label>
-                <select id="continente">
-                    <option value="all">Todos os Continentes</option>
-                    <option value="América do Sul">América do Sul</option>
-                    <option value="Europa">Europa</option>
-                    <option value="América do Norte">América do Norte</option>
-                    <option value="Ásia">Ásia</option>
-                    <option value="África">África</option>
-                    <option value="Oceania">Oceania</option>
-                    <option value="América Central">América Central</option>
-                </select>
+            <div class="hero-content">
+                <h2>Explore o mundo com Nomad Maps</h2>
+                <p>Descubra destinos incríveis, planeje suas viagens e compartilhe suas experiências com outros viajantes.</p>
+                <a href="destinos.html" class="btn">Explorar Festivais</a>
             </div>
-            <div class="filter-group">
-                <label for="vertente">Vertente:</label>
-                <select id="vertente">
-                    <option value="all">Todas as Vertentes</option>
-                    <option value="Psytrance - multigênero">Psytrance Multigênero</option>
-                    <option value="Darkpsy">Darkpsy</option>
-                    <option value="Hitech Psytrance">Hitech Psytrance</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label for="status">Status:</label>
-                <select id="status">
-                    <option value="all">Todos os Status</option>
-                    <option value="Ativo">Ativos</option>
-                    <option value="Inativo">Inativos</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <button id="reset-filters" class="btn-secondary">Limpar Filtros</button>
+            <div class="hero-image">
+                <img src="assets/Imagens/banner-nomad-maps.jpg" alt="Nomad Maps - Plataforma de viagens e descobertas">
             </div>
         </div>
     </section>
 
-    <!-- Mapa e Lista -->
-    <section class="map-section">
+    <!-- Seção de Recursos -->
+    <section class="features">
         <div class="container">
-            <div class="map-container">
-                <div id="map"></div>
-                <div class="map-legend">
-                    <h4>Legenda:</h4>
-                    <div class="legend-item">
-                        <span class="legend-color active"></span>
-                        <span>Festival Ativo</span>
+            <h2>Por que usar o Nomad Maps?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
                     </div>
-                    <div class="legend-item">
-                        <span class="legend-color inactive"></span>
-                        <span>Festival Inativo</span>
-                    </div>
+                    <h3>Mapas Detalhados</h3>
+                    <p>Encontre rotas, pontos de interesse e informações atualizadas sobre cada destino.</p>
                 </div>
-            </div>
-            
-            <div class="festivals-list">
-                <h3>Festivais Encontrados: <span id="festival-count">0</span></h3>
-                <div id="festivals-container" class="festivals-grid">
-                    <!-- Festivais serão carregados aqui via JavaScript -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Comunidade Ativa</h3>
+                    <p>Conecte-se com outros viajantes e compartilhe experiências e dicas valiosas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3>Planejamento Inteligente</h3>
+                    <p>Organize sua viagem com ferramentas que facilitam cada etapa do processo.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Estatísticas -->
-    <section class="stats-section">
+    <!-- Seção de Destinos Populares -->
+    <section class="popular-destinations">
         <div class="container">
-            <h2>Estatísticas dos Festivais</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 id="total-festivals">0</h3>
-                    <p>Total de Festivais</p>
+            <h2>Festivais em Destaque</h2>
+            <div class="destinations-grid">
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <div class="placeholder-image">
+                            <i class="fas fa-music"></i>
+                            <p>Boom Festival</p>
+                        </div>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Boom Festival</h3>
+                        <p>Portugal - Um dos maiores festivais de psytrance do mundo.</p>
+                        <a href="destinos.html" class="btn-secondary">Ver no mapa</a>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <i class="fas fa-play-circle"></i>
-                    <h3 id="active-festivals">0</h3>
-                    <p>Festivais Ativos</p>
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <div class="placeholder-image">
+                            <i class="fas fa-globe-europe"></i>
+                            <p>Ozora Festival</p>
+                        </div>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Ozora Festival</h3>
+                        <p>Hungria - Experiência transformadora no coração da Europa.</p>
+                        <a href="destinos.html" class="btn-secondary">Ver no mapa</a>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <i class="fas fa-pause-circle"></i>
-                    <h3 id="inactive-festivals">0</h3>
-                    <p>Festivais Inativos</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-flag"></i>
-                    <h3 id="countries-count">0</h3>
-                    <p>Países</p>
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <div class="placeholder-image">
+                            <i class="fas fa-sun"></i>
+                            <p>Universo Paralello</p>
+                        </div>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Universo Paralello</h3>
+                        <p>Brasil - Festival brasileiro reconhecido internacionalmente.</p>
+                        <a href="destinos.html" class="btn-secondary">Ver no mapa</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -161,9 +148,6 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/destinos.js"></script>
+    <script src="assets/JS/script.js"></script>
 </body>
 </html>
