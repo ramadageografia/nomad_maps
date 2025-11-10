@@ -1,1 +1,181 @@
+/* assets/CSS/destinos.css */
 
+/* Page Hero */
+.page-hero {
+    background: linear-gradient(135deg, #8e44ad 0%, #3498db 100%);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.page-hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Main Map Section */
+.main-map-section {
+    padding: 2rem 0;
+    background: #f8f9fa;
+}
+
+.map-container {
+    position: relative;
+    height: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+#trance-map {
+    height: 100%;
+    width: 100%;
+}
+
+.map-legend {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.map-legend h4 {
+    margin-bottom: 0.8rem;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.legend-color.active-marker {
+    background-color: #27ae60;
+}
+
+.legend-color.inactive-marker {
+    background-color: #e74c3c;
+}
+
+/* Info Section */
+.info-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    color: white;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.info-card {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.info-card i {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: #3498db;
+    opacity: 0.9;
+}
+
+.info-card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.info-card p {
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+/* Leaflet Customization */
+.leaflet-popup-content {
+    margin: 1rem;
+    min-width: 200px;
+}
+
+.festival-popup h3 {
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.festival-popup .location {
+    color: #7f8c8d;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.festival-popup .genre {
+    color: #3498db;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.status-active {
+    background-color: #d5f4e6;
+    color: #27ae60;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.status-inactive {
+    background-color: #fdeaea;
+    color: #e74c3c;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .map-container {
+        height: 400px;
+    }
+    
+    .page-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .page-hero p {
+        font-size: 1.1rem;
+    }
+    
+    .map-legend {
+        bottom: 10px;
+        left: 10px;
+        padding: 0.8rem;
+    }
+}
