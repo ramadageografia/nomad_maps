@@ -1,0 +1,947 @@
+[
+  {
+    "WKT": "POINT (3.7616 46.0201)",
+    "Nome": "Nataraja Festival",
+    "Pais": "França",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (11.4979 48.7904)",
+    "Nome": "Nature Frequencies",
+    "Pais": "Alemanha",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (24.284814 -31.388542)",
+    "Nome": "Alien Safari",
+    "Pais": "África do Sul",
+    "Continente": "África",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (11.4153 53.2623)",
+    "Nome": "Indian Spirit",
+    "Pais": "Alemanha",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (12.3821 52.7388)",
+    "Nome": "Antaris Project",
+    "Pais": "Alemanha",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (9.1011 46.3439)",
+    "Nome": "Shankra Festival",
+    "Pais": "Suíça",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (12.1538 52.8625)",
+    "Nome": "Vuuv Festival",
+    "Pais": "Alemanha",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-83.312888 10.446698)",
+    "Nome": "Envision Festival",
+    "Pais": "Costa Rica",
+    "Continente": "América Central",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-119.6982 34.4208)",
+    "Nome": "Lucidity Festival",
+    "Pais": "EUA",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-71.208 46.8139)",
+    "Nome": "Eclipse Festival",
+    "Pais": "Canadá",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-60.145092 -2.548959)",
+    "Nome": "Jacundá Trance Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-45.170907 -23.100547)",
+    "Nome": "Mundo de Oz",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-45.20952 -23.08043)",
+    "Nome": "High Stage",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Hitech Psytrance",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-45.178715 -23.078685)",
+    "Nome": "Hitech Revolution",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-44.845167 -21.060319)",
+    "Nome": "Swampy Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-38.92635 -13.512251)",
+    "Nome": "Universo Paralello",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-52.07779 -28.78656)",
+    "Nome": "Undervision Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-50.550707 -30.023123)",
+    "Nome": "Earthdance Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-53.588792 -30.93924)",
+    "Nome": "Zion Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-48.775212 -27.256784)",
+    "Nome": "Festival Terrazul",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-53.268706 -23.761119)",
+    "Nome": "Elementorum Naturae",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Hitech Psytrance",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-47.911257 -15.710742)",
+    "Nome": "Zuvuya Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-49.279106 -16.542452)",
+    "Nome": "Hipnótica Crew",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-47.384999 -5.892661)",
+    "Nome": "Happiness Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Intivo"
+  },
+  {
+    "WKT": "POINT (-54.209206 -34.458919)",
+    "Nome": "Inchalla Festival",
+    "Pais": "Uruguai",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-71.948714 -13.454688)",
+    "Nome": "Arkana Festival",
+    "Pais": "Perú",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-92.866588 17.466728)",
+    "Nome": "Psycristrance Festival",
+    "Pais": "México",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-92.45536 16.280933)",
+    "Nome": "Winter Solstice Gathering",
+    "Pais": "México",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-68.007017 -16.575838)",
+    "Nome": "Totem",
+    "Pais": "Bolívia",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-72.88202 -36.712002)",
+    "Nome": "Hybrid Festival",
+    "Pais": "Chile",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-78.122396 0.572869)",
+    "Nome": "Forest Festival",
+    "Pais": "Equador",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-58.172867 -34.17276)",
+    "Nome": "Chakra Psy Festival",
+    "Pais": "Argentina",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-71.020313 -32.814198)",
+    "Nome": "Montemapu Festival",
+    "Pais": "Chile",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-61.16462 -32.88964)",
+    "Nome": "Fractal Research",
+    "Pais": "Argentina",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-71.213113 -41.4750978)",
+    "Nome": "Ganesha Trance",
+    "Pais": "Argentina",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-64.190227 -31.567992)",
+    "Nome": "Earthdance Argentina",
+    "Pais": "Argentina",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-50.024575 -29.605478)",
+    "Nome": "Origens Gathering",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-63.898045 -9.094822)",
+    "Nome": "Terra Oca",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-35.202517 -8.359513)",
+    "Nome": "Liquid Sky",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-45.204391 -23.098494)",
+    "Nome": "Naturaiz",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Darkpsy, Hitech, Core, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-58.872331 -35.160846)",
+    "Nome": "Nighters Unity",
+    "Pais": "Argentina",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-46.392073 -23.245285)",
+    "Nome": "Pachamama Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-58.888094 -34.308013)",
+    "Nome": "Abrakadabra",
+    "Pais": "Argentina",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-65.160572 -13.721316)",
+    "Nome": "Jardim de Oz",
+    "Pais": "Bolívia",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-48.822487 -25.47658)",
+    "Nome": "Adhana Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-105.595987 49.538639)",
+    "Nome": "Eclipse Festival",
+    "Pais": "Canadá",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-62.77641 -17.065202)",
+    "Nome": "Amazonas Andes Festival",
+    "Pais": "Bolívia",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-71.154979 -34.371561)",
+    "Nome": "Ritual Xalpen",
+    "Pais": "Chile",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (15.177458 -21.845339)",
+    "Nome": "Fractal Festival",
+    "Pais": "Namíbia",
+    "Continente": "África",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-7.578707 32.692806)",
+    "Nome": "Hypnophonia",
+    "Pais": "Marrocos",
+    "Continente": "África",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-6.826367 33.170747)",
+    "Nome": "Xylophobia",
+    "Pais": "Marrocos",
+    "Continente": "África",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-3.40015 31.457302)",
+    "Nome": "Transahara Festival",
+    "Pais": "Marrocos",
+    "Continente": "África",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (74.064123 14.986373)",
+    "Nome": "Karacus Maracus",
+    "Pais": "Índia",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (77.439124 31.712368)",
+    "Nome": "Silvester Magica",
+    "Pais": "Índia",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (85.971816 28.30698)",
+    "Nome": "Maya Gathering",
+    "Pais": "Nepal",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (84.993448 27.367647)",
+    "Nome": "Maya Mantra",
+    "Pais": "Nepal",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (9.829413 37.284509)",
+    "Nome": "Arzeia Festival",
+    "Pais": "Tunísia",
+    "Continente": "África",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-7.45194 39.784492)",
+    "Nome": "Boom Festival",
+    "Pais": "Portugal",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-8.179916 39.070486)",
+    "Nome": "ZNA Gathering",
+    "Pais": "Portugal",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Goa, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-6.448378 37.319755)",
+    "Nome": "Global Tribe",
+    "Pais": "Espanha",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-71.481953 -33.04224)",
+    "Nome": "Multiverse Festival",
+    "Pais": "Chile",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-70.348073 -33.845702)",
+    "Nome": "Quantum Fest",
+    "Pais": "Chile",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-47.848644 -21.104368)",
+    "Nome": "Makuna Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-73.5259 11.209893)",
+    "Nome": "Aluna Ritual",
+    "Pais": "Colômbia",
+    "Continente": "América do Sul",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (15.471648 45.216951)",
+    "Nome": "Mo.dem Festival",
+    "Pais": "Croácia",
+    "Continente": "Europa",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-118.324689 34.528943)",
+    "Nome": "Uforest Festival",
+    "Pais": "EUA",
+    "Continente": "América do Norte",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-121.115488 39.449545)",
+    "Nome": "Heaven on Earth Festival",
+    "Pais": "EUA",
+    "Continente": "América do Norte",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-66.753783 10.044612)",
+    "Nome": "Huytaca Ritual",
+    "Pais": "Venezuela",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-89.979085 15.638839)",
+    "Nome": "OVNI Invasión",
+    "Pais": "Guatemala",
+    "Continente": "América Central",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-90.627401 14.560312)",
+    "Nome": "Cosmic Convergence",
+    "Pais": "Guatemala",
+    "Continente": "América Central",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-98.841636 30.548318)",
+    "Nome": "Texas Eclipse",
+    "Pais": "EUA",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (99.80451 9.111928)",
+    "Nome": "Sola Luna Festival",
+    "Pais": "Tailândia",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-104.822274 23.916436)",
+    "Nome": "Trance Portal Festival",
+    "Pais": "México",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-96.269526 19.23673)",
+    "Nome": "Equinox Festival",
+    "Pais": "México",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-98.994863 18.916937)",
+    "Nome": "Atmosphere Festival",
+    "Pais": "México",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-72.370865 47.013977)",
+    "Nome": "Limitless Festival",
+    "Pais": "Canadá",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-79.38973 45.07101)",
+    "Nome": "Mind Levitation",
+    "Pais": "Canadá",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (27.217006 38.557962)",
+    "Nome": "Tree of Life Festival",
+    "Pais": "Turquia",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (73.635303 15.415892)",
+    "Nome": "Hill Top Goa",
+    "Pais": "Índia",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (121.508543 30.033724)",
+    "Nome": "Shuangda Festival",
+    "Pais": "China",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (104.063824 30.849691)",
+    "Nome": "Ligoor Spirit Festival",
+    "Pais": "China",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-85.192186 51.953908)",
+    "Nome": "Ananta Gathering",
+    "Pais": "Canadá",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (102.947911 11.122385)",
+    "Nome": "Sacred Aeon Festival",
+    "Pais": "Cambodia",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (174.320699 -35.725995)",
+    "Nome": "Lost in Paradise",
+    "Pais": "Nova Zelândia",
+    "Continente": "Oceania",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-0.249981 53.167294)",
+    "Nome": "Invoke Festival",
+    "Pais": "Inglaterra",
+    "Continente": "Europa",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (21.940234 43.557516)",
+    "Nome": "Pyramid Festival",
+    "Pais": "Sérvia",
+    "Continente": "Europa",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-43.427707 -19.612239)",
+    "Nome": "Pulsar Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-7.800269 40.337772)",
+    "Nome": "Insomnia Festival",
+    "Pais": "Portugal",
+    "Continente": "Europa",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-51.84757 -31.156741)",
+    "Nome": "Terra Incógnita",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-59.05887 -34.792092)",
+    "Nome": "Psychedelic Resistance",
+    "Pais": "Argentina",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-0.999927 48.536211)",
+    "Nome": "Ethereal Decibel Festival",
+    "Pais": "França",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (5.703492 45.188742)",
+    "Nome": "Hadra Trance Festival",
+    "Pais": "França",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (23.709953 40.720365)",
+    "Nome": "Free Earth Festival",
+    "Pais": "Grécia",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-80.392383 9.100921)",
+    "Nome": "Tribe Gathering",
+    "Pais": "Panamá",
+    "Continente": "América Central",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (7.196158 58.337636)",
+    "Nome": "Midnight Sun Festival",
+    "Pais": "Noruega",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (135.213746 35.059651)",
+    "Nome": "Xibalba",
+    "Pais": "Japão",
+    "Continente": "Ásia",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-7.831288 41.732198)",
+    "Nome": "Forest Soul Gathering",
+    "Pais": "Portugal",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Forest, Darkpsy, Night",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-8.811818 39.249052)",
+    "Nome": "Trance Odissey",
+    "Pais": "Portugal",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (24.803299 46.492779)",
+    "Nome": "Mumush Festival",
+    "Pais": "Romênia",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-70.906146 -33.51225)",
+    "Nome": "Mimosa Festival",
+    "Pais": "Chile",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-74.014819 48.375358)",
+    "Nome": "Grooven Bass Festival",
+    "Pais": "Canadá",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (76.983855 32.063376)",
+    "Nome": "Kali Mela",
+    "Pais": "Índia",
+    "Continente": "Ásia",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (18.410091 46.779312)",
+    "Nome": "Ozora Festival",
+    "Pais": "Hungria",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (145.374314 -32.276796)",
+    "Nome": "Rainbow",
+    "Pais": "Austrália",
+    "Continente": "Oceania",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (121.995408 -31.979072)",
+    "Nome": "Universal Frequencies",
+    "Pais": "Austrália",
+    "Continente": "Oceania",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  }
+]
