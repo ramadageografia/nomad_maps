@@ -3,148 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOMAD MAPS - Mapeamos a Geografia do Trance</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <title>Nomad Maps - Descubra Novos Destinos</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
+    <!-- Cabeçalho -->
+    <header class="header">
         <div class="container">
-            <nav>
-                <div class="logo"><span class="neon-text">NOMAD MAPS</span></div>
-                <div class="nav-links">
-                    <a href="#mapa">Mapa Global</a>
-                    <a href="#festivais">Festivais</a>
-                    <a href="#filosofia">Filosofia</a>
-                    <a href="#contato">Contato</a>
-                </div>
+            <div class="logo">
+                <h1>Nomad Maps</h1>
+                <span>Descubra novos horizontes</span>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html" class="active">Início</a></li>
+                    <li><a href="destinos.html">Destinos</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
             </nav>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1 class="neon-text">NOMAD MAPS</h1>
-            <p>Mapeamos a Geografia do Trance Global</p>
-            <a href="#mapa" class="cta-button">EXPLORAR MAPA</a>
+    <!-- Banner Principal -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Explore o mundo com Nomad Maps</h2>
+                <p>Descubra destinos incríveis, planeje suas viagens e compartilhe suas experiências com outros viajantes.</p>
+                <a href="destinos.html" class="btn">Explorar Destinos</a>
+            </div>
+            <div class="hero-image">
+                <div class="placeholder-image">
+                    <i class="fas fa-globe-americas"></i>
+                    <p>Imagem do Hero</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Mapa Interativo -->
-    <section id="mapa" class="map-section">
+    <!-- Seção de Recursos -->
+    <section class="features">
         <div class="container">
-            <h2 class="section-title"><span class="neon-text">Mapa Global</span> de Festivais</h2>
-            
-            <div class="map-controls">
-                <div class="filter-group">
-                    <select id="continentFilter" class="nomad-select">
-                        <option value="">Todos os Continentes</option>
-                        <option value="América do Sul">América do Sul</option>
-                        <option value="Europa">Europa</option>
-                        <option value="América do Norte">América do Norte</option>
-                        <option value="Ásia">Ásia</option>
-                        <option value="África">África</option>
-                        <option value="Oceania">Oceania</option>
-                    </select>
-                    
-                    <select id="genreFilter" class="nomad-select">
-                        <option value="">Todos os Gêneros</option>
-                        <option value="Psytrance - multigênero">Psytrance</option>
-                        <option value="Darkpsy">Darkpsy</option>
-                        <option value="Hitech Psytrance">Hitech</option>
-                    </select>
-                    
-                    <select id="statusFilter" class="nomad-select">
-                        <option value="">Todos os Status</option>
-                        <option value="Ativo">Ativos</option>
-                        <option value="Inativo">Inativos</option>
-                    </select>
+            <h2>Por que usar o Nomad Maps?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Mapas Detalhados</h3>
+                    <p>Encontre rotas, pontos de interesse e informações atualizadas sobre cada destino.</p>
                 </div>
-                
-                <div class="map-stats">
-                    <span id="festivalCount">0</span> Festivais no Mapa
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Comunidade Ativa</h3>
+                    <p>Conecte-se com outros viajantes e compartilhe experiências e dicas valiosas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3>Planejamento Inteligente</h3>
+                    <p>Organize sua viagem com ferramentas que facilitam cada etapa do processo.</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="map-container">
-                <div id="map"></div>
-                <div class="map-sidebar">
-                    <div class="sidebar-header">
-                        <h3>Lista de Festivais</h3>
-                        <div class="search-box">
-                            <input type="text" id="searchInput" placeholder="Buscar festivais..." class="nomad-input">
+    <!-- Seção de Destinos Populares -->
+    <section class="popular-destinations">
+        <div class="container">
+            <h2>Destinos Populares</h2>
+            <div class="destinations-grid">
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <div class="placeholder-image">
+                            <i class="fas fa-city"></i>
+                            <p>Paris, França</p>
                         </div>
                     </div>
-                    <div class="festival-list" id="festivalList">
-                        <!-- Festivais carregados via JavaScript -->
+                    <div class="destination-info">
+                        <h3>Paris</h3>
+                        <p>A cidade luz, famosa por sua arquitetura, gastronomia e cultura rica.</p>
+                        <a href="destinos.html" class="btn-secondary">Ver mais</a>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <div class="placeholder-image">
+                            <i class="fas fa-torii-gate"></i>
+                            <p>Tóquio, Japão</p>
+                        </div>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Tóquio</h3>
+                        <p>Onde tradição milenar encontra a tecnologia mais avançada do mundo.</p>
+                        <a href="destinos.html" class="btn-secondary">Ver mais</a>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <div class="placeholder-image">
+                            <i class="fas fa-mountain"></i>
+                            <p>Rio de Janeiro, Brasil</p>
+                        </div>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Rio de Janeiro</h3>
+                        <p>Praias deslumbrantes, montanhas e o famoso Cristo Redentor.</p>
+                        <a href="destinos.html" class="btn-secondary">Ver mais</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Seção de Festivais em Destaque -->
-    <section class="featured-festivals" id="festivais">
-        <div class="container">
-            <h2 class="section-title"><span class="neon-text">Festivais</span> em Destaque</h2>
-            <div class="festival-grid" id="featuredFestivals">
-                <!-- Festivais em destaque carregados via JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Filosofia -->
-    <section id="filosofia" class="philosophy-section">
-        <div class="container">
-            <h2 class="section-title">Nossa Filosofia</h2>
-            <blockquote>
-                "Não somos turistas, somos nômades da alma. Mapeamos a geografia do trance global."
-            </blockquote>
-            <p>Conectamos a comunidade psytrance através do mapeamento completo de festivais, eventos e experiências transformadoras ao redor do mundo.</p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contato">
+    <!-- Rodapé -->
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>Mapa do Site</h4>
+                    <h3>Nomad Maps</h3>
+                    <p>Descubra novos horizontes e planeje suas aventuras com nossa plataforma.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#mapa">Mapa Global</a></li>
-                        <li><a href="#festivais">Festivais</a></li>
-                        <li><a href="#filosofia">Filosofia</a></li>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="destinos.html">Destinos</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="contato.html">Contato</a></li>
                     </ul>
                 </div>
-
-                <div class="footer-section">
-                    <h4>Conecte-se</h4>
-                    <div class="social-links">
-                        <a href="#" title="Instagram">👽</a>
-                        <a href="#" title="Facebook">👁️</a>
-                        <a href="#" title="WhatsApp">💬</a>
-                    </div>
-                </div>
-
-                <div class="footer-section">
-                    <h4>Contato</h4>
-                    <p>contato@nomadmaps.com</p>
-                    <p>+55 (XX) 9XXXX-XXXX</p>
-                    <p>CNPJ: XX.XXX.XXX/0001-XX</p>
-                </div>
             </div>
-            
-            <div class="legal-info">
-                &copy; 2024 NOMAD MAPS - Mapeando a Geografia do Trance Global. Todos os direitos reservados.
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nomad Maps. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="js/map.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
