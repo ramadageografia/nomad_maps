@@ -3,10 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomad Maps - Descubra Novos Destinos</title>
+    <title>Mapa de Festivais - Nomad Maps</title>
     <link rel="stylesheet" href="assets/CSS/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        /* Estilos simples para o mapa */
+        .page-hero {
+            background: linear-gradient(135deg, #8e44ad 0%, #3498db 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .map-container {
+            height: 600px;
+            margin: 2rem auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .map-info {
+            text-align: center;
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+    </style>
 </head>
 <body>
     <!-- Cabeçalho -->
@@ -18,8 +47,8 @@
             </div>
             <nav class="nav">
                 <ul>
-                    <li><a href="index.html" class="active">Início</a></li>
-                    <li><a href="destinos.html">Festivais</a></li>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="destinos.html" class="active">Festivais</a></li>
                     <li><a href="sobre.html">Sobre</a></li>
                     <li><a href="contato.html">Contato</a></li>
                 </ul>
@@ -33,94 +62,25 @@
     </header>
 
     <!-- Banner Principal -->
-    <section class="hero">
+    <section class="page-hero">
         <div class="container">
-            <div class="hero-content">
-                <h2>Explore o mundo com Nomad Maps</h2>
-                <p>Descubra destinos incríveis, planeje suas viagens e compartilhe suas experiências com outros viajantes.</p>
-                <a href="destinos.html" class="btn">Explorar Festivais</a>
-            </div>
-            <div class="hero-image">
-                <img src="assets/Imagens/banner-nomad-maps.jpg" alt="Nomad Maps - Plataforma de viagens e descobertas">
-            </div>
+            <h1>Mapa Global de Festivais de Trance</h1>
+            <p>Explore os principais festivais de psytrance ao redor do mundo</p>
         </div>
     </section>
 
-    <!-- Seção de Recursos -->
-    <section class="features">
-        <div class="container">
-            <h2>Por que usar o Nomad Maps?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </div>
-                    <h3>Mapas Detalhados</h3>
-                    <p>Encontre rotas, pontos de interesse e informações atualizadas sobre cada destino.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Comunidade Ativa</h3>
-                    <p>Conecte-se com outros viajantes e compartilhe experiências e dicas valiosas.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-route"></i>
-                    </div>
-                    <h3>Planejamento Inteligente</h3>
-                    <p>Organize sua viagem com ferramentas que facilitam cada etapa do processo.</p>
-                </div>
-            </div>
+    <!-- Mapa -->
+    <section class="container">
+        <div class="map-container">
+            <div id="map"></div>
         </div>
     </section>
 
-    <!-- Seção de Destinos Populares -->
-    <section class="popular-destinations">
+    <!-- Informações -->
+    <section class="map-info">
         <div class="container">
-            <h2>Festivais em Destaque</h2>
-            <div class="destinations-grid">
-                <div class="destination-card">
-                    <div class="destination-image">
-                        <div class="placeholder-image">
-                            <i class="fas fa-music"></i>
-                            <p>Boom Festival</p>
-                        </div>
-                    </div>
-                    <div class="destination-info">
-                        <h3>Boom Festival</h3>
-                        <p>Portugal - Um dos maiores festivais de psytrance do mundo.</p>
-                        <a href="destinos.html" class="btn-secondary">Ver no mapa</a>
-                    </div>
-                </div>
-                <div class="destination-card">
-                    <div class="destination-image">
-                        <div class="placeholder-image">
-                            <i class="fas fa-globe-europe"></i>
-                            <p>Ozora Festival</p>
-                        </div>
-                    </div>
-                    <div class="destination-info">
-                        <h3>Ozora Festival</h3>
-                        <p>Hungria - Experiência transformadora no coração da Europa.</p>
-                        <a href="destinos.html" class="btn-secondary">Ver no mapa</a>
-                    </div>
-                </div>
-                <div class="destination-card">
-                    <div class="destination-image">
-                        <div class="placeholder-image">
-                            <i class="fas fa-sun"></i>
-                            <p>Universo Paralello</p>
-                        </div>
-                    </div>
-                    <div class="destination-info">
-                        <h3>Universo Paralello</h3>
-                        <p>Brasil - Festival brasileiro reconhecido internacionalmente.</p>
-                        <a href="destinos.html" class="btn-secondary">Ver no mapa</a>
-                    </div>
-                </div>
-            </div>
+            <h2>Festivais Mapeados</h2>
+            <p>Mapa interativo com os principais festivais de trance ao redor do mundo</p>
         </div>
     </section>
 
@@ -130,7 +90,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Nomad Maps</h3>
-                    <p>Descubra novos horizontes e planeje suas aventuras com nossa plataforma.</p>
+                    <p>Plataforma dedicada ao mapeamento global da cena trance mundial.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Links Rápidos</h4>
@@ -148,6 +108,67 @@
         </div>
     </footer>
 
-    <script src="assets/JS/script.js"></script>
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Mapa simples e funcional
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar mapa
+            var map = L.map('map').setView([20, 0], 2);
+            
+            // Adicionar tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+            
+            // Adicionar alguns marcadores de exemplo
+            var festivals = [
+                {
+                    name: "Boom Festival",
+                    country: "Portugal", 
+                    lat: 39.784492,
+                    lng: -7.45194,
+                    status: "Ativo"
+                },
+                {
+                    name: "Ozora Festival",
+                    country: "Hungria",
+                    lat: 46.779312, 
+                    lng: 18.410091,
+                    status: "Ativo"
+                },
+                {
+                    name: "Universo Paralello",
+                    country: "Brasil",
+                    lat: -13.512251,
+                    lng: -38.92635,
+                    status: "Ativo"
+                },
+                {
+                    name: "Mo:dem Festival",
+                    country: "Croácia",
+                    lat: 45.216951,
+                    lng: 15.471648,
+                    status: "Ativo"
+                }
+            ];
+            
+            // Adicionar marcadores ao mapa
+            festivals.forEach(function(festival) {
+                var markerColor = festival.status === 'Ativo' ? 'green' : 'red';
+                var marker = L.marker([festival.lat, festival.lng]).addTo(map);
+                
+                marker.bindPopup(`
+                    <div style="min-width: 200px">
+                        <h3 style="margin: 0 0 10px 0; color: #2c3e50;">${festival.name}</h3>
+                        <p style="margin: 5px 0; color: #666;">📍 ${festival.country}</p>
+                        <p style="margin: 5px 0; color: #666;">Status: <strong>${festival.status}</strong></p>
+                    </div>
+                `);
+            });
+            
+            console.log('Mapa carregado com sucesso!');
+        });
+    </script>
 </body>
 </html>
