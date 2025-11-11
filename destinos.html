@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa de Festivais de Trance - Nomad Maps</title>
+    <title>Mapa de Festivais - Nomad Maps</title>
     <link rel="stylesheet" href="assets/CSS/style.css">
-    <link rel="stylesheet" href="assets/CSS/destinos.css">
+    <link rel="stylesheet" href="assets/CSS/map.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -13,17 +13,20 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
 </head>
 <body>
-    <!-- Cabeçalho -->
     <header class="header">
         <div class="container">
             <div class="logo">
-                <h1>Nomad Maps</h1>
-                <span>Descubra novos horizontes</span>
+                <img src="assets/Imagens/logo_circular.png" alt="Nomad Maps" class="logo-img">
+                <div class="logo-text">
+                    <h1>Nomad Maps</h1>
+                    <span>Sua jornada pelos festivais começa aqui</span>
+                </div>
             </div>
             <nav class="nav">
                 <ul>
                     <li><a href="index.html">Início</a></li>
-                    <li><a href="destinos.html" class="active">Festivais</a></li>
+                    <li><a href="destinos.html" class="active">Mapa de Festivais</a></li>
+                    <li><a href="pacotes.html">Pacotes</a></li>
                     <li><a href="sobre.html">Sobre</a></li>
                     <li><a href="contato.html">Contato</a></li>
                 </ul>
@@ -36,15 +39,13 @@
         </div>
     </header>
 
-    <!-- Banner Principal -->
     <section class="page-hero">
         <div class="container">
-            <h1>Mapa Global de Festivais de Trance</h1>
-            <p>Explore os principais festivais de psytrance ao redor do mundo em tempo real</p>
+            <h1>Mapa Global de Festivais</h1>
+            <p>Explore todos os festivais de trance ativos no mundo e planeje sua próxima aventura</p>
         </div>
     </section>
 
-    <!-- Controles -->
     <section class="map-controls">
         <div class="container">
             <div class="controls-grid">
@@ -54,7 +55,7 @@
                         <div class="filter-item">
                             <label for="continente">Continente:</label>
                             <select id="continente">
-                                <option value="all">Todos</option>
+                                <option value="all">Todos os Continentes</option>
                                 <option value="América do Sul">América do Sul</option>
                                 <option value="Europa">Europa</option>
                                 <option value="América do Norte">América do Norte</option>
@@ -64,11 +65,12 @@
                             </select>
                         </div>
                         <div class="filter-item">
-                            <label for="status">Status:</label>
-                            <select id="status">
-                                <option value="all">Todos</option>
-                                <option value="Ativo">Ativos</option>
-                                <option value="Inativo">Inativos</option>
+                            <label for="vertente">Estilo Musical:</label>
+                            <select id="vertente">
+                                <option value="all">Todos os Estilos</option>
+                                <option value="Psytrance - multigênero">Psytrance Multigênero</option>
+                                <option value="Darkpsy">Darkpsy</option>
+                                <option value="Hitech Psytrance">Hitech Psytrance</option>
                             </select>
                         </div>
                     </div>
@@ -79,7 +81,7 @@
                     <div class="stats-mini">
                         <div class="stat-mini">
                             <span class="stat-number" id="total-festivals">0</span>
-                            <span class="stat-label">Total</span>
+                            <span class="stat-label">Festivais</span>
                         </div>
                         <div class="stat-mini">
                             <span class="stat-number" id="active-festivals">0</span>
@@ -91,23 +93,10 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="control-group">
-                    <h4><i class="fas fa-cog"></i> Controles</h4>
-                    <div class="action-buttons">
-                        <button id="reset-filters" class="btn-secondary">
-                            <i class="fas fa-times"></i> Limpar Filtros
-                        </button>
-                        <button id="reset-view" class="btn-secondary">
-                            <i class="fas fa-globe-americas"></i> Visualização Global
-                        </button>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- Mapa e Lista -->
     <section class="main-map-section">
         <div class="container">
             <div class="map-layout">
@@ -118,10 +107,6 @@
                         <div class="legend-item">
                             <span class="legend-color active-marker"></span>
                             <span>Festival Ativo</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-color inactive-marker"></span>
-                            <span>Festival Inativo</span>
                         </div>
                         <div class="legend-item">
                             <span class="legend-color cluster-marker"></span>
@@ -148,20 +133,22 @@
         </div>
     </section>
 
-    <!-- Rodapé -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Nomad Maps</h3>
-                    <p>Plataforma dedicada ao mapeamento global da cena trance mundial.</p>
+                    <div class="footer-logo">
+                        <img src="assets/Imagens/logo_circular.png" alt="Nomad Maps" class="logo-img-small">
+                        <h3>Nomad Maps</h3>
+                    </div>
+                    <p>Sua agência especializada em viagens para festivais de trance ao redor do mundo.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Links Rápidos</h4>
                     <ul>
                         <li><a href="index.html">Início</a></li>
-                        <li><a href="destinos.html">Festivais</a></li>
-                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="destinos.html">Mapa de Festivais</a></li>
+                        <li><a href="pacotes.html">Pacotes</a></li>
                         <li><a href="contato.html">Contato</a></li>
                     </ul>
                 </div>
@@ -172,10 +159,9 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <script src="assets/JS/script.js"></script>
-    <script src="assets/JS/trance-map.js"></script>
+    <script src="assets/JS/map.js"></script>
 </body>
 </html>
