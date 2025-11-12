@@ -1,167 +1,311 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa de Festivais - Nomad Maps</title>
-    <link rel="stylesheet" href="assets/CSS/style.css">
-    <link rel="stylesheet" href="assets/CSS/map.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
-</head>
-<body>
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <img src="assets/Imagens/logo_circular.png" alt="Nomad Maps" class="logo-img">
-                <div class="logo-text">
-                    <h1>Nomad Maps</h1>
-                    <span>Sua jornada pelos festivais começa aqui</span>
-                </div>
-            </div>
-            <nav class="nav">
-                <ul>
-                    <li><a href="index.html">Início</a></li>
-                    <li><a href="destinos.html" class="active">Mapa de Festivais</a></li>
-                    <li><a href="pacotes.html">Pacotes</a></li>
-                    <li><a href="sobre.html">Sobre</a></li>
-                    <li><a href="contato.html">Contato</a></li>
-                </ul>
-            </nav>
-            <div class="mobile-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </header>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/JS/trance-map.js"></script>
+<script>
+// Mapeamento de ícones por subgênero
+const subgenreIcons = {
+    'Psytrance': 'assets/Imagens/icones/psytrance.png',
+    'Progressive': 'assets/Imagens/icones/progressive.png', 
+    'Full On': 'assets/Imagens/icones/fullon.png',
+    'Darkpsy': 'assets/Imagens/icones/darkpsy.png',
+    'Goa': 'assets/Imagens/icones/goa.png',
+    'Zenonesque': 'assets/Imagens/icones/zenonesque.png',
+    'Hi-Tech': 'assets/Imagens/icones/hitech.png',
+    'Forest': 'assets/Imagens/icones/forest.png',
+    'Suomi': 'assets/Imagens/icones/suomi.png',
+    'default': 'assets/Imagens/icones/psytrance.png'
+};
 
-    <section class="page-hero">
-        <div class="container">
-            <h1>Mapa Global de Festivais</h1>
-            <p>Explore todos os festivais de trance ativos no mundo e planeje sua próxima aventura</p>
-        </div>
-    </section>
+// Mapeamento de bandeiras por país (vamos começar com os principais)
+const countryFlags = {
+    'Brasil': '🇧🇷',
+    'Portugal': '🇵🇹', 
+    'Espanha': '🇪🇸',
+    'Alemanha': '🇩🇪',
+    'França': '🇫🇷',
+    'Itália': '🇮🇹',
+    'Grécia': '🇬🇷',
+    'Israel': '🇮🇱',
+    'Índia': '🇮🇳',
+    'Japão': '🇯🇵',
+    'Austrália': '🇦🇺',
+    'Chile': '🇨🇱',
+    'Argentina': '🇦🇷',
+    'México': '🇲🇽',
+    'EUA': '🇺🇸',
+    'Canadá': '🇨🇦'
+};
 
-    <section class="map-controls">
-        <div class="container">
-            <div class="controls-grid">
-                <div class="control-group">
-                    <h4><i class="fas fa-filter"></i> Filtros</h4>
-                    <div class="filter-options">
-                        <div class="filter-item">
-                            <label for="continente">Continente:</label>
-                            <select id="continente">
-                                <option value="all">Todos os Continentes</option>
-                                <option value="América do Sul">América do Sul</option>
-                                <option value="Europa">Europa</option>
-                                <option value="América do Norte">América do Norte</option>
-                                <option value="Ásia">Ásia</option>
-                                <option value="África">África</option>
-                                <option value="Oceania">Oceania</option>
-                            </select>
-                        </div>
-                        <div class="filter-item">
-                            <label for="vertente">Estilo Musical:</label>
-                            <select id="vertente">
-                                <option value="all">Todos os Estilos</option>
-                                <option value="Psytrance - multigênero">Psytrance Multigênero</option>
-                                <option value="Darkpsy">Darkpsy</option>
-                                <option value="Hitech Psytrance">Hitech Psytrance</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <h4><i class="fas fa-chart-bar"></i> Estatísticas</h4>
-                    <div class="stats-mini">
-                        <div class="stat-mini">
-                            <span class="stat-number" id="total-festivals">0</span>
-                            <span class="stat-label">Festivais</span>
-                        </div>
-                        <div class="stat-mini">
-                            <span class="stat-number" id="active-festivals">0</span>
-                            <span class="stat-label">Ativos</span>
-                        </div>
-                        <div class="stat-mini">
-                            <span class="stat-number" id="countries-count">0</span>
-                            <span class="stat-label">Países</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+// Função para criar ícone personalizado
+function createCustomIcon(festival, categoryType) {
+    let iconUrl;
+    let iconSize = [30, 30];
+    
+    if (categoryType === 'subgenero') {
+        // Ícone por subgênero musical
+        const mainSubgenre = festival.subgeneros && festival.subgeneros.length > 0 
+            ? festival.subgeneros[0] 
+            : 'default';
+        iconUrl = subgenreIcons[mainSubgenre] || subgenreIcons['default'];
+    } 
+    else if (categoryType === 'pais') {
+        // Bandeira do país (usando emoji por enquanto)
+        const flag = countryFlags[festival.pais] || '🎵';
+        // Criar um ícone com a bandeira - por enquanto usando marcador padrão
+        iconUrl = 'assets/Imagens/icones/psytrance.png'; // placeholder
+        iconSize = [25, 25];
+    }
+    else if (categoryType === 'continente') {
+        // Ícone por continente
+        const continentIcons = {
+            'América do Sul': 'assets/Imagens/icones/southamerica.png',
+            'América do Norte': 'assets/Imagens/icones/northamerica.png', 
+            'Europa': 'assets/Imagens/icones/europe.png',
+            'Ásia': 'assets/Imagens/icones/asia.png',
+            'Oceania': 'assets/Imagens/icones/oceania.png',
+            'África': 'assets/Imagens/icones/africa.png'
+        };
+        iconUrl = continentIcons[festival.continente] || subgenreIcons['default'];
+    }
+    else {
+        // Categoria por nome (ícone padrão psytrance)
+        iconUrl = subgenreIcons['default'];
+    }
+    
+    return L.icon({
+        iconUrl: iconUrl,
+        iconSize: iconSize,
+        iconAnchor: [15, 15],
+        popupAnchor: [0, -15],
+        className: 'custom-marker'
+    });
+}
 
-    <section class="main-map-section">
-        <div class="container">
-            <div class="map-layout">
-                <div class="map-container">
-                    <div id="trance-map"></div>
-                    <div class="map-legend">
-                        <h4><i class="fas fa-map-marker-alt"></i> Legenda</h4>
-                        <div class="legend-item">
-                            <span class="legend-color active-marker"></span>
-                            <span>Festival Ativo</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-color cluster-marker"></span>
-                            <span>Agrupamento</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="side-panel">
-                    <div class="panel-header">
-                        <h3>Festivais <span id="festival-count">0</span></h3>
-                        <div class="search-box">
-                            <input type="text" id="festival-search" placeholder="Buscar festival...">
-                            <i class="fas fa-search"></i>
-                        </div>
-                    </div>
-                    <div class="panel-content">
-                        <div id="festivals-container" class="festivals-list">
-                            <!-- Festivais carregados via JavaScript -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+// Variáveis globais
+let map;
+let currentMarkers = L.layerGroup();
+let currentCategory = 'subgenero';
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <img src="assets/Imagens/logo_circular.png" alt="Nomad Maps" class="logo-img-small">
-                        <h3>Nomad Maps</h3>
-                    </div>
-                    <p>Sua agência especializada em viagens para festivais de trance ao redor do mundo.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Links Rápidos</h4>
-                    <ul>
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="destinos.html">Mapa de Festivais</a></li>
-                        <li><a href="pacotes.html">Pacotes</a></li>
-                        <li><a href="contato.html">Contato</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Nomad Maps. Todos os direitos reservados.</p>
-            </div>
-        </div>
-    </footer>
+// Inicializar mapa
+function initMap() {
+    map = L.map('map').setView([-14.2350, -51.9253], 3);
+    
+    // Camada do mapa estilo escuro (igual Google My Maps)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '©OpenStreetMap, ©CartoDB',
+        maxZoom: 20
+    }).addTo(map);
+    
+    // Adicionar grupo de marcadores
+    currentMarkers.addTo(map);
+    
+    // Carregar festivais
+    loadFestivals();
+}
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-    <script src="assets/JS/script.js"></script>
-    <script src="assets/JS/map.js"></script>
-</body>
-</html>
+// Carregar e exibir festivais
+function loadFestivals() {
+    if (!window.festivalsData || window.festivalsData.length === 0) {
+        console.error('❌ Nenhum dado encontrado em festivalsData');
+        return;
+    }
+    
+    console.log(`🎪 Carregando ${window.festivalsData.length} festivais...`);
+    updateFestivalsByCategory(currentCategory);
+}
+
+// Atualizar marcadores por categoria
+function updateFestivalsByCategory(category) {
+    currentCategory = category;
+    currentMarkers.clearLayers();
+    
+    window.festivalsData.forEach(festival => {
+        if (festival.latitude && festival.longitude) {
+            const lat = parseFloat(festival.latitude);
+            const lng = parseFloat(festival.longitude);
+            
+            // Criar ícone baseado na categoria selecionada
+            const customIcon = createCustomIcon(festival, category);
+            
+            // Criar marcador
+            const marker = L.marker([lat, lng], { icon: customIcon });
+            
+            // Criar popup informativo
+            const popupContent = createPopupContent(festival);
+            marker.bindPopup(popupContent);
+            
+            // Adicionar ao grupo
+            marker.addTo(currentMarkers);
+        }
+    });
+    
+    updateLegend(category);
+}
+
+// Criar conteúdo do popup
+function createPopupContent(festival) {
+    return `
+        <div class="festival-popup" style="color: #0f0c29; min-width: 280px; font-family: Arial, sans-serif;">
+            <h3 style="color: #6a11cb; margin-bottom: 10px; border-bottom: 2px solid #ff00cc; padding-bottom: 5px;">
+                ${festival.nome}
+            </h3>
+            
+            <div style="margin-bottom: 8px;">
+                <strong>📍 ${festival.cidade}, ${festival.pais}</strong>
+            </div>
+            
+            <div style="margin-bottom: 8px;">
+                <strong>🌍 ${festival.continente}</strong>
+            </div>
+            
+            <div style="margin-bottom: 8px;">
+                <strong>📅 ${festival.mes_temporada || 'Data a confirmar'}</strong>
+            </div>
+            
+            <div style="margin-bottom: 10px;">
+                <strong>🎵 ${festival.subgeneros ? festival.subgeneros.join(', ') : 'Psytrance'}</strong>
+            </div>
+            
+            <div style="margin-bottom: 10px; padding: 5px; background: #f0f0f0; border-radius: 5px;">
+                <strong>Status:</strong> 
+                <span style="color: ${festival.status === 'Ativo' ? 'green' : 'gray'};">
+                    ${festival.status === 'Ativo' ? '🟢 Ativo' : '⚫ Inativo'}
+                </span>
+            </div>
+            
+            ${festival.link ? `
+            <div style="margin-top: 10px;">
+                <a href="${festival.link}" target="_blank" 
+                   style="color: #2575fc; text-decoration: none; font-weight: bold;">
+                   🔗 Site Oficial
+                </a>
+            </div>
+            ` : ''}
+            
+            ${festival.instagram ? `
+            <div>
+                <a href="https://instagram.com/${festival.instagram}" target="_blank"
+                   style="color: #e1306c; text-decoration: none; font-weight: bold;">
+                   📸 Instagram
+                </a>
+            </div>
+            ` : ''}
+        </div>
+    `;
+}
+
+// Atualizar legenda
+function updateLegend(category) {
+    const legend = document.getElementById('mapLegend');
+    if (!legend) return;
+    
+    let legendHTML = '<h4>Legenda</h4>';
+    
+    if (category === 'subgenero') {
+        legendHTML += `
+            <div class="legend-item"><div class="legend-color" style="background-image: url('assets/Imagens/icones/psytrance.png'); background-size: cover;"></div><span>Psytrance</span></div>
+            <div class="legend-item"><div class="legend-color" style="background-image: url('assets/Imagens/icones/progressive.png'); background-size: cover;"></div><span>Progressive</span></div>
+            <div class="legend-item"><div class="legend-color" style="background-image: url('assets/Imagens/icones/fullon.png'); background-size: cover;"></div><span>Full On</span></div>
+            <div class="legend-item"><div class="legend-color" style="background-image: url('assets/Imagens/icones/darkpsy.png'); background-size: cover;"></div><span>Darkpsy</span></div>
+            <div class="legend-item"><div class="legend-color" style="background-image: url('assets/Imagens/icones/goa.png'); background-size: cover;"></div><span>Goa</span></div>
+        `;
+    }
+    else if (category === 'pais') {
+        legendHTML += `
+            <div class="legend-item"><div class="legend-color" style="background: #ff00cc;"></div><span>Brasil 🇧🇷</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2575fc;"></div><span>Portugal 🇵🇹</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #00ff99;"></div><span>Outros Países</span></div>
+        `;
+    }
+    else if (category === 'continente') {
+        legendHTML += `
+            <div class="legend-item"><div class="legend-color" style="background: #ff00cc;"></div><span>América do Sul</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2575fc;"></div><span>Europa</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #00ff99;"></div><span>América do Norte</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #ff9900;"></div><span>Ásia</span></div>
+        `;
+    }
+    
+    legend.innerHTML = legendHTML;
+}
+
+// Inicializar quando a página carregar
+document.addEventListener('DOMContentLoaded', function() {
+    initMap();
+    
+    // Event listeners para os botões de categoria
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+            updateFestivalsByCategory(category);
+            
+            // Atualizar botão ativo
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+});
+</script>
+
+<style>
+/* Estilos para os controles de categoria */
+.category-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: rgba(15, 12, 41, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ff00cc;
+}
+
+.category-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid #2575fc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background: #ff00cc;
+    transform: translateY(-2px);
+}
+
+/* Legenda do mapa */
+.map-legend {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    background: rgba(15, 12, 41, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #00ff99;
+    z-index: 1000;
+    max-width: 200px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid white;
+}
+
+.custom-marker {
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+}
+</style>
