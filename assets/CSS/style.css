@@ -1,5 +1,12 @@
 /* assets/CSS/style.css */
 
+#flyer-popup img {
+    border-radius: 8px;
+    max-width: 250px;
+    height: auto;
+    background: #000;
+}
+
 /* Reset e configurações básicas */
 * {
     margin: 0;
