@@ -1,0 +1,1 @@
+(function(){console.log('Trance map placeholder. Replace with full script in production.');})();
