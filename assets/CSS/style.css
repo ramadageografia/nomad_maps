@@ -1,66 +1,60 @@
-/* === Estilos Gerais === */
-body {
+/* ===== REGRAS GERAIS ===== */
+html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
   font-family: 'Poppins', sans-serif;
-  background-color: #0a0a0a;
+  background-color: #000; /* fundo escuro */
   color: #fff;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
 }
 
-/* === Banners === */
-.banner {
-  width: 100%;
-  height: auto;
-  max-height: 220px;
-  object-fit: cover;
-  display: block;
-}
-
+/* ===== BANNERS ===== */
 .banner-topo,
 .banner-rodape {
   width: 100%;
   text-align: center;
   background-color: #000;
-  border-top: 2px solid #222;
-  border-bottom: 2px solid #222;
 }
 
-/* === Mapa === */
-#trance-map {
-  flex: 1;
+.banner {
   width: 100%;
-  height: 85vh;
+  max-height: 180px;
+  object-fit: cover;
+}
+
+/* ===== MAPA ===== */
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  height: calc(100vh - 360px); /* altura total menos dois banners */
+}
+
+#trance-map {
+  width: 100%;
+  height: 100%;
   z-index: 1;
 }
 
-/* === Flyer flutuante === */
-#flyer-popup {
+/* ===== POPUP DE FLYER ===== */
+.flyer-popup {
   position: absolute;
   display: none;
   pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 1000;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #fff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  z-index: 9999;
 }
 
-#flyer-popup img {
+.flyer-popup img {
   width: 280px;
   height: auto;
-  border-radius: 12px;
-  border: 2px solid #fff;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
 }
 
-/* === Popup Leaflet === */
-.leaflet-popup-content {
-  font-size: 14px;
-  text-align: center;
-  color: #111;
-}
-.leaflet-popup-content h3 {
-  margin: 5px 0;
-  font-size: 16px;
-  color: #111;
+/* ===== EFEITO FLUTUANTE AO PASSAR O MOUSE ===== */
+.marker-flyer:hover .flyer-popup {
+  display: block;
 }
