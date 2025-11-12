@@ -3,149 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nomad Maps — Global Trance Festivals</title>
-  <link rel="icon" href="assets/Imagens/logo_circular.png" type="image/png">
-
-  <!-- Leaflet -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-  <!-- MarkerCluster -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
-  <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-
-  <!-- Estilo -->
-  <style>
-   <footer>
-  <img class="banner" src="assets/Imagens/banner-nomad-maps.jpg" alt="Banner Nomad Maps">
-</footer>
-
-    body {
-     <link rel="stylesheet" href="assets/CSS/style.css">
-
-    }
-
-    /* TOPO */
-    header {
-      display: flex;
-      align-items: center;
-      background: #111;
-      padding: 10px 20px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-    }
-
-    header img.logo {
-      height: 80px;
-      width: 80px;
-      border-radius: 50%;
-      margin-right: 15px;
-    }
-
-    header img.banner {
-      height: 80px;
-      width: auto;
-      border-radius: 10px;
-    }
-
-    /* MAPA */
-    #trance-map {
-      width: 100%;
-      height: 85vh;
-      margin: 0;
-      z-index: 1;
-    }
-
-    /* POPUPS E ICONES */
-    .leaflet-popup-content-wrapper {
-      background: #111;
-      color: #fff;
-      border-radius: 10px;
-      font-size: 14px;
-    }
-
-    .festival-popup h3 {
-      margin: 0;
-      color: #00ffe0;
-      font-size: 16px;
-    }
-
-    .festival-popup .status-active {
-      color: #00ff99;
-    }
-
-    .festival-popup .status-inactive {
-      color: #ff4444;
-    }
-
-    /* FLYER FLUTUANTE */
-    #flyer-popup {
-      position: absolute;
-      display: none;
-      pointer-events: none;
-      z-index: 9999;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      transition: opacity 0.2s ease;
-    }
-
-    #flyer-popup img {
-      border-radius: 10px;
-      max-width: 260px;
-      height: auto;
-      display: block;
-    }
-
-    /* LISTA DE FESTIVAIS (opcional) */
-    #sidebar {
-      padding: 15px;
-      background: #111;
-      height: 15vh;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
-
-    .festival-card {
-      display: inline-block;
-      background: #222;
-      border-radius: 10px;
-      margin-right: 10px;
-      padding: 8px 12px;
-      color: #fff;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-
-    .festival-card:hover {
-      transform: scale(1.05);
-      background: #333;
-    }
-
-    .festival-card.active {
-      border: 2px solid #00ffe0;
-    }
-  </style>
+  <title>Nomad Maps — Global Trance Festival Map</title>
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="assets/CSS/style.css">
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css"
+  />
 </head>
-
 <body>
-  <!-- TOPO -->
-  <header>
-    <img class="logo" src="assets/Imagens/logo_circular.png" alt="Nomad Maps Logo">
-    <img class="banner" src="assets/Imagens/banner-nomad-maps.jpg" alt="Banner Nomad Maps">
+
+  <!-- ===== TOPO COM BANNER ===== -->
+  <header class="banner-topo">
+    <img class="banner" src="assets/Imagens/banner-nomad-maps.jpg" alt="Banner Nomad Maps Topo">
   </header>
 
-  <!-- MAPA -->
-  <div id="trance-map"></div>
+  <!-- ===== CONTEÚDO PRINCIPAL ===== -->
+  <main>
+    <div id="trance-map"></div>
+  </main>
 
-  <!-- LISTA DE FESTIVAIS -->
-  <div id="sidebar">
-    <div id="festivals-container"></div>
-  </div>
+  <!-- ===== RODAPÉ COM BANNER ===== -->
+  <footer class="banner-rodape">
+    <img class="banner" src="assets/Imagens/banner-nomad-maps.jpg" alt="Banner Nomad Maps Rodapé">
+  </footer>
 
-  <!-- JS PRINCIPAL -->
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
   <script src="assets/JS/trance-map.js"></script>
 </body>
 </html>
-
-
