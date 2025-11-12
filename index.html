@@ -1,358 +1,147 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomad Maps - Agência de Viagens para Festivais de Trance</title>
-    <link rel="stylesheet" href="assets/CSS/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <style>
-        body {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/Imagens/image_fundo.jpeg');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-        }
-        
-        /* Estilos do mapa na home */
-        .home-map-section {
-            padding: 4rem 0;
-            background: var(--white);
-        }
-        
-        .home-map-container {
-            height: 500px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-bottom: 2rem;
-        }
-        
-        #home-map {
-            height: 100%;
-            width: 100%;
-        }
-        
-        .map-cta {
-            text-align: center;
-            margin-top: 2rem;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nomad Maps — Global Trance Festivals</title>
+  <link rel="icon" href="assets/Imagens/logo_circular.png" type="image/png">
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- MarkerCluster -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+  <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+
+  <!-- Estilo -->
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background-color: #0d0d0d;
+      color: #fff;
+    }
+
+    /* TOPO */
+    header {
+      display: flex;
+      align-items: center;
+      background: #111;
+      padding: 10px 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    header img.logo {
+      height: 80px;
+      width: 80px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    header img.banner {
+      height: 80px;
+      width: auto;
+      border-radius: 10px;
+    }
+
+    /* MAPA */
+    #trance-map {
+      width: 100%;
+      height: 85vh;
+      margin: 0;
+      z-index: 1;
+    }
+
+    /* POPUPS E ICONES */
+    .leaflet-popup-content-wrapper {
+      background: #111;
+      color: #fff;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    .festival-popup h3 {
+      margin: 0;
+      color: #00ffe0;
+      font-size: 16px;
+    }
+
+    .festival-popup .status-active {
+      color: #00ff99;
+    }
+
+    .festival-popup .status-inactive {
+      color: #ff4444;
+    }
+
+    /* FLYER FLUTUANTE */
+    #flyer-popup {
+      position: absolute;
+      display: none;
+      pointer-events: none;
+      z-index: 9999;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: opacity 0.2s ease;
+    }
+
+    #flyer-popup img {
+      border-radius: 10px;
+      max-width: 260px;
+      height: auto;
+      display: block;
+    }
+
+    /* LISTA DE FESTIVAIS (opcional) */
+    #sidebar {
+      padding: 15px;
+      background: #111;
+      height: 15vh;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .festival-card {
+      display: inline-block;
+      background: #222;
+      border-radius: 10px;
+      margin-right: 10px;
+      padding: 8px 12px;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .festival-card:hover {
+      transform: scale(1.05);
+      background: #333;
+    }
+
+    .festival-card.active {
+      border: 2px solid #00ffe0;
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Cabeçalho -->
-   <header style="display: flex; align-items: center; justify-content: flex-start; padding: 10px 20px; background-color: #000;">
-  <!-- Logo circular -->
-  <img 
-    src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/logo_circular.png" 
-    alt="Logo Nomad Maps" 
-    style="height: 70px; width: auto; border-radius: 50%; margin-right: 15px;"
-  >
+  <!-- TOPO -->
+  <header>
+    <img class="logo" src="assets/Imagens/logo_circular.png" alt="Nomad Maps Logo">
+    <img class="banner" src="assets/Imagens/banner-nomad-maps.jpg" alt="Banner Nomad Maps">
+  </header>
 
-  <!-- Banner superior -->
-  <img 
-    src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/banner-nomad-maps.jpg" 
-    alt="Banner Nomad Maps" 
-    style="height: 70px; width: auto; border-radius: 10px;"
-  >
-</header>
-    </section>
+  <!-- MAPA -->
+  <div id="trance-map"></div>
 
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3>50+</h3>
-                    <p>Festivais Ativos</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-map-marked-alt"></i>
-                    <h3>25</h3>
-                    <p>Países</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-users"></i>
-                    <h3>2.000+</h3>
-                    <p>Viajantes Atendidos</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-star"></i>
-                    <h3>4.9</h3>
-                    <p>Avaliação Média</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- LISTA DE FESTIVAIS -->
+  <div id="sidebar">
+    <div id="festivals-container"></div>
+  </div>
 
-    <!-- Mapa na Home -->
-    <section class="home-map-section" id="mapa-home">
-        <div class="container">
-            <h2 class="section-title">Explore o Mapa de Festivais</h2>
-            <p class="section-subtitle">Descubra os principais festivais de trance ao redor do mundo</p>
-            
-            <div class="home-map-container">
-                <div id="home-map"></div>
-            </div>
-            
-            <div class="map-cta">
-                <a href="destinos.html" class="btn btn-primary btn-large">
-                    <i class="fas fa-expand"></i> Ver Mapa Completo
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Festivais em Destaque -->
-    <section class="featured-festivals">
-        <div class="container">
-            <h2 class="section-title">Festivais em Destaque</h2>
-            <p class="section-subtitle">Experiências cuidadosamente selecionadas para você</p>
-            
-            <div class="festivals-grid">
-                <!-- Universo Paralello -->
-                <div class="festival-card">
-                    <div class="festival-image">
-                        <img src="assets/Imagens/flyers/Universo%20Paralello/Banner_up.jpg" alt="Universo Paralello">
-                        <div class="festival-overlay">
-                            <span class="festival-location">🇧🇷 Brasil</span>
-                        </div>
-                    </div>
-                    <div class="festival-info">
-                        <h3>Universo Paralello</h3>
-                        <p class="festival-dates">🎵 Psytrance Multigênero</p>
-                        <p class="festival-description">Um dos maiores festivais de trance do Brasil, conhecido por sua produção impecável e localização paradisíaca.</p>
-                        <div class="festival-features">
-                            <span><i class="fas fa-calendar"></i> 7 Dias</span>
-                            <span><i class="fas fa-users"></i> 10.000+ Pessoas</span>
-                        </div>
-                        <div class="festival-actions">
-                            <a href="#" class="btn btn-primary">Ver Pacote</a>
-                            <a href="destinos.html#universo-paralello" class="btn btn-outline">Ver no Mapa</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ozora Festival -->
-                <div class="festival-card">
-                    <div class="festival-image">
-                        <img src="assets/Imagens/flyers/Ozora/banner_ozora26.jpg" alt="Ozora Festival">
-                        <div class="festival-overlay">
-                            <span class="festival-location">🇭🇺 Hungria</span>
-                        </div>
-                    </div>
-                    <div class="festival-info">
-                        <h3>Ozora Festival</h3>
-                        <p class="festival-dates">🎵 Psytrance Multigênero</p>
-                        <p class="festival-description">Experiência transformadora no coração da Europa, conhecida como a "Capital Psychedelic" do mundo.</p>
-                        <div class="festival-features">
-                            <span><i class="fas fa-calendar"></i> 7 Dias</span>
-                            <span><i class="fas fa-users"></i> 30.000+ Pessoas</span>
-                        </div>
-                        <div class="festival-actions">
-                            <a href="#" class="btn btn-primary">Ver Pacote</a>
-                            <a href="destinos.html#ozora" class="btn btn-outline">Ver no Mapa</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Boom Festival -->
-                <div class="festival-card">
-                    <div class="festival-image">
-                        <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Boom Festival">
-                        <div class="festival-overlay">
-                            <span class="festival-location">🇵🇹 Portugal</span>
-                        </div>
-                    </div>
-                    <div class="festival-info">
-                        <h3>Boom Festival</h3>
-                        <p class="festival-dates">🎵 Psytrance & Cultura Alternativa</p>
-                        <p class="festival-description">Festival bianual que combina música eletrônica, sustentabilidade e arte em um ambiente único.</p>
-                        <div class="festival-features">
-                            <span><i class="fas fa-calendar"></i> 8 Dias</span>
-                            <span><i class="fas fa-users"></i> 40.000+ Pessoas</span>
-                        </div>
-                        <div class="festival-actions">
-                            <a href="#" class="btn btn-primary">Ver Pacote</a>
-                            <a href="destinos.html#boom" class="btn btn-outline">Ver no Mapa</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Serviços -->
-    <section class="services">
-        <div class="container">
-            <h2 class="section-title">Por que escolher a Nomad Maps?</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-passport"></i>
-                    <h3>Pacotes Completos</h3>
-                    <p>Ingressos, hospedagem, traslados e suporte 24h - tudo em um só lugar</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-headset"></i>
-                    <h3>Suporte Dedicado</h3>
-                    <p>Equipe especializada em festivais para te ajudar em toda a jornada</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Segurança Garantida</h3>
-                    <p>Experiência segura com toda a logística planejada nos mínimos detalhes</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-users"></i>
-                    <h3>Comunidade</h3>
-                    <p>Viaje com outros amantes de trance e faça amigos para a vida toda</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Pronto para sua próxima aventura musical?</h2>
-                <p>Junte-se a milhares de viajantes que já viveram experiências inesquecíveis com a Nomad Maps</p>
-                <div class="cta-buttons">
-                    <a href="contato.html" class="btn btn-primary btn-large">
-                        <i class="fas fa-comments"></i> Falar com Especialista
-                    </a>
-                    <a href="destinos.html" class="btn btn-secondary btn-large">
-                        <i class="fas fa-map"></i> Explorar Festivais
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Rodapé -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <img src="assets/Imagens/logo_circular.png" alt="Nomad Maps" class="logo-img-small">
-                        <h3>Nomad Maps</h3>
-                    </div>
-                    <p>Sua agência especializada em viagens para festivais de trance ao redor do mundo.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Festivais</h4>
-                    <ul>
-                        <li><a href="destinos.html">Mapa Interativo</a></li>
-                        <li><a href="#">América do Sul</a></li>
-                        <li><a href="#">Europa</a></li>
-                        <li><a href="#">Ásia</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Serviços</h4>
-                    <ul>
-                        <li><a href="pacotes.html">Pacotes Completos</a></li>
-                        <li><a href="#">Ingressos</a></li>
-                        <li><a href="#">Hospedagem</a></li>
-                        <li><a href="#">Traslados</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contato</h4>
-                    <ul class="contact-info">
-                        <li><i class="fas fa-envelope"></i> contato@nomadmaps.com</li>
-                        <li><i class="fas fa-phone"></i> +55 (11) 99999-9999</li>
-                        <li><i class="fas fa-map-marker-alt"></i> São Paulo, Brasil</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Nomad Maps - Agência de Viagens para Festivais. Todos os direitos reservados.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="assets/JS/script.js"></script>
-    <script>
-        // Mapa simples para a home
-        document.addEventListener('DOMContentLoaded', function() {
-            // Inicializar mapa
-            var map = L.map('home-map').setView([20, 0], 2);
-            
-            // Adicionar tile layer
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors | Nomad Maps',
-                maxZoom: 18
-            }).addTo(map);
-            
-            // Festivais principais para mostrar na home
-            var featuredFestivals = [
-                {
-                    name: "Universo Paralello",
-                    country: "Brasil",
-                    lat: -13.512251,
-                    lng: -38.92635,
-                    type: "Psytrance"
-                },
-                {
-                    name: "Ozora Festival", 
-                    country: "Hungria",
-                    lat: 46.779312,
-                    lng: 18.410091,
-                    type: "Psytrance"
-                },
-                {
-                    name: "Boom Festival",
-                    country: "Portugal", 
-                    lat: 39.784492,
-                    lng: -7.45194,
-                    type: "Psytrance"
-                },
-                {
-                    name: "Mo:dem Festival",
-                    country: "Croácia",
-                    lat: 45.216951, 
-                    lng: 15.471648,
-                    type: "Darkpsy"
-                },
-                {
-                    name: "Shankra Festival",
-                    country: "Suíça",
-                    lat: 46.3439,
-                    lng: 9.1011,
-                    type: "Psytrance"
-                }
-            ];
-            
-            // Adicionar marcadores ao mapa
-            featuredFestivals.forEach(function(festival) {
-                var markerColor = festival.type === "Psytrance" ? '#8e44ad' : '#e74c3c';
-                
-                var marker = L.marker([festival.lat, festival.lng]).addTo(map);
-                
-                marker.bindPopup(`
-                    <div style="min-width: 200px; padding: 10px;">
-                        <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">${festival.name}</h3>
-                        <p style="margin: 4px 0; color: #666; font-size: 14px;">📍 ${festival.country}</p>
-                        <p style="margin: 4px 0; color: #8e44ad; font-size: 13px; font-weight: 500;">🎵 ${festival.type}</p>
-                        <a href="destinos.html" style="display: inline-block; margin-top: 8px; padding: 6px 12px; background: #8e44ad; color: white; text-decoration: none; border-radius: 5px; font-size: 12px;">Ver Detalhes</a>
-                    </div>
-                `);
-            });
-        });
-    </script>
+  <!-- JS PRINCIPAL -->
+  <script src="assets/JS/trance-map.js"></script>
 </body>
 </html>
-
