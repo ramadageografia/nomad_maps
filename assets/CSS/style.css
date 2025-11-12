@@ -1,60 +1,78 @@
-/* ===== REGRAS GERAIS ===== */
-html, body {
+body {
   margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Poppins', sans-serif;
-  background-color: #000; /* fundo escuro */
+  font-family: "Poppins", sans-serif;
+  background-color: #0a0a0a;
   color: #fff;
+  text-align: center;
 }
 
-/* ===== BANNERS ===== */
-.banner-topo,
-.banner-rodape {
+.banner-topo, .banner-rodape {
   width: 100%;
-  text-align: center;
-  background-color: #000;
+  overflow: hidden;
 }
 
 .banner {
   width: 100%;
-  max-height: 180px;
-  object-fit: cover;
-}
-
-/* ===== MAPA ===== */
-main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  height: calc(100vh - 360px); /* altura total menos dois banners */
+  height: auto;
+  display: block;
 }
 
 #trance-map {
   width: 100%;
-  height: 100%;
-  z-index: 1;
+  height: 80vh;
+  border-top: 4px solid #222;
+  border-bottom: 4px solid #222;
 }
 
-/* ===== POPUP DE FLYER ===== */
-.flyer-popup {
-  position: absolute;
-  display: none;
-  pointer-events: none;
+#destaques {
+  background-color: #111;
+  padding: 50px 20px;
+}
+
+#destaques h2 {
+  font-size: 2rem;
+  color: #ffd700;
+  margin-bottom: 30px;
+}
+
+.festival-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.festival-card {
+  background: #1a1a1a;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+  width: 320px;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.festival-card:hover {
+  transform: scale(1.05);
+}
+
+.festival-card h3 {
+  color: #ffd700;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.flyer-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.flyer-gallery img, .banner-festival {
+  width: 100%;
   border-radius: 12px;
-  overflow: hidden;
-  border: 2px solid #fff;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-  z-index: 9999;
+  transition: transform 0.3s;
 }
 
-.flyer-popup img {
-  width: 280px;
-  height: auto;
-}
-
-/* ===== EFEITO FLUTUANTE AO PASSAR O MOUSE ===== */
-.marker-flyer:hover .flyer-popup {
-  display: block;
+.flyer-gallery img:hover, .banner-festival:hover {
+  transform: scale(1.05);
 }
