@@ -3,59 +3,360 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomad-Maps | Agência de Viagens Psytrance</title>
+    <title>NOMAD MAPS | Psytrance Travel Agency</title>
     
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
-    <!-- Seu CSS personalizado -->
-    <link rel="stylesheet" href="assets/CSS/style.css">
-    
     <style>
-        /* Estilos para os controles de categoria */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        :root {
+            --neon-pink: #ff00ff;
+            --acid-green: #00ff00;
+            --electric-blue: #00ffff;
+            --deep-purple: #1a0033;
+            --dark-space: #0a0a0a;
+            --neon-purple: #9d00ff;
+            --glow-yellow: #ffff00;
+        }
+
+        body {
+            background: var(--dark-space);
+            color: #fff;
+            overflow-x: hidden;
+            background-image: url('assets/Imagens/visual%20identity/image_fundo.jpeg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.85);
+            z-index: -1;
+        }
+
+        /* === HEADER UNDERGROUND === */
+        .header {
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--neon-pink);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            height: 50px;
+            filter: drop-shadow(0 0 10px var(--neon-pink));
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            filter: drop-shadow(0 0 20px var(--acid-green));
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--acid-green);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::before {
+            width: 80%;
+        }
+
+        .nav-links a:hover {
+            color: var(--acid-green);
+            text-shadow: 0 0 10px var(--acid-green);
+        }
+
+        /* === HERO SECTION UNDERGROUND === */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, 
+                rgba(26, 0, 51, 0.9) 0%, 
+                rgba(10, 10, 10, 0.8) 50%,
+                rgba(26, 0, 51, 0.9) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent, 
+                rgba(255, 0, 255, 0.1), 
+                transparent);
+            animation: shine 6s linear infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, var(--neon-pink), var(--acid-green), var(--electric-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            color: #ccc;
+            line-height: 1.6;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .cta-button {
+            background: transparent;
+            color: var(--acid-green);
+            padding: 1rem 2.5rem;
+            border: 2px solid var(--acid-green);
+            border-radius: 0;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* === MAPA SECTION UNDERGROUND === */
+        .map-section {
+            padding: 4rem 2rem;
+            background: rgba(10, 10, 10, 0.9);
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--electric-blue);
+            text-shadow: 0 0 15px var(--electric-blue);
+            font-weight: 300;
+        }
+
+        .map-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            height: 700px;
+        }
+
+        /* === FILTROS UNDERGROUND === */
+        .filters-sidebar {
+            background: rgba(26, 0, 51, 0.8);
+            border: 1px solid var(--neon-purple);
+            border-radius: 0;
+            padding: 1.5rem;
+            overflow-y: auto;
+            box-shadow: 0 0 20px rgba(157, 0, 255, 0.3);
+        }
+
+        .filter-group {
+            margin-bottom: 2rem;
+        }
+
+        .filter-title {
+            color: var(--acid-green);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--acid-green);
+            padding-bottom: 0.5rem;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .filter-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--neon-pink);
+            transform: translateX(5px);
+        }
+
+        /* === MAPA CONTAINER UNDERGROUND === */
+        .map-container {
+            background: rgba(26, 0, 51, 0.8);
+            border: 1px solid var(--electric-blue);
+            border-radius: 0;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        #trance-map {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* === CONTROLES DE CATEGORIA UNDERGROUND === */
         .category-controls {
             position: absolute;
             top: 20px;
             right: 20px;
             z-index: 1000;
-            background: rgba(15, 12, 41, 0.95);
-            padding: 20px;
-            border-radius: 15px;
-            border: 2px solid #ff00cc;
+            background: rgba(26, 0, 51, 0.95);
+            padding: 1.5rem;
+            border: 1px solid var(--neon-pink);
             backdrop-filter: blur(10px);
-            min-width: 200px;
+        }
+
+        .category-controls h4 {
+            color: var(--acid-green);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
         }
 
         .category-btn {
             display: block;
             width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid #2575fc;
-            border-radius: 8px;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background: transparent;
+            color: #fff;
+            border: 1px solid var(--electric-blue);
+            text-align: left;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .category-btn:hover,
         .category-btn.active {
-            background: #ff00cc;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 0, 204, 0.4);
+            background: rgba(0, 255, 255, 0.1);
+            border-color: var(--acid-green);
+            color: var(--acid-green);
+            transform: translateX(5px);
         }
 
-        /* Legenda do mapa */
+        /* === LEGENDA UNDERGROUND === */
         .map-legend {
             position: absolute;
             bottom: 20px;
             left: 20px;
-            background: rgba(15, 12, 41, 0.95);
-            padding: 20px;
-            border-radius: 15px;
-            border: 2px solid #00ff99;
+            background: rgba(26, 0, 51, 0.95);
+            padding: 1.5rem;
+            border: 1px solid var(--acid-green);
             z-index: 1000;
             max-width: 250px;
             backdrop-filter: blur(10px);
@@ -64,86 +365,203 @@
         .legend-item {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 0.8rem;
+            font-size: 0.8rem;
         }
 
         .legend-color {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            margin-right: 12px;
-            border: 2px solid white;
-            background-size: cover;
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+            border: 1px solid #fff;
         }
 
-        .custom-marker {
-            filter: drop-shadow(2px 2px 6px rgba(0,0,0,0.7));
+        /* === FOOTER UNDERGROUND === */
+        .footer {
+            background: rgba(26, 0, 51, 0.95);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--neon-purple);
         }
 
-        /* Garantir que o mapa tenha altura */
-        #trance-map {
-            height: 600px;
+        .footer p {
+            margin-bottom: 0.5rem;
+            color: #ccc;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .footer strong {
+            color: var(--electric-blue);
+            text-shadow: 0 0 10px var(--electric-blue);
+        }
+
+        /* === POPUP CUSTOMIZADO === */
+        .festival-popup {
+            background: var(--dark-space);
+            color: #fff;
+            border: 1px solid var(--neon-pink);
+            padding: 0;
+            max-width: 300px;
+        }
+
+        .popup-flyer {
             width: 100%;
-            border-radius: 15px;
+            height: 150px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--neon-pink);
+        }
+
+        .popup-content {
+            padding: 1rem;
+        }
+
+        .popup-content h3 {
+            color: var(--acid-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .popup-content p {
+            margin-bottom: 0.3rem;
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+
+        /* === RESPONSIVO === */
+        @media (max-width: 968px) {
+            .map-layout {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .filters-sidebar {
+                order: 2;
+                height: 300px;
+            }
+            
+            .map-container {
+                height: 500px;
+                order: 1;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- ===== HEADER COM BANNER NOMAD MAPS ===== -->
+    <!-- === HEADER UNDERGROUND === -->
     <header class="header">
         <nav class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="assets/Imagens/flyers/banner-nomad-maps.jpg" alt="Nomad-Maps" class="logo-img">
-                <span class="logo-text">Nomad-Maps</span>
+            <a href="index.html">
+                <img src="assets/Imagens/visual%20identity/banner-nomad-maps.jpg" alt="NOMAD MAPS" class="logo">
             </a>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="destinos.html" class="active">Mapa de Festivais</a></li>
-                <li><a href="pacotes.html">Pacotes</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
-                <li><a href="contato.html">Contato</a></li>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="mapa.html" class="active">FESTIVAIS</a></li>
+                <li><a href="pacotes.html">PACOTES</a></li>
+                <li><a href="sobre.html">SOBRE</a></li>
+                <li><a href="contato.html">CONTATO</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- ===== HERO SECTION ===== -->
+    <!-- === HERO UNDERGROUND === -->
     <section class="hero">
         <div class="hero-content">
-            <h1>🌍 Sua Jornada Psytrance Começa Aqui</h1>
-            <p>Agência de viagens especializada em conectar você aos melhores festivais de música eletrônica ao redor do mundo. Experiências únicas, pacotes completos e aventuras inesquecíveis!</p>
-            <a href="#mapa" class="cta-button">Explorar Festivais do Mundo</a>
+            <h1>NOMAD MAPS</h1>
+            <p>PSYTRANCE TRAVEL AGENCY<br>Conectando almas nômades aos festivais underground do planeta</p>
+            <a href="#mapa" class="cta-button">EXPLORAR FESTIVAIS</a>
         </div>
     </section>
 
-    <!-- ===== MAPA SECTION ===== -->
+    <!-- === MAPA UNDERGROUND === -->
     <section class="map-section" id="mapa">
         <div class="section-container">
-            <h2 class="section-title">🗺️ Mapa Global de Festivais Psytrance</h2>
+            <h2 class="section-title">MAPA GLOBAL PSYTRANCE</h2>
             
             <div class="map-layout">
-                <!-- Mapa com controles -->
-                <div class="map-view">
+                <!-- Filtros -->
+                <div class="filters-sidebar">
+                    <div class="filter-group">
+                        <h3 class="filter-title">Subvertentes</h3>
+                        <div class="filter-option">
+                            <input type="checkbox" id="filter-psy" checked>
+                            <label for="filter-psy">Psytrance</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="filter-progressive" checked>
+                            <label for="filter-progressive">Progressive</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="filter-darkpsy" checked>
+                            <label for="filter-darkpsy">Darkpsy</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="filter-goa" checked>
+                            <label for="filter-goa">Goa</label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3 class="filter-title">Continentes</h3>
+                        <div class="filter-option">
+                            <input type="checkbox" id="filter-europa" checked>
+                            <label for="filter-europa">Europa</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="filter-america" checked>
+                            <label for="filter-america">Américas</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="filter-asia" checked>
+                            <label for="filter-asia">Ásia</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3 class="filter-title">Status</h3>
+                        <div class="filter-option">
+                            <input type="checkbox" id="filter-ativo" checked>
+                            <label for="filter-ativo">Ativos</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="filter-inativo">
+                            <label for="filter-inativo">Inativos</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mapa -->
+                <div class="map-container">
                     <div id="trance-map"></div>
                     
                     <!-- Controles de Categoria -->
                     <div class="category-controls">
-                        <h4 style="color: #00ff99; margin-bottom: 15px; text-align: center;">🎵 Categorizar por:</h4>
-                        <button class="category-btn active" data-category="subgenero">🎵 Subgênero</button>
-                        <button class="category-btn" data-category="pais">🇧🇷 País</button>
-                        <button class="category-btn" data-category="continente">🌍 Continente</button>
-                        <button class="category-btn" data-category="nome">🏷️ Nome</button>
+                        <h4>VISUALIZAR POR</h4>
+                        <button class="category-btn active" data-category="nome">NOME</button>
+                        <button class="category-btn" data-category="pais">PAÍS</button>
+                        <button class="category-btn" data-category="continente">CONTINENTE</button>
+                        <button class="category-btn" data-category="subgenero">SUBVERTENTE</button>
                     </div>
                     
                     <!-- Legenda -->
                     <div class="map-legend" id="mapLegend">
-                        <h4 style="color: #00ff99; margin-bottom: 15px;">Legenda</h4>
+                        <h4 style="color: var(--acid-green); margin-bottom: 1rem;">LEGENDA</h4>
                         <div class="legend-item">
-                            <div class="legend-color" style="background: #ff00cc;"></div>
-                            <span>Festivais Ativos</span>
+                            <div class="legend-color" style="background: var(--neon-pink);"></div>
+                            <span>Festival Ativo</span>
                         </div>
                         <div class="legend-item">
-                            <div class="legend-color" style="background: #666666;"></div>
-                            <span>Festivais Inativos</span>
+                            <div class="legend-color" style="background: #666;"></div>
+                            <span>Festival Inativo</span>
                         </div>
                     </div>
                 </div>
@@ -151,49 +569,33 @@
         </div>
     </section>
 
-    <!-- ===== SERVIÇOS ===== -->
-    <section class="services-section">
-        <div class="section-container">
-            <h2 class="section-title">✨ Serviços da Nomad-Maps</h2>
-            <div class="services">
-                <div class="service-card">
-                    <div class="service-icon">✈️</div>
-                    <h3>Pacotes Completos</h3>
-                    <p>Passagem aérea, hospedagem premium, ingressos VIP e transfers. Tudo organizado para você focar apenas na experiência!</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🎫</div>
-                    <h3>Ingressos Antecipados</h3>
-                    <p>Acesso a lotes promocionais e ingressos com preços especiais antes do lançamento oficial.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🏕️</div>
-                    <h3>Acampamento Premium</h3>
-                    <p>Estrutura completa no festival: tenda equipada, banheiro privativo, café da manhã e área VIP.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">👨‍✈️</div>
-                    <h3>Guia Nomad</h3>
-                    <p>Guia local experiente para te acompanhar durante todo o festival e mostrar os melhores momentos.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== FOOTER ===== -->
+    <!-- === FOOTER UNDERGROUND === -->
     <footer class="footer">
-        <div class="footer-content">
-            <p>🌎 <strong>Nomad-Maps</strong> - Sua agência de viagens psytrance</p>
-            <p>Conectando almas nômades aos melhores festivais do planeta</p>
-            <p>✉️ contato@nomad-maps.com | 📱 +55 (11) 99999-9999</p>
-        </div>
+        <p><strong>NOMAD MAPS</strong> - PSYTRANCE TRAVEL AGENCY</p>
+        <p>conectando almas nômades desde 2024</p>
+        <p>🌍 🎵 ✨</p>
     </footer>
 
-    <!-- ===== SCRIPTS ===== -->
+    <!-- === SCRIPTS === -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="assets/JS/trance-map.js"></script>
     
     <script>
+        // Mapeamento correto dos ícones
+        const festivalIcons = {
+            // Ícones por nome do festival (usando os arquivos da pasta icones)
+            'Universo Paralello': 'assets/Imagens/icones/universo_paralello.png',
+            'Boom Festival': 'assets/Imagens/icones/boom_festival.png',
+            'Ozora Festival': 'assets/Imagens/icones/ozora.png',
+            'MoDem Festival': 'assets/Imagens/icones/modem.png',
+            'Master of Puppets': 'assets/Imagens/icones/master_of_puppets.png',
+            'VuuV Festival': 'assets/Imagens/icones/vuuv.png',
+            'Antaris Project': 'assets/Imagens/icones/antaris.png',
+            'Indian Spirit': 'assets/Imagens/icones/indian_spirit.png',
+            'Psy-Fi Festival': 'assets/Imagens/icones/psyfi.png',
+            'default': 'assets/Imagens/icones/psytrance.png'
+        };
+
         // Mapeamento de ícones por subgênero
         const subgenreIcons = {
             'Psytrance': 'assets/Imagens/icones/psytrance.png',
@@ -204,138 +606,112 @@
             'Zenonesque': 'assets/Imagens/icones/zenonesque.png',
             'Hi-Tech': 'assets/Imagens/icones/hitech.png',
             'Forest': 'assets/Imagens/icones/forest.png',
-            'Suomi': 'assets/Imagens/icones/suomi.png',
-            'default': 'assets/Imagens/icones/psytrance.png'
+            'Suomi': 'assets/Imagens/icones/suomi.png'
         };
 
-        // Variáveis globais
+        // Mapeamento de flyers
+        const festivalFlyers = {
+            'Universo Paralello': 'assets/Imagens/flyers/universo_paralello.jpg',
+            'Boom Festival': 'assets/Imagens/flyers/boom_festival.jpg',
+            'Ozora Festival': 'assets/Imagens/flyers/ozora.jpg',
+            'MoDem Festival': 'assets/Imagens/flyers/modem.jpg',
+            // Adicione mais mapeamentos conforme necessário
+        };
+
         let map;
         let currentMarkers = L.layerGroup();
-        let currentCategory = 'subgenero';
+        let currentCategory = 'nome';
 
-        // Inicializar mapa
         function initMap() {
-            map = L.map('trance-map').setView([-14.2350, -51.9253], 3);
+            map = L.map('trance-map').setView([20, 0], 2);
             
-            // Camada do mapa estilo escuro
             L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '©OpenStreetMap, ©CartoDB',
-                maxZoom: 20
+                attribution: '©OpenStreetMap, ©CartoDB'
             }).addTo(map);
             
-            // Adicionar grupo de marcadores
             currentMarkers.addTo(map);
-            
-            // Carregar festivais
             loadFestivals();
         }
 
-        // Carregar e exibir festivais
-        function loadFestivals() {
-            if (!window.festivalsData || window.festivalsData.length === 0) {
-                console.error('❌ Nenhum dado encontrado em festivalsData');
-                // Adicionar marcadores de teste
-                addTestMarkers();
-                return;
+        function getFestivalIcon(festival, category) {
+            let iconUrl;
+            
+            if (category === 'nome') {
+                iconUrl = festivalIcons[festival.nome] || festivalIcons['default'];
+            } else if (category === 'subgenero') {
+                const mainSubgenre = festival.subgeneros && festival.subgeneros[0] ? festival.subgeneros[0] : 'Psytrance';
+                iconUrl = subgenreIcons[mainSubgenre] || subgenreIcons['Psytrance'];
+            } else {
+                iconUrl = festivalIcons['default'];
             }
-            
-            console.log(`🎪 Carregando ${window.festivalsData.length} festivais...`);
-            updateFestivalsByCategory(currentCategory);
-        }
 
-        // Adicionar marcadores de teste
-        function addTestMarkers() {
-            const testLocations = [
-                { name: "São Paulo", lat: -23.5505, lng: -46.6333, country: "Brasil" },
-                { name: "Rio de Janeiro", lat: -22.9068, lng: -43.1729, country: "Brasil" },
-                { name: "Lisboa", lat: 38.7223, lng: -9.1393, country: "Portugal" },
-                { name: "Berlim", lat: 52.5200, lng: 13.4050, country: "Alemanha" }
-            ];
-            
-            testLocations.forEach(location => {
-                const marker = L.marker([location.lat, location.lng]).addTo(currentMarkers);
-                marker.bindPopup(`
-                    <div style="color: #0f0c29; min-width: 200px;">
-                        <h3 style="color: #6a11cb;">${location.name}</h3>
-                        <p><strong>📍 ${location.country}</strong></p>
-                        <p>🎵 Psytrance</p>
-                        <p style="color: green;">🟢 Ativo</p>
-                        <p><em>Marcador de teste - Verifique o trance-map.js</em></p>
-                    </div>
-                `);
+            return L.icon({
+                iconUrl: iconUrl,
+                iconSize: [32, 32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -32],
+                className: 'custom-marker'
             });
         }
 
-        // Atualizar marcadores por categoria
+        function getFestivalFlyer(festival) {
+            return festivalFlyers[festival.nome] || 'assets/Imagens/icones/psytrance.png';
+        }
+
+        function loadFestivals() {
+            if (!window.festivalsData) {
+                console.error('Dados não carregados');
+                return;
+            }
+
+            console.log('Festivais carregados:', window.festivalsData.length);
+            updateFestivalsByCategory(currentCategory);
+        }
+
         function updateFestivalsByCategory(category) {
             currentCategory = category;
             currentMarkers.clearLayers();
-            
+
             window.festivalsData.forEach(festival => {
                 if (festival.latitude && festival.longitude) {
                     const lat = parseFloat(festival.latitude);
                     const lng = parseFloat(festival.longitude);
                     
-                    // Criar marcador
-                    const marker = L.circleMarker([lat, lng], {
-                        radius: 8,
-                        fillColor: festival.status === 'Ativo' ? '#ff00cc' : '#666666',
-                        color: '#ffffff',
-                        weight: 2,
-                        fillOpacity: 0.8
-                    });
+                    const customIcon = getFestivalIcon(festival, category);
+                    const marker = L.marker([lat, lng], { icon: customIcon });
                     
-                    // Criar popup informativo
+                    const flyerUrl = getFestivalFlyer(festival);
                     const popupContent = `
-                        <div style="color: #0f0c29; min-width: 280px; font-family: Arial, sans-serif;">
-                            <h3 style="color: #6a11cb; margin-bottom: 10px; border-bottom: 2px solid #ff00cc; padding-bottom: 5px;">
-                                ${festival.nome}
-                            </h3>
-                            <p><strong>📍 ${festival.cidade}, ${festival.pais}</strong></p>
-                            <p><strong>🌍 ${festival.continente}</strong></p>
-                            <p><strong>📅 ${festival.mes_temporada || 'Data a confirmar'}</strong></p>
-                            <p><strong>🎵 ${festival.subgeneros ? festival.subgeneros.join(', ') : 'Psytrance'}</strong></p>
-                            <p style="color: ${festival.status === 'Ativo' ? 'green' : 'gray'};">
-                                <strong>${festival.status === 'Ativo' ? '🟢 Ativo' : '⚫ Inativo'}</strong>
-                            </p>
-                            ${festival.link ? `<p><a href="${festival.link}" target="_blank" style="color: #2575fc;">🔗 Site Oficial</a></p>` : ''}
+                        <div class="festival-popup">
+                            <img src="${flyerUrl}" class="popup-flyer" onerror="this.style.display='none'">
+                            <div class="popup-content">
+                                <h3>${festival.nome}</h3>
+                                <p><strong>📍 ${festival.cidade}, ${festival.pais}</strong></p>
+                                <p>🌍 ${festival.continente}</p>
+                                <p>📅 ${festival.mes_temporada || 'Data a confirmar'}</p>
+                                <p>🎵 ${festival.subgeneros ? festival.subgeneros.join(', ') : 'Psytrance'}</p>
+                                <p style="color: ${festival.status === 'Ativo' ? 'var(--acid-green)' : '#666'}">
+                                    ${festival.status === 'Ativo' ? '🟢 ATIVO' : '⚫ INATIVO'}
+                                </p>
+                                ${festival.link ? `<p><a href="${festival.link}" target="_blank" style="color: var(--electric-blue);">🔗 Site Oficial</a></p>` : ''}
+                            </div>
                         </div>
                     `;
-                    
+
                     marker.bindPopup(popupContent);
-                    
-                    // Efeito hover
-                    marker.on('mouseover', function() {
-                        this.setStyle({
-                            fillColor: '#00ff99',
-                            radius: 10
-                        });
-                    });
-                    
-                    marker.on('mouseout', function() {
-                        this.setStyle({
-                            fillColor: festival.status === 'Ativo' ? '#ff00cc' : '#666666',
-                            radius: 8
-                        });
-                    });
-                    
-                    // Adicionar ao grupo
                     marker.addTo(currentMarkers);
                 }
             });
         }
 
-        // Inicializar quando a página carregar
         document.addEventListener('DOMContentLoaded', function() {
             initMap();
             
-            // Event listeners para os botões de categoria
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const category = this.getAttribute('data-category');
                     updateFestivalsByCategory(category);
                     
-                    // Atualizar botão ativo
                     document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                 });
