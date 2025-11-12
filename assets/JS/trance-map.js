@@ -1,137 +1,85 @@
-// assets/JS/trance-map.js
-
-const FESTIVALS_DATA = [...]; // (mantenha seus dados aqui, exatamente como estão)
-
-class TranceMap {
-    constructor() {
-        this.map = null;
-        this.markers = [];
-        this.markerCluster = null;
-        this.currentFestivals = [];
-        this.flyerPopup = null; // elemento do flyer flutuante
-
-        this.filters = {
-            continente: 'all',
-            status: 'all',
-            search: ''
-        };
-
-        this.init();
-    }
-
-    init() {
-        this.currentFestivals = [...FESTIVALS_DATA];
-        this.initMap();
-        this.renderFestivalsList();
-        this.updateStats();
-        this.setupEventListeners();
-        this.createFlyerPopup();
-    }
-
-    createFlyerPopup() {
-        // Cria o elemento que mostrará o flyer flutuante
-        this.flyerPopup = document.createElement('div');
-        this.flyerPopup.id = 'flyer-popup';
-        this.flyerPopup.style.position = 'absolute';
-        this.flyerPopup.style.display = 'none';
-        this.flyerPopup.style.pointerEvents = 'none';
-        this.flyerPopup.style.zIndex = 9999;
-        this.flyerPopup.style.borderRadius = '10px';
-        this.flyerPopup.style.overflow = 'hidden';
-        this.flyerPopup.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
-        this.flyerPopup.style.transition = 'opacity 0.2s ease';
-        document.body.appendChild(this.flyerPopup);
-    }
-
-    showFlyerPopup(e, festivalName) {
-        const flyerPath = `assets/Imagens/flyers/${festivalName}/flyer.jpg`;
-        this.flyerPopup.innerHTML = `<img src="${flyerPath}" style="width:250px; height:auto; display:block;">`;
-        this.flyerPopup.style.left = e.originalEvent.pageX + 15 + 'px';
-        this.flyerPopup.style.top = e.originalEvent.pageY - 20 + 'px';
-        this.flyerPopup.style.display = 'block';
-        this.flyerPopup.style.opacity = 1;
-    }
-
-    hideFlyerPopup() {
-        this.flyerPopup.style.display = 'none';
-        this.flyerPopup.style.opacity = 0;
-    }
-
-    initMap() {
-        this.map = L.map('trance-map').setView([20, 0], 2);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors | Nomad Maps',
-            maxZoom: 18
-        }).addTo(this.map);
-
-        this.markerCluster = L.markerClusterGroup({
-            chunkedLoading: true,
-            maxClusterRadius: 50,
-            spiderfyOnMaxZoom: true,
-            showCoverageOnHover: true,
-            zoomToBoundsOnClick: true
-        });
-
-        this.map.addLayer(this.markerCluster);
-        this.addMarkersToMap(this.currentFestivals);
-    }
-
-    addMarkersToMap(festivals) {
-        this.markerCluster.clearLayers();
-        this.markers = [];
-
-        festivals.forEach(festival => {
-            const marker = this.createMarker(festival);
-            this.markers.push(marker);
-            this.markerCluster.addLayer(marker);
-        });
-    }
-
-    createMarker(festival) {
-        const iconUrl = `assets/Imagens/icones/${festival.nome}/icone.png`;
-        const markerIcon = L.icon({
-            iconUrl: iconUrl,
-            iconSize: [38, 38],
-            iconAnchor: [19, 38],
-            popupAnchor: [0, -38],
-            className: 'festival-icon'
-        });
-
-        const marker = L.marker([festival.lat, festival.lng], { icon: markerIcon });
-
-        marker.bindPopup(this.createPopupContent(festival));
-
-        marker.on('mouseover', (e) => this.showFlyerPopup(e, festival.nome));
-        marker.on('mousemove', (e) => {
-            this.flyerPopup.style.left = e.originalEvent.pageX + 15 + 'px';
-            this.flyerPopup.style.top = e.originalEvent.pageY - 20 + 'px';
-        });
-        marker.on('mouseout', () => this.hideFlyerPopup());
-
-        marker.on('click', () => this.highlightFestivalInList(festival.nome));
-
-        return marker;
-    }
-
-    createPopupContent(festival) {
-        return `
-            <div class="festival-popup">
-                <h3>${festival.nome}</h3>
-                <div class="location">📍 ${festival.pais}, ${festival.continente}</div>
-                <div class="genre">🎵 ${festival.vertente}</div>
-                <div class="subgenres">${festival.subvertentes}</div>
-                <span class="status ${festival.status === 'Ativo' ? 'status-active' : 'status-inactive'}">
-                    ${festival.status}
-                </span>
-            </div>
-        `;
-    }
-
-    // ... (mantém as funções renderFestivalsList, createFestivalCard, centerMapOnFestival, etc. como estão)
-
-}
-
-// Inicializar mapa
-document.addEventListener('DOMContentLoaded', () => {
-    window.tranceMap = new TranceMap();
+// Inicializa o mapa
+const map = L.map('trance-map', {
+  center: [20, 0],
+  zoom: 2,
+  worldCopyJump: true,
+  zoomControl: true
 });
+
+// Adiciona camada base (OpenStreetMap)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '&copy; OpenStreetMap'
+}).addTo(map);
+
+// Cluster para os marcadores
+const markers = L.markerClusterGroup();
+
+// Exemplo: estrutura JSON dos festivais (você pode importar externamente também)
+const festivals = [
+  {
+    "nome": "Boom Festival",
+    "pais": "Portugal",
+    "lat": 39.5665,
+    "lng": -7.8422,
+    "icone": "boom.png",
+    "flyer": "boom.jpg"
+  },
+  {
+    "nome": "Ozora Festival",
+    "pais": "Hungria",
+    "lat": 46.900,
+    "lng": 18.700,
+    "icone": "ozora.png",
+    "flyer": "ozora.jpg"
+  },
+  {
+    "nome": "Hadra Trance Festival",
+    "pais": "França",
+    "lat": 45.1885,
+    "lng": 5.7245,
+    "icone": "hadra.png",
+    "flyer": "hadra.jpg"
+  }
+  // ... adicione todos os outros festivais aqui ou importe de JSON
+];
+
+// Cria o elemento flutuante para o flyer
+const flyerPopup = document.createElement('div');
+flyerPopup.classList.add('flyer-popup');
+const flyerImg = document.createElement('img');
+flyerPopup.appendChild(flyerImg);
+document.body.appendChild(flyerPopup);
+
+// Função para criar marcador com ícone e flyer flutuante
+festivals.forEach(festival => {
+  const iconePersonalizado = L.icon({
+    iconUrl: `assets/Imagens/icones/${festival.nome.toLowerCase().replace(/ /g, '-')}/${festival.icone}`,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40]
+  });
+
+  const marker = L.marker([festival.lat, festival.lng], { icon: iconePersonalizado });
+
+  marker.bindPopup(`<b>${festival.nome}</b><br>${festival.pais}`);
+
+  marker.on('mouseover', function (e) {
+    flyerImg.src = `assets/Imagens/flyers/${festival.nome.toLowerCase().replace(/ /g, '-')}/${festival.flyer}`;
+    flyerPopup.style.display = 'block';
+  });
+
+  marker.on('mousemove', function (e) {
+    flyerPopup.style.left = (e.originalEvent.pageX + 15) + 'px';
+    flyerPopup.style.top = (e.originalEvent.pageY - 10) + 'px';
+  });
+
+  marker.on('mouseout', function () {
+    flyerPopup.style.display = 'none';
+  });
+
+  markers.addLayer(marker);
+});
+
+// Adiciona todos os marcadores ao mapa
+map.addLayer(markers);
