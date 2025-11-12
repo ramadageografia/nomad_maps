@@ -4,21 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nomad Maps — Global Trance Festival Map</title>
-
+  
   <!-- Estilos -->
   <link rel="stylesheet" href="assets/CSS/style.css">
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css"
-  />
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css"
-  />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css"/>
 </head>
 <body>
 
@@ -29,7 +20,36 @@
 
   <!-- ===== CONTEÚDO PRINCIPAL ===== -->
   <main>
-    <div id="trance-map"></div>
+    <section id="map-section">
+      <div id="trance-map"></div>
+    </section>
+
+    <!-- ===== SEÇÃO DE FESTIVAIS EM DESTAQUE ===== -->
+    <section id="destaques">
+      <h2>🎶 Festivais em Destaque</h2>
+      <div class="festival-grid">
+        
+        <!-- UNIVERSO PARALELLO -->
+        <div class="festival-card">
+          <h3>Universo Paralello (Brasil)</h3>
+          <div class="flyer-gallery">
+            <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/flyers/Universo%20Paralello/flyer_up.jpg" alt="Flyer Universo Paralello 1">
+            <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/flyers/Universo%20Paralello/flyer_up2.jpg" alt="Flyer Universo Paralello 2">
+          </div>
+          <img class="banner-festival" src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/flyers/Universo%20Paralello/Banner_up.jpg" alt="Banner Universo Paralello">
+        </div>
+
+        <!-- OZORA FESTIVAL -->
+        <div class="festival-card">
+          <h3>Ozora Festival (Hungria)</h3>
+          <div class="flyer-gallery">
+            <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/flyers/Ozora/flyer_ozora.jpg" alt="Flyer Ozora Festival 1">
+            <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/flyers/Ozora/flyer_ozora2.jpg" alt="Flyer Ozora Festival 2">
+          </div>
+        </div>
+
+      </div>
+    </section>
   </main>
 
   <!-- ===== RODAPÉ COM BANNER ===== -->
