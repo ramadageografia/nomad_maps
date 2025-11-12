@@ -1,98 +1,346 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Nomad Maps — Experiências & Festivais</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomad-Maps | Agência de Viagens Psytrance</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Seu CSS personalizado -->
+    <link rel="stylesheet" href="assets/CSS/style.css">
+    
+    <style>
+        /* Estilos para os controles de categoria */
+        .category-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(15, 12, 41, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #ff00cc;
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+        }
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="assets/CSS/style.css" />
+        .category-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid #2575fc;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
 
-  <!-- Leaflet / MarkerCluster CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+        .category-btn:hover,
+        .category-btn.active {
+            background: #ff00cc;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 0, 204, 0.4);
+        }
+
+        /* Legenda do mapa */
+        .map-legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(15, 12, 41, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #00ff99;
+            z-index: 1000;
+            max-width: 250px;
+            backdrop-filter: blur(10px);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .legend-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 2px solid white;
+            background-size: cover;
+        }
+
+        .custom-marker {
+            filter: drop-shadow(2px 2px 6px rgba(0,0,0,0.7));
+        }
+
+        /* Garantir que o mapa tenha altura */
+        #trance-map {
+            height: 600px;
+            width: 100%;
+            border-radius: 15px;
+        }
+    </style>
 </head>
 <body>
-
-  <!-- HEADER: logo + banner + nav -->
-  <header class="site-header">
-    <div class="header-inner">
-      <img class="logo" src="assets/Imagens/logo_circular.png" alt="Nomad Maps Logo">
-      <div class="brand-and-nav">
-        <img class="banner-top" src="assets/Imagens/banner-nomad-maps.jpg" alt="Nomad Maps">
-        <nav class="main-nav">
-          <a href="#" class="nav-link">Início</a>
-          <a href="#destaques" class="nav-link">Festivais</a>
-          <a href="#experiencias" class="nav-link">Experiências</a>
-          <a href="#contato" class="nav-link">Contato</a>
+    <!-- ===== HEADER COM BANNER NOMAD MAPS ===== -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/Imagens/flyers/banner-nomad-maps.jpg" alt="Nomad-Maps" class="logo-img">
+                <span class="logo-text">Nomad-Maps</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="destinos.html" class="active">Mapa de Festivais</a></li>
+                <li><a href="pacotes.html">Pacotes</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
         </nav>
-      </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- HERO / CHAMADA -->
-  <section class="hero">
-    <div class="hero-inner">
-      <h1>Nomad Maps — Viagens & Festivais</h1>
-      <p class="subtitle">Descubra festivais, experiências e roteiros místicos ao redor do mundo. Turismo autoral para buscadores.</p>
-      <a class="btn-primary" href="#destaques">Explorar Festivais</a>
-    </div>
-  </section>
-
-  <!-- CONTEÚDO -->
-  <main>
-
-    <!-- MAP (menor, mas em destaque) -->
-    <section id="map-block" class="map-block">
-      <div class="map-card">
-        <h2>Mapa Interativo</h2>
-        <p class="map-sub">Passe o cursor sobre os ícones para ver o flyer. Clique para centralizar.</p>
-        <div id="trance-map"></div>
-      </div>
-    </section>
-
-    <!-- FESTIVAIS EM DESTAQUE -->
-    <section id="destaques" class="destaques">
-      <div class="container">
-        <h2>Festivais em Destaque</h2>
-        <p class="lead">Selecionados a dedo — experiências que conectam natureza, som e comunidade.</p>
-        <div id="featured-grid" class="featured-grid">
-          <!-- cartões gerados dinamicamente pelo JS -->
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🌍 Sua Jornada Psytrance Começa Aqui</h1>
+            <p>Agência de viagens especializada em conectar você aos melhores festivais de música eletrônica ao redor do mundo. Experiências únicas, pacotes completos e aventuras inesquecíveis!</p>
+            <a href="#mapa" class="cta-button">Explorar Festivais do Mundo</a>
         </div>
-      </div>
     </section>
 
-    <!-- EXPERIÊNCIAS (placeholder) -->
-    <section id="experiencias" class="experiencias">
-      <div class="container">
-        <h2>Experiências</h2>
-        <p>Roteiros especiais, pacotes e passeios para acompanhar festivais (em desenvolvimento).</p>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- RODAPÉ -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <img class="banner-foot" src="assets/Imagens/banner-nomad-maps.jpg" alt="Banner Nomad Maps Rodapé">
-      <div class="footer-meta">
-        <p>© Nomad Maps — Agência de Viagens Alternativa</p>
-        <div class="socials">
-          <!-- se quiser depois, troque # por links reais -->
-          <a href="#" aria-label="Instagram">IG</a>
-          <a href="#" aria-label="Facebook">FB</a>
+    <!-- ===== MAPA SECTION ===== -->
+    <section class="map-section" id="mapa">
+        <div class="section-container">
+            <h2 class="section-title">🗺️ Mapa Global de Festivais Psytrance</h2>
+            
+            <div class="map-layout">
+                <!-- Mapa com controles -->
+                <div class="map-view">
+                    <div id="trance-map"></div>
+                    
+                    <!-- Controles de Categoria -->
+                    <div class="category-controls">
+                        <h4 style="color: #00ff99; margin-bottom: 15px; text-align: center;">🎵 Categorizar por:</h4>
+                        <button class="category-btn active" data-category="subgenero">🎵 Subgênero</button>
+                        <button class="category-btn" data-category="pais">🇧🇷 País</button>
+                        <button class="category-btn" data-category="continente">🌍 Continente</button>
+                        <button class="category-btn" data-category="nome">🏷️ Nome</button>
+                    </div>
+                    
+                    <!-- Legenda -->
+                    <div class="map-legend" id="mapLegend">
+                        <h4 style="color: #00ff99; margin-bottom: 15px;">Legenda</h4>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ff00cc;"></div>
+                            <span>Festivais Ativos</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #666666;"></div>
+                            <span>Festivais Inativos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </footer>
+    </section>
 
-  <!-- SCRIPTS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+    <!-- ===== SERVIÇOS ===== -->
+    <section class="services-section">
+        <div class="section-container">
+            <h2 class="section-title">✨ Serviços da Nomad-Maps</h2>
+            <div class="services">
+                <div class="service-card">
+                    <div class="service-icon">✈️</div>
+                    <h3>Pacotes Completos</h3>
+                    <p>Passagem aérea, hospedagem premium, ingressos VIP e transfers. Tudo organizado para você focar apenas na experiência!</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎫</div>
+                    <h3>Ingressos Antecipados</h3>
+                    <p>Acesso a lotes promocionais e ingressos com preços especiais antes do lançamento oficial.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏕️</div>
+                    <h3>Acampamento Premium</h3>
+                    <p>Estrutura completa no festival: tenda equipada, banheiro privativo, café da manhã e área VIP.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👨‍✈️</div>
+                    <h3>Guia Nomad</h3>
+                    <p>Guia local experiente para te acompanhar durante todo o festival e mostrar os melhores momentos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- seu script do mapa (veja abaixo: trance-map.js) -->
-  <script src="assets/JS/trance-map.js"></script>
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>🌎 <strong>Nomad-Maps</strong> - Sua agência de viagens psytrance</p>
+            <p>Conectando almas nômades aos melhores festivais do planeta</p>
+            <p>✉️ contato@nomad-maps.com | 📱 +55 (11) 99999-9999</p>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="assets/JS/trance-map.js"></script>
+    
+    <script>
+        // Mapeamento de ícones por subgênero
+        const subgenreIcons = {
+            'Psytrance': 'assets/Imagens/icones/psytrance.png',
+            'Progressive': 'assets/Imagens/icones/progressive.png', 
+            'Full On': 'assets/Imagens/icones/fullon.png',
+            'Darkpsy': 'assets/Imagens/icones/darkpsy.png',
+            'Goa': 'assets/Imagens/icones/goa.png',
+            'Zenonesque': 'assets/Imagens/icones/zenonesque.png',
+            'Hi-Tech': 'assets/Imagens/icones/hitech.png',
+            'Forest': 'assets/Imagens/icones/forest.png',
+            'Suomi': 'assets/Imagens/icones/suomi.png',
+            'default': 'assets/Imagens/icones/psytrance.png'
+        };
+
+        // Variáveis globais
+        let map;
+        let currentMarkers = L.layerGroup();
+        let currentCategory = 'subgenero';
+
+        // Inicializar mapa
+        function initMap() {
+            map = L.map('trance-map').setView([-14.2350, -51.9253], 3);
+            
+            // Camada do mapa estilo escuro
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '©OpenStreetMap, ©CartoDB',
+                maxZoom: 20
+            }).addTo(map);
+            
+            // Adicionar grupo de marcadores
+            currentMarkers.addTo(map);
+            
+            // Carregar festivais
+            loadFestivals();
+        }
+
+        // Carregar e exibir festivais
+        function loadFestivals() {
+            if (!window.festivalsData || window.festivalsData.length === 0) {
+                console.error('❌ Nenhum dado encontrado em festivalsData');
+                // Adicionar marcadores de teste
+                addTestMarkers();
+                return;
+            }
+            
+            console.log(`🎪 Carregando ${window.festivalsData.length} festivais...`);
+            updateFestivalsByCategory(currentCategory);
+        }
+
+        // Adicionar marcadores de teste
+        function addTestMarkers() {
+            const testLocations = [
+                { name: "São Paulo", lat: -23.5505, lng: -46.6333, country: "Brasil" },
+                { name: "Rio de Janeiro", lat: -22.9068, lng: -43.1729, country: "Brasil" },
+                { name: "Lisboa", lat: 38.7223, lng: -9.1393, country: "Portugal" },
+                { name: "Berlim", lat: 52.5200, lng: 13.4050, country: "Alemanha" }
+            ];
+            
+            testLocations.forEach(location => {
+                const marker = L.marker([location.lat, location.lng]).addTo(currentMarkers);
+                marker.bindPopup(`
+                    <div style="color: #0f0c29; min-width: 200px;">
+                        <h3 style="color: #6a11cb;">${location.name}</h3>
+                        <p><strong>📍 ${location.country}</strong></p>
+                        <p>🎵 Psytrance</p>
+                        <p style="color: green;">🟢 Ativo</p>
+                        <p><em>Marcador de teste - Verifique o trance-map.js</em></p>
+                    </div>
+                `);
+            });
+        }
+
+        // Atualizar marcadores por categoria
+        function updateFestivalsByCategory(category) {
+            currentCategory = category;
+            currentMarkers.clearLayers();
+            
+            window.festivalsData.forEach(festival => {
+                if (festival.latitude && festival.longitude) {
+                    const lat = parseFloat(festival.latitude);
+                    const lng = parseFloat(festival.longitude);
+                    
+                    // Criar marcador
+                    const marker = L.circleMarker([lat, lng], {
+                        radius: 8,
+                        fillColor: festival.status === 'Ativo' ? '#ff00cc' : '#666666',
+                        color: '#ffffff',
+                        weight: 2,
+                        fillOpacity: 0.8
+                    });
+                    
+                    // Criar popup informativo
+                    const popupContent = `
+                        <div style="color: #0f0c29; min-width: 280px; font-family: Arial, sans-serif;">
+                            <h3 style="color: #6a11cb; margin-bottom: 10px; border-bottom: 2px solid #ff00cc; padding-bottom: 5px;">
+                                ${festival.nome}
+                            </h3>
+                            <p><strong>📍 ${festival.cidade}, ${festival.pais}</strong></p>
+                            <p><strong>🌍 ${festival.continente}</strong></p>
+                            <p><strong>📅 ${festival.mes_temporada || 'Data a confirmar'}</strong></p>
+                            <p><strong>🎵 ${festival.subgeneros ? festival.subgeneros.join(', ') : 'Psytrance'}</strong></p>
+                            <p style="color: ${festival.status === 'Ativo' ? 'green' : 'gray'};">
+                                <strong>${festival.status === 'Ativo' ? '🟢 Ativo' : '⚫ Inativo'}</strong>
+                            </p>
+                            ${festival.link ? `<p><a href="${festival.link}" target="_blank" style="color: #2575fc;">🔗 Site Oficial</a></p>` : ''}
+                        </div>
+                    `;
+                    
+                    marker.bindPopup(popupContent);
+                    
+                    // Efeito hover
+                    marker.on('mouseover', function() {
+                        this.setStyle({
+                            fillColor: '#00ff99',
+                            radius: 10
+                        });
+                    });
+                    
+                    marker.on('mouseout', function() {
+                        this.setStyle({
+                            fillColor: festival.status === 'Ativo' ? '#ff00cc' : '#666666',
+                            radius: 8
+                        });
+                    });
+                    
+                    // Adicionar ao grupo
+                    marker.addTo(currentMarkers);
+                }
+            });
+        }
+
+        // Inicializar quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+            
+            // Event listeners para os botões de categoria
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    updateFestivalsByCategory(category);
+                    
+                    // Atualizar botão ativo
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
