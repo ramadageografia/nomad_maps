@@ -7,12 +7,37 @@
     <link rel="stylesheet" href="assets/CSS/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         body {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/Imagens/image_fundo.jpeg');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
+        }
+        
+        /* Estilos do mapa na home */
+        .home-map-section {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+        
+        .home-map-container {
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 2rem;
+        }
+        
+        #home-map {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .map-cta {
+            text-align: center;
+            margin-top: 2rem;
         }
     </style>
 </head>
@@ -51,7 +76,7 @@
                 <h2>Viva a experiência dos maiores festivais de trance do mundo</h2>
                 <p>Pacotes completos com hospedagem, ingressos e traslados para os principais festivais de psytrance globais. Sua aventura musical com comodidade e segurança.</p>
                 <div class="hero-buttons">
-                    <a href="destinos.html" class="btn btn-primary">
+                    <a href="#mapa-home" class="btn btn-primary">
                         <i class="fas fa-map-marked-alt"></i> Explorar Mapa
                     </a>
                     <a href="pacotes.html" class="btn btn-secondary">
@@ -93,6 +118,24 @@
         </div>
     </section>
 
+    <!-- Mapa na Home -->
+    <section class="home-map-section" id="mapa-home">
+        <div class="container">
+            <h2 class="section-title">Explore o Mapa de Festivais</h2>
+            <p class="section-subtitle">Descubra os principais festivais de trance ao redor do mundo</p>
+            
+            <div class="home-map-container">
+                <div id="home-map"></div>
+            </div>
+            
+            <div class="map-cta">
+                <a href="destinos.html" class="btn btn-primary btn-large">
+                    <i class="fas fa-expand"></i> Ver Mapa Completo
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Festivais em Destaque -->
     <section class="featured-festivals">
         <div class="container">
@@ -104,7 +147,7 @@
                 <div class="festival-card">
                     <div class="festival-image">
                         <img src="assets/Imagens/flyers/Universo%20Paralello/Banner_up.jpg" alt="Universo Paralello">
-                        <div class festival-overlay>
+                        <div class="festival-overlay">
                             <span class="festival-location">🇧🇷 Brasil</span>
                         </div>
                     </div>
@@ -269,6 +312,76 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="assets/JS/script.js"></script>
+    <script>
+        // Mapa simples para a home
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar mapa
+            var map = L.map('home-map').setView([20, 0], 2);
+            
+            // Adicionar tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors | Nomad Maps',
+                maxZoom: 18
+            }).addTo(map);
+            
+            // Festivais principais para mostrar na home
+            var featuredFestivals = [
+                {
+                    name: "Universo Paralello",
+                    country: "Brasil",
+                    lat: -13.512251,
+                    lng: -38.92635,
+                    type: "Psytrance"
+                },
+                {
+                    name: "Ozora Festival", 
+                    country: "Hungria",
+                    lat: 46.779312,
+                    lng: 18.410091,
+                    type: "Psytrance"
+                },
+                {
+                    name: "Boom Festival",
+                    country: "Portugal", 
+                    lat: 39.784492,
+                    lng: -7.45194,
+                    type: "Psytrance"
+                },
+                {
+                    name: "Mo:dem Festival",
+                    country: "Croácia",
+                    lat: 45.216951, 
+                    lng: 15.471648,
+                    type: "Darkpsy"
+                },
+                {
+                    name: "Shankra Festival",
+                    country: "Suíça",
+                    lat: 46.3439,
+                    lng: 9.1011,
+                    type: "Psytrance"
+                }
+            ];
+            
+            // Adicionar marcadores ao mapa
+            featuredFestivals.forEach(function(festival) {
+                var markerColor = festival.type === "Psytrance" ? '#8e44ad' : '#e74c3c';
+                
+                var marker = L.marker([festival.lat, festival.lng]).addTo(map);
+                
+                marker.bindPopup(`
+                    <div style="min-width: 200px; padding: 10px;">
+                        <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">${festival.name}</h3>
+                        <p style="margin: 4px 0; color: #666; font-size: 14px;">📍 ${festival.country}</p>
+                        <p style="margin: 4px 0; color: #8e44ad; font-size: 13px; font-weight: 500;">🎵 ${festival.type}</p>
+                        <a href="destinos.html" style="display: inline-block; margin-top: 8px; padding: 6px 12px; background: #8e44ad; color: white; text-decoration: none; border-radius: 5px; font-size: 12px;">Ver Detalhes</a>
+                    </div>
+                `);
+            });
+        });
+    </script>
 </body>
 </html>
