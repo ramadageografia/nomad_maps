@@ -1,170 +1,66 @@
-/* ==============================
-   NOMAD MAPS — ESTILO PRINCIPAL
-   ============================== */
-
+/* === Estilos Gerais === */
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  background-color: #0d0d0d;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #0a0a0a;
   color: #fff;
-}
-
-/* ===== CABEÇALHO ===== */
-header {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  background: #111;
-  padding: 15px 30px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  flex-wrap: wrap;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-header img.logo {
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  margin-right: 20px;
-}
-
-header img.banner {
-  height: auto;
-  width: 70%;
-  max-width: 900px;
-  border-radius: 12px;
-  object-fit: cover;
-}
-
-/* ===== MAPA ===== */
-#trance-map {
+/* === Banners === */
+.banner {
   width: 100%;
-  height: 80vh;
-  margin: 0;
+  height: auto;
+  max-height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.banner-topo,
+.banner-rodape {
+  width: 100%;
+  text-align: center;
+  background-color: #000;
+  border-top: 2px solid #222;
+  border-bottom: 2px solid #222;
+}
+
+/* === Mapa === */
+#trance-map {
+  flex: 1;
+  width: 100%;
+  height: 85vh;
   z-index: 1;
 }
 
-/* ===== POPUPS ===== */
-.leaflet-popup-content-wrapper {
-  background: #111;
-  color: #fff;
-  border-radius: 10px;
-  font-size: 14px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
-}
-
-.festival-popup h3 {
-  margin: 0;
-  color: #00ffe0;
-  font-size: 16px;
-}
-
-.festival-popup .status-active {
-  color: #00ff99;
-}
-
-.festival-popup .status-inactive {
-  color: #ff4444;
-}
-
-/* ===== FLYER FLUTUANTE ===== */
+/* === Flyer flutuante === */
 #flyer-popup {
   position: absolute;
   display: none;
   pointer-events: none;
-  z-index: 9999;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: opacity 0.2s ease;
-}
-
-#flyer-popup img {
-  border-radius: 10px;
-  max-width: 260px;
-  height: auto;
-  display: block;
-}
-
-/* ===== LISTA DE FESTIVAIS ===== */
-#sidebar {
-  padding: 15px;
-  background: #111;
-  height: 15vh;
-  overflow-x: auto;
-  white-space: nowrap;
-  border-top: 1px solid #222;
-}
-
-#festivals-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.festival-card {
-  display: inline-block;
-  background: #222;
-  border-radius: 10px;
-  padding: 8px 12px;
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
-  font-size: 14px;
-}
-
-.festival-card:hover {
-  transform: scale(1.05);
-  background: #333;
-}
-
-.festival-card.active {
-  border: 2px solid #00ffe0;
-}
-
-/* ===== RODAPÉ ===== */
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #111;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 0;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.3s ease;
   z-index: 1000;
 }
 
-footer img.banner {
-  height: 70px;
-  max-width: 90%;
-  border-radius: 10px;
-  object-fit: contain;
+#flyer-popup img {
+  width: 280px;
+  height: auto;
+  border-radius: 12px;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
 }
 
-/* ===== RESPONSIVIDADE ===== */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  header img.logo {
-    height: 60px;
-    width: 60px;
-    margin-bottom: 10px;
-  }
-
-  header img.banner {
-    height: 60px;
-  }
-
-  #trance-map {
-    height: 70vh;
-  }
-
-  footer img.banner {
-    height: 50px;
-  }
+/* === Popup Leaflet === */
+.leaflet-popup-content {
+  font-size: 14px;
+  text-align: center;
+  color: #111;
+}
+.leaflet-popup-content h3 {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #111;
 }
