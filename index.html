@@ -1,539 +1,65 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomad Maps | Psytrance Travel Agency</title>
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <noscript>
+      <style>
+        #container {
+          display: none;
+        }
+      </style>
+    </noscript>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="preload" href="/_runtimes/sites-runtime.59514e8dbfa629cc14a5878f76a1003cf361b05c7ccfe51744c88fd4164223ec.js" as="script" crossorigin />
+    <link rel="preload" href="/_components/v2/a58809d3130728a4e55dca9e54fac5b6fc5914e9.js" as="script" crossorigin />
+    <link rel="preload" href="/_json/f9e61b8f-cd9f-4f18-b287-4debc7922cf0/_index.json" as="fetch" />
+        <style id="reset-css"> @layer figreset,figoverridable,reset,theme,base,figutils,components,utilities;@layer figreset{:root{--100dvw:100vw;--100dvh:100vh;--banner-height:48px;--banner-height-v2:40px;--full-height-with-banner:calc(100dvh - var(--banner-height));font-synthesis:none;text-align:left;button{text-align:left}}@supports (width:100dvw){:root{--100dvw:100dvw;--100dvh:100dvh}}}@media (max-width:600px){.banner-v2-container{left:0 !important;right:0 !important;margin:0 auto !important}}.wrapper-with-banner .min-h-screen{min-height:var(--full-height-with-banner)}.wrapper-with-banner .h-screen{height:var(--full-height-with-banner)}</style><style id="font-faces-0"></style><style id="body-background-color">body:has([data-breakpoint-id="node-0_7"]) { background-color: #FFF }</style><style id="ssr-css">#container .css-vh2lqg {width: var(--viewport-width-scaled); min-height: var(--viewport-height-scaled); height: 100%; top: 0px;}#container .css-tzn6qh {display: block; position: absolute;}#container .css-6gkcj1 {transform-origin: top left; --max-layout-width: 2048px; --min-layout-width: 320px; --max-font-size: 288px; --min-font-size: 6px; --viewport-width-scaled: calc(var(--100dvw) / var(--viewport-scale)); --viewport-height-scaled: calc(var(--100dvh) / var(--viewport-scale)); --content-width-scaled: calc(var(--content-width-unscaled) / var(--viewport-scale)); --content-margin-x-scaled: max(calc((var(--viewport-width) - var(--max-layout-width)) / var(--viewport-scale) / 2), 0px);}#container .css-myl2ny {position: relative; flex-shrink: 0; flex: 1 0 0; display: block;}#container .css-exq74d {min-width: 1px; min-height: 1px; width: 100%; height: 100dvh;}#container .css-j9f0op {width: 100%; height: 100%;}</style><script>window.__serverRenderedCSSClassNames = {"css-vh2lqg":"{\"width\":\"var(--viewport-width-scaled)\",\"minHeight\":\"var(--viewport-height-scaled)\",\"height\":\"100%\",\"top\":\"0px\"}","css-tzn6qh":"{\"display\":\"block\",\"position\":\"absolute\"}","css-6gkcj1":"{\"transformOrigin\":\"top left\",\"--max-layout-width\":\"2048px\",\"--min-layout-width\":\"320px\",\"--max-font-size\":\"288px\",\"--min-font-size\":\"6px\",\"--viewport-width-scaled\":\"calc(var(--100dvw) / var(--viewport-scale))\",\"--viewport-height-scaled\":\"calc(var(--100dvh) / var(--viewport-scale))\",\"--content-width-scaled\":\"calc(var(--content-width-unscaled) / var(--viewport-scale))\",\"--content-margin-x-scaled\":\"max(calc((var(--viewport-width) - var(--max-layout-width)) / var(--viewport-scale) / 2), 0px)\"}","css-myl2ny":"{\"position\":\"relative\",\"flexShrink\":0,\"flex\":\"1 0 0\",\"display\":\"block\"}","css-exq74d":"{\"minWidth\":1,\"minHeight\":1,\"width\":\"100%\",\"height\":\"100dvh\"}","css-j9f0op":"{\"width\":\"100%\",\"height\":\"100%\"}"}</script><meta id="meta-bkauwd" name="description" content="Created with Figma"><meta id="meta-yw3oin" name="robots" content="noindex"><title id="title-y2qwah">Nomad Maps - Psytrance Travel Agency</title>
+    <link rel="stylesheet" href="/_components/v2/a58809d3130728a4e55dca9e54fac5b6fc5914e9.css">
+  </head>
+  <body>
     
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-        }
+    <script data-template-id="country-code">window.__cf_country = "BR"</script>
+    <script type="module">
+      import {SitesRuntime} from '/_runtimes/sites-runtime.59514e8dbfa629cc14a5878f76a1003cf361b05c7ccfe51744c88fd4164223ec.js';
+      const sitesRuntime = new SitesRuntime({
+        container: document.getElementById('container'),
+        env: 'published',
+        bundleId: 'f9e61b8f-cd9f-4f18-b287-4debc7922cf0',
         
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        /* Header */
-        .top-bar {
-            background: var(--primary);
-            color: white;
-            padding: 8px 0;
-            font-size: 0.9rem;
-        }
-        
-        .navbar-brand img {
-            height: 50px;
-        }
-        
-        .nav-link {
-            color: var(--dark) !important;
-            font-weight: 500;
-            padding: 0.8rem 1rem !important;
-        }
-        
-        .nav-link:hover {
-            color: var(--secondary) !important;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), 
-                        url('assets/Imagens/visual%20identity/image_fundo.jpeg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 100px 0;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-        
-        /* Map Section */
-        .map-section {
-            padding: 80px 0;
-            background: var(--light);
-        }
-        
-        .map-container {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            height: 600px;
-            position: relative;
-        }
-        
-        #trance-map {
-            height: 100%;
-            width: 100%;
-            border-radius: 10px;
-        }
-        
-        .map-controls {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .map-legend {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
-        
-        /* Services */
-        .services {
-            padding: 80px 0;
-        }
-        
-        .service-card {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            height: 100%;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .service-icon {
-            font-size: 3rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-        
-        /* Footer */
-        .footer {
-            background: var(--dark);
-            color: white;
-            padding: 50px 0 20px;
-        }
-        
-        .footer h5 {
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-        
-        .social-links a {
-            color: white;
-            margin-right: 15px;
-            font-size: 1.2rem;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .map-controls, .map-legend {
-                position: relative;
-                margin-bottom: 15px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <i class="fas fa-map-marker-alt me-2"></i>Nomad Maps - Psytrance Travel Agency
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <i class="fas fa-envelope me-2"></i> contato@nomadmaps.com
-                    <i class="fas fa-phone ms-3 me-2"></i> +55 (11) 99999-9999
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="assets/Imagens/visual%20identity/banner-nomad-maps.jpg" alt="Nomad Maps">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Mapa de Festivais</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pacotes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sobre</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contato</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>NOMAD MAPS</h1>
-            <p class="lead">Psytrance Travel Agency - Conectando você aos melhores festivais do mundo</p>
-            <a href="#mapa" class="btn btn-primary btn-lg">Explorar Festivais</a>
-        </div>
-    </section>
-
-    <!-- Map Section -->
-    <section class="map-section" id="mapa">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-12 text-center">
-                    <h2 class="display-5 fw-bold">Mapa Global de Festivais</h2>
-                    <p class="lead">Explore os principais festivais psytrance ao redor do mundo</p>
-                </div>
-            </div>
-            
-            <div class="map-container">
-                <div id="trance-map"></div>
-                
-                <!-- Map Controls -->
-                <div class="map-controls">
-                    <h6 class="mb-3">Visualizar por:</h6>
-                    <div class="btn-group-vertical">
-                        <button class="btn btn-sm btn-outline-primary active" data-category="nome">Nome</button>
-                        <button class="btn btn-sm btn-outline-primary" data-category="pais">País</button>
-                        <button class="btn btn-sm btn-outline-primary" data-category="subgenero">Subgênero</button>
-                    </div>
-                </div>
-                
-                <!-- Map Legend -->
-                <div class="map-legend">
-                    <h6 class="mb-3">Legenda</h6>
-                    <div class="legend-item d-flex align-items-center mb-2">
-                        <div class="legend-color bg-primary rounded-circle me-2" style="width: 15px; height: 15px;"></div>
-                        <small>Festival Ativo</small>
-                    </div>
-                    <div class="legend-item d-flex align-items-center">
-                        <div class="legend-color bg-secondary rounded-circle me-2" style="width: 15px; height: 15px;"></div>
-                        <small>Festival Inativo</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-12 text-center">
-                    <h2 class="display-5 fw-bold">Nossos Serviços</h2>
-                    <p class="lead">Tudo que você precisa para sua jornada psytrance</p>
-                </div>
-            </div>
-            
-            <div class="row g-4">
-                <div class="col-md-3">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-plane"></i>
-                        </div>
-                        <h5>Pacotes Completos</h5>
-                        <p>Passagem, hospedagem, ingressos e transfers organizados</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-ticket-alt"></i>
-                        </div>
-                        <h5>Ingressos Antecipados</h5>
-                        <p>Acesso a lotes promocionais com preços especiais</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-campground"></i>
-                        </div>
-                        <h5>Acampamento Premium</h5>
-                        <p>Estrutura completa com todo conforto no festival</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-user-guide"></i>
-                        </div>
-                        <h5>Guia Nomad</h5>
-                        <p>Guia local experiente para acompanhar sua jornada</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <h5>Nomad Maps</h5>
-                    <p>Psytrance Travel Agency especializada em conectar você aos melhores festivais do mundo.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <h5>Links Rápidos</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-light text-decoration-none">Home</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Mapa de Festivais</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Pacotes</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Sobre</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h5>Contato</h5>
-                    <p>
-                        <i class="fas fa-envelope me-2"></i>contato@nomadmaps.com<br>
-                        <i class="fas fa-phone me-2"></i>+55 (11) 99999-9999<br>
-                        <i class="fas fa-map-marker-alt me-2"></i>São Paulo, Brasil
-                    </p>
-                </div>
-            </div>
-            <hr class="my-4">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <p class="mb-0">&copy; 2024 Nomad Maps. Todos os direitos reservados.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- Your Data -->
-    <script src="assets/JS/trance-map.js"></script>
-    
-    <script>
-        // Mapeamento correto dos ícones
-        const festivalIcons = {
-            'Universo Paralello': 'assets/Imagens/icones/universo_paralello.png',
-            'Boom Festival': 'assets/Imagens/icones/boom_festival.png',
-            'Ozora Festival': 'assets/Imagens/icones/ozora.png',
-            'MoDem Festival': 'assets/Imagens/icones/modem.png',
-            'Master of Puppets': 'assets/Imagens/icones/master_of_puppets.png',
-            'VuuV Festival': 'assets/Imagens/icones/vuuv.png',
-            'Antaris Project': 'assets/Imagens/icones/antaris.png',
-            'Indian Spirit': 'assets/Imagens/icones/indian_spirit.png',
-            'Psy-Fi Festival': 'assets/Imagens/icones/psyfi.png',
-            'default': 'assets/Imagens/icones/psytrance.png'
-        };
-
-        let map;
-        let currentMarkers = L.layerGroup();
-        let currentCategory = 'nome';
-
-        // Inicializar mapa
-        function initMap() {
-            map = L.map('trance-map').setView([20, 0], 2);
-            
-            // Camada do mapa
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
-            
-            currentMarkers.addTo(map);
-            loadFestivals();
-        }
-
-        // Carregar festivais
-        function loadFestivals() {
-            console.log('🔍 Carregando dados...');
-            console.log('Festivals Data:', window.festivalsData);
-
-            if (!window.festivalsData || window.festivalsData.length === 0) {
-                console.error('❌ Nenhum dado encontrado');
-                addTestFestivals();
-                return;
-            }
-
-            console.log(`🎪 Encontrados ${window.festivalsData.length} festivais`);
-            updateFestivalsByCategory(currentCategory);
-        }
-
-        // Atualizar marcadores por categoria
-        function updateFestivalsByCategory(category) {
-            currentCategory = category;
-            currentMarkers.clearLayers();
-
-            let count = 0;
-            
-            window.festivalsData.forEach(festival => {
-                if (festival.latitude && festival.longitude) {
-                    const lat = parseFloat(festival.latitude);
-                    const lng = parseFloat(festival.longitude);
-                    
-                    // Escolher ícone baseado na categoria
-                    let iconUrl;
-                    if (category === 'nome') {
-                        iconUrl = festivalIcons[festival.nome] || festivalIcons['default'];
-                    } else {
-                        iconUrl = festivalIcons['default'];
-                    }
-                    
-                    // Criar ícone personalizado
-                    const customIcon = L.icon({
-                        iconUrl: iconUrl,
-                        iconSize: [32, 32],
-                        iconAnchor: [16, 32],
-                        popupAnchor: [0, -32]
-                    });
-                    
-                    // Criar marcador
-                    const marker = L.marker([lat, lng], { icon: customIcon });
-                    
-                    // Criar popup
-                    const popupContent = `
-                        <div class="festival-popup" style="min-width: 250px;">
-                            <h5 class="fw-bold">${festival.nome}</h5>
-                            <p class="mb-1"><i class="fas fa-map-marker-alt"></i> ${festival.cidade}, ${festival.pais}</p>
-                            <p class="mb-1"><i class="fas fa-globe-americas"></i> ${festival.continente}</p>
-                            <p class="mb-1"><i class="fas fa-calendar"></i> ${festival.mes_temporada || 'Data a confirmar'}</p>
-                            <p class="mb-2"><i class="fas fa-music"></i> ${festival.subgeneros ? festival.subgeneros.join(', ') : 'Psytrance'}</p>
-                            <span class="badge ${festival.status === 'Ativo' ? 'bg-success' : 'bg-secondary'}">
-                                ${festival.status === 'Ativo' ? 'Ativo' : 'Inativo'}
-                            </span>
-                            ${festival.link ? `<p class="mt-2"><a href="${festival.link}" target="_blank" class="btn btn-sm btn-primary">Site Oficial</a></p>` : ''}
-                        </div>
-                    `;
-
-                    marker.bindPopup(popupContent);
-                    marker.addTo(currentMarkers);
-                    count++;
-                }
-            });
-
-            console.log(`📍 ${count} marcadores adicionados ao mapa`);
-        }
-
-        // Adicionar festivais de teste
-        function addTestFestivals() {
-            console.log('📍 Adicionando festivais de teste...');
-            
-            const testFestivals = [
-                {
-                    nome: "Universo Paralello",
-                    cidade: "Ituberá",
-                    pais: "Brasil",
-                    continente: "América do Sul",
-                    mes_temporada: "Dezembro/Julho",
-                    subgeneros: ["Psytrance", "Progressive"],
-                    status: "Ativo",
-                    latitude: -13.7232,
-                    longitude: -39.1561,
-                    link: "https://universoparalello.org"
-                },
-                {
-                    nome: "Boom Festival",
-                    cidade: "Idanha-a-Nova",
-                    pais: "Portugal",
-                    continente: "Europa",
-                    mes_temporada: "Julho",
-                    subgeneros: ["Psytrance", "Goa"],
-                    status: "Ativo", 
-                    latitude: 39.9334,
-                    longitude: -7.1665,
-                    link: "https://boomfestival.org"
-                },
-                {
-                    nome: "Ozora Festival",
-                    cidade: "Ozora",
-                    pais: "Hungria", 
-                    continente: "Europa",
-                    mes_temporada: "Agosto",
-                    subgeneros: ["Psytrance", "Progressive"],
-                    status: "Ativo",
-                    latitude: 46.8516,
-                    longitude: 18.3919,
-                    link: "https://ozorafestival.eu"
-                }
-            ];
-
-            window.festivalsData = testFestivals;
-            updateFestivalsByCategory(currentCategory);
-        }
-
-        // Inicializar quando a página carregar
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🗺️ Inicializando mapa...');
-            initMap();
-            
-            // Event listeners para botões de categoria
-            document.querySelectorAll('.map-controls .btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const category = this.getAttribute('data-category');
-                    updateFestivalsByCategory(category);
-                    
-                    // Atualizar botões ativos
-                    document.querySelectorAll('.map-controls .btn').forEach(b => {
-                        b.classList.remove('active');
-                        b.classList.add('btn-outline-primary');
-                    });
-                    this.classList.add('active');
-                    this.classList.remove('btn-outline-primary');
-                });
-            });
-        });
+        loadComponentsOverNetwork: true,
+        assetsVersion: 'v11',
+        fontsVersion: 'v1',
+        videosVersion: 'v1',
+        codeComponentsVersion: 'v2',
+        wasServerRendered: true,
+        withBaseStyles: false,
+        reportingDomain: "https://www.figma.com",
+        bundleCreationDate: '2025-11-13 20:06:53 UTC',
+        isFigmake: true,
+      });
     </script>
-</body>
+    
+    <div id="container"><div class="tailwind css-myl2ny css-exq74d"></div></div>
+    
+
+     <noscript data-nosnippet>
+      <main style="height: 100vh; width: 100vw; background-color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+        <h1 style="font-size: 24px; padding: 8px; color: black">
+        This site requires JavaScript
+        </h1>
+        <p style="font-size: 16px; padding: 8px; color: #00000080">To view this website, enable JavaScript in your browser settings and reload the page.</p>
+        <form style="margin-top: 12px;" action="">
+          <button type="submit" style="font-size: 14px; color: black; border: 1px solid #0000001a; border-radius: 5px; width: 256px; height: 32px;">
+          Reload page
+          </button>
+        </form>
+      </main>
+    </noscript>
+  </body>
 </html>
