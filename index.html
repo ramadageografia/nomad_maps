@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nomad Maps - Psytrance Travel Agency</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        /* Reset e estilos básicos */
         * {
             margin: 0;
             padding: 0;
@@ -13,284 +13,1431 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            min-height: 100vh;
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f1a;
+            color: #ffffff;
+            height: 100vh;
+            overflow: hidden;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            height: 100vh;
         }
 
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
+        /* Sidebar */
+        .sidebar {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 2rem;
+            border-right: 1px solid #2d3748;
+            overflow-y: auto;
         }
 
         .logo {
-            font-size: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #2d3748;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
             font-weight: bold;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #ff6b6b, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .tagline {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        /* Conteúdo principal */
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .text-content h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .text-content p {
-            font-size: 1.1rem;
-            line-height: 1.6;
+            color: #a0aec0;
+            font-size: 0.9rem;
             margin-bottom: 2rem;
-            opacity: 0.9;
         }
 
-        /* Cards de destinos */
-        .destinations {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+        /* Filtros */
+        .filters {
+            margin-bottom: 2rem;
+        }
+
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+
+        .filter-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 0.75rem;
+            background: #2d3748;
+            border: 1px solid #4a5568;
+            border-radius: 8px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        /* Lista de festivais */
+        .festivals-list {
             margin-top: 2rem;
         }
 
-        .destination-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
+        .festival-card {
+            background: #2d3748;
+            border-radius: 12px;
             padding: 1.5rem;
-            text-align: center;
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .destination-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .destination-icon {
-            font-size: 2rem;
             margin-bottom: 1rem;
+            border-left: 4px solid #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .destination-name {
-            font-size: 1.2rem;
+        .festival-card:hover {
+            background: #4a5568;
+            transform: translateX(5px);
+        }
+
+        .festival-card.active {
+            background: #4a5568;
+            border-left-color: #ff6b6b;
+        }
+
+        .festival-name {
             font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #e2e8f0;
+        }
+
+        .festival-location {
+            color: #a0aec0;
+            font-size: 0.9rem;
             margin-bottom: 0.5rem;
         }
 
-        .destination-desc {
-            font-size: 0.9rem;
-            opacity: 0.8;
+        .festival-date {
+            color: #ff6b6b;
+            font-size: 0.8rem;
+            font-weight: 500;
         }
 
-        /* Botões */
-        .cta-buttons {
+        /* Mapa */
+        .map-container {
+            position: relative;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+        }
+
+        /* Overlay do mapa */
+        .map-overlay {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
+            background: rgba(26, 26, 46, 0.9);
+            padding: 1rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid #4a5568;
+        }
+
+        .search-box {
             display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
         }
 
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: #ff6b6b;
+        .search-input {
+            padding: 0.75rem;
+            background: #2d3748;
+            border: 1px solid #4a5568;
+            border-radius: 8px;
             color: white;
+            width: 250px;
         }
 
-        .btn-primary:hover {
-            background: #ff5252;
+        .search-btn {
+            padding: 0.75rem 1rem;
+            background: #667eea;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Info do festival selecionado */
+        .festival-info {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #4a5568;
+            max-width: 300px;
+        }
+
+        .info-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #e2e8f0;
+        }
+
+        .info-detail {
+            margin-bottom: 0.5rem;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        .book-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .book-btn:hover {
             transform: translateY(-2px);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: #667eea;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
         /* Responsivo */
-        @media (max-width: 768px) {
-            .main-content {
+        @media (max-width: 1024px) {
+            .container {
                 grid-template-columns: 1fr;
-                text-align: center;
             }
-            
-            .logo {
-                font-size: 2rem;
+            .sidebar {
+                display: none;
             }
-            
-            .text-content h1 {
-                font-size: 2rem;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 200px;
-            }
-        }
-
-        /* Efeitos visuais */
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header class="header">
-            <div class="logo floating">🌍 Nomad Maps</div>
-            <div class="tagline">Psytrance Travel Agency - Sua jornança começa aqui</div>
-        </header>
-
-        <main class="main-content">
-            <div class="text-content">
-                <h1>Descubra os melhores festivais de Psytrance ao redor do mundo</h1>
-                <p>Junte-se à comunidade de viajantes espirituais e explore destinos místicos onde a música e a natureza se encontram. De Goa às montanhas da Turquia, nós guiamos sua jornança.</p>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">🌍</div>
+                <div class="logo-text">Nomad Maps</div>
+            </div>
+            <div class="tagline">Psytrance Travel Agency - Encontre os melhores festivais pelo mundo</div>
+            
+            <div class="filters">
+                <div class="filter-group">
+                    <label class="filter-label">Tipo de Festival</label>
+                    <select class="filter-select" id="festival-type">
+                        <option value="all">Todos os tipos</option>
+                        <option value="goa">Goa Trance</option>
+                        <option value="progressive">Progressive</option>
+                        <option value="forest">Forest</option>
+                        <option value="dark">Dark Psy</option>
+                    </select>
+                </div>
                 
-                <div class="cta-buttons">
-                    <button class="btn btn-primary pulse">Explorar Destinos</button>
-                    <button class="btn btn-secondary">Agendar Consulta</button>
+                <div class="filter-group">
+                    <label class="filter-label">Continente</label>
+                    <select class="filter-select" id="continent">
+                        <option value="all">Todos os continentes</option>
+                        <option value="europe">Europa</option>
+                        <option value="asia">Ásia</option>
+                        <option value="south-america">América do Sul</option>
+                        <option value="north-america">América do Norte</option>
+                    </select>
                 </div>
             </div>
 
-            <div class="destinations">
-                <div class="destination-card">
-                    <div class="destination-icon">🇮🇳</div>
-                    <div class="destination-name">Goa, Índia</div>
-                    <div class="destination-desc">O berço do Psytrance</div>
+            <div class="festivals-list" id="festivals-list">
+                <!-- Festivais serão carregados via JavaScript -->
+            </div>
+        </div>
+
+        <!-- Mapa -->
+        <div class="map-container">
+            <div id="map"></div>
+            
+            <div class="map-overlay">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Buscar festival ou localização...">
+                    <button class="search-btn">🔍</button>
                 </div>
                 
-                <div class="destination-card">
-                    <div class="destination-icon">🇵🇹</div>
-                    <div class="destination-name">Boom Festival</div>
-                    <div class="destination-desc">Portugal - Experiência transformadora</div>
-                </div>
-                
-                <div class="destination-card">
-                    <div class="destination-icon">🇧🇷</div>
-                    <div class="destination-name">Universo Paralello</div>
-                    <div class="destination-desc">Bahia - Magia brasileira</div>
-                </div>
-                
-                <div class="destination-card">
-                    <div class="destination-icon">🇹🇷</div>
-                    <div class="destination-name">Mo:Dem</div>
-                    <div class="destination-desc">Croácia - Pura energia</div>
+                <div class="festival-info" id="festival-info" style="display: none;">
+                    <div class="info-title" id="info-title">Festival Name</div>
+                    <div class="info-detail" id="info-location">Location</div>
+                    <div class="info-detail" id="info-date">Date</div>
+                    <div class="info-detail" id="info-type">Type</div>
+                    <button class="book-btn">Reservar Viagem</button>
                 </div>
             </div>
-        </main>
-
-        <footer class="footer">
-            <p>&copy; 2024 Nomad Maps - Psytrance Travel Agency. Todos os direitos reservados.</p>
-            <p style="margin-top: 1rem; opacity: 0.7;">Viva a música, explore o mundo, conecte-se com a natureza</p>
-        </footer>
+        </div>
     </div>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // Interatividade básica
-        document.addEventListener('DOMContentLoaded', function() {
-            // Efeito nos cards
-            const cards = document.querySelectorAll('.destination-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.background = 'rgba(255, 255, 255, 0.2)';
+        // Dados dos festivais
+        const festivals = [
+            {
+                id: 1,
+                name: "Boom Festival",
+                location: "Idanha-a-Nova, Portugal",
+                lat: 39.9138,
+                lng: -7.2405,
+                date: "Jul 22-29, 2024",
+                type: "goa",
+                continent: "europe"
+            },
+            {
+                id: 2,
+                name: "Ozora Festival",
+                location: "Dádpuszta, Hungria",
+                lat: 47.1625,
+                lng: 18.6253,
+                date: "Jul 29 - Aug 5, 2024",
+                type: "goa",
+                continent: "europe"
+            },
+            {
+                id: 3,
+                name: "Universo Paralello",
+                location: "Bahia, Brasil",
+                lat: -12.9083,
+                lng: -38.3223,
+                date: "Dec 27 - Jan 3, 2024",
+                type: "progressive",
+                continent: "south-america"
+            },
+            {
+                id: 4,
+                name: "Mo:Dem Festival",
+                location: "Čakovec, Croácia",
+                lat: 46.1622,
+                lng: 16.1825,
+                date: "Aug 5-12, 2024",
+                type: "forest",
+                continent: "europe"
+            },
+            {
+                id: 5,
+                name: "Antaris Project",
+                location: "Lärz, Alemanha",
+                lat: 53.2992,
+                lng: 12.7061,
+                date: "Aug 15-20, 2024",
+                type: "dark",
+                continent: "europe"
+            },
+            {
+                id: 6,
+                name: "Shankra Festival",
+                location: "Lötschental, Suíça",
+                lat: 46.3989,
+                lng: 7.7586,
+                date: "Jul 10-14, 2024",
+                type: "goa",
+                continent: "europe"
+            }
+        ];
+
+
+{
+    "WKT": "POINT (3.7616 46.0201)",
+    "Nome": "Nataraja Festival",
+    "Pais": "França",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (11.4979 48.7904)",
+    "Nome": "Nature Frequencies",
+    "Pais": "Alemanha",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (24.284814 -31.388542)",
+    "Nome": "Alien Safari",
+    "Pais": "África do Sul",
+    "Continente": "África",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (11.4153 53.2623)",
+    "Nome": "Indian Spirit",
+    "Pais": "Alemanha",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (12.3821 52.7388)",
+    "Nome": "Antaris Project",
+    "Pais": "Alemanha",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (9.1011 46.3439)",
+    "Nome": "Shankra Festival",
+    "Pais": "Suíça",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (12.1538 52.8625)",
+    "Nome": "Vuuv Festival",
+    "Pais": "Alemanha",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-83.312888 10.446698)",
+    "Nome": "Envision Festival",
+    "Pais": "Costa Rica",
+    "Continente": "América Central",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-119.6982 34.4208)",
+    "Nome": "Lucidity Festival",
+    "Pais": "EUA",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-71.208 46.8139)",
+    "Nome": "Eclipse Festival",
+    "Pais": "Canadá",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-60.145092 -2.548959)",
+    "Nome": "Jacundá Trance Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-45.170907 -23.100547)",
+    "Nome": "Mundo de Oz",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-45.20952 -23.08043)",
+    "Nome": "High Stage",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Hitech Psytrance",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-45.178715 -23.078685)",
+    "Nome": "Hitech Revolution",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-44.845167 -21.060319)",
+    "Nome": "Swampy Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-38.92635 -13.512251)",
+    "Nome": "Universo Paralello",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-52.07779 -28.78656)",
+    "Nome": "Undervision Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-50.550707 -30.023123)",
+    "Nome": "Earthdance Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-53.588792 -30.93924)",
+    "Nome": "Zion Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-48.775212 -27.256784)",
+    "Nome": "Festival Terrazul",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-53.268706 -23.761119)",
+    "Nome": "Elementorum Naturae",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Hitech Psytrance",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-47.911257 -15.710742)",
+    "Nome": "Zuvuya Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-49.279106 -16.542452)",
+    "Nome": "Hipnótica Crew",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-47.384999 -5.892661)",
+    "Nome": "Happiness Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-54.209206 -34.458919)",
+    "Nome": "Inchalla Festival",
+    "Pais": "Uruguai",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-71.948714 -13.454688)",
+    "Nome": "Arkana Festival",
+    "Pais": "Perú",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-92.866588 17.466728)",
+    "Nome": "Psycristrance Festival",
+    "Pais": "México",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-92.45536 16.280933)",
+    "Nome": "Winter Solstice Gathering",
+    "Pais": "México",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-68.007017 -16.575838)",
+    "Nome": "Totem",
+    "Pais": "Bolívia",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-72.88202 -36.712002)",
+    "Nome": "Hybrid Festival",
+    "Pais": "Chile",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-78.122396 0.572869)",
+    "Nome": "Forest Festival",
+    "Pais": "Equador",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-58.172867 -34.17276)",
+    "Nome": "Chakra Psy Festival",
+    "Pais": "Argentina",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-71.020313 -32.814198)",
+    "Nome": "Montemapu Festival",
+    "Pais": "Chile",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-61.16462 -32.88964)",
+    "Nome": "Fractal Research",
+    "Pais": "Argentina",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-71.213113 -41.4750978)",
+    "Nome": "Ganesha Trance",
+    "Pais": "Argentina",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-64.190227 -31.567992)",
+    "Nome": "Earthdance Argentina",
+    "Pais": "Argentina",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-50.024575 -29.605478)",
+    "Nome": "Origens Gathering",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-63.898045 -9.094822)",
+    "Nome": "Terra Oca",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-35.202517 -8.359513)",
+    "Nome": "Liquid Sky",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-45.204391 -23.098494)",
+    "Nome": "Naturaiz",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Darkpsy, Hitech, Core, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-58.872331 -35.160846)",
+    "Nome": "Nighters Unity",
+    "Pais": "Argentina",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-46.392073 -23.245285)",
+    "Nome": "Pachamama Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-58.888094 -34.308013)",
+    "Nome": "Abrakadabra",
+    "Pais": "Argentina",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-65.160572 -13.721316)",
+    "Nome": "Jardim de Oz",
+    "Pais": "Bolívia",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-48.822487 -25.47658)",
+    "Nome": "Adhana Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-105.595987 49.538639)",
+    "Nome": "Eclipse Festival",
+    "Pais": "Canadá",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-62.77641 -17.065202)",
+    "Nome": "Amazonas Andes Festival",
+    "Pais": "Bolívia",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-71.154979 -34.371561)",
+    "Nome": "Ritual Xalpen",
+    "Pais": "Chile",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (15.177458 -21.845339)",
+    "Nome": "Fractal Festival",
+    "Pais": "Namíbia",
+    "Continente": "África",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-7.578707 32.692806)",
+    "Nome": "Hypnophonia",
+    "Pais": "Marrocos",
+    "Continente": "África",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-6.826367 33.170747)",
+    "Nome": "Xylophobia",
+    "Pais": "Marrocos",
+    "Continente": "África",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-3.40015 31.457302)",
+    "Nome": "Transahara Festival",
+    "Pais": "Marrocos",
+    "Continente": "África",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (74.064123 14.986373)",
+    "Nome": "Karacus Maracus",
+    "Pais": "Índia",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (77.439124 31.712368)",
+    "Nome": "Silvester Magica",
+    "Pais": "Índia",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (85.971816 28.30698)",
+    "Nome": "Maya Gathering",
+    "Pais": "Nepal",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (84.993448 27.367647)",
+    "Nome": "Maya Mantra",
+    "Pais": "Nepal",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (9.829413 37.284509)",
+    "Nome": "Arzeia Festival",
+    "Pais": "Tunísia",
+    "Continente": "África",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-7.45194 39.784492)",
+    "Nome": "Boom Festival",
+    "Pais": "Portugal",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-8.179916 39.070486)",
+    "Nome": "ZNA Gathering",
+    "Pais": "Portugal",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Goa, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-6.448378 37.319755)",
+    "Nome": "Global Tribe",
+    "Pais": "Espanha",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-71.481953 -33.04224)",
+    "Nome": "Multiverse Festival",
+    "Pais": "Chile",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-70.348073 -33.845702)",
+    "Nome": "Quantum Fest",
+    "Pais": "Chile",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-47.848644 -21.104368)",
+    "Nome": "Makuna Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-73.5259 11.209893)",
+    "Nome": "Aluna Ritual",
+    "Pais": "Colômbia",
+    "Continente": "América do Sul",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (15.471648 45.216951)",
+    "Nome": "Mo.dem Festival",
+    "Pais": "Croácia",
+    "Continente": "Europa",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-118.324689 34.528943)",
+    "Nome": "Uforest Festival",
+    "Pais": "EUA",
+    "Continente": "América do Norte",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-121.115488 39.449545)",
+    "Nome": "Heaven on Earth Festival",
+    "Pais": "EUA",
+    "Continente": "América do Norte",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-66.753783 10.044612)",
+    "Nome": "Huytaca Ritual",
+    "Pais": "Venezuela",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-89.979085 15.638839)",
+    "Nome": "OVNI Invasión",
+    "Pais": "Guatemala",
+    "Continente": "América Central",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-90.627401 14.560312)",
+    "Nome": "Cosmic Convergence",
+    "Pais": "Guatemala",
+    "Continente": "América Central",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-98.841636 30.548318)",
+    "Nome": "Texas Eclipse",
+    "Pais": "EUA",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (99.80451 9.111928)",
+    "Nome": "Sola Luna Festival",
+    "Pais": "Tailândia",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-104.822274 23.916436)",
+    "Nome": "Trance Portal Festival",
+    "Pais": "México",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-96.269526 19.23673)",
+    "Nome": "Equinox Festival",
+    "Pais": "México",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-98.994863 18.916937)",
+    "Nome": "Atmosphere Festival",
+    "Pais": "México",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-72.370865 47.013977)",
+    "Nome": "Limitless Festival",
+    "Pais": "Canadá",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-79.38973 45.07101)",
+    "Nome": "Mind Levitation",
+    "Pais": "Canadá",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (27.217006 38.557962)",
+    "Nome": "Tree of Life Festival",
+    "Pais": "Turquia",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (73.635303 15.415892)",
+    "Nome": "Hill Top Goa",
+    "Pais": "Índia",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (121.508543 30.033724)",
+    "Nome": "Shuangda Festival",
+    "Pais": "China",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (104.063824 30.849691)",
+    "Nome": "Ligoor Spirit Festival",
+    "Pais": "China",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-85.192186 51.953908)",
+    "Nome": "Ananta Gathering",
+    "Pais": "Canadá",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (102.947911 11.122385)",
+    "Nome": "Sacred Aeon Festival",
+    "Pais": "Cambodia",
+    "Continente": "Ásia",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (174.320699 -35.725995)",
+    "Nome": "Lost in Paradise",
+    "Pais": "Nova Zelândia",
+    "Continente": "Oceania",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-0.249981 53.167294)",
+    "Nome": "Invoke Festival",
+    "Pais": "Inglaterra",
+    "Continente": "Europa",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (21.940234 43.557516)",
+    "Nome": "Pyramid Festival",
+    "Pais": "Sérvia",
+    "Continente": "Europa",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-43.427707 -19.612239)",
+    "Nome": "Pulsar Festival",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-7.800269 40.337772)",
+    "Nome": "Insomnia Festival",
+    "Pais": "Portugal",
+    "Continente": "Europa",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-51.84757 -31.156741)",
+    "Nome": "Terra Incógnita",
+    "Pais": "Brasil",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (-59.05887 -34.792092)",
+    "Nome": "Psychedelic Resistance",
+    "Pais": "Argentina",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-0.999927 48.536211)",
+    "Nome": "Ethereal Decibel Festival",
+    "Pais": "França",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (5.703492 45.188742)",
+    "Nome": "Hadra Trance Festival",
+    "Pais": "França",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (23.709953 40.720365)",
+    "Nome": "Free Earth Festival",
+    "Pais": "Grécia",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-80.392383 9.100921)",
+    "Nome": "Tribe Gathering",
+    "Pais": "Panamá",
+    "Continente": "América Central",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (7.196158 58.337636)",
+    "Nome": "Midnight Sun Festival",
+    "Pais": "Noruega",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (135.213746 35.059651)",
+    "Nome": "Xibalba",
+    "Pais": "Japão",
+    "Continente": "Ásia",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-7.831288 41.732198)",
+    "Nome": "Forest Soul Gathering",
+    "Pais": "Portugal",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Forest, Darkpsy, Night",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-8.811818 39.249052)",
+    "Nome": "Trance Odissey",
+    "Pais": "Portugal",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (24.803299 46.492779)",
+    "Nome": "Mumush Festival",
+    "Pais": "Romênia",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-70.906146 -33.51225)",
+    "Nome": "Mimosa Festival",
+    "Pais": "Chile",
+    "Continente": "América do Sul",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (-74.014819 48.375358)",
+    "Nome": "Grooven Bass Festival",
+    "Pais": "Canadá",
+    "Continente": "América do Norte",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (76.983855 32.063376)",
+    "Nome": "Kali Mela",
+    "Pais": "Índia",
+    "Continente": "Ásia",
+    "Vertente principal": "Darkpsy",
+    "Subvertentes": "Hitech, Darkpsy, Core",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (18.410091 46.779312)",
+    "Nome": "Ozora Festival",
+    "Pais": "Hungria",
+    "Continente": "Europa",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+  },
+  {
+    "WKT": "POINT (145.374314 -32.276796)",
+    "Nome": "Rainbow",
+    "Pais": "Austrália",
+    "Continente": "Oceania",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Inativo"
+  },
+  {
+    "WKT": "POINT (121.995408 -31.979072)",
+    "Nome": "Universal Frequencies",
+    "Pais": "Austrália",
+    "Continente": "Oceania",
+    "Vertente principal": "Psytrance - multigênero",
+    "Subvertentes": "Full on, Prog, Night, Forest",
+    "Status": "Ativo"
+
+        }
+        ];
+
+
+
+        // Inicialização do mapa
+        const map = L.map('map').setView([30, 0], 2);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            className: 'map-tiles'
+        }).addTo(map);
+
+        // Marcadores customizados
+        const customIcon = L.divIcon({
+            html: '🎵',
+            className: 'custom-marker',
+            iconSize: [30, 30],
+            iconAnchor: [15, 15]
+        });
+
+        // Adicionar marcadores ao mapa
+        const markers = [];
+        festivals.forEach(festival => {
+            const marker = L.marker([festival.lat, festival.lng], { icon: customIcon })
+                .addTo(map)
+                .bindPopup(`
+                    <div style="color: black; padding: 10px;">
+                        <h3 style="margin: 0 0 10px 0;">${festival.name}</h3>
+                        <p style="margin: 5px 0;"><strong>Local:</strong> ${festival.location}</p>
+                        <p style="margin: 5px 0;"><strong>Data:</strong> ${festival.date}</p>
+                        <p style="margin: 5px 0;"><strong>Tipo:</strong> ${festival.type}</p>
+                    </div>
+                `);
+            
+            marker.festivalId = festival.id;
+            markers.push(marker);
+
+            // Evento de clique no marcador
+            marker.on('click', function() {
+                showFestivalInfo(festival);
+            });
+        });
+
+        // Popular lista de festivais
+        function populateFestivalsList(filteredFestivals = festivals) {
+            const listContainer = document.getElementById('festivals-list');
+            listContainer.innerHTML = '';
+
+            filteredFestivals.forEach(festival => {
+                const card = document.createElement('div');
+                card.className = 'festival-card';
+                card.innerHTML = `
+                    <div class="festival-name">${festival.name}</div>
+                    <div class="festival-location">${festival.location}</div>
+                    <div class="festival-date">${festival.date}</div>
+                `;
+                
+                card.addEventListener('click', () => {
+                    // Centralizar mapa no festival
+                    map.setView([festival.lat, festival.lng], 6);
+                    showFestivalInfo(festival);
+                    
+                    // Destacar card
+                    document.querySelectorAll('.festival-card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
                 });
                 
-                card.addEventListener('mouseleave', function() {
-                    this.style.background = 'rgba(255, 255, 255, 0.1)';
-                });
+                listContainer.appendChild(card);
+            });
+        }
+
+        // Mostrar informações do festival
+        function showFestivalInfo(festival) {
+            const infoPanel = document.getElementById('festival-info');
+            document.getElementById('info-title').textContent = festival.name;
+            document.getElementById('info-location').textContent = festival.location;
+            document.getElementById('info-date').textContent = festival.date;
+            document.getElementById('info-type').textContent = `Tipo: ${festival.type}`;
+            infoPanel.style.display = 'block';
+        }
+
+        // Filtros
+        document.getElementById('festival-type').addEventListener('change', filterFestivals);
+        document.getElementById('continent').addEventListener('change', filterFestivals);
+
+        function filterFestivals() {
+            const typeFilter = document.getElementById('festival-type').value;
+            const continentFilter = document.getElementById('continent').value;
+
+            const filtered = festivals.filter(festival => {
+                const typeMatch = typeFilter === 'all' || festival.type === typeFilter;
+                const continentMatch = continentFilter === 'all' || festival.continent === continentFilter;
+                return typeMatch && continentMatch;
             });
 
-            // Botões CTA
-            const buttons = document.querySelectorAll('.btn');
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    if (this.classList.contains('btn-primary')) {
-                        alert('🌍 Bem-vindo à Nomad Maps! Em breve nossos destinos estarão disponíveis.');
-                    } else {
-                        alert('📞 Entraremos em contato para agendar sua consulta de viagem!');
-                    }
-                });
-            });
-
-            // Efeito de digitação no título
-            const title = document.querySelector('.text-content h1');
-            const originalText = title.textContent;
-            title.textContent = '';
-            let i = 0;
+            populateFestivalsList(filtered);
             
-            function typeWriter() {
-                if (i < originalText.length) {
-                    title.textContent += originalText.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 50);
+            // Atualizar marcadores no mapa
+            markers.forEach(marker => {
+                const festival = festivals.find(f => f.id === marker.festivalId);
+                if (festival && filtered.find(f => f.id === festival.id)) {
+                    map.addLayer(marker);
+                } else {
+                    map.removeLayer(marker);
+                }
+            });
+        }
+
+        // Busca
+        document.querySelector('.search-btn').addEventListener('click', performSearch);
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') performSearch();
+        });
+
+        function performSearch() {
+            const query = document.querySelector('.search-input').value.toLowerCase();
+            if (query) {
+                const found = festivals.find(festival => 
+                    festival.name.toLowerCase().includes(query) || 
+                    festival.location.toLowerCase().includes(query)
+                );
+                
+                if (found) {
+                    map.setView([found.lat, found.lng], 6);
+                    showFestivalInfo(found);
                 }
             }
-            
-            setTimeout(typeWriter, 1000);
+        }
+
+        // Botão de reserva
+        document.querySelector('.book-btn').addEventListener('click', function() {
+            const festivalName = document.getElementById('info-title').textContent;
+            alert(`🎉 Ótima escolha! Em breve entraremos em contato para organizar sua viagem para ${festivalName}`);
         });
+
+        // Inicializar lista
+        populateFestivalsList();
     </script>
 </body>
 </html>
