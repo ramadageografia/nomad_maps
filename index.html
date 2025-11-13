@@ -1,65 +1,296 @@
-
-
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <noscript>
-      <style>
-        #container {
-          display: none;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomad Maps - Psytrance Travel Agency</title>
+    <style>
+        /* Reset e estilos básicos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-      </style>
-    </noscript>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
-    <link rel="preload" href="/_runtimes/sites-runtime.59514e8dbfa629cc14a5878f76a1003cf361b05c7ccfe51744c88fd4164223ec.js" as="script" crossorigin />
-    <link rel="preload" href="/_components/v2/a58809d3130728a4e55dca9e54fac5b6fc5914e9.js" as="script" crossorigin />
-    <link rel="preload" href="/_json/f9e61b8f-cd9f-4f18-b287-4debc7922cf0/_index.json" as="fetch" />
-        <style id="reset-css"> @layer figreset,figoverridable,reset,theme,base,figutils,components,utilities;@layer figreset{:root{--100dvw:100vw;--100dvh:100vh;--banner-height:48px;--banner-height-v2:40px;--full-height-with-banner:calc(100dvh - var(--banner-height));font-synthesis:none;text-align:left;button{text-align:left}}@supports (width:100dvw){:root{--100dvw:100dvw;--100dvh:100dvh}}}@media (max-width:600px){.banner-v2-container{left:0 !important;right:0 !important;margin:0 auto !important}}.wrapper-with-banner .min-h-screen{min-height:var(--full-height-with-banner)}.wrapper-with-banner .h-screen{height:var(--full-height-with-banner)}</style><style id="font-faces-0"></style><style id="body-background-color">body:has([data-breakpoint-id="node-0_7"]) { background-color: #FFF }</style><style id="ssr-css">#container .css-vh2lqg {width: var(--viewport-width-scaled); min-height: var(--viewport-height-scaled); height: 100%; top: 0px;}#container .css-tzn6qh {display: block; position: absolute;}#container .css-6gkcj1 {transform-origin: top left; --max-layout-width: 2048px; --min-layout-width: 320px; --max-font-size: 288px; --min-font-size: 6px; --viewport-width-scaled: calc(var(--100dvw) / var(--viewport-scale)); --viewport-height-scaled: calc(var(--100dvh) / var(--viewport-scale)); --content-width-scaled: calc(var(--content-width-unscaled) / var(--viewport-scale)); --content-margin-x-scaled: max(calc((var(--viewport-width) - var(--max-layout-width)) / var(--viewport-scale) / 2), 0px);}#container .css-myl2ny {position: relative; flex-shrink: 0; flex: 1 0 0; display: block;}#container .css-exq74d {min-width: 1px; min-height: 1px; width: 100%; height: 100dvh;}#container .css-j9f0op {width: 100%; height: 100%;}</style><script>window.__serverRenderedCSSClassNames = {"css-vh2lqg":"{\"width\":\"var(--viewport-width-scaled)\",\"minHeight\":\"var(--viewport-height-scaled)\",\"height\":\"100%\",\"top\":\"0px\"}","css-tzn6qh":"{\"display\":\"block\",\"position\":\"absolute\"}","css-6gkcj1":"{\"transformOrigin\":\"top left\",\"--max-layout-width\":\"2048px\",\"--min-layout-width\":\"320px\",\"--max-font-size\":\"288px\",\"--min-font-size\":\"6px\",\"--viewport-width-scaled\":\"calc(var(--100dvw) / var(--viewport-scale))\",\"--viewport-height-scaled\":\"calc(var(--100dvh) / var(--viewport-scale))\",\"--content-width-scaled\":\"calc(var(--content-width-unscaled) / var(--viewport-scale))\",\"--content-margin-x-scaled\":\"max(calc((var(--viewport-width) - var(--max-layout-width)) / var(--viewport-scale) / 2), 0px)\"}","css-myl2ny":"{\"position\":\"relative\",\"flexShrink\":0,\"flex\":\"1 0 0\",\"display\":\"block\"}","css-exq74d":"{\"minWidth\":1,\"minHeight\":1,\"width\":\"100%\",\"height\":\"100dvh\"}","css-j9f0op":"{\"width\":\"100%\",\"height\":\"100%\"}"}</script><meta id="meta-bkauwd" name="description" content="Created with Figma"><meta id="meta-yw3oin" name="robots" content="noindex"><title id="title-y2qwah">Nomad Maps - Psytrance Travel Agency</title>
-    <link rel="stylesheet" href="/_components/v2/a58809d3130728a4e55dca9e54fac5b6fc5914e9.css">
-  </head>
-  <body>
-    
-    
-    <script data-template-id="country-code">window.__cf_country = "BR"</script>
-    <script type="module">
-      import {SitesRuntime} from '/_runtimes/sites-runtime.59514e8dbfa629cc14a5878f76a1003cf361b05c7ccfe51744c88fd4164223ec.js';
-      const sitesRuntime = new SitesRuntime({
-        container: document.getElementById('container'),
-        env: 'published',
-        bundleId: 'f9e61b8f-cd9f-4f18-b287-4debc7922cf0',
-        
-        loadComponentsOverNetwork: true,
-        assetsVersion: 'v11',
-        fontsVersion: 'v1',
-        videosVersion: 'v1',
-        codeComponentsVersion: 'v2',
-        wasServerRendered: true,
-        withBaseStyles: false,
-        reportingDomain: "https://www.figma.com",
-        bundleCreationDate: '2025-11-13 20:06:53 UTC',
-        isFigmake: true,
-      });
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Conteúdo principal */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .text-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .text-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Cards de destinos */
+        .destinations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .destination-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .destination-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .destination-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .destination-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .destination-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Botões */
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .text-content h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+        }
+
+        /* Efeitos visuais */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo floating">🌍 Nomad Maps</div>
+            <div class="tagline">Psytrance Travel Agency - Sua jornança começa aqui</div>
+        </header>
+
+        <main class="main-content">
+            <div class="text-content">
+                <h1>Descubra os melhores festivais de Psytrance ao redor do mundo</h1>
+                <p>Junte-se à comunidade de viajantes espirituais e explore destinos místicos onde a música e a natureza se encontram. De Goa às montanhas da Turquia, nós guiamos sua jornança.</p>
+                
+                <div class="cta-buttons">
+                    <button class="btn btn-primary pulse">Explorar Destinos</button>
+                    <button class="btn btn-secondary">Agendar Consulta</button>
+                </div>
+            </div>
+
+            <div class="destinations">
+                <div class="destination-card">
+                    <div class="destination-icon">🇮🇳</div>
+                    <div class="destination-name">Goa, Índia</div>
+                    <div class="destination-desc">O berço do Psytrance</div>
+                </div>
+                
+                <div class="destination-card">
+                    <div class="destination-icon">🇵🇹</div>
+                    <div class="destination-name">Boom Festival</div>
+                    <div class="destination-desc">Portugal - Experiência transformadora</div>
+                </div>
+                
+                <div class="destination-card">
+                    <div class="destination-icon">🇧🇷</div>
+                    <div class="destination-name">Universo Paralello</div>
+                    <div class="destination-desc">Bahia - Magia brasileira</div>
+                </div>
+                
+                <div class="destination-card">
+                    <div class="destination-icon">🇹🇷</div>
+                    <div class="destination-name">Mo:Dem</div>
+                    <div class="destination-desc">Croácia - Pura energia</div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Nomad Maps - Psytrance Travel Agency. Todos os direitos reservados.</p>
+            <p style="margin-top: 1rem; opacity: 0.7;">Viva a música, explore o mundo, conecte-se com a natureza</p>
+        </footer>
+    </div>
+
+    <script>
+        // Interatividade básica
+        document.addEventListener('DOMContentLoaded', function() {
+            // Efeito nos cards
+            const cards = document.querySelectorAll('.destination-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.background = 'rgba(255, 255, 255, 0.2)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.background = 'rgba(255, 255, 255, 0.1)';
+                });
+            });
+
+            // Botões CTA
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.classList.contains('btn-primary')) {
+                        alert('🌍 Bem-vindo à Nomad Maps! Em breve nossos destinos estarão disponíveis.');
+                    } else {
+                        alert('📞 Entraremos em contato para agendar sua consulta de viagem!');
+                    }
+                });
+            });
+
+            // Efeito de digitação no título
+            const title = document.querySelector('.text-content h1');
+            const originalText = title.textContent;
+            title.textContent = '';
+            let i = 0;
+            
+            function typeWriter() {
+                if (i < originalText.length) {
+                    title.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            
+            setTimeout(typeWriter, 1000);
+        });
     </script>
-    
-    <div id="container"><div class="tailwind css-myl2ny css-exq74d"></div></div>
-    
-
-     <noscript data-nosnippet>
-      <main style="height: 100vh; width: 100vw; background-color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-        <h1 style="font-size: 24px; padding: 8px; color: black">
-        This site requires JavaScript
-        </h1>
-        <p style="font-size: 16px; padding: 8px; color: #00000080">To view this website, enable JavaScript in your browser settings and reload the page.</p>
-        <form style="margin-top: 12px;" action="">
-          <button type="submit" style="font-size: 14px; color: black; border: 1px solid #0000001a; border-radius: 5px; width: 256px; height: 32px;">
-          Reload page
-          </button>
-        </form>
-      </main>
-    </noscript>
-  </body>
+</body>
 </html>
