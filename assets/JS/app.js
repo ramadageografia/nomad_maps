@@ -223,6 +223,7 @@ function setupFilters() {
 }
 
 // Filtrar festivais
+// Filtrar festivais MANTENDO ORDENAÇÃO
 function filterFestivals() {
     const country = document.getElementById('countryFilter').value;
     
@@ -235,6 +236,30 @@ function filterFestivals() {
             map.removeLayer(marker);
         }
     });
+    
+    // Filtrar lista sidebar MANTENDO ORDENAÇÃO
+    const sortedFestivals = [...festivalsData]
+        .sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'))
+        .filter(festival => !country || festival.country === country);
+    
+    const festivalList = sortedFestivals.map(festival => {
+        const mainSubgenre = festival.subgenres.split(', ')[0];
+        
+        return `
+            <div class="festival-card" onclick="zoomToFestival('${festival.name}')" data-festival="${festival.name}">
+                <div class="festival-name">${festival.name}</div>
+                <div class="festival-location">${festival.country} • ${festival.continent}</div>
+                <div class="festival-meta">
+                    <span class="festival-genre">${mainSubgenre}</span>
+                    <span class="festival-status ${festival.status === 'Ativo' ? 'ativo' : 'inativo'}">${festival.status}</span>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    document.getElementById('festivalsList').innerHTML = festivalList;
+    updateFestivalCount();
+}
     
     // Filtrar lista sidebar
     const festivalCards = document.querySelectorAll('.festival-card');
@@ -263,5 +288,6 @@ function updateFestivalCount() {
     
     document.getElementById('festivalCount').textContent = `${count} festivais`;
 }
+
 
 
