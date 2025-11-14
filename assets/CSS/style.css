@@ -194,3 +194,38 @@
         height: calc(100vh - 150px);
     }
 }
+/* ===== ESTILOS DO MAPA - CRÍTICOS ===== */
+.main-content {
+    height: calc(100vh - 200px) !important;
+}
+
+.map-container {
+    padding: 0 !important;
+    height: 100% !important;
+    position: relative;
+}
+
+#map {
+    height: 100% !important;
+    width: 100% !important;
+    background: #1e293b;
+    z-index: 1;
+}
+
+/* Garantir que o Leaflet funcione */
+.leaflet-container {
+    height: 100% !important;
+    width: 100% !important;
+    font-family: inherit;
+    background: #1e293b;
+}
+
+/* Override de qualquer estilo que possa estar atrapalhando */
+.container-fluid, .row, .col-md-8 {
+    height: 100% !important;
+}
+
+/* Debug visual - pode remover depois */
+.map-debug {
+    border: 2px solid #10b981 !important;
+}
