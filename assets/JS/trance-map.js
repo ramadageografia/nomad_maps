@@ -33,9 +33,7 @@ const TRANCE_CONFIG = {
 // Funções específicas para o mapa de psytrance
 function initTranceMap() {
     console.log('🎵 Inicializando mapa psytrance...');
-    
-    // Aqui você pode adicionar funcionalidades específicas
-    // como clusters de marcadores, heatmaps, etc.
+    return true;
 }
 
 // Exportar para uso global
