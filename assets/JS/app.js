@@ -57,19 +57,32 @@ function loadAllFestivals() {
     
     updateSidebarList();
 }
-
-// Criar ícone do festival - AGORA COM ÍCONES PERSONALIZADOS
-function createFestivalIcon(festival) {
-    // Verificar se tem ícone personalizado
-    if (customIcons[festival.name] && !customIcons[festival.name].includes('🎵')) {
-        return L.icon({
-            iconUrl: customIcons[festival.name],
-            iconSize: [40, 40],
-            iconAnchor: [20, 40],
-            popupAnchor: [0, -40],
-            className: 'custom-festival-icon'
-        });
-    }
+// Atualizar sidebar COM ORDENAÇÃO ALFABÉTICA
+function updateSidebarList() {
+    const listContainer = document.getElementById('festivalsList');
+    
+    // Ordenar festivais alfabeticamente
+    const sortedFestivals = [...festivalsData].sort((a, b) => 
+        a.name.localeCompare(b.name, 'pt-BR')
+    );
+    
+    const festivalList = sortedFestivals.map(festival => {
+        const mainSubgenre = festival.subgenres.split(', ')[0];
+        
+        return `
+            <div class="festival-card" onclick="zoomToFestival('${festival.name}')" data-festival="${festival.name}">
+                <div class="festival-name">${festival.name}</div>
+                <div class="festival-location">${festival.country} • ${festival.continent}</div>
+                <div class="festival-meta">
+                    <span class="festival-genre">${mainSubgenre}</span>
+                    <span class="festival-status ${festival.status === 'Ativo' ? 'ativo' : 'inativo'}">${festival.status}</span>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    listContainer.innerHTML = festivalList;
+}
     
     // Se não tem ícone personalizado, usar ícone colorido padrão
     const colorMap = {
@@ -250,4 +263,5 @@ function updateFestivalCount() {
     
     document.getElementById('festivalCount').textContent = `${count} festivais`;
 }
+
 
