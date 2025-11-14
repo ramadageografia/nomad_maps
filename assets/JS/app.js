@@ -2,6 +2,14 @@
 let map;
 let allMarkers = [];
 
+// Mapeamento de ícones personalizados
+const customIcons = {
+    'Boom Festival': 'https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/icones/boom-removebg-preview%20(1).png',
+    'Ozora Festival': '🎵', // Placeholder - você pode adicionar a URL real depois
+    'Universo Paralello': '🎵', // Placeholder
+    // Adicione outros festivais conforme tiver os ícones
+};
+
 // Aguardar o carregamento da página
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🎵 NOMAD MAPS - Iniciando mapa...');
@@ -47,8 +55,20 @@ function loadAllFestivals() {
     updateSidebarList();
 }
 
-// Criar ícone do festival
+// Criar ícone do festival - AGORA COM ÍCONES PERSONALIZADOS
 function createFestivalIcon(festival) {
+    // Verificar se tem ícone personalizado
+    if (customIcons[festival.name] && !customIcons[festival.name].includes('🎵')) {
+        return L.icon({
+            iconUrl: customIcons[festival.name],
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+            popupAnchor: [0, -40],
+            className: 'custom-festival-icon'
+        });
+    }
+    
+    // Se não tem ícone personalizado, usar ícone colorido padrão
     const colorMap = {
         'Full on': '#EF4444',
         'Darkpsy': '#8B5CF6', 
@@ -61,9 +81,9 @@ function createFestivalIcon(festival) {
     };
     
     let color = '#3B82F6';
-    let iconChar = '🎵';
+    let iconChar = customIcons[festival.name] || '🎵'; // Usar emoji do mapeamento ou padrão
     
-    // Encontrar cor e ícone
+    // Encontrar cor baseada nas subvertentes
     for (const [key, value] of Object.entries(colorMap)) {
         if (festival.subgenres.includes(key)) {
             color = value;
@@ -105,9 +125,13 @@ function createFestivalIcon(festival) {
 function createFestivalPopup(festival) {
     const mainSubgenre = festival.subgenres.split(', ')[0];
     
+    // Adicionar imagem do flyer se existir
+    const flyerUrl = `https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/flyers/${festival.name.replace(/\s+/g, '_')}.jpg`;
+    
     return `
         <div class="festival-popup">
             <div class="festival-name">${festival.name}</div>
+            <img src="${flyerUrl}" alt="${festival.name}" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;" onerror="this.style.display='none'">
             <div class="festival-info">
                 <strong>Localização:</strong> ${festival.country}, ${festival.continent}<br>
                 <strong>Gênero:</strong> ${festival.main_genre}<br>
