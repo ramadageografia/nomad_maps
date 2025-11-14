@@ -1,0 +1,278 @@
+/* ================== NOMAD MAPS - Design Clean =================*/
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --secondary: #f59e0b;
+    --accent: #10b981;
+    --dark: #1e293b;
+    --light: #f8fafc;
+    --muted: #64748b;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --sidebar: #0f172a;
+    --card-bg: #1e293b;
+}
+
+* { 
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--dark);
+    color: var(--light);
+}
+
+/* Header */
+.nomad-header {
+    background: var(--sidebar);
+    border-bottom: 1px solid #334155;
+    padding: 15px 0;
+}
+
+.nomad-header h1 {
+    font-weight: 800;
+    font-size: 2rem;
+    color: var(--light);
+    margin: 0;
+}
+
+.tagline {
+    color: var(--secondary);
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.filter-section .form-select {
+    background: var(--card-bg);
+    border: 1px solid #334155;
+    color: var(--light);
+    border-radius: 8px;
+}
+
+/* Conteúdo Principal */
+.main-content {
+    height: calc(100vh - 80px);
+}
+
+/* Mapa */
+.map-container {
+    padding: 0;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    background: var(--dark);
+}
+
+/* Sidebar */
+.sidebar {
+    background: var(--sidebar);
+    border-left: 1px solid #334155;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+/* Seções da Sidebar */
+.festivals-section {
+    flex: 1;
+    overflow-y: auto;
+    border-bottom: 1px solid #334155;
+}
+
+.stats-section {
+    padding: 20px;
+    border-bottom: 1px solid #334155;
+}
+
+.legend-section {
+    padding: 20px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid #334155;
+}
+
+.section-header h5, .section-header h6 {
+    color: var(--light);
+    margin: 0;
+    font-weight: 600;
+}
+
+.section-header h6 {
+    color: var(--secondary);
+}
+
+/* Lista de Festivais */
+.festivals-list {
+    padding: 10px;
+}
+
+.festival-card {
+    background: var(--card-bg);
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.festival-card:hover {
+    border-color: var(--primary);
+    background: rgba(37, 99, 235, 0.1);
+}
+
+.festival-card.active {
+    border-color: var(--secondary);
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.festival-name {
+    font-weight: 600;
+    color: var(--light);
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.festival-location {
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+}
+
+.festival-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.festival-genre {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--secondary);
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.festival-status {
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.festival-status.ativo {
+    background: rgba(34, 197, 94, 0.2);
+    color: var(--success);
+}
+
+.festival-status.inativo {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--danger);
+}
+
+/* Estatísticas */
+.stats-section {
+    background: rgba(255,255,255,0.02);
+}
+
+.stat-card {
+    text-align: center;
+    padding: 10px 5px;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--secondary);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.2;
+}
+
+/* Legenda */
+.legend-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.legend-item span {
+    font-size: 0.8rem;
+    color: var(--light);
+}
+
+/* Popups */
+.leaflet-popup-content {
+    background: var(--card-bg);
+    color: var(--light);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 0;
+    width: 280px !important;
+    border: 1px solid #334155;
+}
+
+.festival-popup .festival-name {
+    color: var(--secondary);
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.festival-popup .festival-info {
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.festival-popup .festival-info strong {
+    color: var(--light);
+}
+
+/* Scrollbar personalizada */
+.festivals-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.festivals-list::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+}
+
+.festivals-list::-webkit-scrollbar-thumb {
+    background: var(--muted);
+    border-radius: 3px;
+}
+
+.festivals-list::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
