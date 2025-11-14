@@ -5,8 +5,11 @@ let allMarkers = [];
 // Mapeamento de ícones personalizados
 const customIcons = {
     'Boom Festival': 'https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/icones/boom-removebg-preview%20(1).png',
-    'Ozora Festival': '🎵', // Placeholder - você pode adicionar a URL real depois
-    'Universo Paralello': '🎵', // Placeholder
+    'Ozora Festival': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/ozora_icone.png', // Placeholder - você pode adicionar a URL real depois
+    'Universo Paralello': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/universoparalello_icone.png',
+    'Adhana Festival': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/adhana_icone.png',
+    
+    // Placeholder
     // Adicione outros festivais conforme tiver os ícones
 };
 
@@ -247,3 +250,4 @@ function updateFestivalCount() {
     
     document.getElementById('festivalCount').textContent = `${count} festivais`;
 }
+
