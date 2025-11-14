@@ -276,3 +276,13 @@ html, body {
 .festivals-list::-webkit-scrollbar-thumb:hover {
     background: var(--secondary);
 }
+/* Ícones personalizados */
+.custom-festival-icon {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* Ajustes para popups com imagens */
+.leaflet-popup-content img {
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
