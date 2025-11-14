@@ -1,101 +1,43 @@
-const festivalsData = [
-    {
-        "name": "Nataraja Festival",
-        "country": "França",
-        "continent": "Europa", 
-        "main_genre": "Psytrance - multigênero",
-        "subgenres": "Full on, Prog, Night, Forest",
-        "status": "Ativo",
-        "coordinates": [46.0201, 3.7616]
+// NOMAD MAPS - Mapa Interativo de Psytrance
+console.log('🎵 TRANCE MAP - Mapa de festivais psytrance carregado!');
+
+// Configurações específicas do mapa psytrance
+const TRANCE_CONFIG = {
+    // Estilos de música e suas cores
+    musicStyles: {
+        fullon: { color: '#EF4444', name: 'Full On' },
+        darkpsy: { color: '#8B5CF6', name: 'Darkpsy' },
+        hitech: { color: '#06B6D4', name: 'Hitech' },
+        progressive: { color: '#10B981', name: 'Progressive' },
+        forest: { color: '#22C55E', name: 'Forest' },
+        psyprog: { color: '#F59E0B', name: 'Psy Progressive' },
+        suomi: { color: '#EC4899', name: 'Suomi' },
+        zenonesque: { color: '#6366F1', name: 'Zenonesque' }
     },
-    {
-        "name": "Nature Frequencies",
-        "country": "Alemanha",
-        "continent": "Europa",
-        "main_genre": "Psytrance - multigênero", 
-        "subgenres": "Full on, Prog, Night, Forest",
-        "status": "Inativo",
-        "coordinates": [48.7904, 11.4979]
+    
+    // Zoom levels para diferentes tipos de visualização
+    zoomLevels: {
+        world: 2,
+        continent: 4,
+        country: 6,
+        region: 8,
+        city: 10,
+        venue: 12
     },
-    {
-        "name": "Alien Safari",
-        "country": "África do Sul",
-        "continent": "África",
-        "main_genre": "Psytrance - multigênero",
-        "subgenres": "Full on, Prog, Night, Forest",
-        "status": "Inativo", 
-        "coordinates": [-31.388542, 24.284814]
-    },
-    {
-        "name": "Indian Spirit",
-        "country": "Alemanha",
-        "continent": "Europa",
-        "main_genre": "Psytrance - multigênero",
-        "subgenres": "Full on, Prog, Night, Forest",
-        "status": "Ativo",
-        "coordinates": [53.2623, 11.4153]
-    },
-    {
-        "name": "Boom Festival", 
-        "country": "Portugal",
-        "continent": "Europa",
-        "main_genre": "Psytrance - multigênero",
-        "subgenres": "Full on, Prog, Night, Forest",
-        "status": "Ativo",
-        "coordinates": [39.784492, -7.45194]
-    },
-    {
-        "name": "Ozora Festival",
-        "country": "Hungria", 
-        "continent": "Europa",
-        "main_genre": "Psytrance - multigênero",
-        "subgenres": "Full on, Prog, Night, Forest",
-        "status": "Ativo",
-        "coordinates": [46.779312, 18.410091]
-    },
-    {
-        "name": "Universo Paralello",
-        "country": "Brasil",
-        "continent": "América do Sul",
-        "main_genre": "Psytrance - multigênero", 
-        "subgenres": "Full on, Prog, Night, Forest",
-        "status": "Ativo",
-        "coordinates": [-13.512251, -38.92635]
-    },
-    {
-        "name": "Mo.dem Festival",
-        "country": "Croácia",
-        "continent": "Europa",
-        "main_genre": "Darkpsy",
-        "subgenres": "Hitech, Darkpsy, Core", 
-        "status": "Ativo",
-        "coordinates": [45.216951, 15.471648]
-    },
-    {
-        "name": "High Stage",
-        "country": "Brasil",
-        "continent": "América do Sul",
-        "main_genre": "Hitech Psytrance",
-        "subgenres": "Hitech, Darkpsy, Core",
-        "status": "Ativo",
-        "coordinates": [-23.08043, -45.20952]
-    },
-    {
-        "name": "Shankra Festival",
-        "country": "Suíça",
-        "continent": "Europa",
-        "main_genre": "Psytrance - multigênero",
-        "subgenres": "Full on, Prog, Night, Forest",
-        "status": "Ativo",
-        "coordinates": [46.3439, 9.1011]
-    },
-    {
-        "name": "Envision Festival",
-        "country": "Costa Rica",
-        "continent": "América Central",
-        "main_genre": "Psytrance - multigênero",
-        "subgenres": "Full on, Prog, Night, Forest",
-        "status": "Ativo",
-        "coordinates": [10.446698, -83.312888]
-    }
-];
+    
+    // Configurações de performance
+    maxMarkers: 100,
+    clusterRadius: 50
+};
+
+// Funções específicas para o mapa de psytrance
+function initTranceMap() {
+    console.log('🎵 Inicializando mapa psytrance...');
+    
+    // Aqui você pode adicionar funcionalidades específicas
+    // como clusters de marcadores, heatmaps, etc.
+}
+
+// Exportar para uso global
+window.TRANCE_CONFIG = TRANCE_CONFIG;
+window.initTranceMap = initTranceMap;
