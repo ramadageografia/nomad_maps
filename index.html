@@ -3,144 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOMAD MAPS - Psytrance Travel Agency</title>
-    
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/CSS/style.css">
+    <title>Nomad Maps - Evolução Histórica do Psytrance</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #8a2be2;
+            --secondary: #00ffff;
+            --accent: #ff00ff;
+            --dark: #0a0a1a;
+            --light: #f0f8ff;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(0, 255, 255, 0.2));
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .map-container {
+            background: rgba(20, 20, 40, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        #evolution-map {
+            height: 600px;
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid var(--secondary);
+        }
+
+        .timeline-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .year-slider {
+            flex-grow: 1;
+            max-width: 500px;
+        }
+
+        .year-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .play-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .info-panel {
+            background: rgba(20, 20, 40, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .info-panel h3 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .era-section {
+            margin-bottom: 30px;
+        }
+
+        .era-title {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            #evolution-map {
+                height: 400px;
+            }
+            
+            .timeline-controls {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header com Banner e Overlay -->
-    <header class="nomad-header">
-        <div class="banner-container">
-            <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/visual%20identity/banner_nomad_principal.png" 
-                 alt="NOMAD MAPS - Psytrance Travel Agency" 
-                 class="banner-image">
-            <div class="banner-overlay">
-                <div class="container-fluid h-100">
-                    <div class="row align-items-center h-100">
-                        <!-- Banner à Esquerda -->
-                        <div class="col-md-6">
-                            <div class="banner-logo">
-                                <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/visual%20identity/banner_nomad_principal.png" 
-                                     alt="NOMAD MAPS" 
-                                     class="logo-image">
-                                <div class="logo-text">
-                                    <div class="main-title">NOMAD MAPS</div>
-                                    <div class="subtitle">PSYTRANCE TRAVEL AGENCY</div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Filtro à Direita -->
-                        <div class="col-md-6">
-                            <div class="filter-wrapper">
-                                <div class="filter-section">
-                                    <label for="countryFilter" class="filter-label">
-                                        <i class="fas fa-filter me-2"></i>Filtrar por País
-                                    </label>
-                                    <select id="countryFilter" class="form-select">
-                                        <option value="">Todos os Países</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="container">
+        <div class="header">
+            <h1>Evolução Histórica do Psytrance</h1>
+            <p class="subtitle">Da origem em Goa à expansão global (1986-2020)</p>
+        </div>
+
+        <div class="map-container">
+            <div class="timeline-controls">
+                <div class="year-display" id="current-year">1986</div>
+                <input type="range" id="year-slider" class="year-slider" min="1986" max="2020" value="1986" step="1">
+                <div class="play-controls">
+                    <button id="play-btn">▶ Play</button>
+                    <button id="pause-btn">⏸ Pause</button>
+                    <button id="reset-btn">↺ Reset</button>
+                </div>
+            </div>
+            
+            <div id="evolution-map"></div>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #ff6b6b;"></div>
+                    <span>Origens (1986-1990)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #4ecdc4;"></div>
+                    <span>Primeiros Festivais (1991-2000)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #45b7d1;"></div>
+                    <span>Expansão Europeia (2001-2008)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #96ceb4;"></div>
+                    <span>Globalização (2009-2020)</span>
                 </div>
             </div>
         </div>
-    </header>
 
-    <!-- Conteúdo Principal -->
-    <main class="main-content">
-        <div class="container-fluid h-100">
-            <div class="row h-100">
-                <!-- Mapa -->
-                <section class="col-md-8 map-container">
-                    <div id="map"></div>
-                </section>
-
-                <!-- Sidebar -->
-                <aside class="col-md-4 sidebar">
-                    <!-- Lista de Festivais -->
-                    <div class="festivals-section">
-                        <div class="section-header">
-                            <h5><i class="fas fa-music me-2"></i>Festivais</h5>
-                            <span id="festivalCount">Carregando...</span>
-                        </div>
-                        <div class="festivals-list" id="festivalsList">
-                            <!-- Festivais carregados via JavaScript -->
-                        </div>
-                    </div>
-
-                    <!-- Estatísticas -->
-                    <div class="stats-section">
-                        <div class="row g-2">
-                            <div class="col-4">
-                                <div class="stat-card">
-                                    <div class="stat-number">50+</div>
-                                    <div class="stat-label">Festivais Parceiros</div>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="stat-card">
-                                    <div class="stat-number">30+</div>
-                                    <div class="stat-label">Países</div>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="stat-card">
-                                    <div class="stat-number">5000+</div>
-                                    <div class="stat-label">Viajantes Satisfeitos</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Legenda -->
-                    <div class="legend-section">
-                        <div class="section-header">
-                            <h6><i class="fas fa-palette me-2"></i>LEGENDA</h6>
-                        </div>
-                        <div class="legend-items">
-                            <div class="legend-item">
-                                <div class="legend-color" style="background: #EF4444;"></div>
-                                <span>Full On</span>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-color" style="background: #8B5CF6;"></div>
-                                <span>Darkpsy</span>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-color" style="background: #06B6D4;"></div>
-                                <span>Hitech</span>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-color" style="background: #10B981;"></div>
-                                <span>Progressive</span>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-color" style="background: #22C55E;"></div>
-                                <span>Forest</span>
-                            </div>
-                        </div>
-                    </div>
-                </aside>
+        <div class="info-panel">
+            <h3>Linha do Tempo da Expansão Psytrance</h3>
+            
+            <div class="era-section">
+                <div class="era-title">🎯 Origens (1986-1990)</div>
+                <p>O psytrance nasce em Goa, Índia, influenciado pela cena psicodélica dos anos 60/70 e pela música eletrônica europeia. Frankfurt se torna outro polo importante com o acid trance.</p>
+            </div>
+            
+            <div class="era-section">
+                <div class="era-title">🎪 Primeiros Festivais (1991-2000)</div>
+                <p>Surgem os primeiros festivais dedicados e gravadoras especializadas. Boom Festival em Portugal se estabelece como um dos principais eventos globais.</p>
+            </div>
+            
+            <div class="era-section">
+                <div class="era-title">🌍 Expansão Europeia (2001-2008)</div>
+                <p>O gênero se consolida na Europa com festivais em vários países e o surgimento de novas gravadoras. A cena se diversifica em subgêneros.</p>
+            </div>
+            
+            <div class="era-section">
+                <div class="era-title">🚀 Globalização (2009-2020)</div>
+                <p>Expansão para novas fronteiras: México, Brasil, Austrália e retorno fortalecido à Índia (Goa e Kasol). Festivais se tornam maiores e mais profissionais.</p>
             </div>
         </div>
-    </main>
+    </div>
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/JS/trance-map.js"></script>
-    <script src="assets/JS/app.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Dados da evolução histórica do psytrance
+        const psytranceHistory = [
+            // Origens (1986-1990)
+            { name: 'Goa Trance', lat: 15.2993, lon: 74.1240, year: 1986, type: 'origin', era: 'origins', description: 'Nascimento do Goa Trance nas praias de Goa' },
+            { name: 'Frankfurt Acid', lat: 50.1109, lon: 8.6821, year: 1988, type: 'origin', era: 'origins', description: 'Cena acid trance em Frankfurt' },
+            
+            // Primeiros Festivais (1991-2000)
+            { name: 'Dragonfly Records', lat: 51.5074, lon: -0.1278, year: 1993, type: 'label', era: 'early-festivals', description: 'Gravadora pioneira em Londres' },
+            { name: 'Boom Festival', lat: 39.5932, lon: -8.4467, year: 1997, type: 'festival', era: 'early-festivals', description: 'Primeira edição em Portugal' },
+            { name: 'Voov Experience', lat: 53.5511, lon: 9.9937, year: 1994, type: 'festival', era: 'early-festivals', description: 'Festival alemão importante' },
+            { name: 'Transylvania', lat: 46.7709, lon: 23.5894, year: 1999, type: 'festival', era: 'early-festivals', description: 'Festival na Romênia' },
+            
+            // Expansão Europeia (2001-2008)
+            { name: 'Armada Music', lat: 52.3676, lon: 4.9041, year: 2003, type: 'label', era: 'europe-expansion', description: 'Gravadora holandesa' },
+            { name: 'Ozora Festival', lat: 47.1625, lon: 17.6206, year: 2004, type: 'festival', era: 'europe-expansion', description: 'Festival na Hungria' },
+            { name: 'Modem Festival', lat: 45.3435, lon: 14.4074, year: 2008, type: 'festival', era: 'europe-expansion', description: 'Festival na Croácia' },
+            { name: 'Antaris Project', lat: 51.9507, lon: 13.6926, year: 2005, type: 'festival', era: 'europe-expansion', description: 'Festival alemão' },
+            
+            // Globalização (2009-2020)
+            { name: 'Universo Paralello', lat: -13.0029, lon: -38.5089, year: 2009, type: 'festival', era: 'globalization', description: 'Festival brasileiro na Bahia' },
+            { name: 'Ometeotl Festival', lat: 19.4326, lon: -99.1332, year: 2012, type: 'festival', era: 'globalization', description: 'Festival no México' },
+            { name: 'Hilltop Festival', lat: 32.2386, lon: 77.1862, year: 2014, type: 'festival', era: 'globalization', description: 'Festival em Kasol, Índia' },
+            { name: 'Shankra Festival', lat: 46.4480, lon: 9.8198, year: 2016, type: 'festival', era: 'globalization', description: 'Festival na Suíça' },
+            { name: 'Earthcore', lat: -37.8136, lon: 144.9631, year: 2018, type: 'festival', era: 'globalization', description: 'Festival na Austrália' },
+            { name: 'Mo:Dem Festival', lat: 45.3435, lon: 14.4074, year: 2020, type: 'festival', era: 'globalization', description: 'Festival na Croácia' }
+        ];
+
+        // Configuração do mapa
+        const map = L.map('evolution-map').setView([20, 0], 2);
+
+        // Adicionar tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Cores para cada era
+        const eraColors = {
+            'origins': '#ff6b6b',
+            'early-festivals': '#4ecdc4', 
+            'europe-expansion': '#45b7d1',
+            'globalization': '#96ceb4'
+        };
+
+        // Ícones personalizados
+        function createCustomIcon(color) {
+            return L.divIcon({
+                className: 'custom-marker',
+                html: `<div style="background-color: ${color}; width: 15px; height: 15px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 10px ${color};"></div>`,
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            });
+        }
+
+        // Adicionar marcadores ao mapa
+        let markers = [];
+        
+        function updateMap(year) {
+            // Limpar marcadores antigos
+            markers.forEach(marker => map.removeLayer(marker));
+            markers = [];
+            
+            // Adicionar marcadores para o ano atual
+            psytranceHistory.forEach(location => {
+                if (location.year <= year) {
+                    const color = eraColors[location.era];
+                    const marker = L.marker([location.lat, location.lon], {
+                        icon: createCustomIcon(color)
+                    }).addTo(map);
+                    
+                    marker.bindPopup(`
+                        <div style="color: #333;">
+                            <h3 style="margin: 0 0 10px 0; color: ${color};">${location.name}</h3>
+                            <p><strong>Ano:</strong> ${location.year}</p>
+                            <p><strong>Tipo:</strong> ${location.type === 'origin' ? 'Origem' : location.type === 'festival' ? 'Festival' : 'Gravadora'}</p>
+                            <p>${location.description}</p>
+                        </div>
+                    `);
+                    
+                    markers.push(marker);
+                }
+            });
+        }
+
+        // Controles da linha do tempo
+        const yearSlider = document.getElementById('year-slider');
+        const currentYearDisplay = document.getElementById('current-year');
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const resetBtn = document.getElementById('reset-btn');
+
+        let animationInterval;
+
+        yearSlider.addEventListener('input', function() {
+            const year = parseInt(this.value);
+            currentYearDisplay.textContent = year;
+            updateMap(year);
+        });
+
+        playBtn.addEventListener('click', function() {
+            clearInterval(animationInterval);
+            animationInterval = setInterval(() => {
+                let currentYear = parseInt(yearSlider.value);
+                if (currentYear < 2020) {
+                    yearSlider.value = currentYear + 1;
+                    currentYearDisplay.textContent = currentYear + 1;
+                    updateMap(currentYear + 1);
+                } else {
+                    clearInterval(animationInterval);
+                }
+            }, 800);
+        });
+
+        pauseBtn.addEventListener('click', function() {
+            clearInterval(animationInterval);
+        });
+
+        resetBtn.addEventListener('click', function() {
+            clearInterval(animationInterval);
+            yearSlider.value = 1986;
+            currentYearDisplay.textContent = '1986';
+            updateMap(1986);
+        });
+
+        // Inicializar o mapa
+        updateMap(1986);
+    </script>
 </body>
 </html>
