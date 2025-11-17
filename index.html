@@ -19,25 +19,38 @@
             --accent: #ff00ff;
             --dark: #0a0a1a;
             --light: #f0f8ff;
+            --neon-glow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
         }
 
         body {
             background-color: var(--dark);
             color: var(--light);
-            line-height: 1.6;
+            overflow-x: hidden;
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.15) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.15) 0%, transparent 20%);
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 255, 0.1) 0%, transparent 30%);
+        }
+
+        #psychedelic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
         }
 
         header {
-            background: linear-gradient(135deg, rgba(10, 10, 26, 0.95) 0%, rgba(138, 43, 226, 0.8) 100%);
-            padding: 15px 0;
+            background: linear-gradient(135deg, rgba(10, 10, 26, 0.9) 0%, rgba(138, 43, 226, 0.7) 100%);
+            backdrop-filter: blur(10px);
+            padding: 10px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid var(--secondary);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
         }
 
         .container {
@@ -53,40 +66,52 @@
         }
 
         .logo {
-            max-width: 280px;
+            max-width: 400px;
             filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.7));
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+        }
+
+        nav ul li {
+            margin-left: 25px;
         }
 
         nav ul li a {
             color: var(--light);
             text-decoration: none;
             font-weight: 600;
-            padding: 10px 20px;
-            border-radius: 25px;
+            padding: 8px 15px;
+            border-radius: 20px;
             transition: all 0.3s ease;
-            border: 1px solid transparent;
         }
 
         nav ul li a:hover {
             color: var(--secondary);
-            border-color: var(--secondary);
-            box-shadow: 0 0 15px var(--secondary);
+            box-shadow: 0 0 10px var(--secondary);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            color: var(--light);
+            cursor: pointer;
         }
 
         .hero {
-            height: 70vh;
+            position: relative;
+            height: 40vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(135deg, rgba(138, 43, 226, 0.4), rgba(0, 255, 255, 0.3));
-            position: relative;
             overflow: hidden;
         }
 
@@ -95,298 +120,632 @@
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
+            width: 100%;
+            height: 100%;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.2) 0%, transparent 50%);
+                radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 0, 255, 0.3) 0%, transparent 50%);
             z-index: -1;
         }
 
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+            z-index: 1;
+        }
+
         .hero h1 {
-            font-size: 4rem;
+            font-size: 2.5rem;
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 20px;
-            text-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
-            animation: glow 3s ease-in-out infinite alternate;
+            text-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+            animation: pulse 3s infinite alternate;
+            margin-bottom: 15px;
         }
 
         .hero p {
-            font-size: 1.4rem;
-            margin-bottom: 40px;
-            max-width: 700px;
-            opacity: 0.9;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 15px 35px;
+            padding: 12px 30px;
             background: linear-gradient(45deg, var(--primary), var(--accent));
             color: white;
             text-decoration: none;
             border-radius: 30px;
             font-weight: bold;
-            margin: 10px;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.4);
-            border: 2px solid transparent;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+            margin: 5px;
         }
 
         .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.6);
-            border-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.6);
+        }
+
+        .cta-secondary {
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
         }
 
         section {
-            padding: 80px 0;
+            padding: 60px 0;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
+            position: relative;
         }
 
         .section-title h2 {
-            font-size: 3rem;
+            font-size: 2.2rem;
+            display: inline-block;
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 15px;
+            position: relative;
         }
 
-        .section-title p {
-            color: rgba(255, 255, 255, 0.7);
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 1.1rem;
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            border-radius: 3px;
+        }
+
+        .map-section {
+            background: rgba(10, 10, 30, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
         }
 
         .map-stats {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
         .stat-card {
-            background: rgba(20, 20, 40, 0.8);
-            border-radius: 15px;
-            padding: 25px;
+            background: rgba(20, 20, 40, 0.7);
+            border-radius: 10px;
+            padding: 15px;
             text-align: center;
-            border: 1px solid rgba(138, 43, 226, 0.4);
+            border: 1px solid rgba(138, 43, 226, 0.3);
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
         }
 
         .stat-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(138, 43, 226, 0.4);
-            border-color: var(--secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.4);
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: 2rem;
             font-weight: bold;
             color: var(--secondary);
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            margin-bottom: 8px;
         }
 
         .stat-label {
-            font-size: 1rem;
+            font-size: 0.9rem;
             opacity: 0.8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .map-controls {
             display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: 300px 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .map-controls {
+                grid-template-columns: 1fr;
+            }
         }
 
         .filters {
-            background: rgba(20, 20, 40, 0.8);
-            border-radius: 15px;
-            padding: 25px;
-            border: 1px solid rgba(255, 0, 255, 0.4);
-            backdrop-filter: blur(10px);
-            height: fit-content;
+            background: rgba(20, 20, 40, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(255, 0, 255, 0.3);
         }
 
         .filter-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .filter-group h3 {
             color: var(--secondary);
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
         }
 
         .filter-options {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
 
         .filter-btn {
-            padding: 10px 18px;
+            padding: 8px 15px;
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
             color: var(--light);
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .filter-btn:hover, .filter-btn.active {
             background: var(--secondary);
             color: var(--dark);
             border-color: var(--secondary);
-            transform: scale(1.05);
         }
 
         .search-box {
             width: 100%;
-            padding: 15px 25px;
+            padding: 12px 20px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 30px;
+            border-radius: 25px;
             color: var(--light);
             font-size: 1rem;
-            margin-bottom: 20px;
-            backdrop-filter: blur(10px);
+            margin-bottom: 15px;
         }
 
-        .search-box:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.6);
         }
 
         #interactive-map {
-            height: 600px;
+            height: 500px;
             width: 100%;
-            border-radius: 20px;
-            border: 3px solid var(--secondary);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+            border-radius: 15px;
+            border: 2px solid var(--secondary);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
             overflow: hidden;
+        }
+
+        /* Estilos customizados para o Leaflet */
+        .leaflet-container {
+            background: #1a1a2e !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .leaflet-popup-content-wrapper {
+            background: rgba(20, 20, 40, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 2px solid var(--secondary);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+            max-width: 400px;
+        }
+
+        .leaflet-popup-content {
+            color: var(--light);
+            margin: 0;
+            width: 100% !important;
+        }
+
+        .leaflet-popup-tip {
+            background: var(--secondary);
+        }
+
+        .leaflet-control-zoom a {
+            background: rgba(20, 20, 40, 0.9) !important;
+            color: var(--secondary) !important;
+            border: 1px solid var(--secondary) !important;
+        }
+
+        .leaflet-control-zoom a:hover {
+            background: var(--secondary) !important;
+            color: var(--dark) !important;
+        }
+
+        .leaflet-control-attribution {
+            background: rgba(20, 20, 40, 0.8) !important;
+            color: var(--light) !important;
+            font-size: 0.8rem;
+        }
+
+        .leaflet-control-attribution a {
+            color: var(--secondary) !important;
+        }
+
+        .custom-marker {
+            transition: all 0.3s ease;
+        }
+
+        .custom-marker:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+
+        /* Estilos para o popup personalizado */
+        .festival-popup {
+            padding: 0;
+            width: 380px;
+        }
+
+        .popup-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 20px;
+            border-radius: 13px 13px 0 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .popup-header h3 {
+            margin: 0;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: #00ff00;
+            color: #000;
+        }
+
+        .status-inactive {
+            background: #ff4444;
+            color: white;
+        }
+
+        .popup-content {
+            padding: 20px;
+        }
+
+        .festival-info {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .info-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .info-text {
+            flex: 1;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .flyer-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .flyer-section h4 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .flyer-placeholder {
+            width: 100%;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .flyer-placeholder:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--secondary);
         }
 
         .legends {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-top: 25px;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .legends {
+                grid-template-columns: 1fr;
+            }
         }
 
         .legend {
             background: rgba(10, 10, 26, 0.9);
-            padding: 20px;
-            border-radius: 15px;
+            padding: 15px;
+            border-radius: 10px;
             border: 1px solid var(--secondary);
-            backdrop-filter: blur(10px);
         }
 
         .legend h4 {
             color: var(--secondary);
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-size: 1rem;
         }
 
         .legend-items {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 5px;
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
         }
 
         .legend-color {
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
             border-radius: 50%;
-            margin-right: 10px;
+            margin-right: 8px;
+            border: 1px solid white;
+        }
+
+        .legend-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            border-radius: 50%;
             border: 2px solid white;
+            object-fit: cover;
         }
 
-        .frame-section {
-            background: rgba(10, 10, 30, 0.9);
-            border-radius: 20px;
-            padding: 40px;
-            margin-top: 60px;
-            border: 1px solid rgba(255, 0, 255, 0.4);
-            backdrop-filter: blur(10px);
-        }
-
-        .frame-container {
-            width: 100%;
-            height: 500px;
-            background: rgba(20, 20, 40, 0.8);
+        .newsletter {
+            background: rgba(20, 20, 40, 0.7);
             border-radius: 15px;
-            overflow: hidden;
-            border: 3px solid var(--secondary);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            text-align: center;
         }
 
-        #custom-frame {
+        .newsletter h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .newsletter p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            color: var(--light);
+            font-size: 1rem;
+        }
+
+        .packages {
+            background: rgba(10, 10, 30, 0.7);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 30px 0;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .package-card {
+            background: rgba(20, 20, 40, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(138, 43, 226, 0.4);
+            border-color: var(--secondary);
+        }
+
+        .package-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .package-card h4 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .package-card p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .package-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .package-features li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .package-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+
+        .geo-analysis {
+            background: rgba(10, 10, 30, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .geo-analysis h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .geo-analysis p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 350px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 15px;
+            border: 1px solid rgba(138, 43, 226, 0.5);
+            position: relative;
+        }
+
+        .map-placeholder {
             width: 100%;
             height: 100%;
-            border: none;
-        }
-
-        .loading {
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 200px;
-            flex-direction: column;
-            gap: 20px;
+            justify-content: center;
+            background: linear-gradient(45deg, rgba(138, 43, 226, 0.1), rgba(0, 255, 255, 0.1));
+            color: var(--secondary);
+            font-size: 1.1rem;
         }
 
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-top: 5px solid var(--secondary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .thematic-maps {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .map-card {
+            background: rgba(20, 20, 40, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 0, 255, 0.3);
+        }
+
+        .map-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(255, 0, 255, 0.4);
+            border-color: var(--accent);
+        }
+
+        .map-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+        }
+
+        .map-info {
+            padding: 18px;
+        }
+
+        .map-info h3 {
+            color: var(--accent);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .map-info p {
+            line-height: 1.5;
+            font-size: 0.9rem;
         }
 
         footer {
-            background: linear-gradient(135deg, rgba(10, 10, 26, 0.95) 0%, rgba(138, 43, 226, 0.8) 100%);
-            padding: 50px 0 20px;
+            background: linear-gradient(135deg, rgba(10, 10, 26, 0.9) 0%, rgba(138, 43, 226, 0.7) 100%);
+            padding: 40px 0 15px;
             border-top: 1px solid var(--secondary);
-            backdrop-filter: blur(10px);
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
         }
 
         .footer-column h3 {
             color: var(--secondary);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
         }
 
         .footer-column ul {
@@ -394,81 +753,105 @@
         }
 
         .footer-column ul li {
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .footer-column ul li a {
             color: var(--light);
             text-decoration: none;
             transition: color 0.3s ease;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         .footer-column ul li a:hover {
             color: var(--secondary);
         }
 
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
         .copyright {
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 0.9rem;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.8rem;
             color: rgba(255, 255, 255, 0.7);
         }
 
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
-            }
-            to {
-                text-shadow: 0 0 30px rgba(138, 43, 226, 0.8), 0 0 40px rgba(0, 255, 255, 0.6);
-            }
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes pulse {
+            0% { text-shadow: 0 0 15px rgba(138, 43, 226, 0.5); }
+            100% { text-shadow: 0 0 25px rgba(138, 43, 226, 0.8), 0 0 35px rgba(0, 255, 255, 0.6); }
         }
 
         @media (max-width: 768px) {
-            .map-controls {
-                grid-template-columns: 1fr;
+            .header-content {
+                flex-direction: column;
+            }
+            .logo {
+                max-width: 300px;
+                margin-bottom: 10px;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                margin: 8px 0;
+            }
+            .mobile-menu {
+                display: block;
+                position: absolute;
+                top: 15px;
+                right: 15px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .section-title h2 {
+                font-size: 1.8rem;
             }
             .map-stats {
                 grid-template-columns: repeat(2, 1fr);
-            }
-            .legends {
-                grid-template-columns: 1fr;
-            }
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .section-title h2 {
-                font-size: 2.2rem;
             }
         }
     </style>
 </head>
 <body>
+    <canvas id="psychedelic-bg"></canvas>
+
     <header>
         <div class="container">
             <div class="header-content">
                 <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/visual%20identity/Nomad_Logo.png?raw=true" alt="Nomad Maps Logo" class="logo">
+                <div class="mobile-menu">☰</div>
                 <nav>
                     <ul>
                         <li><a href="#home">Início</a></li>
                         <li><a href="#mapa">Mapa Interativo</a></li>
-                        <li><a href="#festivais">Festivais</a></li>
-                        <li><a href="#sobre">Sobre</a></li>
-                        <li><a href="#contato">Contato</a></li>
+                        <li><a href="#packages">Pacotes</a></li>
+                        <li><a href="#geo-analysis">Análises</a></li>
+                        <li><a href="#thematic-maps">Mapas</a></li>
+                        <li><a href="#contact">Contato</a></li>
                     </ul>
                 </nav>
             </div>
@@ -476,12 +859,12 @@
     </header>
 
     <section class="hero" id="home">
-        <div class="container">
+        <div class="hero-content">
             <h1>Nomad Maps</h1>
-            <p>Explore mais de 100 festivais de psytrance ao redor do mundo. Descubra experiências únicas e conecte-se com a comunidade global.</p>
+            <p>Descubra os melhores festivais de psytrance ao redor do mundo</p>
             <div>
-                <a href="#mapa" class="cta-button">🎪 Explorar Festivais</a>
-                <a href="#festivais" class="cta-button">🗺️ Ver Mapa Completo</a>
+                <a href="#mapa" class="cta-button">Explorar Mapa Interativo</a>
+                <a href="#packages" class="cta-button cta-secondary">Ver Pacotes</a>
             </div>
         </div>
     </section>
@@ -489,8 +872,7 @@
     <section id="mapa">
         <div class="container">
             <div class="section-title">
-                <h2>Mapa Interativo Global</h2>
-                <p>Navegue por mais de 100 festivais de psytrance em todos os continentes. Filtre por localização, estilo musical e muito mais.</p>
+                <h2>Mapa Interativo de Festivais</h2>
             </div>
             
             <div class="map-stats">
@@ -512,138 +894,222 @@
                 </div>
             </div>
 
-            <div class="map-controls">
-                <div class="filters">
-                    <input type="text" id="search-input" class="search-box" placeholder="🔍 Buscar festival, país ou cidade...">
-                    
-                    <div class="filter-group">
-                        <h3>🌍 Continente</h3>
-                        <div class="filter-options" id="continent-filters">
-                            <button class="filter-btn active" data-continent="all">Todos</button>
+            <div class="map-section">
+                <div class="map-controls">
+                    <div class="filters">
+                        <input type="text" id="search-input" class="search-box" placeholder="🔍 Buscar festival...">
+                        
+                        <div class="filter-group">
+                            <h3>🌍 Continente</h3>
+                            <div class="filter-options" id="continent-filters"></div>
                         </div>
-                    </div>
 
-                    <div class="filter-group">
-                        <h3>🎵 Estilo Musical</h3>
-                        <div class="filter-options" id="genre-filters">
-                            <button class="filter-btn active" data-subvertente="all">Todos</button>
+                        <div class="filter-group">
+                            <h3>🎵 Subvertentes</h3>
+                            <div class="filter-options" id="genre-filters"></div>
                         </div>
-                    </div>
 
-                    <div class="filter-group">
-                        <h3>📊 Status</h3>
-                        <div class="filter-options" id="status-filters">
-                            <button class="filter-btn active" data-status="all">Todos</button>
-                            <button class="filter-btn" data-status="Ativo">Ativos</button>
-                            <button class="filter-btn" data-status="Inativo">Inativos</button>
-                        </div>
-                    </div>
-
-                    <button id="reset-filters" class="filter-btn" style="width: 100%; margin-top: 15px; background: var(--accent); font-weight: bold;">
-                        🔄 Limpar Todos os Filtros
-                    </button>
-                </div>
-
-                <div>
-                    <div id="interactive-map">
-                        <div class="loading">
-                            <div class="spinner"></div>
-                            <p>Carregando mapa e festivais...</p>
-                        </div>
-                    </div>
-                    <div class="legends">
-                        <div class="legend">
-                            <h4>Continentes</h4>
-                            <div class="legend-items">
-                                <div class="legend-item"><div class="legend-color" style="background-color: #FF6B6B;"></div><span>América do Sul</span></div>
-                                <div class="legend-item"><div class="legend-color" style="background-color: #4ECDC4;"></div><span>América do Norte</span></div>
-                                <div class="legend-item"><div class="legend-color" style="background-color: #45B7D1;"></div><span>América Central</span></div>
-                                <div class="legend-item"><div class="legend-color" style="background-color: #96CEB4;"></div><span>Europa</span></div>
-                                <div class="legend-item"><div class="legend-color" style="background-color: #FFEAA7;"></div><span>Ásia</span></div>
-                                <div class="legend-item"><div class="legend-color" style="background-color: #DDA0DD;"></div><span>África</span></div>
-                                <div class="legend-item"><div class="legend-color" style="background-color: #98D8C8;"></div><span>Oceania</span></div>
+                        <div class="filter-group">
+                            <h3>📊 Status</h3>
+                            <div class="filter-options" id="status-filters">
+                                <button class="filter-btn active" data-status="all">Todos</button>
+                                <button class="filter-btn" data-status="Ativo">Ativos</button>
+                                <button class="filter-btn" data-status="Inativo">Inativos</button>
                             </div>
                         </div>
-                        <div class="legend">
-                            <h4>Status do Festival</h4>
-                            <div class="legend-items">
-                                <div class="legend-item"><div class="legend-color" style="background-color: #00ff00;"></div><span>Ativo</span></div>
-                                <div class="legend-item"><div class="legend-color" style="background-color: #ff4444;"></div><span>Inativo</span></div>
-                                <div class="legend-item"><div class="legend-color" style="background-color: #ffaa00;"></div><span>Em Breve</span></div>
+
+                        <button id="reset-filters" class="filter-btn" style="width: 100%; margin-top: 10px; background: var(--accent);">
+                            🔄 Limpar Filtros
+                        </button>
+                    </div>
+
+                    <div>
+                        <div id="interactive-map"></div>
+                        <div class="legends">
+                            <div class="legend">
+                                <h4>Continentes</h4>
+                                <div class="legend-items">
+                                    <div class="legend-item"><div class="legend-color" style="background-color: #FF6B6B;"></div><span>América do Sul</span></div>
+                                    <div class="legend-item"><div class="legend-color" style="background-color: #4ECDC4;"></div><span>América do Norte</span></div>
+                                    <div class="legend-item"><div class="legend-color" style="background-color: #45B7D1;"></div><span>América Central</span></div>
+                                    <div class="legend-item"><div class="legend-color" style="background-color: #96CEB4;"></div><span>Europa</span></div>
+                                    <div class="legend-item"><div class="legend-color" style="background-color: #FFEAA7;"></div><span>Ásia</span></div>
+                                    <div class="legend-item"><div class="legend-color" style="background-color: #DDA0DD;"></div><span>África</span></div>
+                                    <div class="legend-item"><div class="legend-color" style="background-color: #98D8C8;"></div><span>Oceania</span></div>
+                                </div>
+                            </div>
+                            <div class="legend">
+                                <h4>Subvertentes</h4>
+                                <div class="legend-items">
+                                    <div class="legend-item">
+                                        <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/fullon.png?raw=true" alt="Full On" class="legend-icon">
+                                        <span>Full On</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/icone_prog.png?raw=true" alt="Prog" class="legend-icon">
+                                        <span>Prog</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/forest.png?raw=true" alt="Forest" class="legend-icon">
+                                        <span>Forest</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/icone_dark3.png?raw=true" alt="Darkpsy" class="legend-icon">
+                                        <span>Darkpsy</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/core.png?raw=true" alt="Core" class="legend-icon">
+                                        <span>Core</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- FRAME ADICIONAL -->
-            <div class="frame-section">
-                <div class="section-title">
-                    <h2>Análise e Estatísticas</h2>
-                    <p>Explore dados exclusivos e insights sobre a cena global de festivais de psytrance</p>
-                </div>
-                <div class="frame-container">
-                    <iframe id="custom-frame" src="about:blank"></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="contato">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Nomad Maps</h3>
-                    <ul>
-                        <li><a href="#home">Início</a></li>
-                        <li><a href="#mapa">Mapa Interativo</a></li>
-                        <li><a href="#festivais">Todos os Festivais</a></li>
-                        <li><a href="#sobre">Sobre o Projeto</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contato</h3>
-                    <ul>
-                        <li><a href="mailto:contato@nomadmaps.com">📧 contato@nomadmaps.com</a></li>
-                        <li><a href="tel:+551199999999">📞 +55 11 9999-9999</a></li>
-                        <li><a href="#">💬 Chat Online</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Redes Sociais</h3>
-                    <ul>
-                        <li><a href="#">📷 Instagram</a></li>
-                        <li><a href="#">👥 Facebook</a></li>
-                        <li><a href="#">🎬 YouTube</a></li>
-                        <li><a href="#">💼 LinkedIn</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Recursos</h3>
-                    <ul>
-                        <li><a href="#">📊 Estatísticas</a></li>
-                        <li><a href="#">🎵 Guia de Estilos</a></li>
-                        <li><a href="#">🌍 Roteiros</a></li>
-                        <li><a href="#">📰 Blog</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                &copy; 2024 Nomad Maps. Todos os direitos reservados. | Desenvolvido com ❤️ para a comunidade psytrance
-            </div>
-        </div>
-    </footer>
+    <!-- Resto das seções permanecem iguais -->
+    <!-- ... -->
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-        // URL do arquivo CSV no GitHub
-        const CSV_URL = 'https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Dados/Raw/festivals.csv';
+        // Dados COMPLETOS dos 100+ festivais
+        const festivalsData = [
+            {nome: "Nataraja Festival", pais: "França", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 46.0201, lon: 3.7616},
+            {nome: "Nature Frequencies", pais: "Alemanha", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: 48.7904, lon: 11.4979},
+            {nome: "Alien Safari", pais: "África do Sul", continente: "África", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: -31.388542, lon: 24.284814},
+            {nome: "Indian Spirit", pais: "Alemanha", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 53.2623, lon: 11.4153},
+            {nome: "Antaris Project", pais: "Alemanha", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: 52.7388, lon: 12.3821},
+            {nome: "Shankra Festival", pais: "Suíça", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 46.3439, lon: 9.1011},
+            {nome: "Vuuv Festival", pais: "Alemanha", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 52.8625, lon: 12.1538},
+            {nome: "Envision Festival", pais: "Costa Rica", continente: "América Central", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 10.446698, lon: -83.312888},
+            {nome: "Lucidity Festival", pais: "EUA", continente: "América do Norte", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 34.4208, lon: -119.6982},
+            {nome: "Eclipse Festival", pais: "Canadá", continente: "América do Norte", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 46.8139, lon: -71.208},
+            {nome: "Jacundá Trance Festival", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: -2.548959, lon: -60.145092},
+            {nome: "Mundo de Oz", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -23.100547, lon: -45.170907},
+            {nome: "High Stage", pais: "Brasil", continente: "América do Sul", vertente: "Hitech Psytrance", subvertentes: "Hitech, Darkpsy, Core", status: "Ativo", lat: -23.08043, lon: -45.20952},
+            {nome: "Hitech Revolution", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Hitech, Darkpsy, Core", status: "Ativo", lat: -23.078685, lon: -45.178715},
+            {nome: "Swampy Festival", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -21.060319, lon: -44.845167},
+            {nome: "Universo Paralello", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -13.512251, lon: -38.92635},
+            {nome: "Undervision Festival", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -28.78656, lon: -52.07779},
+            {nome: "Earthdance Festival", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -30.023123, lon: -50.550707},
+            {nome: "Zion Festival", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -30.93924, lon: -53.588792},
+            {nome: "Festival Terrazul", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -27.256784, lon: -48.775212},
+            {nome: "Elementorum Naturae", pais: "Brasil", continente: "América do Sul", vertente: "Hitech Psytrance", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -23.761119, lon: -53.268706},
+            {nome: "Zuvuya Festival", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -15.710742, lon: -47.911257},
+            {nome: "Hipnótica Crew", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -16.542452, lon: -49.279106},
+            {nome: "Happiness Festival", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: -5.892661, lon: -47.384999},
+            {nome: "Inchalla Festival", pais: "Uruguai", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -34.458919, lon: -54.209206},
+            {nome: "Arkana Festival", pais: "Perú", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -13.454688, lon: -71.948714},
+            {nome: "Psycristrance Festival", pais: "México", continente: "América do Norte", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 17.466728, lon: -92.866588},
+            {nome: "Winter Solstice Gathering", pais: "México", continente: "América do Norte", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 16.280933, lon: -92.45536},
+            {nome: "Totem", pais: "Bolívia", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -16.575838, lon: -68.007017},
+            {nome: "Hybrid Festival", pais: "Chile", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -36.712002, lon: -72.88202},
+            {nome: "Forest Festival", pais: "Equador", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 0.572869, lon: -78.122396},
+            {nome: "Chakra Psy Festival", pais: "Argentina", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -34.17276, lon: -58.172867},
+            {nome: "Montemapu Festival", pais: "Chile", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: -32.814198, lon: -71.020313},
+            {nome: "Fractal Research", pais: "Argentina", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: -32.88964, lon: -61.16462},
+            {nome: "Ganesha Trance", pais: "Argentina", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: -41.4750978, lon: -71.213113},
+            {nome: "Earthdance Argentina", pais: "Argentina", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: -31.567992, lon: -64.190227},
+            {nome: "Origens Gathering", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -29.605478, lon: -50.024575},
+            {nome: "Terra Oca", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: -9.094822, lon: -63.898045},
+            {nome: "Liquid Sky", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: -8.359513, lon: -35.202517},
+            {nome: "Naturaiz", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Darkpsy, Hitech, Core, Forest", status: "Ativo", lat: -23.098494, lon: -45.204391},
+            {nome: "Nighters Unity", pais: "Argentina", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: -35.160846, lon: -58.872331},
+            {nome: "Pachamama Festival", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -23.245285, lon: -46.392073},
+            {nome: "Abrakadabra", pais: "Argentina", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: -34.308013, lon: -58.888094},
+            {nome: "Jardim de Oz", pais: "Bolívia", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -13.721316, lon: -65.160572},
+            {nome: "Adhana Festival", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -25.47658, lon: -48.822487},
+            {nome: "Eclipse Festival", pais: "Canadá", continente: "América do Norte", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 49.538639, lon: -105.595987},
+            {nome: "Amazonas Andes Festival", pais: "Bolívia", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -17.065202, lon: -62.77641},
+            {nome: "Ritual Xalpen", pais: "Chile", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -34.371561, lon: -71.154979},
+            {nome: "Fractal Festival", pais: "Namíbia", continente: "África", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -21.845339, lon: 15.177458},
+            {nome: "Hypnophonia", pais: "Marrocos", continente: "África", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: 32.692806, lon: -7.578707},
+            {nome: "Xylophobia", pais: "Marrocos", continente: "África", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: 33.170747, lon: -6.826367},
+            {nome: "Transahara Festival", pais: "Marrocos", continente: "África", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: 31.457302, lon: -3.40015},
+            {nome: "Karacus Maracus", pais: "Índia", continente: "Ásia", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 14.986373, lon: 74.064123},
+            {nome: "Silvester Magica", pais: "Índia", continente: "Ásia", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 31.712368, lon: 77.439124},
+            {nome: "Maya Gathering", pais: "Nepal", continente: "Ásia", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 28.30698, lon: 85.971816},
+            {nome: "Maya Mantra", pais: "Nepal", continente: "Ásia", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: 27.367647, lon: 84.993448},
+            {nome: "Arzeia Festival", pais: "Tunísia", continente: "África", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: 37.284509, lon: 9.829413},
+            {nome: "Boom Festival", pais: "Portugal", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 39.784492, lon: -7.45194},
+            {nome: "ZNA Gathering", pais: "Portugal", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Goa, Prog, Night, Forest", status: "Ativo", lat: 39.070486, lon: -8.179916},
+            {nome: "Global Tribe", pais: "Espanha", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 37.319755, lon: -6.448378},
+            {nome: "Multiverse Festival", pais: "Chile", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: -33.04224, lon: -71.481953},
+            {nome: "Quantum Fest", pais: "Chile", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -33.845702, lon: -70.348073},
+            {nome: "Makuna Festival", pais: "Brasil", continente: "América do Sul", vertente: "Darkpsy", subvertentes: "Hitech, Darkpsy, Core", status: "Ativo", lat: -21.104368, lon: -47.848644},
+            {nome: "Aluna Ritual", pais: "Colômbia", continente: "América do Sul", vertente: "Darkpsy", subvertentes: "Hitech, Darkpsy, Core", status: "Ativo", lat: 11.209893, lon: -73.5259},
+            {nome: "Mo.dem Festival", pais: "Croácia", continente: "Europa", vertente: "Darkpsy", subvertentes: "Hitech, Darkpsy, Core", status: "Ativo", lat: 45.216951, lon: 15.471648},
+            {nome: "Uforest Festival", pais: "EUA", continente: "América do Norte", vertente: "Darkpsy", subvertentes: "Hitech, Darkpsy, Core", status: "Ativo", lat: 34.528943, lon: -118.324689},
+            {nome: "Heaven on Earth Festival", pais: "EUA", continente: "América do Norte", vertente: "Darkpsy", subvertentes: "Hitech, Darkpsy, Core", status: "Ativo", lat: 39.449545, lon: -121.115488},
+            {nome: "Huytaca Ritual", pais: "Venezuela", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 10.044612, lon: -66.753783},
+            {nome: "OVNI Invasión", pais: "Guatemala", continente: "América Central", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 15.638839, lon: -89.979085},
+            {nome: "Cosmic Convergence", pais: "Guatemala", continente: "América Central", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 14.560312, lon: -90.627401},
+            {nome: "Texas Eclipse", pais: "EUA", continente: "América do Norte", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 30.548318, lon: -98.841636},
+            {nome: "Sola Luna Festival", pais: "Tailândia", continente: "Ásia", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 9.111928, lon: 99.80451},
+            {nome: "Trance Portal Festival", pais: "México", continente: "América do Norte", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 23.916436, lon: -104.822274},
+            {nome: "Equinox Festival", pais: "México", continente: "América do Norte", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 19.23673, lon: -96.269526},
+            {nome: "Atmosphere Festival", pais: "México", continente: "América do Norte", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 18.916937, lon: -98.994863},
+            {nome: "Limitless Festival", pais: "Canadá", continente: "América do Norte", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 47.013977, lon: -72.370865},
+            {nome: "Mind Levitation", pais: "Canadá", continente: "América do Norte", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 45.07101, lon: -79.38973},
+            {nome: "Tree of Life Festival", pais: "Turquia", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 38.557962, lon: 27.217006},
+            {nome: "Hill Top Goa", pais: "Índia", continente: "Ásia", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 15.415892, lon: 73.635303},
+            {nome: "Shuangda Festival", pais: "China", continente: "Ásia", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 30.033724, lon: 121.508543},
+            {nome: "Ligoor Spirit Festival", pais: "China", continente: "Ásia", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 30.849691, lon: 104.063824},
+            {nome: "Ananta Gathering", pais: "Canadá", continente: "América do Norte", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 51.953908, lon: -85.192186},
+            {nome: "Sacred Aeon Festival", pais: "Cambodia", continente: "Ásia", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 11.122385, lon: 102.947911},
+            {nome: "Lost in Paradise", pais: "Nova Zelândia", continente: "Oceania", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -35.725995, lon: 174.320699},
+            {nome: "Invoke Festival", pais: "Inglaterra", continente: "Europa", vertente: "Darkpsy", subvertentes: "Hitech, Darkpsy, Core", status: "Ativo", lat: 53.167294, lon: -0.249981},
+            {nome: "Pyramid Festival", pais: "Sérvia", continente: "Europa", vertente: "Darkpsy", subvertentes: "Hitech, Darkpsy, Core", status: "Ativo", lat: 43.557516, lon: 21.940234},
+            {nome: "Pulsar Festival", pais: "Brasil", continente: "América do Sul", vertente: "Darkpsy", subvertentes: "Hitech, Darkpsy, Core", status: "Ativo", lat: -19.612239, lon: -43.427707},
+            {nome: "Insomnia Festival", pais: "Portugal", continente: "Europa", vertente: "Darkpsy", subvertentes: "Hitech, Darkpsy, Core", status: "Ativo", lat: 40.337772, lon: -7.800269},
+            {nome: "Terra Incógnita", pais: "Brasil", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: -31.156741, lon: -51.84757},
+            {nome: "Psychedelic Resistance", pais: "Argentina", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -34.792092, lon: -59.05887},
+            {nome: "Ethereal Decibel Festival", pais: "França", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 48.536211, lon: -0.999927},
+            {nome: "Hadra Trance Festival", pais: "França", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 45.188742, lon: 5.703492},
+            {nome: "Free Earth Festival", pais: "Grécia", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 40.720365, lon: 23.709953},
+            {nome: "Tribe Gathering", pais: "Panamá", continente: "América Central", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 9.100921, lon: -80.392383},
+            {nome: "Midnight Sun Festival", pais: "Noruega", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 58.337636, lon: 7.196158},
+            {nome: "Xibalba", pais: "Japão", continente: "Ásia", vertente: "Darkpsy", subvertentes: "Hitech, Darkpsy, Core", status: "Ativo", lat: 35.059651, lon: 135.213746},
+            {nome: "Forest Soul Gathering", pais: "Portugal", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Forest, Darkpsy, Night", status: "Ativo", lat: 41.732198, lon: -7.831288},
+            {nome: "Trance Odissey", pais: "Portugal", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 39.249052, lon: -8.811818},
+            {nome: "Mumush Festival", pais: "Romênia", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 46.492779, lon: 24.803299},
+            {nome: "Mimosa Festival", pais: "Chile", continente: "América do Sul", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -33.51225, lon: -70.906146},
+            {nome: "Grooven Bass Festival", pais: "Canadá", continente: "América do Norte", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 48.375358, lon: -74.014819},
+            {nome: "Kali Mela", pais: "Índia", continente: "Ásia", vertente: "Darkpsy", subvertentes: "Hitech, Darkpsy, Core", status: "Ativo", lat: 32.063376, lon: 76.983855},
+            {nome: "Ozora Festival", pais: "Hungria", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 46.779312, lon: 18.410091},
+            {nome: "Rainbow", pais: "Austrália", continente: "Oceania", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: -32.276796, lon: 145.374314},
+            {nome: "Universal Frequencies", pais: "Austrália", continente: "Oceania", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -31.979072, lon: 121.995408}
+        ];
 
-        // Variáveis globais
-        let festivalsData = [];
-        let map;
-        let allMarkers = [];
-        let currentFilters = { continente: 'all', subvertente: 'all', status: 'all', search: '' };
+        // URLs dos ícones das subvertentes
+        const subvertenteIcons = {
+            'Full on': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/fullon.png?raw=true',
+            'Prog': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/icone_prog.png?raw=true',
+            'Forest': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/forest.png?raw=true',
+            'Darkpsy': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/icone_dark3.png?raw=true',
+            'Core': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/core.png?raw=true',
+            'Hitech': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/core.png?raw=true',
+            'Night': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/icone_dark3.png?raw=true',
+            'Goa': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/fullon.png?raw=true'
+        };
+
+        // Função para determinar a subvertente principal
+        function getMainSubvertente(subvertentes) {
+            const subvertenteList = subvertentes.split(', ').map(s => s.trim());
+            
+            const priorityOrder = ['Darkpsy', 'Forest', 'Core', 'Hitech', 'Full on', 'Prog', 'Night', 'Goa'];
+            
+            for (let sub of priorityOrder) {
+                if (subvertenteList.includes(sub)) {
+                    return sub;
+                }
+            }
+            
+            return subvertenteList[0] || 'Full on';
+        }
 
         // Sistema de cores para continentes
         function getColorByContinent(continente) {
@@ -659,167 +1125,195 @@
             return colors[continente] || '#CCCCCC';
         }
 
-        // Carregar dados do CSV
-        async function loadFestivalsData() {
-            try {
-                const response = await fetch(CSV_URL);
-                const csvText = await response.text();
-                
-                // Processar CSV
-                const lines = csvText.split('\n');
-                const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
-                
-                festivalsData = [];
-                
-                for (let i = 1; i < lines.length; i++) {
-                    if (!lines[i].trim()) continue;
-                    
-                    const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
-                    const festival = {};
-                    
-                    headers.forEach((header, index) => {
-                        festival[header] = values[index] || '';
-                    });
-                    
-                    // Converter coordenadas para números
-                    if (festival.lat && festival.lon) {
-                        festival.lat = parseFloat(festival.lat);
-                        festival.lon = parseFloat(festival.lon);
+        // Função para criar marcadores SIMPLES sem animações
+        function createFestivalIcon(continente, status, subvertentes) {
+            const color = getColorByContinent(continente);
+            const isActive = status === 'Ativo';
+            const mainSubvertente = getMainSubvertente(subvertentes);
+            const iconUrl = subvertenteIcons[mainSubvertente] || subvertenteIcons['Full on'];
+            
+            return L.divIcon({
+                className: 'custom-marker',
+                html: `
+                    <div style="
+                        position: relative;
+                        width: 20px;
+                        height: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                    ">
+                        <!-- Círculo de fundo simples -->
+                        <div style="
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            background: ${color};
+                            border-radius: 50%;
+                            border: 2px solid ${isActive ? '#00FF00' : '#FF4444'};
+                            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+                        "></div>
                         
-                        // Adicionar apenas se as coordenadas são válidas
-                        if (!isNaN(festival.lat) && !isNaN(festival.lon)) {
-                            festivalsData.push(festival);
-                        }
-                    }
-                }
-                
-                console.log(`Carregados ${festivalsData.length} festivais`);
-                initializeMap();
-                initializeFilters();
-                updateStats(festivalsData);
-                
-            } catch (error) {
-                console.error('Erro ao carregar dados:', error);
-                // Carregar dados de fallback
-                loadFallbackData();
-            }
+                        <!-- Ícone central -->
+                        <img src="${iconUrl}" 
+                             alt="${mainSubvertente}" 
+                             style="
+                                 position: relative;
+                                 width: 10px;
+                                 height: 10px;
+                                 border-radius: 50%;
+                                 object-fit: cover;
+                                 z-index: 2;
+                             "
+                             onerror="this.style.display='none'"
+                        />
+                    </div>
+                `,
+                iconSize: [20, 20],
+                iconAnchor: [10, 10],
+                popupAnchor: [0, -10]
+            });
         }
 
-        // Dados de fallback caso o CSV não carregue
-        function loadFallbackData() {
-            festivalsData = [
-                {
-                    nome: "Boom Festival", 
-                    pais: "Portugal", 
-                    continente: "Europa", 
-                    vertente: "Psytrance - multigênero", 
-                    subvertentes: "Full on, Prog, Night, Forest", 
-                    status: "Ativo", 
-                    lat: 39.784492, 
-                    lon: -7.45194
-                },
-                {
-                    nome: "Universo Paralello", 
-                    pais: "Brasil", 
-                    continente: "América do Sul", 
-                    vertente: "Psytrance - multigênero", 
-                    subvertentes: "Full on, Prog, Night, Forest", 
-                    status: "Ativo", 
-                    lat: -13.512251, 
-                    lon: -38.92635
-                },
-                {
-                    nome: "Ozora Festival", 
-                    pais: "Hungria", 
-                    continente: "Europa", 
-                    vertente: "Psytrance - multigênero", 
-                    subvertentes: "Full on, Prog, Night, Forest", 
-                    status: "Ativo", 
-                    lat: 46.779312, 
-                    lon: 18.410091
-                }
-            ];
+        // Função para criar popup personalizado
+        function createFestivalPopup(festival) {
+            const color = getColorByContinent(festival.continente);
+            const isActive = festival.status === 'Ativo';
             
-            initializeMap();
-            initializeFilters();
-            updateStats(festivalsData);
+            return `
+                <div class="festival-popup">
+                    <div class="popup-header" style="background: linear-gradient(135deg, ${color}, ${color}99);">
+                        <h3>${festival.nome}</h3>
+                        <div class="status-badge ${isActive ? 'status-active' : 'status-inactive'}">
+                            ${festival.status}
+                        </div>
+                    </div>
+                    
+                    <div class="popup-content">
+                        <div class="festival-info">
+                            <div class="info-item">
+                                <div class="info-icon">📍</div>
+                                <div class="info-text">
+                                    <strong>País:</strong> ${festival.pais}<br>
+                                    <strong>Continente:</strong> ${festival.continente}
+                                </div>
+                            </div>
+                            
+                            <div class="info-item">
+                                <div class="info-icon">🎵</div>
+                                <div class="info-text">
+                                    <strong>Vertente:</strong> ${festival.vertente}<br>
+                                    <strong>Subgêneros:</strong> ${festival.subvertentes}
+                                </div>
+                            </div>
+                            
+                            <div class="info-item">
+                                <div class="info-icon">📅</div>
+                                <div class="info-text">
+                                    <strong>Próxima edição:</strong> A definir<br>
+                                    <strong>Temporada:</strong> Verão 2024
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flyer-section">
+                            <h4>🎪 Flyer do Festival</h4>
+                            <div class="flyer-placeholder">
+                                <div>
+                                    <div style="font-size: 2rem; margin-bottom: 10px;">🖼️</div>
+                                    <div>Espaço para flyer</div>
+                                    <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 5px;">
+                                        (Em breve)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
         // Inicializar mapa
-        function initializeMap() {
-            // Remover loading
-            const mapContainer = document.getElementById('interactive-map');
-            mapContainer.innerHTML = '';
-            
-            // Criar mapa
-            map = L.map('interactive-map', {
-                zoomControl: true,
-                preferCanvas: true
-            }).setView([20, 0], 2);
+        const map = L.map('interactive-map', {
+            zoomControl: true,
+            preferCanvas: true
+        }).setView([20, 0], 2);
 
-            // Adicionar mapa base
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors',
-                maxZoom: 18
-            }).addTo(map);
+        // Mapa base ESRI World Imagery (Satélite)
+        const esriSatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+            maxZoom: 20
+        });
 
-            // Adicionar marcadores
-            addMarkersToMap(festivalsData);
-        }
+        // Mapa base OpenStreetMap (Padrão)
+        const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 20
+        });
+
+        // Mapa base Google Maps estilo
+        const googleHybrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            attribution: '© Google',
+            maxZoom: 20
+        });
+
+        // Adicionar o mapa base padrão (ESRI Satellite)
+        esriSatellite.addTo(map);
+
+        // Adicionar controle de camadas
+        const baseMaps = {
+            "Satélite (ESRI)": esriSatellite,
+            "OpenStreetMap": osm,
+            "Google Híbrido": googleHybrid
+        };
+        
+        L.control.layers(baseMaps).addTo(map);
+
+        // Adicionar controles
+        L.control.zoom({
+            position: 'topright'
+        }).addTo(map);
 
         // Adicionar marcadores ao mapa
+        let allMarkers = [];
+        let markerCluster = null;
+
         function addMarkersToMap(festivals) {
             // Limpar marcadores existentes
-            allMarkers.forEach(marker => map.removeLayer(marker));
+            if (markerCluster) {
+                map.removeLayer(markerCluster);
+            }
+            
             allMarkers = [];
 
             festivals.forEach(festival => {
-                const color = getColorByContinent(festival.continente);
-                const isActive = festival.status === 'Ativo';
-                
-                // Criar marcador personalizado
-                const marker = L.circleMarker([festival.lat, festival.lon], {
-                    color: color,
-                    fillColor: color,
-                    fillOpacity: 0.8,
-                    radius: 8,
-                    weight: 2
-                }).addTo(map);
+                const icon = createFestivalIcon(festival.continente, festival.status, festival.subvertentes);
+                const marker = L.marker([festival.lat, festival.lon], { icon });
                 
                 // Popup personalizado
-                const popupContent = `
-                    <div style="color: #000; padding: 20px; max-width: 350px; font-family: 'Segoe UI', sans-serif;">
-                        <h3 style="margin: 0 0 15px 0; color: #8a2be2; border-bottom: 2px solid #00ffff; padding-bottom: 8px;">${festival.nome}</h3>
-                        <div style="display: grid; gap: 8px;">
-                            <div><strong>📍 País:</strong> ${festival.pais}</div>
-                            <div><strong>🌍 Continente:</strong> ${festival.continente}</div>
-                            <div><strong>🎵 Vertente:</strong> ${festival.vertente}</div>
-                            <div><strong>📊 Status:</strong> <span style="color: ${isActive ? 'green' : 'red'}; font-weight: bold;">${festival.status}</span></div>
-                            ${festival.subvertentes ? `<div><strong>🎶 Subgêneros:</strong> ${festival.subvertentes}</div>` : ''}
-                            ${festival.descricao ? `<div style="margin-top: 10px; font-style: italic; border-top: 1px solid #eee; padding-top: 10px;">${festival.descricao}</div>` : ''}
-                        </div>
-                    </div>
-                `;
-                
-                marker.bindPopup(popupContent);
+                const popupContent = createFestivalPopup(festival);
+                marker.bindPopup(popupContent, {
+                    maxWidth: 400,
+                    className: 'custom-popup'
+                });
+
                 allMarkers.push(marker);
             });
 
-            // Ajustar view do mapa para mostrar todos os marcadores
-            if (festivals.length > 0) {
-                const group = new L.featureGroup(allMarkers);
-                map.fitBounds(group.getBounds().pad(0.1));
-            }
+            // Usar clustering para melhor performance
+            markerCluster = L.layerGroup(allMarkers).addTo(map);
         }
 
-        // Sistema de filtros
+        // Resto do código (filtros, estatísticas, etc.)
+        let currentFilters = { continente: 'all', subvertente: 'all', status: 'all', search: '' };
+
         function filterFestivals() {
             return festivalsData.filter(festival => {
                 if (currentFilters.continente !== 'all' && festival.continente !== currentFilters.continente) return false;
                 if (currentFilters.subvertente !== 'all' && !festival.subvertentes.includes(currentFilters.subvertente)) return false;
                 if (currentFilters.status !== 'all' && festival.status !== currentFilters.status) return false;
-                if (currentFilters.search && !festival.nome.toLowerCase().includes(currentFilters.search.toLowerCase()) && 
-                    !festival.pais.toLowerCase().includes(currentFilters.search.toLowerCase())) return false;
+                if (currentFilters.search && !festival.nome.toLowerCase().includes(currentFilters.search.toLowerCase())) return false;
                 return true;
             });
         }
@@ -840,9 +1334,9 @@
         // Inicializar filtros
         function initializeFilters() {
             // Continentes
-            const continents = [...new Set(festivalsData.map(f => f.continente).filter(c => c))];
+            const continents = [...new Set(festivalsData.map(f => f.continente))];
             const continentFilters = document.getElementById('continent-filters');
-            
+            continentFilters.innerHTML = '<button class="filter-btn active" data-continent="all">Todos</button>';
             continents.forEach(continent => {
                 const btn = document.createElement('button');
                 btn.className = 'filter-btn';
@@ -852,12 +1346,10 @@
             });
 
             // Subvertentes
-            const allSubvertentes = festivalsData.flatMap(f => 
-                f.subvertentes ? f.subvertentes.split(', ').map(s => s.trim()) : []
-            );
+            const allSubvertentes = festivalsData.flatMap(f => f.subvertentes.split(', ').map(s => s.trim()));
             const uniqueSubvertentes = [...new Set(allSubvertentes)].filter(s => s);
             const genreFilters = document.getElementById('genre-filters');
-            
+            genreFilters.innerHTML = '<button class="filter-btn active" data-subvertente="all">Todos</button>';
             uniqueSubvertentes.forEach(subvertente => {
                 const btn = document.createElement('button');
                 btn.className = 'filter-btn';
@@ -866,13 +1358,12 @@
                 genreFilters.appendChild(btn);
             });
 
-            // Event listeners para filtros
+            // Event listeners
             document.querySelectorAll('.filter-options').forEach(container => {
                 container.addEventListener('click', (e) => {
                     if (e.target.classList.contains('filter-btn')) {
                         container.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
                         e.target.classList.add('active');
-                        
                         if (e.target.hasAttribute('data-continent')) {
                             currentFilters.continente = e.target.getAttribute('data-continent');
                         } else if (e.target.hasAttribute('data-subvertente')) {
@@ -885,149 +1376,37 @@
                 });
             });
 
-            // Busca
             document.getElementById('search-input').addEventListener('input', (e) => {
                 currentFilters.search = e.target.value;
                 applyFilters();
             });
 
-            // Reset
             document.getElementById('reset-filters').addEventListener('click', () => {
                 currentFilters = { continente: 'all', subvertente: 'all', status: 'all', search: '' };
                 document.getElementById('search-input').value = '';
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.getAttribute('data-continent') === 'all' || 
-                        btn.getAttribute('data-subvertente') === 'all' || 
-                        btn.getAttribute('data-status') === 'all') {
-                        btn.classList.add('active');
-                    }
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.filter-options').forEach(container => {
+                    container.querySelector('[data-continent="all"], [data-subvertente="all"], [data-status="all"]').classList.add('active');
                 });
                 applyFilters();
             });
         }
 
-        // Inicializar frame
-        function initializeCustomFrame() {
-            const frame = document.getElementById('custom-frame');
-            const frameContent = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <style>
-                        body {
-                            background: linear-gradient(135deg, #0a0a1a, #1a1a2e);
-                            color: #f0f8ff;
-                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                            margin: 0;
-                            padding: 0;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            height: 100vh;
-                        }
-                        .content {
-                            text-align: center;
-                            padding: 40px;
-                            max-width: 600px;
-                        }
-                        h2 {
-                            color: #00ffff;
-                            margin-bottom: 25px;
-                            font-size: 2.5rem;
-                            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-                        }
-                        p {
-                            margin-bottom: 25px;
-                            line-height: 1.6;
-                            font-size: 1.1rem;
-                        }
-                        .stats-grid {
-                            display: grid;
-                            grid-template-columns: repeat(2, 1fr);
-                            gap: 20px;
-                            margin: 30px 0;
-                        }
-                        .stat-card {
-                            background: rgba(138, 43, 226, 0.2);
-                            padding: 20px;
-                            border-radius: 15px;
-                            border: 1px solid rgba(0, 255, 255, 0.3);
-                            backdrop-filter: blur(10px);
-                        }
-                        .stat-number {
-                            font-size: 2.2rem;
-                            font-weight: bold;
-                            color: #00ffff;
-                            display: block;
-                            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-                        }
-                        .stat-label {
-                            font-size: 0.95rem;
-                            opacity: 0.9;
-                            margin-top: 8px;
-                        }
-                        .highlight {
-                            background: linear-gradient(45deg, #8a2be2, #00ffff);
-                            -webkit-background-clip: text;
-                            background-clip: text;
-                            color: transparent;
-                            font-weight: bold;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="content">
-                        <h2>🌍 Análise Global Psytrance</h2>
-                        <p>Explore insights exclusivos sobre a cena mundial de festivais de psytrance</p>
-                        
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <span class="stat-number">100+</span>
-                                <span class="stat-label">Festivais Catalogados</span>
-                            </div>
-                            <div class="stat-card">
-                                <span class="stat-number">30+</span>
-                                <span class="stat-label">Países</span>
-                            </div>
-                            <div class="stat-card">
-                                <span class="stat-number">6</span>
-                                <span class="stat-label">Continentes</span>
-                            </div>
-                            <div class="stat-card">
-                                <span class="stat-number">15+</span>
-                                <span class="stat-label">Subgêneros</span>
-                            </div>
-                        </div>
-                        
-                        <p><strong>Destaque:</strong> <span class="highlight">Europa</span> lidera com a maior concentração de festivais, seguida pela <span class="highlight">América do Sul</span>.</p>
-                        <p>Os estilos <span class="highlight">Full On</span> e <span class="highlight">Progressive</span> são os mais populares globalmente.</p>
-                    </div>
-                </body>
-                </html>
-            `;
-            
-            const blob = new Blob([frameContent], {type: 'text/html'});
-            frame.src = URL.createObjectURL(blob);
+        // Inicializar
+        function initializeMap() {
+            addMarkersToMap(festivalsData);
+            updateStats(festivalsData);
+            initializeFilters();
         }
 
-        // Inicializar tudo quando a página carregar
+        // Iniciar
         document.addEventListener('DOMContentLoaded', function() {
-            loadFestivalsData();
-            initializeCustomFrame();
-            
-            // Adicionar smooth scroll para links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
+            initializeMap();
+            document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('.newsletter-input').value;
+                alert(`Obrigado por se cadastrar! Enviaremos novidades para: ${email}`);
+                this.reset();
             });
         });
     </script>
