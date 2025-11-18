@@ -1,1 +1,5 @@
+mkdir business-plan
+touch business-plan/.gitkeep
+git add business-plan/
+git commit -m "Adiciona pasta vazia"
 
