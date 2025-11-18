@@ -6,6 +6,7 @@
     <title>Nomad Maps</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
+        /* Todo o CSS permanece igual */
         * {
             margin: 0;
             padding: 0;
@@ -946,7 +947,7 @@
                                         <span>Full On</span>
                                     </div>
                                     <div class="legend-item">
-                                        <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/icone_prog.png?raw=true" alt="Prog" class="legend-icon">
+                                        <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/prog.png?raw=true" alt="Prog" class="legend-icon">
                                         <span>Prog</span>
                                     </div>
                                     <div class="legend-item">
@@ -954,7 +955,7 @@
                                         <span>Forest</span>
                                     </div>
                                     <div class="legend-item">
-                                        <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/icone_dark3.png?raw=true" alt="Darkpsy" class="legend-icon">
+                                        <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/dark.png?raw=true" alt="Darkpsy" class="legend-icon">
                                         <span>Darkpsy</span>
                                     </div>
                                     <div class="legend-item">
@@ -969,9 +970,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Resto das seções permanecem iguais -->
-    <!-- ... -->
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
@@ -1084,34 +1082,71 @@
             {nome: "Universal Frequencies", pais: "Austrália", continente: "Oceania", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -31.979072, lon: 121.995408}
         ];
 
-        // URLs dos ícones das subvertentes
+        // URLs dos ícones das subvertentes - CORRETOS
         const subvertenteIcons = {
             'Full on': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/fullon.png?raw=true',
-            'Prog': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/icone_prog.png?raw=true',
+            'Prog': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/prog.png?raw=true',
             'Forest': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/forest.png?raw=true',
-            'Darkpsy': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/icone_dark3.png?raw=true',
+            'Darkpsy': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/dark.png?raw=true',
             'Core': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/core.png?raw=true',
             'Hitech': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/core.png?raw=true',
-            'Night': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/icone_dark3.png?raw=true',
+            'Night': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/dark.png?raw=true',
             'Goa': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/fullon.png?raw=true'
         };
 
-        // Função para determinar a subvertente principal
+        // Função para determinar a subvertente principal - CORRIGIDA
         function getMainSubvertente(subvertentes) {
             const subvertenteList = subvertentes.split(', ').map(s => s.trim());
             
-            const priorityOrder = ['Darkpsy', 'Forest', 'Core', 'Hitech', 'Full on', 'Prog', 'Night', 'Goa'];
-            
-            for (let sub of priorityOrder) {
-                if (subvertenteList.includes(sub)) {
+            // Procura por qualquer subvertente que exista no objeto de ícones
+            for (let sub of subvertenteList) {
+                if (subvertenteIcons[sub]) {
                     return sub;
                 }
             }
             
+            // Se não encontrar, retorna a primeira subvertente da lista
             return subvertenteList[0] || 'Full on';
         }
 
-        // Sistema de cores para continentes
+        // Função para criar marcadores SIMPLES sem borda colorida
+        function createFestivalIcon(subvertentes) {
+            const mainSubvertente = getMainSubvertente(subvertentes);
+            const iconUrl = subvertenteIcons[mainSubvertente] || subvertenteIcons['Full on'];
+            
+            return L.divIcon({
+                className: 'custom-marker',
+                html: `
+                    <div style="
+                        position: relative;
+                        width: 24px;
+                        height: 24px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                    ">
+                        <!-- Ícone central sem borda colorida -->
+                        <img src="${iconUrl}" 
+                             alt="${mainSubvertente}" 
+                             style="
+                                 width: 24px;
+                                 height: 24px;
+                                 border-radius: 50%;
+                                 object-fit: cover;
+                                 box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+                             "
+                             onerror="this.style.display='none'"
+                        />
+                    </div>
+                `,
+                iconSize: [24, 24],
+                iconAnchor: [12, 12],
+                popupAnchor: [0, -12]
+            });
+        }
+
+        // Sistema de cores para continentes (mantido para o popup)
         function getColorByContinent(continente) {
             const colors = {
                 'América do Sul': '#FF6B6B', 
@@ -1125,65 +1160,13 @@
             return colors[continente] || '#CCCCCC';
         }
 
-        // Função para criar marcadores SIMPLES sem animações
-        function createFestivalIcon(continente, status, subvertentes) {
-            const color = getColorByContinent(continente);
-            const isActive = status === 'Ativo';
-            const mainSubvertente = getMainSubvertente(subvertentes);
-            const iconUrl = subvertenteIcons[mainSubvertente] || subvertenteIcons['Full on'];
-            
-            return L.divIcon({
-                className: 'custom-marker',
-                html: `
-                    <div style="
-                        position: relative;
-                        width: 20px;
-                        height: 20px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        cursor: pointer;
-                    ">
-                        <!-- Círculo de fundo simples -->
-                        <div style="
-                            position: absolute;
-                            width: 100%;
-                            height: 100%;
-                            background: ${color};
-                            border-radius: 50%;
-                            border: 2px solid ${isActive ? '#00FF00' : '#FF4444'};
-                            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-                        "></div>
-                        
-                        <!-- Ícone central -->
-                        <img src="${iconUrl}" 
-                             alt="${mainSubvertente}" 
-                             style="
-                                 position: relative;
-                                 width: 10px;
-                                 height: 10px;
-                                 border-radius: 50%;
-                                 object-fit: cover;
-                                 z-index: 2;
-                             "
-                             onerror="this.style.display='none'"
-                        />
-                    </div>
-                `,
-                iconSize: [20, 20],
-                iconAnchor: [10, 10],
-                popupAnchor: [0, -10]
-            });
-        }
-
         // Função para criar popup personalizado
         function createFestivalPopup(festival) {
-            const color = getColorByContinent(festival.continente);
             const isActive = festival.status === 'Ativo';
             
             return `
                 <div class="festival-popup">
-                    <div class="popup-header" style="background: linear-gradient(135deg, ${color}, ${color}99);">
+                    <div class="popup-header" style="background: linear-gradient(135deg, var(--primary), var(--accent));">
                         <h3>${festival.nome}</h3>
                         <div class="status-badge ${isActive ? 'status-active' : 'status-inactive'}">
                             ${festival.status}
@@ -1288,7 +1271,7 @@
             allMarkers = [];
 
             festivals.forEach(festival => {
-                const icon = createFestivalIcon(festival.continente, festival.status, festival.subvertentes);
+                const icon = createFestivalIcon(festival.subvertentes);
                 const marker = L.marker([festival.lat, festival.lon], { icon });
                 
                 // Popup personalizado
@@ -1402,12 +1385,6 @@
         // Iniciar
         document.addEventListener('DOMContentLoaded', function() {
             initializeMap();
-            document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = this.querySelector('.newsletter-input').value;
-                alert(`Obrigado por se cadastrar! Enviaremos novidades para: ${email}`);
-                this.reset();
-            });
         });
     </script>
 </body>
