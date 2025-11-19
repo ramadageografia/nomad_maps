@@ -99,7 +99,7 @@
 
         .header-content {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
         }
 
@@ -107,6 +107,7 @@
             max-width: 400px;
             filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.7));
             transition: transform 0.3s ease;
+            margin-bottom: 10px;
         }
 
         .logo:hover {
@@ -116,19 +117,22 @@
         nav ul {
             display: flex;
             list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         nav ul li {
-            margin-left: 25px;
+            margin: 0 8px;
         }
 
         nav ul li a {
             color: var(--light);
             text-decoration: none;
             font-weight: 600;
-            padding: 8px 15px;
+            padding: 5px 10px;
             border-radius: 20px;
             transition: all 0.3s ease;
+            font-size: 0.9rem;
         }
 
         nav ul li a:hover {
@@ -145,7 +149,7 @@
 
         .hero {
             position: relative;
-            height: 40vh;
+            height: 30vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -173,20 +177,12 @@
             z-index: 1;
         }
 
-        .hero h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
-            animation: pulse 3s infinite alternate;
-            margin-bottom: 15px;
+        .hero-buttons {
+            margin-bottom: 20px;
         }
 
         .hero p {
             font-size: 1.1rem;
-            margin-bottom: 25px;
             line-height: 1.6;
         }
 
@@ -740,6 +736,8 @@
             width: 100%;
             height: 180px;
             background: linear-gradient(45deg, var(--primary), var(--accent));
+            background-size: cover;
+            background-position: center;
         }
 
         .map-info {
@@ -755,6 +753,38 @@
         .map-info p {
             line-height: 1.5;
             font-size: 0.9rem;
+        }
+
+        .thematic-map-large {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid var(--secondary);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .thematic-map-large img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .map-description {
+            background: rgba(20, 20, 40, 0.7);
+            padding: 20px;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .map-description h4 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .map-description p {
+            line-height: 1.6;
+            margin-bottom: 10px;
         }
 
         footer {
@@ -852,9 +882,6 @@
                 top: 15px;
                 right: 15px;
             }
-            .hero h1 {
-                font-size: 2rem;
-            }
             .section-title h2 {
                 font-size: 1.8rem;
             }
@@ -871,7 +898,6 @@
         <div class="container">
             <div class="header-content">
                 <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/visual%20identity/Nomad_Logo.png?raw=true" alt="Nomad Maps Logo" class="logo">
-                <div class="mobile-menu">☰</div>
                 <nav>
                     <ul>
                         <li><a href="#home">Início</a></li>
@@ -890,12 +916,11 @@
 
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Nomad Maps</h1>
-            <p>Descubra os melhores festivais de psytrance ao redor do mundo</p>
-            <div>
+            <div class="hero-buttons">
                 <a href="#mapa" class="cta-button">Explorar Mapa Interativo</a>
                 <a href="#produtos" class="cta-button cta-secondary">Ver Produtos</a>
             </div>
+            <p>Descubra os melhores festivais de psytrance ao redor do mundo</p>
         </div>
     </section>
 
@@ -963,6 +988,10 @@
         <div class="container">
             <div class="section-title">
                 <h2>Mapa Interativo de Festivais</h2>
+            </div>
+            
+            <div class="geo-analysis">
+                <p>Mapa-mundi dinâmico com geolocalização de festivais, filtros por nome, país, continente e subvertentes. Camadas analíticas integradas, o data-trance, com sobreposição de dados geográficos com informações relevantes sobre os festivais, como evolução histórica, mapas de fluxos, mapas de calor, rastreamento de fluxos transnacionais, etc.</p>
             </div>
             
             <div class="map-stats">
@@ -1051,25 +1080,52 @@
     <section id="galeria">
         <div class="container">
             <div class="section-title">
-                <h2>Galeria de Mapas</h2>
+                <h2>Galeria de Mapas Temáticos</h2>
             </div>
-            <div class="thematic-maps">
-                <div class="map-card">
-                    <div class="map-image"></div>
-                    <div class="map-info">
-                        <h3>Mapa de Rotas</h3>
-                        <p>Rotas otimizadas para os principais festivais de psytrance ao redor do mundo.</p>
+            
+            <div class="geo-analysis">
+                <h3>Mapa Mundial - Projeção de Robinson</h3>
+                <p>Distribuição global dos festivais de psytrance em projeção Robinson, mostrando a concentração de eventos por continente e região.</p>
+                <div class="thematic-map-large">
+                    <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/mapas_tematicos/robinson.png?raw=true" alt="Mapa Mundial - Projeção de Robinson">
+                    <div class="map-description">
+                        <h4>Análise Global</h4>
+                        <p>Este mapa mostra a distribuição mundial dos festivais de psytrance, destacando os principais polos de concentração na Europa, América do Sul e Ásia. A projeção Robinson proporciona uma visão equilibrada das distâncias e áreas continentais.</p>
+                        <p><strong>Principais insights:</strong> Concentração na Europa Central, crescimento na América do Sul, e emergência de polos na Ásia.</p>
                     </div>
                 </div>
+            </div>
+
+            <div class="geo-analysis" style="margin-top: 40px;">
+                <h3>Mapa da América do Sul</h3>
+                <p>Foco na distribuição dos festivais de psytrance na América do Sul, mostrando os principais países e regiões de concentração.</p>
+                <div class="thematic-map-large">
+                    <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/mapas_tematicos/1000059085.jpg?raw=true" alt="Mapa da América do Sul">
+                    <div class="map-description">
+                        <h4>Análise Regional - América do Sul</h4>
+                        <p>O mapa destaca a forte presença do movimento psytrance na América do Sul, com Brasil e Argentina como principais polos. Nota-se também o crescimento em países como Chile, Peru e Colômbia.</p>
+                        <p><strong>Características regionais:</strong> Diversidade de subgêneros, festivais em ambientes naturais, e forte conexão com movimentos de contracultura.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="thematic-maps" style="margin-top: 40px;">
                 <div class="map-card">
-                    <div class="map-image"></div>
+                    <div class="map-image" style="background: linear-gradient(45deg, #FF6B6B, #4ECDC4);"></div>
                     <div class="map-info">
                         <h3>Mapa de Densidade</h3>
                         <p>Visualização da concentração de festivais por região e período do ano.</p>
                     </div>
                 </div>
                 <div class="map-card">
-                    <div class="map-image"></div>
+                    <div class="map-image" style="background: linear-gradient(45deg, #96CEB4, #6A0DAD);"></div>
+                    <div class="map-info">
+                        <h3>Mapa de Fluxos</h3>
+                        <p>Rastreamento de movimentos transnacionais e rotas de artistas.</p>
+                    </div>
+                </div>
+                <div class="map-card">
+                    <div class="map-image" style="background: linear-gradient(45deg, #FFEAA7, #FFA500);"></div>
                     <div class="map-info">
                         <h3>Mapa de Gêneros</h3>
                         <p>Distribuição geográfica dos diferentes subgêneros de psytrance.</p>
@@ -1085,12 +1141,42 @@
                 <h2>Data-Trance</h2>
             </div>
             <div class="geo-analysis">
-                <h3>Análise de Dados e Tendências</h3>
-                <p>Nossa plataforma Data-Trance oferece análises aprofundadas sobre o cenário mundial de festivais de psytrance.</p>
-                <p>Utilizamos dados geográficos, demográficos e comportamentais para identificar tendências e oferecer insights valiosos.</p>
-                <div class="map-container">
-                    <div class="map-placeholder">
-                        Visualização Data-Trance - Em breve
+                <h3>Análises Avançadas e Visualizações de Dados</h3>
+                <p>Nossa plataforma Data-Trance oferece análises aprofundadas sobre o cenário mundial de festivais de psytrance. Utilizamos dados geográficos, demográficos e comportamentais para identificar tendências e oferecer insights valiosos.</p>
+                
+                <div class="packages-grid">
+                    <div class="package-card">
+                        <div class="package-icon">📈</div>
+                        <h4>Evolução Temporal</h4>
+                        <p>Análise da evolução histórica dos festivais e tendências ao longo do tempo.</p>
+                        <ul class="package-features">
+                            <li>Crescimento por década</li>
+                            <li>Tendências sazonais</li>
+                            <li>Análise de ciclos</li>
+                            <li>Projeções futuras</li>
+                        </ul>
+                    </div>
+                    <div class="package-card">
+                        <div class="package-icon">🌡️</div>
+                        <h4>Mapas de Calor</h4>
+                        <p>Visualizações de densidade e concentração de eventos por região.</p>
+                        <ul class="package-features">
+                            <li>Densidade por continente</li>
+                            <li>Concentração regional</li>
+                            <li>Análise de clusters</li>
+                            <li>Hotspots globais</li>
+                        </ul>
+                    </div>
+                    <div class="package-card">
+                        <div class="package-icon">🔄</div>
+                        <h4>Análise de Fluxos</h4>
+                        <p>Rastreamento de movimentos e conexões entre diferentes polos.</p>
+                        <ul class="package-features">
+                            <li>Rotas de artistas</li>
+                            <li>Migração de públicos</li>
+                            <li>Conexões transnacionais</li>
+                            <li>Redes de influência</li>
+                        </ul>
                     </div>
                 </div>
             </div>
