@@ -6,7 +6,44 @@
     <title>Nomad Maps</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
-        /* Todo o CSS permanece igual */
+        /* Estilos customizados para os novos marcadores SEM BORDAS */
+        .fullon-marker {
+            background-color: #FF6B6B;
+        }
+        
+        .prog-marker {
+            background-color: #4ECDC4;
+        }
+        
+        .forest-marker {
+            background-color: #96CEB4;
+        }
+        
+        .darkpsy-marker {
+            background-color: #6A0DAD;
+        }
+        
+        .core-marker {
+            background-color: #FFEAA7;
+        }
+        
+        .hitech-marker {
+            background-color: #FFA500;
+        }
+        
+        .night-marker {
+            background-color: #2C3E50;
+        }
+        
+        .goa-marker {
+            background-color: #E74C3C;
+        }
+        
+        .default-marker {
+            background-color: #95A5A6;
+        }
+
+        /* Resto do CSS permanece igual */
         * {
             margin: 0;
             padding: 0;
@@ -376,7 +413,7 @@
         }
 
         .custom-marker:hover {
-            transform: scale(1.1);
+            transform: scale(1.2);
             filter: drop-shadow(0 0 8px currentColor);
         }
 
@@ -528,16 +565,6 @@
             height: 15px;
             border-radius: 50%;
             margin-right: 8px;
-            border: 1px solid white;
-        }
-
-        .legend-icon {
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
-            border-radius: 50%;
-            border: 2px solid white;
-            object-fit: cover;
         }
 
         .newsletter {
@@ -942,26 +969,14 @@
                             <div class="legend">
                                 <h4>Subvertentes</h4>
                                 <div class="legend-items">
-                                    <div class="legend-item">
-                                        <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/fullon.png?raw=true" alt="Full On" class="legend-icon">
-                                        <span>Full On</span>
-                                    </div>
-                                    <div class="legend-item">
-                                        <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/prog.png?raw=true" alt="Prog" class="legend-icon">
-                                        <span>Prog</span>
-                                    </div>
-                                    <div class="legend-item">
-                                        <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/forest.png?raw=true" alt="Forest" class="legend-icon">
-                                        <span>Forest</span>
-                                    </div>
-                                    <div class="legend-item">
-                                        <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/dark.png?raw=true" alt="Darkpsy" class="legend-icon">
-                                        <span>Darkpsy</span>
-                                    </div>
-                                    <div class="legend-item">
-                                        <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/core.png?raw=true" alt="Core" class="legend-icon">
-                                        <span>Core</span>
-                                    </div>
+                                    <div class="legend-item"><div class="legend-color" style="background-color: #FF6B6B;"></div><span>Full On</span></div>
+                                    <div class="legend-item"><div class="legend-color" style="background-color: #4ECDC4;"></div><span>Prog</span></div>
+                                    <div class="legend-item"><div class="legend-color" style="background-color: #96CEB4;"></div><span>Forest</span></div>
+                                    <div class="legend-item"><div class="legend-color" style="background-color: #6A0DAD;"></div><span>Darkpsy</span></div>
+                                    <div class="legend-item"><div class="legend-color" style="background-color: #FFEAA7;"></div><span>Core</span></div>
+                                    <div class="legend-item"><div class="legend-color" style="background-color: #FFA500;"></div><span>Hitech</span></div>
+                                    <div class="legend-item"><div class="legend-color" style="background-color: #2C3E50;"></div><span>Night</span></div>
+                                    <div class="legend-item"><div class="legend-color" style="background-color: #E74C3C;"></div><span>Goa</span></div>
                                 </div>
                             </div>
                         </div>
@@ -973,7 +988,7 @@
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-        // Dados COMPLETOS dos 100+ festivais
+        // Dados COMPLETOS dos 105 festivais
         const festivalsData = [
             {nome: "Nataraja Festival", pais: "França", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: 46.0201, lon: 3.7616},
             {nome: "Nature Frequencies", pais: "Alemanha", continente: "Europa", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Inativo", lat: 48.7904, lon: 11.4979},
@@ -1082,25 +1097,25 @@
             {nome: "Universal Frequencies", pais: "Austrália", continente: "Oceania", vertente: "Psytrance - multigênero", subvertentes: "Full on, Prog, Night, Forest", status: "Ativo", lat: -31.979072, lon: 121.995408}
         ];
 
-        // URLs dos ícones das subvertentes - CORRETOS
-        const subvertenteIcons = {
-            'Full on': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/fullon.png?raw=true',
-            'Prog': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/prog.png?raw=true',
-            'Forest': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/forest.png?raw=true',
-            'Darkpsy': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/dark.png?raw=true',
-            'Core': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/core.png?raw=true',
-            'Hitech': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/core.png?raw=true',
-            'Night': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/dark.png?raw=true',
-            'Goa': 'https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/icones/icones_vertentes/fullon.png?raw=true'
+        // Cores para cada subvertente
+        const subvertenteColors = {
+            'Full on': '#FF6B6B',
+            'Prog': '#4ECDC4', 
+            'Forest': '#96CEB4',
+            'Darkpsy': '#6A0DAD',
+            'Core': '#FFEAA7',
+            'Hitech': '#FFA500',
+            'Night': '#2C3E50',
+            'Goa': '#E74C3C'
         };
 
-        // Função para determinar a subvertente principal - CORRIGIDA
+        // Função para determinar a subvertente principal
         function getMainSubvertente(subvertentes) {
             const subvertenteList = subvertentes.split(', ').map(s => s.trim());
             
-            // Procura por qualquer subvertente que exista no objeto de ícones
+            // Procura por qualquer subvertente que exista no objeto de cores
             for (let sub of subvertenteList) {
-                if (subvertenteIcons[sub]) {
+                if (subvertenteColors[sub]) {
                     return sub;
                 }
             }
@@ -1109,40 +1124,26 @@
             return subvertenteList[0] || 'Full on';
         }
 
-        // Função para criar marcadores SIMPLES sem borda colorida
+        // Função para criar marcadores tradicionais com cores SEM BORDAS
         function createFestivalIcon(subvertentes) {
             const mainSubvertente = getMainSubvertente(subvertentes);
-            const iconUrl = subvertenteIcons[mainSubvertente] || subvertenteIcons['Full on'];
+            const color = subvertenteColors[mainSubvertente] || '#95A5A6';
+            const className = mainSubvertente.toLowerCase().replace(' ', '-') + '-marker';
             
             return L.divIcon({
-                className: 'custom-marker',
+                className: `custom-marker ${className}`,
                 html: `
                     <div style="
-                        position: relative;
-                        width: 24px;
-                        height: 24px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        cursor: pointer;
-                    ">
-                        <!-- Ícone central sem borda colorida -->
-                        <img src="${iconUrl}" 
-                             alt="${mainSubvertente}" 
-                             style="
-                                 width: 24px;
-                                 height: 24px;
-                                 border-radius: 50%;
-                                 object-fit: cover;
-                                 box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-                             "
-                             onerror="this.style.display='none'"
-                        />
-                    </div>
+                        width: 12px;
+                        height: 12px;
+                        background-color: ${color};
+                        border-radius: 50%;
+                        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+                    "></div>
                 `,
-                iconSize: [24, 24],
-                iconAnchor: [12, 12],
-                popupAnchor: [0, -12]
+                iconSize: [12, 12],
+                iconAnchor: [6, 6],
+                popupAnchor: [0, -6]
             });
         }
 
@@ -1288,7 +1289,7 @@
             markerCluster = L.layerGroup(allMarkers).addTo(map);
         }
 
-        // Resto do código (filtros, estatísticas, etc.)
+        // Resto do código (filtros, estatísticas, etc.) permanece igual
         let currentFilters = { continente: 'all', subvertente: 'all', status: 'all', search: '' };
 
         function filterFestivals() {
