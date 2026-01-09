@@ -1,4 +1,4 @@
-# 🌍 Nomad Maps - Mapa Interativo de Festivais Psytrance
+# 🌍 Nomad Maps - Agência de Viagens Especializada em Festivais Psytrance
 
 **Visualize, explore e descubra festivais de psytrance ao redor do mundo!**
 
