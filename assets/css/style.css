@@ -1,88 +1,53 @@
-/* PALETA DE CORES FIGMA TRAVEL */
+/* Estilos customizados para os novos marcadores SEM BORDAS */
+.fullon-marker { background-color: #FF6B6B; }
+.prog-marker { background-color: #4ECDC4; }
+.forest-marker { background-color: #96CEB4; }
+.darkpsy-marker { background-color: #6A0DAD; }
+.core-marker { background-color: #FFEAA7; }
+.hitech-marker { background-color: #FFA500; }
+.night-marker { background-color: #2C3E50; }
+.goa-marker { background-color: #E74C3C; }
+.default-marker { background-color: #95A5A6; }
+
+/* Resto do CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 :root {
-    --primary: #FF5A5F; /* Coral/Vermelho suave para CTAs */
-    --accent: #10b981;  /* Verde (seu original) para destaques */
-    --dark: #1E1E1E;
-    --light-gray: #F3F4F6;
-    --text-main: #2D3748;
-    --white: #FFFFFF;
+    --primary: #8a2be2;
+    --secondary: #00ffff;
+    --accent: #ff00ff;
+    --dark: #0a0a1a;
+    --light: #f0f8ff;
+    --neon-glow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
 }
 
 body {
-    font-family: 'Inter', 'Montserrat', sans-serif; /* Fontes limpas do Figma */
-    margin: 0;
-    color: var(--text-main);
-    background-color: var(--white);
+    background-color: var(--dark);
+    color: var(--light);
+    overflow-x: hidden;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.15) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.15) 0%, transparent 20%),
+        radial-gradient(circle at 50% 50%, rgba(255, 0, 255, 0.1) 0%, transparent 30%);
 }
 
-/* HERO SECTION (Estilo Figma: Grande Imagem com busca) */
-.hero-figma {
-    height: 90vh;
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                url('https://images.unsplash.com/photo-1514525253361-bee8718a300c?q=80&w=1920&auto=format&fit=crop'); 
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
+/* ... continue com todo o restante do CSS fornecido anteriormente ... */
+/* Copie todo o conteúdo do style tag do HTML original para aqui */
+
+/* Adicione ao final: */
+.my-maps-section {
+    margin-top: 40px;
 }
 
-.hero-figma h1 {
-    font-size: 4rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-    letter-spacing: -1px;
-}
-
-/* SEÇÃO DE DESTINOS (Cards do Figma) */
-.destinations-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    padding: 80px 10%;
-}
-
-.destination-card {
-    border-radius: 20px;
+.my-maps-section .map-container {
+    height: 500px;
+    border: 2px solid var(--secondary);
+    border-radius: 13px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-    background: white;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
 }
-
-.destination-card:hover {
-    transform: translateY(-10px);
-}
-
-.destination-image {
-    height: 250px;
-    background-size: cover;
-    background-position: center;
-}
-
-.destination-content {
-    padding: 20px;
-}
-
-/* BOTÃO WHATSAPP DISCRETO (Direita) */
-.wa-floating {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #25D366;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    z-index: 1000;
-    transition: 0.3s;
-}
-
-.wa-floating:hover { transform: scale(1.1); }
-.wa-floating img { width: 35px; }
