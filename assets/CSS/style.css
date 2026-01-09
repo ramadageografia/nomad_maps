@@ -1,144 +1,43 @@
-:root {
-    --primary-color: #bc13fe; /* Roxo Neon */
-    --secondary-color: #00f3ff; /* Azul Ciano */
-    --bg-dark: #0a0a0a;
-    --card-bg: #1a1a1a;
-    --text-light: #ffffff;
+/* --- ADIÇÕES NOMAD MAPS --- */
+
+/* Ajuste de imagem do banner para não quebrar o layout */
+.banner-promocional img {
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
 }
 
-body {
-    font-family: 'Montserrat', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-    line-height: 1.6;
-}
-
-h1, h2, .logo {
-    font-family: 'Orbitron', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* Header & Nav */
-header.hero {
-    height: 80vh;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(10,10,10,1)), 
-                url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1350&q=80'); /* Imagem de festival ao fundo */
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 5%;
-    align-items: center;
-}
-
-nav ul { display: flex; list-style: none; }
-nav ul li { margin-left: 20px; }
-nav ul li a { color: white; text-decoration: none; font-weight: bold; font-size: 0.9em; }
-
-.hero-content {
-    margin: auto;
-    text-align: center;
-    max-width: 800px;
-    padding: 0 20px;
-}
-
-.hero-content h1 { font-size: 3em; color: var(--secondary-color); text-shadow: 0 0 10px var(--secondary-color); }
-
-/* Botões */
-.btn-main {
-    display: inline-block;
-    padding: 15px 30px;
-    background: var(--primary-color);
+/* Botão WhatsApp Pequeno e Discreto no canto direito */
+.btn-whats-small {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
     color: white;
     text-decoration: none;
-    border-radius: 50px;
-    font-weight: bold;
-    margin-top: 20px;
-    transition: 0.3s;
-}
-
-.btn-main:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--primary-color); }
-
-.btn-card {
-    display: block;
-    background: transparent;
-    border: 1px solid var(--secondary-color);
-    color: var(--secondary-color);
-    padding: 10px;
-    text-decoration: none;
-    margin-top: 15px;
-    transition: 0.3s;
-}
-
-.btn-card:hover { background: var(--secondary-color); color: black; }
-
-/* Grid de Festivais */
-.festival-grid {
+    padding: 8px 15px;
+    border-radius: 30px;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 40px 5%;
-}
-
-.festival-card {
-    background: var(--card-bg);
-    border-radius: 15px;
-    padding: 30px;
-    margin: 15px;
-    width: 320px;
-    transition: 0.3s;
-    position: relative;
-    border-bottom: 4px solid var(--primary-color);
-}
-
-.card-badge {
-    position: absolute;
-    top: -10px;
-    right: 10px;
-    background: var(--secondary-color);
-    color: black;
-    padding: 5px 10px;
-    font-size: 0.7em;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
     font-weight: bold;
-    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    z-index: 10000;
+    transition: transform 0.3s ease;
 }
 
-/* WhatsApp Float */
-.whatsapp-float {
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 40px;
-    right: 40px;
-    background-color: #25d366;
-    border-radius: 50px;
-    text-align: center;
-    box-shadow: 2px 2px 3px #999;
-    z-index: 100;
+.btn-whats-small img {
+    width: 20px;
+    margin-right: 8px;
 }
 
-.whatsapp-float img { width: 35px; margin-top: 12px; }
+.btn-whats-small:hover {
+    transform: scale(1.05);
+    background-color: #128c7e;
+}
 
-/* Seções */
-section { padding: 60px 5%; text-align: center; }
-.section-title { font-size: 2.2em; margin-bottom: 10px; }
-.subtitle { color: #888; margin-bottom: 40px; }
-
-.about-section { background: #111; }
-.about-container { max-width: 700px; margin: 0 auto; }
-
-footer { padding: 40px; border-top: 1px solid #222; color: #555; }
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .hero-content h1 { font-size: 2em; }
-    nav ul { display: none; } /* Simplificação mobile */
+/* Efeito no banner ao passar o mouse */
+section img:hover {
+    filter: brightness(1.1);
 }
