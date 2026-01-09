@@ -1,21 +1,13 @@
+# 🌍 Nomad Maps - Mapa Interativo de Festivais Psytrance
 
-# Nomad-Maps (Prepared package)
+**Visualize, explore e descubra festivais de psytrance ao redor do mundo!**
 
-Site multi-page (Home, Destinos, Sobre, Contato) prepared for GitHub Pages.
-Structure:
-- index.html (home)
-- destinos.html
-- sobre.html
-- contato.html
-- Assets/CSS/style.css
-- Assets/Imagens/ (logo and banner included)
-- Assets/JS/maps.js (Leaflet + Plotly initialization)
+## 🚀 Funcionalidades
 
-How to publish:
-1. Upload the entire folder contents to the root of the GitHub repository `Nomad-Maps`.
-2. In GitHub > Settings > Pages select Branch `main` and folder `/ (root)`.
-3. Wait a minute — site will be published at: https://<your-username>.github.io/Nomad-Maps/
+- **Mapa Interativo**: 105+ festivais com filtros por continente, gênero e status
+- **Visualizações**: Marcadores coloridos por subvertente musical
+- **Análises**: Estatísticas em tempo real e distribuição geográfica
+- **Mapas Temáticos**: Projeções especializadas e My Maps integrado
+- **Pacotes**: Ofertas de viagens e experiências completas
 
-Notes:
-- Replace placeholder festival data in Assets/JS/maps.js with your full dataset or connect to external JSON/CSV.
-- You'll later provide the collab for the Plotly graph — keep `plotlyData` variable in maps.js ready to accept it.
+## 📁 Estrutura do Projeto
