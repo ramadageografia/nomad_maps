@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euro Trip to Trance 2027 | Nomad Maps</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: #0a0a0a; color: white; font-family: sans-serif; }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .highlight { color: #bc13fe; font-weight: bold; }
+        .info-box { border: 1px solid #333; padding: 20px; border-radius: 10px; margin: 20px 0; background: #111; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" style="color: #666; text-decoration: none;">← Voltar</a>
+        <h1 style="margin-top: 20px;">Expedição Europa 2027</h1>
+        <p class="highlight">O sonho da Tríplice Coroa: Boom Festival, Ozora e MoDem.</p>
+        
+        <div class="info-box">
+            <h2>Por que ir com a Nomad Maps?</h2>
+            <p>Viajar para festivais internacionais exige planejamento técnico. Como <strong>Bacharel em Turismo</strong>, ofereço:</p>
+            <ul>
+                <li>Consultoria de Passagens e Vistos.</li>
+                <li>Logística de Shuttles entre Portugal, Hungria e Croácia.</li>
+                <li>Guia de Redução de Danos e Saúde no Verão Europeu.</li>
+                <li>Suporte para compra de ingressos (Tickets que esgotam rápido!).</li>
+            </ul>
+        </div>
+
+        <p>Prepare-se para o verão de 2027. O planejamento começa agora para garantir os melhores preços e vagas.</p>
+        
+        <a href="https://wa.me/SEUNUMERO?text=Quero+saber+mais+sobre+a+EuroTrip" style="display: block; text-align: center; background: #bc13fe; color: white; padding: 15px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-top: 30px;">Solicitar Orçamento de Consultoria</a>
+    </div>
+</body>
+</html>
