@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomad Maps - Dashboard</title>
+    <title>Nomad Maps</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        /* GARANTINDO O FUNDO ESCURO QUE VOCÊ QUER */
         :root {
             --dark-bg: #0f172a;
             --sidebar-bg: #1e293b;
@@ -15,16 +14,14 @@
         }
 
         body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
+            margin: 0; padding: 0; height: 100%;
             background-color: var(--dark-bg);
             color: var(--text);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
         }
 
-        /* HEADER COM A LOGO CENTRALIZADA */
+        /* HEADER IGUAL AO SEU DESKTOP */
         .nomad-header {
             height: 180px;
             background: var(--dark-bg);
@@ -39,16 +36,15 @@
             filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.4));
         }
 
-        /* ESTRUTURA DASHBOARD */
+        /* LAYOUT DASHBOARD LADO A LADO */
         .dashboard-container {
             display: flex;
-            height: calc(100vh - 180px);
+            height: calc(100vh - 182px);
         }
 
         #map {
             flex: 3;
             height: 100%;
-            z-index: 1;
         }
 
         .sidebar {
@@ -59,7 +55,7 @@
             overflow-y: auto;
         }
 
-        /* ESTILO DOS FLYERS NO HOVER (O QUE VOCÊ QUERIA) */
+        /* ESTILO DOS FLYERS NO HOVER */
         .flyer-tooltip {
             background: transparent !important;
             border: none !important;
@@ -69,12 +65,13 @@
             background: rgba(15, 23, 42, 0.95);
             padding: 10px;
             border-radius: 8px;
-            border: 1px solid var(--accent);
+            border: 2px solid var(--accent);
             text-align: center;
             color: white;
+            max-width: 220px;
         }
         .flyer-card img {
-            width: 200px;
+            width: 100%;
             border-radius: 4px;
             margin-bottom: 8px;
         }
@@ -89,29 +86,31 @@
     <div class="dashboard-container">
         <div id="map"></div>
         <aside class="sidebar">
-            <h2 style="color: var(--accent);">Explorar Festivais</h2>
-            <p>Passe o mouse nos ícones para ver os detalhes e flyers.</p>
-            <hr style="border: 0.5px solid #334155; margin: 20px 0;">
-            <div id="stats">
-                <p><strong>Status:</strong> Mapa Online</p>
-            </div>
+            <h2 style="color: var(--accent); margin-top: 0;">Festivais</h2>
+            <p style="font-size: 0.9rem; color: #94a3b8;">Explore o mapa e passe o mouse nos ícones para ver os flyers.</p>
+            <div id="festivais-lista">
+                </div>
         </aside>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // Inicializa o mapa com tema escuro
-        const map = L.map('map').setView([20, 0], 2);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
+        // 1. Inicializa o mapa
+        const map = L.map('map').setView([-15, -50], 3);
 
-        // Ícone customizado
+        // 2. Camada de mapa escuro (CartoDB Dark Matter)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // 3. Ícone Nomad
         const nomadIcon = L.icon({
             iconUrl: 'https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/icones/marker_nomad.png',
             iconSize: [30, 30],
             iconAnchor: [15, 30]
         });
 
-        // Lista de Festivais (Links Raw corrigidos)
+        // 4. Seus festivais com links RAW corrigidos
         const festivais = [
             { nome: "Aluna Ritual", lat: -23.55, lng: -46.63, flyer: "https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/flyers/Aluna%20Ritual/flyer_aluna.jpg" },
             { nome: "Universo Paralello", lat: -13.90, lng: -38.93, flyer: "https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/flyers/Universo%20Paralello/flyer_up.jpg" },
@@ -120,13 +119,13 @@
             { nome: "ZNA Gathering", lat: 38.64, lng: -8.19, flyer: "https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/flyers/ZNA/flter_zna.jpg" }
         ];
 
-        // Adiciona marcadores com hover
+        // 5. Adicionando ao mapa com Hover
         festivais.forEach(f => {
             const marker = L.marker([f.lat, f.lng], { icon: nomadIcon }).addTo(map);
             
             marker.bindTooltip(`
                 <div class="flyer-card">
-                    <img src="${f.flyer}" onerror="this.src='https://via.placeholder.com/200x250?text=Flyer+em+Breve'">
+                    <img src="${f.flyer}">
                     <br><strong>${f.nome}</strong>
                 </div>
             `, {
