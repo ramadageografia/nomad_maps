@@ -3,268 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomad Maps - Psychedelic Travel</title>
+    <title>Nomad Maps</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
-        /* --- VARIÁVEIS E TEMA --- */
+        /* Variáveis de Cores */
         :root {
-            --primary: #8a2be2;   /* Roxo */
-            --secondary: #00ffff; /* Ciano/Neon */
-            --accent: #ff00ff;    /* Magenta */
-            --dark-bg: #050510;   /* Fundo ainda mais escuro */
-            --card-bg: rgba(15, 15, 30, 0.8); /* Fundo dos cards escuro */
-            --text-main: #ffffff; /* Texto totalmente branco */
+            --primary: #8a2be2;
+            --secondary: #00ffff;
+            --accent: #ff00ff;
+            --dark: #050510; /* Fundo mais escuro como solicitado */
+            --light: #ffffff; /* Letras totalmente brancas */
+            --neon-glow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        /* Marcadores do Mapa */
+        .fullon-marker { background-color: #FF6B6B; }
+        .prog-marker { background-color: #4ECDC4; }
+        .forest-marker { background-color: #96CEB4; }
+        .darkpsy-marker { background-color: #6A0DAD; }
+        .core-marker { background-color: #FFEAA7; }
+        .hitech-marker { background-color: #FFA500; }
+        .night-marker { background-color: #2C3E50; }
+        .goa-marker { background-color: #E74C3C; }
+        .default-marker { background-color: #95A5A6; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
         
         body {
-            background-color: var(--dark-bg);
-            color: var(--text-main);
+            background-color: var(--dark);
+            color: var(--light);
             overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 255, 0.1) 0%, transparent 30%);
         }
 
-        /* --- BACKGROUND ANIMADO --- */
-        #psychedelic-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            opacity: 0.15;
-        }
-
-        /* --- HEADER & BANNER --- */
-        header {
-            background: rgba(5, 5, 15, 0.98);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--primary);
-        }
-
+        /* Estilo do Banner */
         .banner-container {
             width: 100%;
-            max-height: 380px;
+            max-height: 350px;
             overflow: hidden;
             border-bottom: 2px solid var(--secondary);
-            background: #000;
         }
-
         .main-banner {
             width: 100%;
             height: auto;
             display: block;
             object-fit: cover;
-            filter: brightness(0.8);
-            transition: 0.5s;
+            filter: brightness(0.9);
         }
 
-        .main-banner:hover { filter: brightness(1); }
+        header {
+            background: linear-gradient(135deg, rgba(5, 5, 16, 0.9) 0%, rgba(138, 43, 226, 0.7) 100%);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--secondary);
+        }
 
-        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-        nav { padding: 15px 0; }
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .logo {
+            max-width: 300px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.7));
+        }
+
         nav ul {
             display: flex;
             list-style: none;
-            justify-content: center;
             flex-wrap: wrap;
-            gap: 25px;
+            justify-content: center;
+            gap: 15px;
         }
 
         nav ul li a {
-            color: #ffffff;
+            color: var(--light);
             text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-size: 0.85rem;
+            font-weight: 600;
+            font-size: 0.9rem;
             transition: 0.3s;
         }
 
-        nav ul li a:hover {
-            color: var(--secondary);
-            text-shadow: 0 0 10px var(--secondary);
-        }
+        nav ul li a:hover { color: var(--secondary); }
 
-        /* --- SEÇÕES --- */
-        section { padding: 80px 0; }
-        .section-title { text-align: center; margin-bottom: 50px; }
-        .section-title h2 {
-            font-size: 2.8rem;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-        .section-title p { color: var(--secondary); font-weight: 300; }
-
-        /* --- MAPA E FILTROS --- */
-        .map-section {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid rgba(138, 43, 226, 0.3);
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 30px;
-        }
-
-        .filters {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid var(--primary);
-        }
-
-        .filters h4 { color: #ffffff; margin-bottom: 15px; text-transform: uppercase; }
-
-        #interactive-map {
-            height: 600px;
-            border-radius: 15px;
-            border: 1px solid var(--secondary);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
-        }
-
-        .search-box {
-            width: 100%;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--primary);
-            border-radius: 8px;
-            color: #ffffff;
-            margin-bottom: 25px;
-            outline: none;
-        }
-
-        /* --- CARDS DE PACOTES --- */
-        .packages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-        }
-
-        .package-card {
-            background: rgba(20, 20, 40, 0.9);
-            border: 1px solid var(--primary);
-            padding: 40px;
-            border-radius: 25px;
+        /* Hero Section Original */
+        .hero {
+            height: 30vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            transition: 0.4s ease;
+            position: relative;
         }
 
-        .package-card h3 { color: #ffffff; margin: 15px 0; font-size: 1.5rem; }
-        .package-card p { color: #cccccc; margin-bottom: 25px; }
-
-        .package-card:hover {
-            transform: translateY(-12px);
-            border-color: var(--secondary);
-            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.15);
-        }
-
-        .btn-action {
+        .cta-button {
             display: inline-block;
             padding: 12px 30px;
-            background: var(--primary);
-            color: #ffffff;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
             text-decoration: none;
             border-radius: 30px;
             font-weight: bold;
-            text-transform: uppercase;
-            transition: 0.3s;
+            margin: 5px;
         }
 
-        .btn-action:hover {
-            background: var(--secondary);
-            color: var(--dark-bg);
-            box-shadow: 0 0 15px var(--secondary);
+        /* Map Controls Original */
+        .map-section {
+            background: rgba(10, 10, 30, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
         }
 
-        @media (max-width: 900px) {
-            .map-section { grid-template-columns: 1fr; }
+        .map-controls {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        #interactive-map {
+            height: 500px;
+            border-radius: 15px;
+            border: 2px solid var(--secondary);
+        }
+
+        /* Outros estilos originais mantidos */
+        .geo-analysis {
+            background: rgba(10, 10, 30, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .thematic-map-large img {
+            width: 100%;
+            border-radius: 15px;
+            border: 2px solid var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            .map-controls { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <canvas id="psychedelic-bg"></canvas>
+    <div class="banner-container">
+        <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/img/visual-identity/banner-nomad-maps.jpg" alt="Nomad Maps" class="main-banner">
+    </div>
 
     <header>
-        <div class="banner-container">
-            <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/img/visual-identity/banner-nomad-maps.jpg" alt="Nomad Maps" class="main-banner">
-        </div>
-        
         <div class="container">
-            <nav>
-                <ul>
-                    <li><a href="#mapa">Mapa</a></li>
-                    <li><a href="#produtos">Pacotes</a></li>
-                    <li><a href="#galeria">Galeria</a></li>
-                    <li><a href="#data-trance">Data-Trance</a></li>
-                </ul>
-            </nav>
+            <div class="header-content">
+                <img src="https://github.com/ramadageografia/nomad_maps/blob/main/assets/Imagens/visual%20identity/Nomad_Logo.png?raw=true" alt="Nomad Maps Logo" class="logo">
+                <nav>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#produtos">Produtos</a></li>
+                        <li><a href="#mapa">Mapa Interativo</a></li>
+                        <li><a href="#galeria">Galeria</a></li>
+                        <li><a href="#data-trance">Data-Trance</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </header>
 
-    <main class="container">
-        <section id="mapa">
-            <div class="section-title">
-                <h2>O Mapa Nomad</h2>
-                <p>Navegue pelas frequências ao redor do globo</p>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-buttons">
+                <a href="#mapa" class="cta-button">Explorar Mapa</a>
+                <a href="#produtos" class="cta-button">Ver Produtos</a>
             </div>
+            <p>Descubra os melhores festivais de psytrance ao redor do mundo</p>
+        </div>
+    </section>
 
-            <div class="map-section">
+    <section id="mapa" class="container">
+        <div class="geo-analysis">
+            <p>Mapa-mundi dinâmico com geolocalização de festivais, filtros por nome, país, continente e subvertentes.</p>
+        </div>
+
+        <div class="map-section">
+            <div class="map-controls">
                 <aside class="filters">
-                    <input type="text" class="search-box" placeholder="🔍 Buscar destino...">
-                    <div>
-                        <h4>Status dos Festivais</h4>
-                        <p style="color: #888; font-size: 0.9rem;">Selecione para filtrar no mapa</p>
+                    <input type="text" class="search-box" style="width:100%; padding:10px; border-radius:20px; background:rgba(255,255,255,0.1); color:white; border:1px solid var(--primary);" placeholder="🔍 Buscar festival...">
+                    <div style="margin-top:20px;">
+                        <h3 style="color:var(--secondary)">Filtros</h3>
                         </div>
                 </aside>
                 <div id="interactive-map"></div>
             </div>
-        </section>
-
-        <section id="produtos">
-            <div class="section-title">
-                <h2>Pacotes de Viagem</h2>
-            </div>
-            <div class="packages-grid">
-                <div class="package-card">
-                    <div style="font-size: 3.5rem;">🌌</div>
-                    <h3>Full Experience</h3>
-                    <p>Logística completa para os maiores festivais do mundo.</p>
-                    <a href="#" class="btn-action">Ver Detalhes</a>
-                </div>
-                <div class="package-card">
-                    <div style="font-size: 3.5rem;">🛸</div>
-                    <h3>Teleport</h3>
-                    <p>Transporte direto com conforto e segurança.</p>
-                    <a href="#" class="btn-action">Ver Detalhes</a>
-                </div>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-        // Inicialização do Mapa com tema Dark
+        // Inicialização do Mapa
         const map = L.map('interactive-map').setView([-15, -50], 3);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; Nomad Maps'
         }).addTo(map);
-
-        // Canvas Background Animado (Sutil)
-        const canvas = document.getElementById('psychedelic-bg');
-        const ctx = canvas.getContext('2d');
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.onresize = resize; resize();
-
-        function animate() {
-            ctx.fillStyle = 'rgba(5, 5, 16, 0.1)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            requestAnimationFrame(animate);
-        }
-        animate();
     </script>
 </body>
 </html>
