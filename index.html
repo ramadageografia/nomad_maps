@@ -6,14 +6,26 @@
     <title>Nomad Maps</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
-        /* Variáveis de Cores */
+        /* Variáveis de Cores Atualizadas */
         :root {
             --primary: #8a2be2;
             --secondary: #00ffff;
             --accent: #ff00ff;
-            --dark: #050510; /* Fundo bem escuro */
+            --dark: #050505; /* Fundo escurecido */
             --light: #ffffff; /* Letras Brancas */
+            --neon-glow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
         }
+
+        /* Estilos dos marcadores */
+        .fullon-marker { background-color: #FF6B6B; }
+        .prog-marker { background-color: #4ECDC4; }
+        .forest-marker { background-color: #96CEB4; }
+        .darkpsy-marker { background-color: #6A0DAD; }
+        .core-marker { background-color: #FFEAA7; }
+        .hitech-marker { background-color: #FFA500; }
+        .night-marker { background-color: #2C3E50; }
+        .goa-marker { background-color: #E74C3C; }
+        .default-marker { background-color: #95A5A6; }
 
         * {
             margin: 0;
@@ -25,18 +37,31 @@
         body {
             background-color: var(--dark);
             color: var(--light);
-            overflow-y: auto; /* Garante a rolagem */
-            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 255, 0.1) 0%, transparent 30%);
+        }
+
+        #psychedelic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
         }
 
         header {
-            background: rgba(5, 5, 16, 0.95);
+            background: rgba(5, 5, 5, 0.95); /* Header mais escuro e sólido para legibilidade */
             backdrop-filter: blur(10px);
+            padding: 10px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid var(--primary);
-            padding: 10px 0;
         }
 
         .container {
@@ -51,30 +76,33 @@
             align-items: center;
         }
 
-        /* Ajuste da Logo */
         .logo {
-            max-width: 220px; /* Tamanho controlado para não quebrar a página */
+            max-width: 280px; /* Reduzi levemente para evitar que o header ocupe a tela toda */
             height: auto;
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.7));
+            transition: transform 0.3s ease;
             margin-bottom: 10px;
-            filter: drop-shadow(0 0 5px var(--primary));
         }
+
+        .logo:hover { transform: scale(1.05); }
 
         nav ul {
             display: flex;
             list-style: none;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
         }
+
+        nav ul li { margin: 0 8px; }
 
         nav ul li a {
             color: var(--light);
             text-decoration: none;
             font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            transition: 0.3s;
+            padding: 5px 10px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
         }
 
         nav ul li a:hover {
@@ -82,55 +110,50 @@
             text-shadow: 0 0 8px var(--secondary);
         }
 
-        /* Hero / Intro */
+        /* Seções e outros estilos originais mantidos */
         .hero {
-            padding: 60px 0;
+            position: relative;
+            height: 30vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
         }
 
-        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        .hero p { color: var(--secondary); font-size: 1.1rem; }
-
-        /* Mapa Section */
-        .map-section {
-            background: rgba(20, 20, 40, 0.5);
-            border-radius: 15px;
-            padding: 20px;
-            border: 1px solid rgba(138, 43, 226, 0.3);
-            margin-top: 20px;
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--light);
+            text-align: center;
+            margin-bottom: 40px;
         }
 
         #interactive-map {
             height: 500px;
             width: 100%;
-            border-radius: 10px;
-            border: 1px solid var(--secondary);
+            border-radius: 15px;
+            border: 2px solid var(--secondary);
         }
 
-        .map-controls {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 20px;
-            margin-top: 20px;
+        .map-section {
+            background: rgba(15, 15, 25, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
         }
 
-        .filters {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
+        /* Rodapé */
+        footer {
+            background: #050505;
+            padding: 40px 0 15px;
+            border-top: 1px solid var(--primary);
         }
-
-        /* Marcadores */
-        .fullon-marker { background-color: #FF6B6B; border-radius: 50%; }
-        .prog-marker { background-color: #4ECDC4; border-radius: 50%; }
-
-        @media (max-width: 768px) {
-            .map-controls { grid-template-columns: 1fr; }
-            .logo { max-width: 150px; }
-        }
+        
+        .footer-column h3 { color: var(--secondary); }
+        .footer-column ul li a { color: var(--light); }
     </style>
 </head>
 <body>
+    <canvas id="psychedelic-bg"></canvas>
 
     <header>
         <div class="container">
@@ -141,10 +164,12 @@
                 <nav>
                     <ul>
                         <li><a href="#home">Início</a></li>
-                        <li><a href="#mapa">Mapa</a></li>
-                        <li><a href="#produtos">Produtos</a></li>
-                        <li><a href="#galeria">Galeria</a></li>
+                        <li><a href="#produtos">Produtos Exclusivos</a></li>
+                        <li><a href="#mapa">Mapa Interativo</a></li>
+                        <li><a href="#galeria">Galeria de Mapas</a></li>
                         <li><a href="#data-trance">Data-Trance</a></li>
+                        <li><a href="#cadastro">Cadastre-se</a></li>
+                        <li><a href="#contact">Contato</a></li>
                     </ul>
                 </nav>
             </div>
@@ -153,28 +178,36 @@
 
     <main class="container">
         <section class="hero" id="home">
-            <h1>Exploração Psicodélica</h1>
-            <p>Geolocalização da cultura trance ao redor do globo.</p>
-        </section>
-
-        <section id="mapa">
-            <div class="map-section">
-                <div class="map-controls">
-                    <aside class="filters">
-                        <h3 style="margin-bottom: 10px; font-size: 0.9rem;">FILTRAR BUSCA</h3>
-                        <input type="text" placeholder="Buscar festival..." style="width:100%; padding:8px; background:#1a1a2e; color:white; border:1px solid var(--primary); border-radius:5px;">
-                    </aside>
-                    <div id="interactive-map"></div>
+            <div class="hero-content">
+                <p style="font-size: 1.5rem; font-weight: bold;">Exploração Psicodélica Global</p>
+                <div class="hero-buttons" style="margin-top: 20px;">
+                    <a href="#mapa" style="padding: 10px 20px; background: var(--primary); color: white; text-decoration: none; border-radius: 20px; margin: 5px; display: inline-block;">Mapa Interativo</a>
                 </div>
             </div>
         </section>
 
-        <section style="height: 500px;"></section> 
-    </main>
+        <section id="mapa">
+            <div class="section-title">
+                <h2>Mapa Interativo de Festivais</h2>
+            </div>
+            <div class="map-section">
+                <div id="interactive-map"></div>
+            </div>
+        </section>
+
+        </main>
+
+    <footer>
+        <div class="container">
+            <div style="text-align: center; font-size: 0.8rem; opacity: 0.7;">
+                © 2023 Nomad Maps. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-        // Inicialização do Mapa
+        // Inicialização do seu mapa original
         const map = L.map('interactive-map').setView([-15, -50], 3);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
     </script>
