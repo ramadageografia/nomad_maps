@@ -47,8 +47,8 @@
 /* Logo Grande Centralizada */
 .logo-container-centered {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items: left;
     height: 100%;
     width: 100%;
 }
@@ -511,3 +511,4 @@
         font-size: 0.9rem;
     }
 }
+
