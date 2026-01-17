@@ -44,11 +44,10 @@
 <body>
 
 <div id="header">
-    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/img/visual-identity/New_nomad_Logo.png" alt="Nomad Maps Logo">
+    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/img/visual-identity/New_nomad_Logo.png" alt="Nomad Maps Logo" style="max-height: 80px; margin-bottom: 10px;">
     <h1>Psychedelic Trance Festivals - World Map</h1>
     <p>Click on the country icon and select the festival.</p>
 </div>
-
 <div id="container">
     <div id="sidebar">
         <div class="filter-section">
@@ -221,7 +220,7 @@
             const icon = L.divIcon({
                 className: 'custom-icon',
                 html: `<div class="flag-marker-container">${flagUrl ? `<img src="${flagUrl}">` : ''}</div>`,
-                iconSize: [24, 24], iconAnchor: [12, 12]
+                iconSize: [20, 20], iconAnchor: [10, 10]
             });
 
             L.marker([f.lat, f.lng], { icon: icon })
@@ -241,3 +240,4 @@
 </script>
 </body>
 </html>
+
