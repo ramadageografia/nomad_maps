@@ -1,3 +1,16 @@
+/* Leaflet popup custom style */
+.leaflet-popup-content a {
+  color: #00ffcc;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.leaflet-popup-content a:hover {
+  color: #ff00cc;
+  text-shadow: 0 0 6px rgba(255,0,204,0.8);
+}
 .logo-banner {
   height: 48px;
   max-width: 100%;
