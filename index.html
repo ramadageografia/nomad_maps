@@ -17,39 +17,45 @@
 
 <body>
 
-<!-- HEADER -->
 <header class="header">
-  <img src="assets/banner-nomad-maps.jpg" alt="Nomad Maps" class="logo-banner">
+  <img src="assets/banner-nomad-maps.jpg" class="logo-banner" alt="Nomad Maps">
   <p class="tagline">
     Sua agência de viagens especializada em festivais de arte e cultura visionária e psytrance pelo mundo!
   </p>
 </header>
 
-<!-- MAIN -->
 <main class="map-layout">
 
-  <!-- LISTA (ESQUERDA) -->
-  <section class="festival-list">
-    <h2>Festivais pelo Mundo</h2>
-    <p>Clique no mapa para detalhes e consultoria de viagem.</p>
-  </section>
+  <!-- PAINEL ESQUERDO -->
+  <aside class="festival-list">
 
-  <!-- MAPA (DIREITA) -->
+    <h2>Filtros</h2>
+
+    <select id="filterCountry">
+      <option value="">🌍 Todos os países</option>
+    </select>
+
+    <select id="filterGenre">
+      <option value="">🎶 Todas as vertentes</option>
+    </select>
+
+    <h2>Festivais</h2>
+    <div id="festivalItems"></div>
+
+  </aside>
+
+  <!-- MAPA -->
   <section class="map-container">
     <div id="festivalMap"></div>
   </section>
 
 </main>
 
-<!-- FOOTER -->
 <footer class="footer">
-  <p>© 2024 Nomad Maps — Web GIS Turístico Psytrance</p>
+  © 2024 Nomad Maps — Web GIS Turístico Psytrance
 </footer>
 
-<!-- Leaflet JS -->
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<!-- JS -->
 <script src="js/main.js"></script>
 
 </body>
