@@ -1,1 +1,31 @@
+[
+  {
+    "id": "boom",
+    "name": "Boom Festival",
+    "country": "Portugal",
+    "continent": "Europe",
+    "city": "Idanha-a-Nova",
+    "lat": 39.716,
+    "lng": -7.492,
+    "month": "July",
+    "type": ["Psytrance", "Downtempo"],
+    "website": "https://boomfestival.org",
+    "airport": "LIS",
+    "description": "O maior festival psytrance do mundo, com foco em sustentabilidade, arte e espiritualidade."
+  },
+  {
+    "id": "universo-paralello",
+    "name": "Universo Paralello",
+    "country": "Brasil",
+    "continent": "South America",
+    "city": "Pratigi - BA",
+    "lat": -12.541,
+    "lng": -38.996,
+    "month": "December",
+    "type": ["Psytrance", "Progressive"],
+    "website": "https://universoparalello.org",
+    "airport": "SSA",
+    "description": "Réveillon psicodélico em praia paradisíaca na Bahia."
+  }
+]
 
