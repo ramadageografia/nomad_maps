@@ -1,31 +1,30 @@
-[
-  {
-    "id": "boom",
-    "name": "Boom Festival",
-    "country": "Portugal",
-    "continent": "Europe",
-    "city": "Idanha-a-Nova",
-    "lat": 39.716,
-    "lng": -7.492,
-    "month": "July",
-    "type": ["Psytrance", "Downtempo"],
-    "website": "https://boomfestival.org",
-    "airport": "LIS",
-    "description": "O maior festival psytrance do mundo, com foco em sustentabilidade, arte e espiritualidade."
-  },
-  {
-    "id": "universo-paralello",
-    "name": "Universo Paralello",
-    "country": "Brasil",
-    "continent": "South America",
-    "city": "Pratigi - BA",
-    "lat": -12.541,
-    "lng": -38.996,
-    "month": "December",
-    "type": ["Psytrance", "Progressive"],
-    "website": "https://universoparalello.org",
-    "airport": "SSA",
-    "description": "Réveillon psicodélico em praia paradisíaca na Bahia."
-  }
-]
+fetch("data/festivals.json")
+  .then(res => res.json())
+  .then(festivals => initMap(festivals));
 
+function initMap(festivals) {
+  const map = L.map("festivalMap").setView([20, 0], 2);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "&copy; OpenStreetMap"
+  }).addTo(map);
+
+  festivals.forEach(f => {
+    if (!f.Latitude || !f.Longitude) return;
+
+    L.circleMarker([f.Latitude, f.Longitude], {
+      radius: 6,
+      color: "#00ffcc",
+      fillOpacity: 0.8
+    })
+      .addTo(map)
+      .bindPopup(`
+        <strong>${f["Nome do Festival"]}</strong><br>
+        ${f.País}<br>
+        <em>${f.Vertente || ""}</em><br><br>
+        <a href="festival.html?id=${encodeURIComponent(f["Nome do Festival"])}">
+          Consultoria de viagem
+        </a>
+      `);
+  });
+}
