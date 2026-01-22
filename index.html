@@ -2,26 +2,14 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <title>Nomad Maps — Psytrance & Visionary Culture</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Nomad Maps | Psytrance & Visionary Festivals</title>
-
-  <meta
-    name="description"
-    content="Sua agência de viagens especializada em festivais de arte, cultura visionária e psytrance pelo mundo."
-  />
-
-  <!-- Fonte -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- Leaflet -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"
-  />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/style.css" />
@@ -29,44 +17,40 @@
 
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="nav-brand">
-      <img
-        src="assets/Imagens/flyers/Ozora/banner_ozora26.jpg"
-        alt="Nomad Maps"
-        class="logo-banner"
-      />
-    </div>
-  </nav>
+<!-- HEADER -->
+<header class="header">
+  <img src="assets/banner-nomad-maps.jpg" alt="Nomad Maps" class="logo-banner">
+  <p class="tagline">
+    Sua agência de viagens especializada em festivais de arte e cultura visionária e psytrance pelo mundo!
+  </p>
+</header>
 
-  <!-- CONTEÚDO -->
-  <main>
+<!-- MAIN -->
+<main class="map-layout">
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-content">
-        <h1 class="hero-title">NOMAD MAPS</h1>
+  <!-- LISTA (ESQUERDA) -->
+  <section class="festival-list">
+    <h2>Festivais pelo Mundo</h2>
+    <p>Clique no mapa para detalhes e consultoria de viagem.</p>
+  </section>
 
-        <p class="hero-description">
-          Sua agência de viagens especializada em festivais de arte e cultura
-          visionária e psytrance pelo mundo!
-        </p>
-      </div>
-    </section>
+  <!-- MAPA (DIREITA) -->
+  <section class="map-container">
+    <div id="festivalMap"></div>
+  </section>
 
-    <!-- MAPA -->
-    <section class="map-section">
-      <div class="map-container">
-        <div id="festivalMap"></div>
-      </div>
-    </section>
+</main>
 
-  </main>
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2024 Nomad Maps — Web GIS Turístico Psytrance</p>
+</footer>
 
-  <!-- JS -->
-  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="js/main.js"></script>
+<!-- Leaflet JS -->
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- JS -->
+<script src="js/main.js"></script>
 
 </body>
 </html>
