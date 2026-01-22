@@ -1,1 +1,255 @@
+/* =========================
+   RESET + BASE
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-dark: #07070a;
+  --bg-darker: #040406;
+  --primary: #00ffcc;
+  --secondary: #8a2be2;
+  --accent: #ff0066;
+  --text-main: #eaeaea;
+  --text-muted: #9aa0a6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background: radial-gradient(circle at top, #0c0c14, #020204);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(5, 5, 10, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 999;
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1rem;
+}
+
+.logo {
+  height: 48px;
+}
+
+.nav-menu {
+  display: none;
+  list-style: none;
+}
+
+.nav-menu li {
+  margin: 1rem 0;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.nav-toggle {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+
+/* Mobile menu active */
+.nav-menu.active {
+  display: block;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  background: var(--bg-darker);
+  padding: 1rem;
+}
+
+/* =========================
+   HERO
+========================= */
+.hero {
+  height: 100vh;
+  background: url("../images/nomad-maps-banner.jpg") center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.6), rgba(0,0,0,.9));
+}
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  padding: 1rem;
+}
+
+.hero-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.6rem;
+  color: var(--primary);
+  letter-spacing: 4px;
+  text-shadow: 0 0 12px var(--primary);
+}
+
+/* Glitch effect */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  opacity: 0.7;
+}
+
+.glitch::before {
+  top: -2px;
+  color: var(--accent);
+  animation: glitch 2s infinite;
+}
+
+.glitch::after {
+  top: 2px;
+  color: var(--secondary);
+  animation: glitch 1.5s infinite reverse;
+}
+
+@keyframes glitch {
+  0% { clip-path: inset(0 0 90% 0); }
+  50% { clip-path: inset(10% 0 20% 0); }
+  100% { clip-path: inset(80% 0 0 0); }
+}
+
+.hero-subtitle {
+  margin-top: 0.8rem;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+.hero-description {
+  margin: 1.2rem auto;
+  max-width: 420px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.4rem;
+  margin: 0.4rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #000;
+}
+
+.btn-secondary,
+.btn-outline {
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+/* =========================
+   SECTIONS
+========================= */
+section {
+  padding: 4rem 1rem;
+}
+
+.section-title {
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.section-divider {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(to right, var(--primary), var(--accent));
+  margin: 0.8rem auto 2rem;
+}
+
+/* =========================
+   MAP
+========================= */
+.map-container {
+  height: 60vh;
+  margin: 1rem 0;
+}
+
+#festivalMap {
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0,255,204,.2);
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer {
+  background: var(--bg-darker);
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.footer p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* =========================
+   DESKTOP
+========================= */
+@media (min-width: 768px) {
+  .nav-menu {
+    display: flex;
+    gap: 1.5rem;
+    position: static;
+    background: none;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .hero-title {
+    font-size: 4rem;
+  }
+}
 
