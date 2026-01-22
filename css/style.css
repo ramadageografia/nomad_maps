@@ -15,17 +15,17 @@ body {
 }
 
 /* =========================
-   NAVBAR FIXA (CORRIGIDA)
+   NAVBAR
 ========================= */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 72px;
-  background: rgba(5, 5, 16, 0.9);
+  height: 64px;
+  background: rgba(5, 5, 16, 0.75);
   backdrop-filter: blur(10px);
   z-index: 1000;
-  border-bottom: 1px solid rgba(0,255,204,0.25);
+  border-bottom: 1px solid rgba(0,255,204,0.15);
   display: flex;
   align-items: center;
 }
@@ -35,29 +35,31 @@ body {
 }
 
 .logo-banner {
-  height: 46px;
+  height: 44px;
   object-fit: contain;
   filter: drop-shadow(0 0 8px rgba(0,255,204,0.4));
 }
 
 /* =========================
-   CONTEÚDO PRINCIPAL
+   MAIN
 ========================= */
 main {
-  padding-top: 72px; /* compensação da navbar */
+  padding-top: 64px;
 }
 
 /* =========================
    HERO
 ========================= */
 .hero {
-  min-height: calc(100vh - 72px);
+  min-height: 65vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: radial-gradient(circle at top, #0b0b2a, #050510);
-  padding: 40px 20px;
+  background:
+    radial-gradient(circle at top, rgba(0,255,204,0.15), transparent 40%),
+    linear-gradient(180deg, #050510, #070720);
+  padding: 60px 20px;
 }
 
 .hero-content {
@@ -65,15 +67,17 @@ main {
 }
 
 .hero-title {
-  font-size: 3rem;
-  letter-spacing: 4px;
+  font-size: 2.8rem;
+  letter-spacing: 6px;
   color: #00ffcc;
-  text-shadow: 0 0 20px rgba(0,255,204,0.5);
+  text-shadow:
+    0 0 10px rgba(0,255,204,0.6),
+    0 0 30px rgba(138,43,226,0.4);
 }
 
 .hero-description {
   margin-top: 20px;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: #bfffee;
 }
 
@@ -81,12 +85,13 @@ main {
    MAPA
 ========================= */
 .map-section {
-  padding: 40px 20px;
+  padding: 20px;
+  background: linear-gradient(180deg, #070720, #050510);
 }
 
 .map-container {
   width: 100%;
-  height: 70vh;
+  height: 75vh;
 }
 
 #festivalMap {
@@ -122,7 +127,7 @@ main {
 }
 
 /* =========================
-   BOTÃO CTA POPUP
+   BOTÃO POPUP
 ========================= */
 .popup-btn {
   display: inline-block;
@@ -147,14 +152,6 @@ main {
    RESPONSIVO
 ========================= */
 @media (max-width: 768px) {
-  .navbar {
-    height: 64px;
-  }
-
-  main {
-    padding-top: 64px;
-  }
-
   .hero-title {
     font-size: 2.2rem;
   }
