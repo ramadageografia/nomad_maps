@@ -3,13 +3,18 @@ let markers = [];
 let allFestivals = [];
 
 fetch("data/festivals.json")
-  .then(res => res.json())
+  .then(res => {
+    if (!res.ok) throw new Error("Erro ao carregar festivals.json");
+    return res.json();
+  })
   .then(data => {
+    console.log("Festivais carregados:", data.length);
     allFestivals = data;
     initFilters(data);
     initMap(data);
     renderList(data);
-  });
+  })
+  .catch(err => console.error(err));
 
 function initMap(festivals) {
   map = L.map("festivalMap").setView([20, 0], 2);
@@ -26,9 +31,12 @@ function updateMarkers(festivals) {
   markers = [];
 
   festivals.forEach(f => {
-    if (!f.latitude || !f.longitude) return;
+    const lat = parseFloat(f.latitude);
+    const lon = parseFloat(f.longitude);
 
-    const marker = L.circleMarker([f.latitude, f.longitude], {
+    if (isNaN(lat) || isNaN(lon)) return;
+
+    const marker = L.circleMarker([lat, lon], {
       radius: 6,
       color: "#00ffcc",
       fillOpacity: 0.8
@@ -54,11 +62,21 @@ function initFilters(festivals) {
 
   [...new Set(festivals.map(f => f.country).filter(Boolean))]
     .sort()
-    .forEach(c => countrySelect.innerHTML += `<option value="${c}">${c}</option>`);
+    .forEach(c =>
+      countrySelect.insertAdjacentHTML(
+        "beforeend",
+        `<option value="${c}">${c}</option>`
+      )
+    );
 
   [...new Set(festivals.map(f => f.genre).filter(Boolean))]
     .sort()
-    .forEach(g => genreSelect.innerHTML += `<option value="${g}">${g}</option>`);
+    .forEach(g =>
+      genreSelect.insertAdjacentHTML(
+        "beforeend",
+        `<option value="${g}">${g}</option>`
+      )
+    );
 
   countrySelect.addEventListener("change", applyFilters);
   genreSelect.addEventListener("change", applyFilters);
@@ -82,6 +100,10 @@ function renderList(festivals) {
   container.innerHTML = "";
 
   festivals.forEach(f => {
+    const lat = parseFloat(f.latitude);
+    const lon = parseFloat(f.longitude);
+    if (isNaN(lat) || isNaN(lon)) return;
+
     const div = document.createElement("div");
     div.className = "festival-item";
     div.innerHTML = `
@@ -89,7 +111,7 @@ function renderList(festivals) {
       <small>${f.country} — ${f.genre}</small>
     `;
     div.onclick = () => {
-      map.setView([f.latitude, f.longitude], 6);
+      map.setView([lat, lon], 6);
     };
     container.appendChild(div);
   });
