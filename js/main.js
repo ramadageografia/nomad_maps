@@ -17,12 +17,15 @@ function initMap(festivals) {
     })
       .addTo(map)
       .bindPopup(`
-        <strong>${f.name}</strong><br>
-        ${f.country}<br><br>
-        <a href="festival.html?id=${f.id}">
-          Ver pacote & consultoria
-        </a>
-      `);
-  });
-}
+  <strong>${f["Nome do Festival"]}</strong><br>
+  ${f.País}<br>
+  <em>${f.Vertente || ""}</em><br><br>
+
+  <a
+    href="festival.html?id=${encodeURIComponent(f["Nome do Festival"])}"
+    class="popup-btn"
+  >
+    ✈️ Consultoria de viagem
+  </a>
+`);
 
