@@ -1,1 +1,7 @@
+.logo-banner {
+  height: 48px;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(0,255,204,0.4));
+}
 
