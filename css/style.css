@@ -1,63 +1,82 @@
-/* RESET */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 body {
+  margin: 0;
   font-family: 'Rajdhani', sans-serif;
-  background: radial-gradient(circle at top, #050010, #000);
-  color: #e0fdfb;
-  overflow-x: hidden;
+  background: radial-gradient(circle at top, #05010a, #000);
+  color: #e0fefe;
 }
 
 /* HEADER */
 .header {
   text-align: center;
-  padding: 20px 12px;
-  background: linear-gradient(180deg, #020014, #000);
+  padding: 16px;
+  background: linear-gradient(180deg, #020005, #000);
   border-bottom: 1px solid rgba(0,255,204,0.2);
 }
 
 .logo-banner {
-  max-width: 420px;
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 0 14px rgba(0,255,204,0.5));
+  max-height: 60px;
+  filter: drop-shadow(0 0 10px rgba(0,255,204,0.5));
 }
 
 .tagline {
-  margin-top: 12px;
-  font-size: 1rem;
-  color: #9fffe8;
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #9ff;
 }
 
 /* LAYOUT */
 .map-layout {
   display: flex;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 140px);
 }
 
 /* LISTA */
 .festival-list {
   width: 35%;
-  padding: 20px;
-  background: linear-gradient(180deg, #03001a, #000);
-  border-right: 1px solid rgba(0,255,204,0.15);
+  min-width: 300px;
+  background: rgba(5,0,15,0.9);
+  padding: 16px;
   overflow-y: auto;
+  border-right: 1px solid rgba(0,255,204,0.15);
 }
 
 .festival-list h2 {
   font-family: 'Orbitron', sans-serif;
-  margin-bottom: 10px;
+  font-size: 1rem;
+  margin: 12px 0;
   color: #00ffcc;
+}
+
+.festival-list select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  background: #02010a;
+  border: 1px solid #00ffcc55;
+  color: #00ffcc;
+  border-radius: 6px;
+}
+
+.festival-item {
+  padding: 10px;
+  margin-bottom: 8px;
+  background: rgba(0,255,204,0.06);
+  border-left: 3px solid #00ffcc;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.festival-item:hover {
+  background: rgba(138,43,226,0.2);
 }
 
 /* MAPA */
 .map-container {
-  width: 65%;
-  position: relative;
+  flex: 1;
 }
 
 #festivalMap {
@@ -65,47 +84,39 @@ body {
   height: 100%;
 }
 
-/* POPUP LEAFLET */
-.leaflet-popup-content {
-  color: #000;
-  font-size: 0.9rem;
-}
-
+/* POPUP */
 .popup-btn {
   display: inline-block;
-  margin-top: 8px;
-  padding: 8px 14px;
-  border-radius: 20px;
-  background: linear-gradient(45deg, #00ffcc, #8a2be2);
+  padding: 6px 14px;
+  background: linear-gradient(45deg, #00ffff, #8a2be2);
   color: #000 !important;
+  border-radius: 20px;
   font-weight: bold;
   text-decoration: none;
-  box-shadow: 0 0 10px rgba(0,255,204,0.6);
+  box-shadow: 0 0 10px rgba(0,255,204,0.5);
 }
 
 /* FOOTER */
 .footer {
   text-align: center;
-  padding: 10px;
+  padding: 8px;
   font-size: 0.8rem;
   background: #000;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(0,255,204,0.15);
 }
 
 /* MOBILE */
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .map-layout {
     flex-direction: column;
-    height: auto;
   }
 
   .festival-list {
     width: 100%;
-    height: 35vh;
+    height: 45%;
   }
 
   .map-container {
-    width: 100%;
-    height: 65vh;
+    height: 55%;
   }
 }
