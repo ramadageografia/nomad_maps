@@ -27,7 +27,6 @@ function updateMarkers(festivals) {
 
   festivals.forEach(f => {
     if (!f.latitude || !f.longitude) return;
-
     const marker = L.circleMarker([f.latitude, f.longitude], {
       radius: 6,
       color: "#00ffcc",
