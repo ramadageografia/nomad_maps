@@ -1,60 +1,285 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Nomad Maps — Psytrance & Visionary Culture</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- Leaflet -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOMAD MAPS - Psytrance Travel Agency</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/CSS/style.css">
 </head>
-
 <body>
+    <!-- Header -->
+    <header class="nomad-header">
+        <div class="banner-container">
+            <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/visual%20identity/banner_nomad_principal.png" 
+                 alt="NOMAD MAPS - Psytrance Travel Agency" 
+                 class="banner-image">
+            <div class="banner-overlay">
+                <div class="logo-container-centered">
+                    <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/visual%20identity/logomarca.png" 
+                         alt="NOMAD MAPS Logo" 
+                         class="logo-image-large">
+                </div>
+            </div>
+        </div>
+    </header>
 
-<header class="header">
-  <img src="images/banner-nomad-maps.jpg" class="logo-banner" alt="Nomad Maps">
-  <p class="tagline">
-    Sua agência de viagens especializada em festivais de arte e cultura visionária e psytrance pelo mundo!
-  </p>
-</header>
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Mapa e Sidebar -->
+                <div class="col-12">
+                    <div class="row main-section">
+                        <!-- Mapa -->
+                        <section class="col-lg-8 col-md-7 map-container">
+                            <div id="map"></div>
+                        </section>
 
-<main class="map-layout">
+                        <!-- Sidebar -->
+                        <aside class="col-lg-4 col-md-5 sidebar">
+                            <!-- Filtro -->
+                            <div class="filter-section-sidebar">
+                                <label for="countryFilter" class="filter-label">
+                                    <i class="fas fa-filter me-2"></i>Filtrar por País
+                                </label>
+                                <select id="countryFilter" class="form-select">
+                                    <option value="">Todos os Países</option>
+                                </select>
+                            </div>
 
-  <!-- PAINEL ESQUERDO -->
-  <aside class="festival-list">
-    <h2>Filtros</h2>
+                            <!-- Lista de Festivais -->
+                            <div class="festivals-section">
+                                <div class="section-header">
+                                    <h5><i class="fas fa-music me-2"></i>TODOS OS FESTIVAIS</h5>
+                                    <span id="festivalCount">Carregando...</span>
+                                </div>
+                                <div class="festivals-list" id="festivalsList">
+                                    <!-- Festivais carregados via JavaScript -->
+                                </div>
+                            </div>
 
-    <select id="filterCountry">
-      <option value="">🌍 Todos os países</option>
-    </select>
+                            <!-- Estatísticas -->
+                            <div class="stats-section">
+                                <div class="row g-2">
+                                    <div class="col-4">
+                                        <div class="stat-card">
+                                            <div class="stat-number">45+</div>
+                                            <div class="stat-label">Festivais</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="stat-card">
+                                            <div class="stat-number">25+</div>
+                                            <div class="stat-label">Países</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="stat-card">
+                                            <div class="stat-number">5000+</div>
+                                            <div class="stat-label">Viajantes</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-    <select id="filterGenre">
-      <option value="">🎶 Todas as vertentes</option>
-    </select>
+                            <!-- Legenda -->
+                            <div class="legend-section">
+                                <div class="section-header">
+                                    <h6><i class="fas fa-palette me-2"></i>LEGENDA</h6>
+                                </div>
+                                <div class="legend-items">
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #EF4444;"></div>
+                                        <span>Full On</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #8B5CF6;"></div>
+                                        <span>Darkpsy</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #06B6D4;"></div>
+                                        <span>Hitech</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #10B981;"></div>
+                                        <span>Progressive</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #22C55E;"></div>
+                                        <span>Forest</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
 
-    <h2>Festivais</h2>
-    <div id="festivalItems"></div>
-  </aside>
+                <!-- Festivais em Destaque -->
+                <div class="col-12">
+                    <section class="featured-section-main">
+                        <div class="container-fluid">
+                            <div class="section-header-main">
+                                <h2><i class="fas fa-crown me-3"></i>FESTIVAIS EM DESTAQUE</h2>
+                                <p class="section-subtitle">Pacotes exclusivos com os melhores festivais do mundo</p>
+                            </div>
+                            
+                            <div class="row g-4">
+                                <!-- Universo Paralello -->
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="featured-card">
+                                        <div class="featured-badge">🔥 MAIS POPULAR</div>
+                                        <div class="featured-header">
+                                            <h3>Universo Paralello</h3>
+                                            <div class="featured-rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <span>5.0</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="featured-images">
+                                            <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/flyers/Universo%20Paralello/flyer_up.jpg" 
+                                                 alt="Universo Paralello Flyer" 
+                                                 class="featured-main-image">
+                                            <div class="featured-thumbnails">
+                                                <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/flyers/Universo%20Paralello/flyer_up2.jpg" 
+                                                     alt="Universo Paralello Flyer 2" 
+                                                     class="featured-thumbnail">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="featured-info">
+                                            <div class="featured-details">
+                                                <div class="detail-item">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                    <div>
+                                                        <strong>Localização</strong>
+                                                        <span>Praia de Pratigi, Bahia - Brasil</span>
+                                                    </div>
+                                                </div>
+                                                <div class="detail-item">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                    <div>
+                                                        <strong>Data</strong>
+                                                        <span>Dezembro 2024 - 7 Dias</span>
+                                                    </div>
+                                                </div>
+                                                <div class="detail-item">
+                                                    <i class="fas fa-music"></i>
+                                                    <div>
+                                                        <strong>Estilos</strong>
+                                                        <span>Forest, Full On, Progressive</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <p class="featured-description">
+                                                O maior festival de psytrance da América Latina! Experiência transformadora com 7 dias de música, arte e cultura alternativa na paradisíaca Praia de Pratigi. Line-up com os maiores nomes da cena mundial.
+                                            </p>
+                                            
+                                            <div class="featured-package">
+                                                <div class="package-price">
+                                                    <span class="price-from">a partir de</span>
+                                                    <span class="price-value">R$ 1.299</span>
+                                                    <span class="price-period">por pessoa</span>
+                                                </div>
+                                                <button class="package-btn" onclick="highlightFestivalByName('Universo Paralello')">
+                                                    <i class="fas fa-map-marker-alt me-2"></i>Ver no Mapa
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-  <!-- MAPA -->
-  <section class="map-container">
-    <div id="festivalMap"></div>
-  </section>
+                                <!-- Ozora Festival -->
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="featured-card">
+                                        <div class="featured-badge">🌟 CLÁSSICO MUNDIAL</div>
+                                        <div class="featured-header">
+                                            <h3>Ozora Festival</h3>
+                                            <div class="featured-rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star-half-alt"></i>
+                                                <span>4.8</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="featured-images">
+                                            <img src="https://raw.githubusercontent.com/ramadageografia/nomad_maps/main/assets/Imagens/flyers/Ozora/cartaz_ozora_festivaisemdestaque.jpg" 
+                                                 alt="Ozora Festival Flyer" 
+                                                 class="featured-main-image">
+                                        </div>
+                                        
+                                        <div class="featured-info">
+                                            <div class="featured-details">
+                                                <div class="detail-item">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                    <div>
+                                                        <strong>Localização</strong>
+                                                        <span>Dádpuszta, Hungria - Europa</span>
+                                                    </div>
+                                                </div>
+                                                <div class="detail-item">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                    <div>
+                                                        <strong>Data</strong>
+                                                        <span>Agosto 2024 - 6 Dias</span>
+                                                    </div>
+                                                </div>
+                                                <div class="detail-item">
+                                                    <i class="fas fa-music"></i>
+                                                    <div>
+                                                        <strong>Estilos</strong>
+                                                        <span>Progressive, Full On, Psytrance</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <p class="featured-description">
+                                                Um dos festivais mais icônicos do mundo! Experiência única no coração da Hungria com os melhores artistas da cena global. Estrutura completa com múltiplos palcos, workshops e atividades espirituais.
+                                            </p>
+                                            
+                                            <div class="featured-package">
+                                                <div class="package-price">
+                                                    <span class="price-from">a partir de</span>
+                                                    <span class="price-value">€ 899</span>
+                                                    <span class="price-period">por pessoa</span>
+                                                </div>
+                                                <button class="package-btn" onclick="highlightFestivalByName('Ozora Festival')">
+                                                    <i class="fas fa-map-marker-alt me-2"></i>Ver no Mapa
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
 
-</main>
-
-<footer class="footer">
-  © 2024 Nomad Maps — Web GIS Turístico Psytrance
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="js/main.js"></script>
-
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/JS/app.js"></script>
 </body>
 </html>
